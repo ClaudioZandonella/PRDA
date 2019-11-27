@@ -1,0 +1,16 @@
+Workflow
+
+
+
+Struttura del pacchetto:
+
+
+
+
+Elementi principali:
+
+1) Funzione che campioni gli effect-sizes dato il tipo di effect size e la distribuzione della prior
+
+2) Funzione che generi i dati
+
+3) Funzione che faccia i test

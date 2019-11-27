@@ -1,0 +1,11 @@
+# R auxiliary files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Other files types
+*.html
+
+# Mac auxiliary files
+.DS_Store
