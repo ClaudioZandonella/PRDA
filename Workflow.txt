@@ -19,7 +19,8 @@ Caratteristiche definibili diverse: .. (numerosità)
 3) Funzione che faccia i test
 
 
-# Oggetto design_analysis
+
+# Oggetto design_analysis:
 
 Pensare come strutturare l'oggetto (classe o lista) in cui si raccolgono tutte le informazioni e risultati
 
@@ -31,4 +32,8 @@ Pensare come strutturare l'oggetto (classe o lista) in cui si raccolgono tutte l
 5) un'ultima funzione esegue i test sui dati simulati
 
 
+
+# Note: 
+1. il pacchetto "effsize" sviluppa come effect size il Cliff’s Delta, Cohen's D, Hedges’g, Vargha and Delaney A. (https://github.com/mtorchiano/effsize/)
+2. Ref tipologie di effect size: https://en.wikipedia.org/wiki/Effect_size, http://www.utstat.toronto.edu/~brunner/oldclass/378f16/readings/CohenPower.pdf
 
