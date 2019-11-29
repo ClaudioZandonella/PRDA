@@ -17,5 +17,5 @@ Elementi principali:
 
 
 Note: 
-1. il pacchetto "effsize" sviluppa come effect size il Cliff’s Delta, Cohen's D, Hedges’g, Vargha and Delaney A. 
+1. il pacchetto "effsize" sviluppa come effect size il Cliff’s Delta, Cohen's D, Hedges’g, Vargha and Delaney A. (https://github.com/mtorchiano/effsize/)
 2. Ref tipologie di effect size: https://en.wikipedia.org/wiki/Effect_size, http://www.utstat.toronto.edu/~brunner/oldclass/378f16/readings/CohenPower.pdf
