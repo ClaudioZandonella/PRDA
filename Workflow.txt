@@ -14,3 +14,8 @@ Elementi principali:
 2) Funzione che generi i dati
 
 3) Funzione che faccia i test
+
+
+Note: 
+1. il pacchetto "effsize" sviluppa come effect size il Cliff’s Delta, Cohen's D, Hedges’g, Vargha and Delaney A. 
+2. Ref tipologie di effect size: https://en.wikipedia.org/wiki/Effect_size, http://www.utstat.toronto.edu/~brunner/oldclass/378f16/readings/CohenPower.pdf
