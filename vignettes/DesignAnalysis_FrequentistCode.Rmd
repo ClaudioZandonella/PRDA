@@ -1,0 +1,291 @@
+---
+title: "Design Analysis - Frequentist Code"
+author: "Anna Vesely"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+ %\VignetteIndexEntry{Vignette Title}
+ %\VignetteEngine{knitr::rmarkdown}
+ \usepackage[utf8]{inputenc} 
+---
+
+## Cohen's d
+
+Given the vectors $\mathbf{x}_1$ and $\mathbf{x}_2$ with the observed values of two groups, the function <tt>`cohen_d`</tt> computes Cohen's $d$ effect size statistic with the corresponding t-statistic and p-value:
+
+\begin{align*}
+d=\frac{\bar{\mathbf{x}_1}-\bar{\mathbf{x}_2}}{s_{\text{pool}}},\quad\quad t=d\,\sqrt{\frac{n_1\, n_2}{n_1+n_2}},\quad\quad p=2\,P(T_{r}\geq |t|)
+\end{align*}
+where $T$ follows a Student's t-distribution with $r=n_1+n_2-2$ degrees of freedom.
+
+```{r}
+cohen_d <- function(x1, x2) {
+  
+  (m1 <- mean(x1, na.rm=TRUE))
+  (m2 <- mean(x2, na.rm=TRUE))
+  S1 <- sum((x1 - m1)^2, na.rm=TRUE)
+  S2 <- sum((x2 - m2)^2, na.rm=TRUE)
+  (n1 <- length(na.omit(x1)))
+  (n2 <- length(na.omit(x2)))
+  (df <- n1 + n2 - 2)
+  
+  (pool.s <- sqrt((S1 + S2) / df))
+  (d <- (m2 - m1) / pool.s)
+  
+  s1 <- sd(x1, na.rm=TRUE)
+  s2 <- sd(x2, na.rm=TRUE)
+  (tstat <- (m2 - m1) / (pool.s * sqrt((n1 + n2) / (n1 * n2))))
+  (pval <- pt(abs(tstat), df, lower.tail=FALSE) * 2)
+  
+  return(list(d=d, tstat=tstat, pval=pval))
+}
+```
+
+## Design Analysis Given a Plausible Value of d
+
+### Simulations of Expected Power and Errors
+
+In the comparison between two groups, given a plausible effect size $d_{\text{sim}}$, the sample sizes $n_1$ and $n_2$ of the groups and the significance level $\alpha$, the function \texttt{sim\_estimate} computes the expected power $\beta$, the type S error $e_S$ (the risk that a significant effect is estimated in the wrong direction) and the type M error $e_M$ (the average overestimation of an effect that emerges as significant).
+
+In particular, the function simulates $\mathbf{x}_1$ as $n_1$ observations from a $\mathcal{N}(0,1)$ distribution, and $\mathbf{x}_2$ as $n_2$ observations from a $\mathcal{N}(d_{\text{sim}},1)$ distribution. Then the values of Cohen's $d$ and the corresponding test statistic $t$ and p-value $p$ are estimated. Such procedure is repeated $B$ times (default $10^4$), and leads to:
+
+\begin{align*}
+\hat{\beta}=\frac{\#\{i\,:\,p_i<\alpha\}}{B},\quad\quad \hat{e}_S=\frac{\#\{i\,:\,p_i<\alpha,\;t_i<0\}}{\#\{i\,:\,p_i<\alpha\}},\quad\quad \hat{e}_M=\frac{\text{mean}\{|d_i|\,:\,p_i<\alpha\}}{d_{\text{sim}}}.
+\end{align*}
+
+```{r}
+sim_estimate <- function(sim_d, target_d=sim_d, n1, n2=n1,
+                          sig.level=0.05, B=1e4 ) {
+  outsim <- t(replicate(B, {
+    x1 <- rnorm(n1)
+    x2 <- rnorm(n2, sim_d)
+    d <- cohen_d(x1, x2)
+    sim <- c(d$d, d$tstat, d$pval, sim_d)
+  }))
+  colnames(outsim) <- c("est_d", "tstat", "pval", "sim_d")
+  (outsim <- data.frame(outsim))
+  (outsim$power <- sum(outsim$pval < sig.level) / nrow(outsim))
+  (outsim$typeS <- with(outsim,
+                        sum((pval < sig.level) &
+                               (tstat < 0)) / sum(pval < sig.level)))
+  (outsim$typeM <- with(outsim,
+                        mean(abs(est_d[pval < sig.level]))) / target_d)
+  return(outsim)
+}
+```
+
+### Prospective Analysis: from Power to Sample Size
+
+In the comparison between two groups, given a plausible value of effect size $d_{\text{sim}}$, the significance level $\alpha$ and the required power $\beta$, the function \texttt{design\_analysis\_n} estimates the sample size per group $n$ needed to reach such power, as well as the type S error $e_S$ and the type M error $e_M$. The function also requires the minimum and the maximum size values ($n_{\min}$ and $n_{\max}$), the number $B$ of iterations and a tolerance $\epsilon$.
+
+Firstly, the function evaluates $\hat{\beta}_{\max}$, the expected power given the effect size $d_{\text{sim}}$ and the sample sizes $n_1=n_2=n_{\max}$. If $\hat{\beta}_{\max}<\beta$, the function stops, because a bigger value $n_{\max}$ is needed.
+
+Otherwise, let $(l^{(1)},\, u^{(1)})=(n_{\min},\, n_{\max})$. For each step $j=1,2,\ldots$, the function defines
+\[\hat{n}^{(j)}=\lfloor\text{median}\{l^{(j)},\,l^{(j)}+1,\,\ldots,\, u^{(j)}\}\rfloor ,\]
+and $\hat{\beta}^{(j)}$ as the expected power given the effect size $d_{\text{sim}}$ and the sample sizes $n_1=n_2=\hat{n}^{(j)}$.
+
+- If $\hat{\beta}^{(j)}\in (\beta-\epsilon,\,\beta+\epsilon]$, then the value $\hat{n}^{(j)}$ is returned.
+- Otherwise, if $\hat{\beta}^{(j)}>\beta + \epsilon$, then $(l^{(j+1)},\, u^{(j+1)}) =(l^{(j)},\,\hat{n}^{(j)})$.
+- Otherwise, if $\hat{\beta}^{(j)}\leq \beta - \epsilon$, then $(l^{(j+1)},\, u^{(j+1)}) =(\hat{n}^{(j)},\,  u^{(j)})$.
+
+```{r}
+design_analysis_n <- function(d, power, sig.level=0.05,
+                               rangen=c(2,1000), B=1e4,
+                               tol=0.005 ){
+  
+  (n_seq <- seq(rangen[1], rangen[2], by=1))
+  (n_target <- round(median(n_seq)))
+  find_power <- FALSE
+  
+  ## check with maximum N
+  cat("Estimating power with n =", rangen[2], "\n")
+  (est_P <- sim_estimate(n1=rangen[2], n2=rangen[2], sim_d=d,
+                          target_d=d, sig.level=sig.level, B=B))
+  (est_power <- est_P[1,]$power)
+  
+  if (est_power < power) {
+    cat(paste0("Actual power = ", est_power, " with n=", rangen[2],
+               " (per group); " ), "\n")
+    cat(paste0(" try to increase maximum of rangen > ", rangen[2],
+               "."), "\n")
+    out <- NULL
+  } else {
+    
+    ## estimating power
+    while((!find_power)) {
+      cat("Estimating power with n=", n_target, "\n")
+      (est_P <- sim_estimate(n1=n_target, n2=n_target, sim_d=d,
+                              target_d=d, sig.level=sig.level, B=B))
+      (est_power <- est_P[1,]$power)
+      
+      if ((est_power <= (power + tol)) & (est_power > (power - tol))) {
+        find_power <- TRUE
+      } else {
+        
+        if (length(n_seq)==1) {
+          print(n_seq)
+          stop(" ")
+        }
+        
+        if (est_power > (power - tol)) {
+          (n_seq <- seq(min(n_seq), n_target, by=1))
+          (n_target <- round(median(n_seq)))
+        } else {
+          (n_seq <- seq(n_target, max(n_seq), by=1))
+          (n_target <- round(median(n_seq)))
+        }
+      }
+    }
+    out <- list(d=d, power=power, n=n_target,
+                 typeS=est_P[1,"typeS"], typeM=est_P[1,"typeM"])
+  }
+  if (!is.null(out)) return(out)
+}
+```
+
+### Retrospective Analysis: from Sample Size to Power
+
+In the comparison between two groups, given a plausible value of effect size $d_{\text{sim}}$, the significance level $\alpha$ and the sample size per group $n$, the function \texttt{design\_analysis\_power} estimates the power $\beta$, the type S error $e_S$ and the type M error $e_M$. It makes use of the function \texttt{sim\_estimate}.
+
+```{r}
+design_analysis_power <- function(n, d, sig.level=0.05, B=1e4,
+                                   tol=0.005) {
+  out <- sim_estimate(sim_d=d, target_d=d, n1=n, sig.level=sig.level,
+                      B=B)
+  out=list(d=d, n=n, power=out[1,"power"], typeS=out[1,"typeS"],
+           typeM=out[1,"typeM"])
+  return(out)
+}
+```
+
+### Prospective or Retrospective Design Analysis
+
+In the comparison between two groups, given a plausible value of effect size $d_{\text{sim}}$ and the significance level $\alpha$, the function \texttt{design\_analysis} performs a design analysis.
+
+- If the power $\beta$ is given, it uses the function \texttt{design\_analysis\_n} to estimate the sample size per group $n$ needed to reach that power, as well as the type S error $e_S$ and the type M error $e_M$.
+- If the sample size per group $n$ is given, it uses the function \texttt{design\_analysis\_power} to estimate the power $\beta$, the type S error $e_S$ and the type M error $e_M$.
+
+```{r}
+design_analysis <- function(d, n=NULL, power=NULL,
+                             sig.level=0.05, B =1e4,
+                             rangen=c(2, 1000),  tol=0.005) {
+  if (d <= 0) {
+    stop("A d greater than 0 must be entered")
+  }
+  
+  if (sum(sapply(list(n, power), is.null)) != 1) {
+    stop("Exactly one of 'n' or 'power' must be NULL")
+  }
+  
+  if (is.null(n)) {
+    out <- design_analysis_n(d=d, power=power, sig.level=sig.level,
+                              rangen=rangen, B=B )
+  } else {
+    if (is.null(power)) {
+      out <- design_analysis_power(n=n, d=d, sig.level=sig.level, B=B)
+    } 
+  }
+  return(out)
+}
+```
+
+## Design Analysis Given a Plausible Distribution for d
+
+### Sampling of Cohen's d
+
+The function \texttt{sampling\_d} requires the package \texttt{truncnorm}. It samples a vector $\mathbf{d}$ of $B_0$ values from a given distribution. Such distribution is bounded on an interval $(d_{\min},d_{\max})$, and may be
+
+- uniform (default);
+- doubly truncated normal with mean and standard deviation
+\[\mu_d=\frac{d_{\min}+d_{\max}}{2},\quad\quad\sigma_d=k\,(d_{\max}-d_{\min})\]
+(where $k$ is a given constant).
+
+```{r}
+sampling_d <- function(target_limits=c(0, 1),
+                        distribution=c("uniform", "normal"), k=1/6,
+                        B0=1e4) {
+  
+  distribution <- match.arg(distribution)
+  my <- (sum(target_limits) / 2)
+  sy <- diff(target_limits) * k
+  if (distribution=="uniform") {
+    y <- runif(B0, target_limits[1], target_limits[2])
+  } else {
+    y <- rtruncnorm(B0, target_limits[1], target_limits[2], mean=my,
+                    sd=sy)
+    
+  }
+  return(list(y=y, my=my, sy=sy))
+}
+```
+
+### Extended Retrospective Design Analysis
+
+The function \texttt{design\_est} requires the package \texttt{truncnorm}. In the comparison between two groups, it performs a retrospective design analysis. In particular, given the sizes $n_1$ and $n_2$ of the two groups, a plausible effect size (either a fixed value or a distribution) and the significance level $\alpha$, it estimates the power $\beta$, the type S error $e_S$ and the type M error $e_M$.
+
+- If the plausible effect size is defined by a single value $d_{\text{sim}}$, then $\hat{\beta}$, $\hat{e}_{S}$ and $\hat{e}_{M}$ are computed through the function \texttt{sim\_estimate}.
+- If the plausible effect size is defined by a bounded distribution, specified as in the function \texttt{sampling\_d}, then a vector $\mathbf{d}$ is sampled from such distribution. For each sampled value $d_i$, the corresponding estimates $\hat{\beta}_i$, $\hat{e}_{S,i}$ and $\hat{e}_{M,i}$ are computed. Finally, the means of these values are returned as $\hat{\beta}$, $\hat{e}_{S}$ and $\hat{e}_{M}$.
+
+```{r}
+design_est<- function(n1=5, n2=n1, target_d=NULL,
+                       target_d_limits=NULL,
+                       distribution=c("uniform", "normal"), k=1/6,
+                       sig.level=0.05, B=500, B0=500,
+                       return_data=FALSE) {
+  
+  distribution <- match.arg(distribution)
+  
+  if (sum(sapply(list(target_d, target_d_limits), is.null)) != 1) {
+    stop("Exactly one of 'target_d' and 'target_d_limits' must be NULL")
+  }
+  
+  ########### fixed d
+  if (!is.null(target_d)) {
+    if (target_d <= 0) stop("Target_d must be greater than 0")
+    temp <- sim_estimate(sim_d=target_d, target_d=target_d, n1=n1,
+                         n2=n2, B=B)
+    results <- list(power=temp[1,"power"], typeS=temp[1,"typeS"],
+                    typeM=temp[1,"typeM"])
+    outList <- list(call=list(n1=n1, n2=n2, target_d=target_d, B=B),
+                    results=results)
+    return(outList)
+  }
+  
+  ############## plausible interval and distribution for d
+  if (!is.null(target_d_limits)) {
+    if (min(target_d_limits)<0)
+      stop("Minimum of target_d_limits must be greater than 0")
+    (call_est <- list(n1=n1, n2=n2, target_d_limits=target_d_limits,
+                      distribution=distribution, k=k, B=B, B0=B0))
+    (my <- (sum(target_d_limits) / 2))
+    (sy <- diff(target_d_limits) * k)
+    y <- sampling_d(target_d_limits, distribution=distribution,
+                    B0=B0, k=k) ###
+    sim_cohen <- y$y
+
+    
+    data <- t(sapply(1:B0, function(b){
+      temp <- sim_estimate(sim_cohen[b], target_d=my, n1=n1, n2=n2,
+                           B=B)
+      c(temp[1,"power"], temp[1,"typeS"], temp[1,"typeM"])
+    }))
+    data <- data.frame(data)
+    colnames(data) <- c("power", "typeS", "typeM")
+    
+    (power <- mean(data$power))
+    (typeS <- mean(data$typeS, na.rm=TRUE))
+    (typeM <- mean(data$typeM, na.rm=TRUE))
+    
+    results <- list(power=power, typeS=typeS, typeM=typeM)
+    if (return_data) {
+      results$data <- data
+      
+      outList <-  list(call=call_est, results=results)
+    } else {
+      outList <-  list(call=call_est, results=results)
+    }
+    return(outList)
+  }
+}
+```
+
