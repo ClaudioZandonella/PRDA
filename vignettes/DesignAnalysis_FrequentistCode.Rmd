@@ -4,18 +4,21 @@ author: "Anna Vesely"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
- %\VignetteIndexEntry{Vignette Title}
+ %\VignetteIndexEntry{Tutorial Design Analysis}
  %\VignetteEngine{knitr::rmarkdown}
  \usepackage[utf8]{inputenc} 
 ---
 
+<!-- \VignetteEngine{knitr::rmarkdown} -->
+
 ## Cohen's d
 
-Given the vectors $\mathbf{x}_1$ and $\mathbf{x}_2$ with the observed values of two groups, the function <tt>`cohen_d`</tt> computes Cohen's $d$ effect size statistic with the corresponding t-statistic and p-value:
+Given the vectors $x_1$ and $x_2$ with the observed values of two groups, the function <tt>`cohen_d`</tt> computes Cohen's $d$ effect size statistic with the corresponding t-statistic and p-value:
 
-\begin{align*}
+$$
 d=\frac{\bar{\mathbf{x}_1}-\bar{\mathbf{x}_2}}{s_{\text{pool}}},\quad\quad t=d\,\sqrt{\frac{n_1\, n_2}{n_1+n_2}},\quad\quad p=2\,P(T_{r}\geq |t|)
-\end{align*}
+$$
+
 where $T$ follows a Student's t-distribution with $r=n_1+n_2-2$ degrees of freedom.
 
 ```{r}
@@ -45,7 +48,7 @@ cohen_d <- function(x1, x2) {
 
 ### Simulations of Expected Power and Errors
 
-In the comparison between two groups, given a plausible effect size $d_{\text{sim}}$, the sample sizes $n_1$ and $n_2$ of the groups and the significance level $\alpha$, the function \texttt{sim\_estimate} computes the expected power $\beta$, the type S error $e_S$ (the risk that a significant effect is estimated in the wrong direction) and the type M error $e_M$ (the average overestimation of an effect that emerges as significant).
+In the comparison between two groups, given a plausible effect size $d_{\text{sim}}$, the sample sizes $n_1$ and $n_2$ of the groups and the significance level $\alpha$, the function <tt>`sim\_estimate`</tt> computes the expected power $\beta$, the type S error $e_S$ (the risk that a significant effect is estimated in the wrong direction) and the type M error $e_M$ (the average overestimation of an effect that emerges as significant).
 
 In particular, the function simulates $\mathbf{x}_1$ as $n_1$ observations from a $\mathcal{N}(0,1)$ distribution, and $\mathbf{x}_2$ as $n_2$ observations from a $\mathcal{N}(d_{\text{sim}},1)$ distribution. Then the values of Cohen's $d$ and the corresponding test statistic $t$ and p-value $p$ are estimated. Such procedure is repeated $B$ times (default $10^4$), and leads to:
 
