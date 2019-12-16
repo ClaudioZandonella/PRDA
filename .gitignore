@@ -5,7 +5,7 @@
 .Ruserdata
 
 # Other files types
-*.html
+
 
 # Mac auxiliary files
 .DS_Store

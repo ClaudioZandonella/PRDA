@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Anna Vesely" />
+
+<meta name="date" content="2019-12-05" />
+
+<title>Design Analysis - Bayes Factor</title>
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Design Analysis - Bayes Factor</h1>
+<h4 class="author">Anna Vesely</h4>
+<h4 class="date">2019-12-05</h4>
+
+
+
+<!-- \VignetteEngine{knitr::rmarkdown} -->
+<div id="bayes-factor" class="section level2">
+<h2>Bayes Factor</h2>
+<p>Consider <span class="math inline">\(n_1\)</span> observations <span class="math inline">\(\mathbf{x}_1\)</span> from a <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution, and <span class="math inline">\(n_2\)</span> observations <span class="math inline">\(\mathbf{x}_2\)</span> from a <span class="math inline">\(\mathcal{N}(d,1)\)</span> distribution. Consider <span class="math display">\[\begin{align*}
+\bar{X}_1\sim\mathcal{N}\left(0,\frac{1}{n_1}\right),\quad\quad \bar{X}_2\sim\mathcal{N}\left(d,\frac{1}{n_2}\right),\quad\quad Z=(\bar{X}_2-\bar{X}_1)\sim\mathcal{N}\left(d,\frac{n_1+n_2}{n_1\,n_2}\right),
+\end{align*}\]</span> and assume that we want to compare the difference between the group means.</p>
+<p>In particular, consider the null hypothesis <span class="math inline">\(H_0:\,d=0\)</span>, and the alternative hypothesis <span class="math inline">\(H_1\,:\, d\sim F\)</span>, where <span class="math inline">\(F\)</span> is a distribution (analysis prior) on a set <span class="math inline">\(D\)</span> containing zero. For simplicity, assume that <span class="math inline">\(F\)</span> is continuous with density <span class="math inline">\(f\)</span>. Then the Bayes factor <span class="math inline">\(B\)</span> is computed as following: <span class="math display">\[\begin{align*}
+&amp;L(d\,|\,z)=\sqrt{\frac{n_1\,n_2}{2\pi(n_1+n_2)}}\exp\left\{-\frac{n_1\,n_2}{2(n_1+n_2)}(z-d)^2\right\}\\
+&amp;P(z\,|\,H_0)=P(z\,|\,d=0),\quad\quad P(z\,|\,H_1)=\int_{D} P(z\,|\,d=v)\,f(v)\,\text{d}v\\
+&amp; B = \frac{P(z\,|\,H_1)}{P(z\,|\,H_0)}= \int_{D} \exp\left\{\frac{n_1\,n_2}{n_1+n_2}\,v\,\left(z-\frac{v}{2}\right)\right\}\,f(v)\,\text{d}v.
+\end{align*}\]</span></p>
+<p>For a given threshold <span class="math inline">\(k\)</span> (e.g. <span class="math inline">\(k=3\)</span>):</p>
+<ul>
+<li>if <span class="math inline">\(B &lt; 1/k\)</span>, then the evidence supports <span class="math inline">\(H_0\)</span>;</li>
+<li>if <span class="math inline">\(1/k \leq B \leq k\)</span>, then the analysis is inconclusive;</li>
+<li>if <span class="math inline">\(B &gt; k\)</span>, then the evidence supports <span class="math inline">\(H_1\)</span>.</li>
+</ul>
+<p>As shown the following table:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center"><span class="math inline">\(\,\, B&lt;1/k \,\,\)</span></th>
+<th align="right"><span class="math inline">\(\,\, 1/k \leq B \leq k \,\,\)</span></th>
+<th align="right"><span class="math inline">\(\,\, B &gt; k \,\,\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td align="center">in favor of <span class="math inline">\(H_0\)</span></td>
+<td align="right">inconclusive</td>
+<td align="right">in favor of <span class="math inline">\(H_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_0\)</span> is true</td>
+<td align="center"><span class="math inline">\(\gamma\)</span></td>
+<td align="right"><span class="math inline">\(e_I^{(0)}\)</span></td>
+<td align="right"><span class="math inline">\(e_P\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_1\)</span> is true</td>
+<td align="center"><span class="math inline">\(e_N\)</span></td>
+<td align="right"><span class="math inline">\(e_I^{(1)}\)</span></td>
+<td align="right"><span class="math inline">\(\beta\)</span>, <span class="math inline">\(e_S\)</span>, <span class="math inline">\(e_M\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>we want to estimate:</p>
+<ul>
+<li><span class="math inline">\(\beta=P(B&gt;k\,|\,H_1)=\)</span> prob. of true positives (power);</li>
+<li><span class="math inline">\(e_{N}=P(B&lt; 1/k\,|\,H_1)=\)</span> prob. of false negatives;</li>
+<li><span class="math inline">\(e_{I}^{(1)}=P(1/k \leq B \leq k\,|\,H_1)=\)</span> prob. of an inconclusive result under the alternative;</li>
+<li><span class="math inline">\(e_{S}=P(B&gt;k,\; \text{sgn}(z)\neq\text{sgn}(d^*)\,|\,H_1,\;B&gt;k)=\)</span> prob. that a significant effect is estimated in the wrong direction;</li>
+<li><span class="math inline">\(e_M=\)</span> average overestimation of an effect that emerges as significant;</li>
+<li><span class="math inline">\(\gamma=P(B&lt; 1/k\,|\,H_0)=\)</span> prob. of true negatives;</li>
+<li><span class="math inline">\(e_{P}=P(B&gt;k\,|\,H_0)=\)</span> prob. of false positives;</li>
+<li><span class="math inline">\(e_{I}^{(0)}=P(1/k \leq B \leq k\,|\,H_0)=\)</span> prob. of an inconclusive result under the null.</li>
+</ul>
+</div>
+<div id="estimation-from-fixed-samples-sizes" class="section level2">
+<h2>Estimation from Fixed Samples Sizes</h2>
+<p>Fix the sample sizes <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>, an analysis prior <span class="math inline">\(F\)</span> and a threshold <span class="math inline">\(k\)</span>. Moreover, consider a plausible effect size <span class="math inline">\(d^*\)</span>. The above-mentioned quantities can be estimated through <span class="math inline">\(2T\)</span> simulations. By default:</p>
+<ul>
+<li><span class="math inline">\(F\)</span> is a Cauchy distribution with scale parameter <span class="math inline">\(\sqrt{2}/2\)</span>;</li>
+<li><span class="math inline">\(k=3\)</span>;</li>
+<li><span class="math inline">\(T=10^4\)</span>.</li>
+</ul>
+<p>Firstly, for <span class="math inline">\(i=1,\ldots, T\)</span>, generate <span class="math inline">\(z_i\)</span> from a <span class="math inline">\(\mathcal{N}\left(d^*,\frac{n_1+n_2}{n_1\,n_2}\right)\)</span> distribution, and compute the Bayes factor <span class="math display">\[
+B_i = \int_{D}\exp\left\{\frac{n_1\,n_2}{n_1+n_2}\,v\,\left(z_i-\frac{v}{2}\right)\right\}\,f(v)\,\text{d}v.
+\]</span> Then <span class="math display">\[\begin{align*}
+&amp;\hat{\beta}=\frac{\#\{i\,:\,B_i&gt;k\}}{T},\quad\quad\hat{e}_N=\frac{\#\{i\,:\,B_i&lt;1/k\}}{T},\quad\quad\hat{e}_I^{(1)}=\frac{\#\{i\,:\,1/k\leq B_i\leq k\}}{T}\\
+&amp;\hat{e}_S=\frac{\#\{i\,:\,B_i&gt;k,\;\text{sgn}(z_i)\neq\text{sgn}(d^*)\}}{\#\{i\,:\,B_i&gt;k\}},\quad\quad\hat{e}_M=\frac{\text{mean}\{|z_i|\,:\,B_i&gt;k\}}{d^*}.
+\end{align*}\]</span></p>
+<p>Subsequently, for <span class="math inline">\(j=1,\ldots, T\)</span>, generate <span class="math inline">\(z_j\)</span> from a <span class="math inline">\(\mathcal{N}\left(0,\frac{n_1+n_2}{n_1\,n_2}\right)\)</span> distribution, and compute the Bayes factor <span class="math inline">\(B_j\)</span> as before. Then <span class="math display">\[\begin{align*}
+&amp;\hat{\gamma}=\frac{\#\{j\,:\,B_j&lt;1/k\}}{T},\quad\quad\hat{e}_P=\frac{\#\{j\,:\,B_j&gt;K\}}{T},\quad\quad\hat{e}_I^{(0)}=\frac{\#\{j\,:\,1/k\leq B_j\leq k\}}{T}.
+\end{align*}\]</span></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
