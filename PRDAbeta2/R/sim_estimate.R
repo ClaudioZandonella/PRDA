@@ -29,3 +29,4 @@ sim_estimate <- function( sim_d, target_d = sim_d, n1, n2 = n1, sig.level = .05,
   (outsim$typeM <- with(outsim, mean(abs(est_d[pval< sig.level]))) / target_d)
   return(outsim)
 }
+#
