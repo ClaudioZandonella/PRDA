@@ -96,9 +96,41 @@ glass_delta <- function(x1,x2) {
 }
 
 
-psi <- function(x1,x2) {
+#psi <- function(x1,x2) {
   
   #to do
   
-  return(list(d=d,tstat=tstat,pval=pval))
+#  return(list(d=d,tstat=tstat,pval=pval))
+#}
+
+#' @analysisPrior prior distribution 
+#' @D range difference mean 
+
+BF <- function(n1,n2= n1,analysisPrior= NULL, D,d) {
+  
+  x1 <- rnorm(n1)
+  x2 <- rnorm(n2, d)
+  (m1 <- mean(x1, na.rm = TRUE))
+  (m2 <- mean(x2, na.rm = TRUE))
+  
+  z <- m2 - m1
+  
+  if(n1> 1000 & n2 > 1000){
+    n1 = 1000
+    n2 = 1000
+  }
+  f <- function(x) { exp(((n1*n2)/(n1 + n2))*x*(z - (x/2))) * dcauchy(x,location = 0, scale = 1/sqrt(2))}
+  B <- integrate(f,lower = D[1], upper = D[2])$value
+  
+  return(cbind(B = B, z = z))
+  
 }
+
+#TEST
+
+#x1 <- rnorm(1000, mean = 3, sd = 1)
+#x2 <- rnorm(1000, mean = 3, sd = 1)
+#D <- c(-3,3)
+#BF(x1 = x1, x2 = x2, analysisPrior = NULL, D = D)
+
+
