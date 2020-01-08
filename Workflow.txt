@@ -1,13 +1,16 @@
-Workflow
+# PRDA_beta
+
+
+# Struttura del pacchetto:
+
+Funzioni diverse per prospective e retrospective
+
+Caratteristiche definibili comuni: .. (tipo effetto, prior effetto)
+Caratteristiche definibili diverse: .. (numerosità)
 
 
 
-Struttura del pacchetto:
-
-
-
-
-Elementi principali:
+# Elementi principali:
 
 1) Funzione che campioni gli effect-sizes dato il tipo di effect size e la distribuzione della prior
 
@@ -16,6 +19,21 @@ Elementi principali:
 3) Funzione che faccia i test
 
 
-Note: 
+
+# Oggetto design_analysis:
+
+Pensare come strutturare l'oggetto (classe o lista) in cui si raccolgono tutte le informazioni e risultati
+
+# Workflow:
+1) l'utente usa la funzione per la prospective (o retrospective) definendo il tipo di effetto, prior, e livello potenza desiderata (o sample size nel caso di retrospective)
+2) si inizia a creare una classe "design_analysis" dove si inseriscono queste informazioni
+3) una funzione legge il tipo di effetto e chiama una sottofunzione (a seconda del tipo di effetto) che genera sampling degli effetti a seconda della prior
+4) un'altra sottofunzione (a seconda dell'effetto) prende gli effetti generati e simula dati
+5) un'ultima funzione esegue i test sui dati simulati
+
+
+
+# Note: 
 1. il pacchetto "effsize" sviluppa come effect size il Cliff’s Delta, Cohen's D, Hedges’g, Vargha and Delaney A. (https://github.com/mtorchiano/effsize/)
 2. Ref tipologie di effect size: https://en.wikipedia.org/wiki/Effect_size, http://www.utstat.toronto.edu/~brunner/oldclass/378f16/readings/CohenPower.pdf
+
