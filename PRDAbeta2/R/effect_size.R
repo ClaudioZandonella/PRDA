@@ -105,6 +105,9 @@ glass_delta <- function(x1,x2) {
 
 #' @analysisPrior prior distribution 
 #' @D range difference mean 
+#' @n1 number of observation of the first group 
+#' @n2 number of observation of the second group 
+#' @d mean difference
 
 BF <- function(n1,n2= n1,analysisPrior= NULL, D,d) {
   
