@@ -1,10 +1,5 @@
 
-#' @D range difference mean 
-#' @d range difference mean 
-
-library(truncnorm)
-
-sampling_d <- function( target_limits = c(0,1), distribution = c("uniform","normal"), k = 1/6, B0 = 1e4 ) {
+sampling_d <- function(target_limits = c(0,1), distribution = c("uniform","normal"), k = 1/6, B0 = 1e4 ) {
   
   distribution <- match.arg(distribution)
   my <- (sum(target_limits)/2)
@@ -18,10 +13,12 @@ sampling_d <- function( target_limits = c(0,1), distribution = c("uniform","norm
   return(list(y=y,my=my,sy=sy))
 }
 
-#' @n1
-#' @n2
-#' @k threshold Bayes Factor
-#' 
+#' @n1 number of observation of the first group 
+#' @n2 number of observation of the second group 
+#' @B number of replicates
+#' @D range difference mean 
+#' @distribution needed for sampling_d function (d distirbution)
+#' @thr threshold Bayes Factor
 
 BayesError <- function(n1, n2 = n1, B = 1e4, D, distribution = c("uniform", "normal"), thr = 3){
   
