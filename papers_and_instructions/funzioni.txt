@@ -1,0 +1,30 @@
+pool_sd: funzione interna che calcola sd pooled, sfruttando il fatto che alcune quantità (medie e df) sono già state calcolate.
+
+
+CALCOLO DELL'EFFECT SIZE
+Dati due vettori x1 e x2:
+- effect_mdiff calcola Cohen's d, Hedges' g e Glass' delta
+- effect_bayes calcola il Bayes factor.
+
+
+STIMA POTENZA ED ERRORI
+sim_estimate, ipotizzato un effetto, simula B volte dei dati e ne calcola l'effetto + potenza ed errori.
+
+
+-------------- da riscrivere -----------
+
+
+SAMPLING DELL'EFFETTO
+sampling_eff campiona un effetto da una prior ipotizzata.
+
+
+DESIGN ANALYSIS
+design_analysis permette di richiamare due funzioni, dato un effetto ipotizzato:
+- design_analysis_power calcola la potenza e gli errori date le sample size
+- design_analysis_n calcola le sample size data la potenza.
+
+
+DESIGN ANALYSIS ESTESA
+design_analysis_est estende design_analysis_power, usando una distribuzione ipotizzata per l'effetto.
+
+
