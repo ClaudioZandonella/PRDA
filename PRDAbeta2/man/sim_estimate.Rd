@@ -5,22 +5,23 @@
 \title{Simulation of Power and Errors}
 \usage{
 sim_estimate(
-  sim_eff,
-  target_eff = sim_eff,
+  sim_e,
+  target_e = sim_e,
   type = c("cohen", "hedges", "glass", "bayes"),
   n1,
   n2 = n1,
   sig.level = 0.05,
   prior_limits = c(0, 1),
   prior_density = function(y) dcauchy(y, location = 0, scale = 1/sqrt(2)),
+  k = 3,
   B = 10000,
   return_data = FALSE
 )
 }
 \arguments{
-\item{sim_eff}{simulated effect size}
+\item{sim_e}{simulated effect size}
 
-\item{target_eff}{target effect size}
+\item{target_e}{target effect size}
 
 \item{type}{a character string specifying the effect type, must be one of \code{"cohen"},
 \code{"hedges"}, \code{"glass"} or \code{"bayes"}.}
@@ -29,41 +30,57 @@ sim_estimate(
 
 \item{n2}{sample size of the second group.}
 
-\item{sig.level}{significance level.}
+\item{sig.level}{significance level (used if \code{type} is \code{"cohen"},
+\code{"hedges"} or \code{"glass"}).}
 
-\item{prior_limits}{vector with lower and upper bounds of the prior distribution of the mean.}
+\item{prior_limits}{vector with lower and upper bounds of the prior distribution of the mean
+(used if \code{type} is \code{"bayes"}).}
 
-\item{prior_density}{function, density of the prior distribution of the mean.}
+\item{prior_density}{function, density of the prior distribution of the mean
+(used if \code{type} is \code{"bayes"}).}
+
+\item{k}{threshold for the Bayes factor (used if \code{type} is \code{"bayes"}).}
 
 \item{B}{number of replicates.}
 
-\item{return_data}{logical, if TRUE the function returns also the simulated data.}
+\item{return_data}{logical, if TRUE the function returns the simulated data.}
 }
 \value{
-Returns a list with the computed values of
-\code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors and, if \code{return_data}
-is TRUE, a data frame \code{sim_data} with the simulated data.
+If \code{return_data} is \code{FALSE} (default), the function returns a list with the following objects:
+\code{power} (power computed on the simulated data), \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}
+(errors computed on the simulated data).
+
+If \code{return_data} is \code{TRUE}, the function returns a list with the above-mentioned objects
+and \code{return_data}, a data frame containing \code{est_e} (effect computed
+on the simulated data), \code{tstat} (\eqn{t} value), \code{pval} (\eqn{p}-value) and
+\code{sim_e} (the effect used to simulate data).
 }
 \description{
 Internal function. In a comparison between two independent groups,
-the function computes through \code{B} simulations the expected power,
-Type-S, Type-M, Type-N and Type-I errors, given a plausible effect size (\code{target_eff}) and the sample size of each group.
+it computes through \code{B} simulations the expected power,
+Type-S, Type-M, Type-N and Type-I errors, given a plausible effect size (\code{target_e})
+and the sample size of each group.
 }
 \details{
-Type-S error is the probabiliyy that a significant effect is estimated in the wrong direction.
+The Bayes factor \eqn{BF} is computed as the ratio of the posterior probabilities of the alternative
+model and the null model. The threshold \eqn{k} is such that
+the evidence supports the null model if \eqn{BF < 1/k}, and
+it supports the alternative model if \eqn{BF > k}.
+
+Type-S error is the probability that a significant effect is estimated in the wrong direction.
 
 Type-M error is the average overestimation of an effect that emerges as significant.
 
-Type-N error is the probability of false negatives (1-power in a non-Bayesian framework).
+Type-N error is the probability of false negatives (1 - power in a non-Bayesian framework).
 
 Type-I error is the probability of an indecisive outcome when the effect is significative (zero
 in a non-Bayesian framework).
 }
 \note{
-Called from \code{\link{design_est}}. For \code{design_analysis}: \code{target_eff} is equal to \code{sim_eff}.
+For \code{design_analysis}: \code{target_e} is equal to \code{sim_e}.
 }
 \examples{
-sim_estimate(sim_eff=0.9, type="cohen", n1=10, n2=15, sig.level=0.05, B=10, return.data=FALSE)
+sim_estimate(sim_e=0.9, type="cohen", n1=10, n2=15, sig.level=0.05, B=10, return.data=FALSE)
 }
 \author{
 Massimiliano Pastore, Gianmarco Altoè

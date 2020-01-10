@@ -18,16 +18,14 @@ pool_sd(x1, x2, m1, m2, df)
 \item{df}{degrees of freedom.}
 }
 \value{
-Returns the pooled standard deviation.
+The function returns the pooled standard deviation.
 }
 \description{
 Internal function. It computes the pooled standard deviation of two groups.
 }
 \details{
-The degrees of freedom \code{df} are given by the sum of the two group sizes minus 2.
-}
-\note{
-Called from \code{\link{effect_mdiff}}.
+The degrees of freedom \code{df} are given by the sum of the two group
+sizes minus 2.
 }
 \examples{
 x1 <- c(0.43, -0.56, -0.39, -0.21, -0.58,  0.65)

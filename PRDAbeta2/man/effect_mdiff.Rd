@@ -4,40 +4,46 @@
 \alias{effect_mdiff}
 \title{Compute Effect Sizes Based on Mean Differences}
 \usage{
-effect_mdiff(x1, x2, type = c("cohen", "hedges", "glass"), sign.level)
+effect_mdiff(x1, x2, type = c("cohen", "hedges", "glass"))
 }
 \arguments{
 \item{x1}{numerical vector with the observed values of the first group.}
 
 \item{x2}{numerical vector with the observed values of the second group.}
 
-\item{type}{a character string specifying the effect type, must be one of \code{"cohen"}, \code{"hedges"} or \code{"glass"}.}
-
-\item{sign.level}{significance level.}
+\item{type}{a character string specifying the effect type, must be one of \code{"cohen"},
+\code{"hedges"} or \code{"glass"}.}
 }
 \value{
-Returns a list with the following objects: \code{effect} (estimated effect size),
+The function returns a list with the following objects: \code{effect} (estimated effect size),
 \code{tstat} (\eqn{t} value), \code{pval} (\eqn{p}-value).
 }
 \description{
-Computes effect size statistics based on differences between means (Cohen's \eqn{d}, Hedges' \eqn{g} and Glass' \eqn{\Delta}) with the relative \eqn{t}-statistics and \eqn{p}-value.
+The function computes effect size statistics based on differences between means
+(Cohen's \eqn{d}, Hedges' \eqn{g} and Glass' \eqn{\Delta}) with the
+corresponding \eqn{t} statistic and \eqn{p}-value.
 }
 \details{
-Cohen's \eqn{d} is computed considering the pooled standard deviation:
-\deqn{d = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}}}{d = (mean(x2) - mean(x1)) / sd_pool}
+Cohen's \eqn{d} is computed as
+\deqn{d = \frac{m_2 - m_1}{s_{pool}}}{d = (m2 - m1) / s_pool}
+where \eqn{m_1}{m1} and \eqn{m_2}{m2} are the group means and
+\eqn{s_{pool}}{s_pool} is the pooled standard deviation.
 
-Hedges' \eqn{g} is computed considering the approximate correction:
-\deqn{g = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}}\left(1 - \frac{3}{4(n_1 + n_2 -2) -1}\right)}{g = [1 - 3 / {4 * (n1 + n2 - 2) - 1}]  *  (mean(x2) - mean(x1)) / sd_pool}
+Hedges' \eqn{g} is computed considering the approximate correction, as
+\deqn{g = \left(1 - \frac{3}{4(n_1 + n_2 -2) -1}\right)\frac{m_2 - m_1}{s_{pool}}}{g = [1 - 3 / {4 * (n1 + n2 - 2) - 1}]  *  (m2 - m1) / s_pool}
 
-Glass' \eqn{\Delta} is computed considering the standard deviation of the first group:
-\deqn{\Delta = \frac{ \bar{x}_2 - \bar{x}_1}{s_1}}{\Delta = (mean(x2) - mean(x1)) / sd1}
+Glass' \eqn{\Delta} is computed as
+\deqn{\Delta = \frac{ m_2 - m_1}{s_1}}{\Delta = (m2 - m1) / s1}
+where \eqn{s_1}{s1} is the standard deviation of the first group.
 
-\eqn{t}-statistics and relative \eqn{p}-value are computed considering two-tailed \eqn{t}-test for independent samples with equal variance.
+The \eqn{t} statistic and the corresponding \eqn{p}-value
+are computed considering a two-tailed \eqn{t}-test for independent samples
+with equal variance.
 }
 \examples{
 x1 <- c(0.43, -0.56, -0.39, -0.21, -0.58,  0.65)
 x2 <- c(2.38, -0.96, -0.82,  0.28, -0.40,  0.34,  1.82)
-effect_mdiff(x1, x2, type="cohen", sign.level=0.05)
+effect_mdiff(x1, x2, type="cohen")
 }
 \author{
 Massimiliano Pastore

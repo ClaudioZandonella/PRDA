@@ -16,22 +16,24 @@ effect_bayes(
 
 \item{x2}{numerical vector with the observed values of the second group.}
 
-\item{prior_limits}{vector with lower and upper bounds of the prior distribution of the mean.}
+\item{prior_limits}{numerical vector with lower and upper bounds of the prior distribution of the mean.}
 
-\item{prior_density}{function, density of the prior distribution of the mean.}
+\item{prior_density}{function, density of the prior distribution of the effect.}
 }
 \value{
-Returns a list with the following objects: \code{BF} (Bayes factor),
-\code{difference} (difference between means).
+The function returns a list with the following objects: \code{BF} (Bayes factor) and
+\code{difference} (difference between group means).
 }
 \description{
-Computes the Bayes factor to compare two models for the difference between means:
-the null model where the difference is zero, and the alternative model where it follows a given prior distribution
-defined on an interval containing zero.
+The function computes the Bayes factor to compare two models for the difference between means:
+the null model where the difference is zero, and the alternative model where the difference
+follows a given prior distribution.
 }
 \details{
 The Bayes factor is computed as the ratio of the posterior probabilities of the alternative
 model and the null model.
+
+The domain of the prior distribution should contain zero.
 }
 \examples{
 x1 <- c(0.43, -0.56, -0.39, -0.21, -0.58,  0.65)
