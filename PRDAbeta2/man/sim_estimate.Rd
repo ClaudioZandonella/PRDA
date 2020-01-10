@@ -14,7 +14,7 @@ sim_estimate(
   prior_limits = c(0, 1),
   prior_density = function(y) dcauchy(y, location = 0, scale = 1/sqrt(2)),
   B = 10000,
-  return.data = FALSE
+  return_data = FALSE
 )
 }
 \arguments{
@@ -36,10 +36,13 @@ sim_estimate(
 \item{prior_density}{function, density of the prior distribution of the mean.}
 
 \item{B}{number of replicates.}
+
+\item{return_data}{logical, if TRUE the function returns also the simulated data.}
 }
 \value{
-Returns the computed values of
-\code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors.
+Returns a list with the computed values of
+\code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors and, if \code{return_data}
+is TRUE, a data frame \code{sim_data} with the simulated data.
 }
 \description{
 Internal function. In a comparison between two independent groups,

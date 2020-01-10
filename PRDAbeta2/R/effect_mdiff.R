@@ -12,11 +12,11 @@
 #' @return Returns a list with the following objects: \code{effect} (estimated effect size),
 #' \code{tstat} (\eqn{t} value), \code{pval} (\eqn{p}-value).
 #' @details Cohen's \eqn{d} is computed considering the pooled standard deviation:
-#' \deqn{d = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}}}
+#' \deqn{d = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}}}{d = (mean(x2) - mean(x1)) / sd_pool}
 #' @details Hedges' \eqn{g} is computed considering the approximate correction:
-#' \deqn{g = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}} \left(1 - \frac{3}{4(n_1 + n_2 -2) -1}\right)}
+#' \deqn{g = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}}\left(1 - \frac{3}{4(n_1 + n_2 -2) -1}\right)}{g = [1 - 3 / {4 * (n1 + n2 - 2) - 1}]  *  (mean(x2) - mean(x1)) / sd_pool}
 #' @details Glass' \eqn{\Delta} is computed considering the standard deviation of the first group:
-#' \deqn{\Delta = \frac{ \bar{x}_2 - \bar{x}_1}{s_1} }
+#' \deqn{\Delta = \frac{ \bar{x}_2 - \bar{x}_1}{s_1}}{\Delta = (mean(x2) - mean(x1)) / sd1}
 #' @details \eqn{t}-statistics and relative \eqn{p}-value are computed considering two-tailed \eqn{t}-test for independent samples with equal variance.
 #' @author Massimiliano Pastore
 #' @examples

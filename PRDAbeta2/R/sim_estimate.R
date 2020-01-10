@@ -17,8 +17,10 @@
 #' @param prior_limits vector with lower and upper bounds of the prior distribution of the mean.
 #' @param prior_density function, density of the prior distribution of the mean.
 #' @param B number of replicates.
-#' @return Returns the computed values of
-#' \code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors.
+#' @param return_data logical, if TRUE the function returns also the simulated data.
+#' @return Returns a list with the computed values of
+#' \code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors and, if \code{return_data}
+#' is TRUE, a data frame \code{sim_data} with the simulated data.
 #' @details Type-S error is the probabiliyy that a significant effect is estimated in the wrong direction.
 #' @details Type-M error is the average overestimation of an effect that emerges as significant.
 #' @details Type-N error is the probability of false negatives (1-power in a non-Bayesian framework).
@@ -30,7 +32,7 @@
 
 sim_estimate <- function(sim_eff, target_eff=sim_eff, type=c("cohen","hedges","glass","bayes"), n1, n2=n1,
                          sig.level=0.05, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2)),
-                         B=1e4, return.data=FALSE){
+                         B=1e4, return_data=FALSE){
   type <- match.arg(type)
 
   if(type %in% c("cohen","hedges","glass")){
@@ -67,7 +69,7 @@ sim_estimate <- function(sim_eff, target_eff=sim_eff, type=c("cohen","hedges","g
 
   out <- list("power"=power, "typeS"=typeS, "typeM"=typeM, "typeN"=typeN, "typeI"=typeI)
 
-  if(return.data){
+  if(return_data){
     out$sim_data <- outsim
   }
 
