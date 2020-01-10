@@ -7,16 +7,16 @@
 #' Type-S, Type-M, Type-N and Type-I errors, given a plausible effect size (\code{target_eff}) and the sample size of each group.
 #' @author Massimiliano Pastore, Gianmarco Altoè
 #' @note Called from \code{\link{design_est}}. For \code{design_analysis}: \code{target_eff} is equal to \code{sim_eff}.
-#' @param sim_eff = simulated effect size
-#' @param target_eff = target effect size
-#' @param type = a character string specifying the effect type, must be one of “\code{cohen}”,
-#' "\code{hedges}", “\code{glass}” or “\code{bayes}”.
-#' @param n1 = sample size of the first group.
-#' @param n2 = sample size of the second group.
-#' @param sig.level = significance level.
-#' @param prior_limits = vector with lower and upper bounds of the prior distribution of the mean.
-#' @param prior_density = function, density of the prior distribution of the mean.
-#' @param B = number of replicates.
+#' @param sim_eff simulated effect size
+#' @param target_eff target effect size
+#' @param type a character string specifying the effect type, must be one of \code{"cohen"},
+#' \code{"hedges"}, \code{"glass"} or \code{"bayes"}.
+#' @param n1 sample size of the first group.
+#' @param n2 sample size of the second group.
+#' @param sig.level significance level.
+#' @param prior_limits vector with lower and upper bounds of the prior distribution of the mean.
+#' @param prior_density function, density of the prior distribution of the mean.
+#' @param B number of replicates.
 #' @return Returns the computed values of
 #' \code{power}, \code{typeS}, \code{typeM}, \code{typeN} and \code{typeI}  errors.
 #' @details Type-S error is the probabiliyy that a significant effect is estimated in the wrong direction.
@@ -27,7 +27,7 @@
 #' @examples
 #' sim_estimate(sim_eff=0.9, type="cohen", n1=10, n2=15, sig.level=0.05, B=10, return.data=FALSE)
 #' @export
-#'
+
 sim_estimate <- function(sim_eff, target_eff=sim_eff, type=c("cohen","hedges","glass","bayes"), n1, n2=n1,
                          sig.level=0.05, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2)),
                          B=1e4, return.data=FALSE){

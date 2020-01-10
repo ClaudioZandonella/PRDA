@@ -5,10 +5,10 @@
 #' @description Computes the Bayes factor to compare two models for the difference between means:
 #' the null model where the difference is zero, and the alternative model where it follows a given prior distribution
 #' defined on an interval containing zero.
-#' @param x1 = numerical vector with the observed values of the first group.
-#' @param x2 = numerical vector with the observed values of the second group.
-#' @param prior_limits = vector with lower and upper bounds of the prior distribution of the mean.
-#' @param prior_density = function, density of the prior distribution of the mean.
+#' @param x1 numerical vector with the observed values of the first group.
+#' @param x2 numerical vector with the observed values of the second group.
+#' @param prior_limits vector with lower and upper bounds of the prior distribution of the mean.
+#' @param prior_density function, density of the prior distribution of the mean.
 #' @return Returns a list with the following objects: \code{BF} (Bayes factor),
 #' \code{difference} (difference between means).
 #' @details The Bayes factor is computed as the ratio of the posterior probabilities of the alternative

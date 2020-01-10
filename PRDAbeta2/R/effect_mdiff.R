@@ -5,10 +5,10 @@
 ############################################
 #' @title Compute Effect Sizes Based on Mean Differences
 #' @description Computes effect size statistics based on differences between means (Cohen's \eqn{d}, Hedges' \eqn{g} and Glass' \eqn{\Delta}) with the relative \eqn{t}-statistics and \eqn{p}-value.
-#' @param x1 = numerical vector with the observed values of the first group.
-#' @param x2 = numerical vector with the observed values of the second group.
-#' @param type = a character string specifying the effect type, must be one of “\code{cohen}”, "\code{hedges}" or “\code{glass}”.
-#' @param sign.level = significance level.
+#' @param x1 numerical vector with the observed values of the first group.
+#' @param x2 numerical vector with the observed values of the second group.
+#' @param type a character string specifying the effect type, must be one of \code{"cohen"}, \code{"hedges"} or \code{"glass"}.
+#' @param sign.level significance level.
 #' @return Returns a list with the following objects: \code{effect} (estimated effect size),
 #' \code{tstat} (\eqn{t} value), \code{pval} (\eqn{p}-value).
 #' @details Cohen's \eqn{d} is computed considering the pooled standard deviation:
@@ -16,7 +16,7 @@
 #' @details Hedges' \eqn{g} is computed considering the approximate correction:
 #' \deqn{g = \frac{\bar{x}_2 - \bar{x}_1}{s_{pool}} \left(1 - \frac{3}{4(n_1 + n_2 -2) -1}\right)}
 #' @details Glass' \eqn{\Delta} is computed considering the standard deviation of the first group:
-#' \deqn{\Delta = \frac{\bar{x}_2 - \bar{x}_1}{s_1}}
+#' \deqn{\Delta = \frac{ \bar{x}_2 - \bar{x}_1}{s_1} }
 #' @details \eqn{t}-statistics and relative \eqn{p}-value are computed considering two-tailed \eqn{t}-test for independent samples with equal variance.
 #' @author Massimiliano Pastore
 #' @examples

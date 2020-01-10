@@ -6,11 +6,11 @@
 #' @title Pooled Standard Deviation
 #' @description Internal function. It computes the pooled standard deviation of two groups.
 #' @note Called from \code{\link{effect_mdiff}}.
-#' @param x1 = numerical vector with the observed values of the first group.
-#' @param x2 = numerical vector with the observed values of the second group.
-#' @param m1 = mean of the first group.
-#' @param m2 = mean of the second group.
-#' @param df = degrees of freedom.
+#' @param x1 numerical vector with the observed values of the first group.
+#' @param x2 numerical vector with the observed values of the second group.
+#' @param m1 mean of the first group.
+#' @param m2 mean of the second group.
+#' @param df degrees of freedom.
 #' @return Returns the pooled standard deviation.
 #' @details The degrees of freedom \code{df} are given by the sum of the two group sizes minus 2.
 #' @author Massimiliano Pastore
