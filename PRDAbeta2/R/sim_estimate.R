@@ -25,12 +25,12 @@
 #' @details Type-I error is the probability of an indecisive outcome when the effect is significative (zero
 #' in a non-Bayesian framework).
 #' @examples
-#' sim_estimate(sim_eff=0.9, type="cohen", n1=10, n2=15, sig.level=0.05, B=10)
+#' sim_estimate(sim_eff=0.9, type="cohen", n1=10, n2=15, sig.level=0.05, B=10, return.data=FALSE)
 #' @export
 #'
 sim_estimate <- function(sim_eff, target_eff=sim_eff, type=c("cohen","hedges","glass","bayes"), n1, n2=n1,
                          sig.level=0.05, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2)),
-                         B=1e4){
+                         B=1e4, return.data=FALSE){
   type <- match.arg(type)
 
   if(type %in% c("cohen","hedges","glass")){
@@ -66,5 +66,10 @@ sim_estimate <- function(sim_eff, target_eff=sim_eff, type=c("cohen","hedges","g
   }
 
   out <- list("power"=power, "typeS"=typeS, "typeM"=typeM, "typeN"=typeN, "typeI"=typeI)
+
+  if(return.data){
+    out$sim_data <- outsim
+  }
+
   return(out)
 }

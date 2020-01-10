@@ -39,13 +39,13 @@ effect_mdiff <- function(x1, x2, type=c("cohen","hedges","glass"), sign.level){
 
   if(type=="cohen"){
     df <- n1+n2-2
-    s_pool <- pool_compute(x1, x2, m1, m2, df)
+    s_pool <- pool_sd(x1, x2, m1, m2, df)
     eff <- z/s_pool
   }
 
   else if(type=="hedges"){
     df <- n1+n2-2
-    s_pool <- pool_compute(x1, x2, m1, m2, df)
+    s_pool <- pool_sd(x1, x2, m1, m2, df)
     correction <- 1 - (3/((4*df)-1))
     eff <- correction*z/s_pool
   }
