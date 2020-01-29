@@ -1,0 +1,55 @@
+---
+title: "Diagramm Functions"
+output: html_document
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(DiagrammeR)
+```
+
+
+Here we represent the structure of the package PRDA.
+To visualize the graph, it is better to compile the `.Rnw` file and open the HTML file in a web browser.
+
+
+```{r}
+mermaid("
+graph TB
+        design_analysis[\"design_analysis(d, n = NULL, power = NULL, sig.level = 0.05, B = 1e4, rangen = c(2, 1000),  tol=.005)\"]
+        
+        design_est[\"design_est(n1 = 5, n2 = n1, target_d = NULL, target_d_limits = NULL, distribution = c('uniform','normal'), k = 1/6, sig.level = 0.05, B = 500, B0 = 500, return_data = FALSE)\"]
+        
+        design_analysis_n[\"design_analysis_n(d, power, sig.level = 0.05, rangen = c(2,1000), B = 1e4, tol = .005)\"]
+        
+        design_analysis_power[\"design_analysis_power(n, d, sig.level = 0.05, B = 1e4 ,tol=.005)\"]
+        
+        sim_estimate[\"sim_estimate(sim_e, target_e=sim_e, type=c('cohen', 'hedges', 'glass', 'bayes'), n1, n2=n1, sig.level=0.05, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2)),k=3, B=1e4, return_data=FALSE)\"]
+        
+        effect_mdiff[\"effect_mdiff(x1, x2, type=c('cohen','hedges','glass'))\"]
+        
+        effect_bayes[\"effect_bayes(x1, x2, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2)))\"]
+        
+        sampling_e[\"sampling_e(limits=c(0,1), distribution=c('uniform','truncnorm'), h=1/6, B0=1e4)\"]
+        
+        pool_sd[\"pool_sd(x1, x2, m1, m2, df)\"]
+        
+        design_analysis-->|\"is.null(n)\"|design_analysis_n
+        design_analysis-->|\"is.null(power)\"|design_analysis_power
+        
+        design_est-->|\"if !is.null(target_d)\"|sim_estimate
+        design_est-->|\"if !is.null(target_d_limits)\"|sampling_e
+        
+        design_analysis_n --> sim_estimate
+        design_analysis_power --> sim_estimate
+        
+        sampling_e --> sim_estimate
+        
+        sim_estimate -->|\"if type %in% c('cohen', 'hedges', 'glass')\"| effect_mdiff
+        sim_estimate -->|\"if type == 'bayes'\"| effect_bayes
+        
+        effect_mdiff --> pool_sd
+        ", height=500, width=1200)
+```
+
+
