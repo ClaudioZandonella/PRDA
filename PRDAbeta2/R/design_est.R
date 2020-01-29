@@ -75,7 +75,7 @@ design_est<- function( n1 = 5, n2 = n1, target_d = NULL, target_d_limits = NULL,
     (call_est <- list(n1=n1, n2=n2, target_d_limits=target_d_limits, distribution=distribution,k=k,B=B,B0=B0))
     (my <- (sum(target_d_limits)/2))
     (sy <- diff(target_d_limits)*k)
-    y <- sampling_d(target_d_limits,distribution = distribution,B0=B0, k = k) ###
+    y <- sampling_e(target_d_limits,distribution = distribution,B0=B0, k = k) ###
     sim_cohen <- y$y
 
     #data <- NULL
