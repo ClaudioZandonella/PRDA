@@ -43,7 +43,7 @@
 
 effect_bayes <- function(x1, x2, prior_limits=c(0,1), prior_density=function(y) dcauchy(y, location=0, scale=1/sqrt(2))){
   
-  if(!((0 >= prior_limits[1]) & (0 <= prior_limits[2]))){stop("prior_limits must contain 0")}
+  if(!((0 >= prior_limits[1]) & (0 <= prior_limits[2]))){stop("prior_limits interval must contain 0")}
   prior_density <- .get.prior_density(prior_density)
   m1 <- mean(x1, na.rm=TRUE)
   m2 <- mean(x2, na.rm=TRUE)
