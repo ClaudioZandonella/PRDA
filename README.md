@@ -1,5 +1,7 @@
 # PRDA_beta
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
+
 <hr>
 
 Versione beta del pacchetto PRDA per svolgere *retrospective* e *prospective design analysis*.
