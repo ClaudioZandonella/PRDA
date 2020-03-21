@@ -5,6 +5,7 @@
 # Renv files
 ^renv$
 ^renv\.lock$
+^\.renvignore$
 
 # Old folders
 ^PRDA_old$
@@ -17,3 +18,5 @@
 # Vignette auxiliary folders
 ^doc$
 ^Meta$
+
+^\.travis\.yml$
