@@ -13,6 +13,34 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
+
+
+#' Hello world
+#'
+#' @return A string of text
+#'
+#' @export
+#'
 hello <- function() {
   print("Hello, world!")
 }
+
+
+#----    An internal function    -----
+
+#' An internal function
+#'
+#' @param x numeric value
+#' @param y numeric value
+#'
+#' @return the sum of the two values
+#'
+#' @examples
+#' simple_sum(3,5)
+simple_sum <- function(x,y){
+  x+y
+}
+
+#----
+
+
