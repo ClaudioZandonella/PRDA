@@ -17,6 +17,3 @@ the sum of the two values
 \description{
 An internal function
 }
-\examples{
-simple_sum(3,5)
-}

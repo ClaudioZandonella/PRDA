@@ -7,7 +7,7 @@ context("Hello function")
 library(PRDAbeta)
 
 test_that("hello returns a string", {
-  expect_true(is.character(capture.output(hello())))
+  expect_true(is.character(capture.output(hello(),file = NULL)))
 })
 
 
