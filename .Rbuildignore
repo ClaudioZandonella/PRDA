@@ -19,4 +19,5 @@
 ^doc$
 ^Meta$
 
+# Travis files
 ^\.travis\.yml$

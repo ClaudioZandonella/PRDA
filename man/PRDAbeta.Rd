@@ -3,7 +3,7 @@
 \docType{package}
 \name{PRDAbeta}
 \alias{PRDAbeta}
-\title{PRDAbeta: A package for cunduct prospective and retospective design analysis.}
+\title{PRDAbeta: A package for cunducting prospective and retospective design analysis.}
 \description{
 The PRDAbeta package provides two main important functions:
 \code{prospective()} and \code{retrospective()}.

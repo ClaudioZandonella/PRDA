@@ -18,7 +18,7 @@
 # renv::remove()                            # Delate packages from project lybrary
 # renv::purge()                             # Delate packages from cache (delate for all projects!!)
 # renv::snapshot()                          # Create snapshot packages used
-
+# renv::restore()                           # Restore packages
 
 #----    Procedure to remove packages   -----
 # ip <- as.data.frame(installed.packages())
@@ -28,3 +28,8 @@
 # pkgs.to.remove <- ip[,1]
 #
 # sapply(pkgs.to.remove, renv::remove, lib = path.lib)
+
+#----
+
+
+

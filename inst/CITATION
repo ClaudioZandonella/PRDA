@@ -1,0 +1,22 @@
+citHeader("To cite PRDAbeta in publications use:")
+
+citEntry(entry = "Article",
+  title        = "PRDA: Enanching statistical inference",
+  author       = personList(as.person("Massimiliano Pastore"),
+                   as.person("Angela Andreella"),
+                   as.person("Anna Vesely"),
+                   as.person("Claudio Zandonella Callegher"),
+                   as.person("Gianmarco Altoè")),
+  journal      = "Journal name",
+  year         = "2020",
+  volume       = "",
+  number       = "",
+  pages        = "",
+  url          = "",
+
+  textVersion  =
+  paste("Massimiliano Pastore, Angela Andreella, Anna Vesely, Claudio Zandonella Callegher, Gianmarco Altoè (2020).",
+        "PRDA: Enanching statistical inference.",
+        "Journal name",
+        "URL ")
+)
