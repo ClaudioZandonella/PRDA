@@ -4,7 +4,7 @@
 
 #----    Package documentation    ----
 
-#' PRDAbeta: A package for cunducting prospective and retospective design analysis.
+#' PRDAbeta: A Package for Prospective and Retrospective Design Analysis.
 #'
 #' The PRDAbeta package provides two main important functions:
 #' \code{prospective()} and \code{retrospective()}.

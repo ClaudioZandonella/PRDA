@@ -5,9 +5,9 @@
 \title{Retrospective}
 \usage{
 retrospective(
-  sample_group1,
+  sample_n1,
   effect_size,
-  sample_group2 = NULL,
+  sample_n2 = NULL,
   effect_type = c("cohen_d", "correlation"),
   alternative = c("two.sided", "less", "greater"),
   sig_level = 0.05,
@@ -17,11 +17,11 @@ retrospective(
 )
 }
 \arguments{
-\item{sample_group1}{numeric value.}
+\item{sample_n1}{numeric value.}
 
 \item{effect_size}{numeric value.}
 
-\item{sample_group2}{numeric value.}
+\item{sample_n2}{numeric value.}
 
 \item{effect_type}{character value.}
 

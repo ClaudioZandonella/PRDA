@@ -4,32 +4,32 @@
 
 #----    simulate_analysis    ----
 
-simulate_analysis <- function(sample_group1, effect_size, sample_group2, effect_type, alternative, B, ...){
-
-
-  if (effect_type == "cohen_d"){
-    analysis_simulated <- analysis_cohen(sample_group1 = sample_group1,
-                                         sample_group2 = sample_group2,
-                                         effect_size = effect_size,
-                                         alternative = alternative,
-                                         B = B, ...)
-    } else if (effect_type == "correlation"){
-
-    analysis_simulated <- analysis_correlation(sample_group1 = sample_group1,
-                                               effect_size = effect_size,
-                                               alternative = alternative,
-                                               B = B, ...)
-    }
-
-  return(analysis_simulated)
-}
+# simulate_analysis <- function(sample_n1, effect_size, sample_n2, effect_type, alternative, B, ...){
+#
+#
+#   if (effect_type == "cohen_d"){
+#     analysis_simulated <- analysis_cohen(sample_n1 = sample_n1,
+#                                          sample_n2 = sample_n2,
+#                                          effect_size = effect_size,
+#                                          alternative = alternative,
+#                                          B = B, ...)
+#     } else if (effect_type == "correlation"){
+#
+#     analysis_simulated <- analysis_correlation(sample_n1 = sample_n1,
+#                                                effect_size = effect_size,
+#                                                alternative = alternative,
+#                                                B = B, ...)
+#     }
+#
+#   return(analysis_simulated)
+# }
 
 #----    analysis_cohen    ----
 
 #' Title
 #'
-#' @param sample_group1 numeric value
-#' @param sample_group2 numeric value
+#' @param sample_n1 numeric value
+#' @param sample_n2 numeric value
 #' @param effect_size numeric value
 #' @param alternative character value
 #' @param B numeric value
@@ -38,21 +38,28 @@ simulate_analysis <- function(sample_group1, effect_size, sample_group2, effect_
 #' @return a matrix
 #' @importFrom stats rnorm t.test
 #'
-analysis_cohen <- function(sample_group1, sample_group2, effect_size, alternative, B, ...){
+analysis_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_level, B, ...){
 
-  arguments <- eval_args(...)
-  arguments$alternative <- alternative
+  arguments <- as.list(match.call()[-1])
+  arguments$conf.level <- 1-sig_level
+
+  # Remove unused arguments
+  remove_args <- !names(arguments) %in% c("sample_n1", "sample_n2", "effect_size", "B",
+                                          "sig_level", "seed")
+  arguments <- arguments[remove_args]
 
   res <- replicate(B,{
-    x1 <- rnorm(sample_group1, mean=0, sd=1)
-    x2 <- rnorm(sample_group2, mean=effect_size, sd=1)
-
+    x1 <- rnorm(sample_n1, mean=0, sd=1)
     arguments$x <- x1
-    arguments$y <- x2
+
+    if(!is.null(sample_n2)){
+      x2 <- rnorm(sample_n2, mean=effect_size, sd=1)
+      arguments$y <- x2
+    }
+
 
     do.call(t.test,arguments)
   })
-
 
   return(res)
   }
@@ -60,7 +67,7 @@ analysis_cohen <- function(sample_group1, sample_group2, effect_size, alternativ
 
 #' Title
 #'
-#' @param sample_group1 numeric value
+#' @param sample_n1 numeric value
 #' @param effect_size numeric value
 #' @param alternative character value
 #' @param B numeric value
@@ -70,15 +77,25 @@ analysis_cohen <- function(sample_group1, sample_group2, effect_size, alternativ
 #' @importFrom MASS mvrnorm
 #' @importFrom stats cor.test
 #'
-analysis_correlation <- function(sample_group1, effect_size, alternative, B, ...){
+analysis_correlation <- function(sample_n1, effect_size, alternative, sig_level, B, ...){
 
-  arguments <- eval_args(...)
-  arguments$alternative <- alternative
+  arguments <- as.list(match.call()[-1])
+  arguments$conf.level <- 1-sig_level
+
+  # Check sample_n2
+  if(!is.null(arguments$sample_n2)){
+    warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+  }
+
+  # Remove unused arguments
+  remove_args <- !names(arguments) %in% c("sample_n1", "sample_n2", "effect_size", "B",
+                                          "sig_level", "seed")
+  arguments <- arguments[remove_args]
 
   res <- replicate(B,{
-    d<-mvrnorm(n = sample_group1, mu=c(0,0), Sigma=matrix(c(1, effect_size, effect_size, 1), ncol=2))
-    arguments$x <- d[,1]
-    arguments$y <- d[,2]
+    obs<-mvrnorm(n = sample_n1, mu=c(0,0), Sigma=matrix(c(1, effect_size, effect_size, 1), ncol=2))
+    arguments$x <- obs[,1]
+    arguments$y <- obs[,2]
 
     do.call(cor.test,arguments)
   })

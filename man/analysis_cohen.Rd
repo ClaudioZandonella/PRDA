@@ -4,12 +4,12 @@
 \alias{analysis_cohen}
 \title{Title}
 \usage{
-analysis_cohen(sample_group1, sample_group2, effect_size, alternative, B, ...)
+analysis_cohen(sample_n1, sample_n2, effect_size, alternative, B, ...)
 }
 \arguments{
-\item{sample_group1}{numeric value}
+\item{sample_n1}{numeric value}
 
-\item{sample_group2}{numeric value}
+\item{sample_n2}{numeric value}
 
 \item{effect_size}{numeric value}
 

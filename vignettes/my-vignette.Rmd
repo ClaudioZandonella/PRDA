@@ -22,8 +22,4 @@ library(PRDAbeta)
 
 An example of PRDA (Beta version functions)
 
-```{r}
-hello()
-```
-
 

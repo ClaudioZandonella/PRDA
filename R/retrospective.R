@@ -6,9 +6,9 @@
 
 #' Retrospective
 #'
-#' @param sample_group1 numeric value.
+#' @param sample_n1 numeric value.
 #' @param effect_size numeric value.
-#' @param sample_group2 numeric value.
+#' @param sample_n2 numeric value.
 #' @param effect_type character value.
 #' @param alternative character value.
 #' @param sig_level numeric value.
@@ -19,9 +19,9 @@
 #' @return a list
 #' @export
 #'
-retrospective <- function(sample_group1,
+retrospective <- function(sample_n1,
                           effect_size,
-                          sample_group2 = NULL,
+                          sample_n2 = NULL,
                           effect_type = c("cohen_d","correlation"),
                           alternative = c("two.sided","less","greater"),
                           sig_level = .05,
@@ -29,59 +29,62 @@ retrospective <- function(sample_group1,
                           seed = NULL,
                           ...){
 
-  #----    Check inputs arguments    ----
 
-  if(!is.finite(sample_group1) || sample_group1 <= 1 || length(sample_group1) > 1)
-    stop("sample_group1 has to be a single integer value grater than 1.")
 
-  if(!is.finite(effect_size) || length(effect_size) != 1)
-    stop("effect_size has to be a single integer value.")
+  #----    Save call    ----
 
-  if(!is.null(sample_group2) && (!is.finite(sample_group2) || sample_group2 <= 1 || length(sample_group2) != 1))
-    stop("If specified, sample_group2 has to be a single integer value grater than 1.")
+  # Check inputs arguments
+  if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
+    stop("sample_n1 has to be a single integer value grater than 1.")
 
-  if(!is.finite(sig_level) || sig_level >= 1 || sig_level <= 0 || length(sig_level) != 1)
+  if(!is_single_numeric(effect_size))
+    stop("effect_size has to be a single numeric value.")
+
+  if(!is.null(sample_n2) && (!is_single_numeric(sample_n2) || sample_n2 <= 1))
+    stop("If specified, sample_n2 has to be a single integer value grater than 1.")
+
+  if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("sig_level has to be a single value between 0 and 1.")
 
-  if(!is.finite(B) || B <= 1 || length(B) != 1)
+  if(!is_single_numeric(B) || B <= 1)
     stop("B has to be a single integer value grater than 1.")
 
-  if(!is.null(seed) && (!is.finite(seed) || length(seed) != 1))
+  if(!is.null(seed) && (!is_single_numeric(seed)))
     stop("If specified, seed has to be a single finite number.")
 
+  # Match arguments
   effect_type <- match.arg(effect_type)
-
   alternative <- match.arg(alternative)
 
-  # Check sample_group2
-  if(effect_type=="correlation" && !is.null(sample_group2)){
-    warning("If effect_type is set to 'correlation', sample_group2 is ignored.")
-    sample_group2 <- NULL
-  }
-
-  if(effect_type=="cohen_d" && is.null(sample_group2)){
-    sample_group2 <- sample_group1
-  }
-
   # Save call
+  z <- list(call_arguments = as.list(match_call(default = TRUE))[-1])
 
-  call_arguments <- as.list(match.call()[-1])
-
-  #----    Simulate data    ----
+  #----    Set seed    ----
 
   # Set seed
   if(!is.null(seed)){
     old_seed <- .Random.seed
     on.exit( { .Random.seed <<- old_seed })
     set.seed(seed = seed)
-    }
+  }
 
-  analysis_simulated <- simulate_analysis(sample_group1 = sample_group1,
-                                          effect_size = effect_size,
-                                          sample_group2 = sample_group2,
-                                          effect_type = effect_type,
-                                          alternative = alternative,
-                                          B = B, ...)
+  #----    Retrospective analysis    ----
+
+
+
+  #
+  # analysis_simulated <- simulate_analysis(sample_n1 = sample_n1,
+  #                                         effect_size = effect_size,
+  #                                         sample_n2 = sample_n2,
+  #                                         effect_type = effect_type,
+  #                                         alternative = alternative,
+  #                                         B = B, ...)
+
+  if(effect_type == "cohen_d"){
+    analysis_simulated <- do.call("analysis_cohen", z$call_arguments)
+  } else if (effect_type == "correlation"){
+    analysis_simulated <- do.call("analysis_correlation", z$call_arguments)
+  }
 
 
   #----

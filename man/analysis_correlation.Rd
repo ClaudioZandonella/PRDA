@@ -4,10 +4,10 @@
 \alias{analysis_correlation}
 \title{Title}
 \usage{
-analysis_correlation(sample_group1, effect_size, alternative, B, ...)
+analysis_correlation(sample_n1, effect_size, alternative, B, ...)
 }
 \arguments{
-\item{sample_group1}{numeric value}
+\item{sample_n1}{numeric value}
 
 \item{effect_size}{numeric value}
 
