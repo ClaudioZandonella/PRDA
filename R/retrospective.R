@@ -25,7 +25,7 @@ retrospective <- function(sample_n1,
                           effect_type = c("cohen_d","correlation"),
                           alternative = c("two.sided","less","greater"),
                           sig_level = .05,
-                          B = 1000,
+                          B = 1e4,
                           seed = NULL,
                           ...){
 
@@ -57,7 +57,8 @@ retrospective <- function(sample_n1,
   alternative <- match.arg(alternative)
 
   # Save call
-  z <- list(call_arguments = as.list(match_call(default = TRUE))[-1])
+  design_fit <- list(design_analysis = list(type="retrospective"),
+                     call_arguments = as.list(match_call(default = TRUE))[-1])
 
   #----    Set seed    ----
 
@@ -68,27 +69,34 @@ retrospective <- function(sample_n1,
     set.seed(seed = seed)
   }
 
+
   #----    Retrospective analysis    ----
 
-
-
-  #
-  # analysis_simulated <- simulate_analysis(sample_n1 = sample_n1,
-  #                                         effect_size = effect_size,
-  #                                         sample_n2 = sample_n2,
-  #                                         effect_type = effect_type,
-  #                                         alternative = alternative,
-  #                                         B = B, ...)
-
   if(effect_type == "cohen_d"){
-    analysis_simulated <- do.call("analysis_cohen", z$call_arguments)
+    # Cohen's d
+
+    design_fit$retrospective_res <- do.call("retrospective_cohen",
+                                            design_fit$call_arguments)
+
   } else if (effect_type == "correlation"){
-    analysis_simulated <- do.call("analysis_correlation", z$call_arguments)
+    # Correlation
+
+    # Check sample_n2
+    if(!is.null(design_fit$call_arguments$sample_n2)){
+      design_fit$call_arguments["sample_n2"] <- list(NULL)
+      warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+    }
+
+    design_fit$retrospective_res <- do.call("retrospective_correlation",
+                                            design_fit$call_arguments)
   }
+
+  #----    Get test info    ----
+
 
 
   #----
-  return(analysis_simulated)
+  return(design_fit)
 
 }
 

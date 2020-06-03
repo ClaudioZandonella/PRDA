@@ -24,7 +24,7 @@
 #   return(analysis_simulated)
 # }
 
-#----    analysis_cohen    ----
+#----    retrospective_cohen    ----
 
 #' Title
 #'
@@ -38,15 +38,15 @@
 #' @return a matrix
 #' @importFrom stats rnorm t.test
 #'
-analysis_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_level, B, ...){
+retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_level, B, ...){
+
 
   arguments <- as.list(match.call()[-1])
   arguments$conf.level <- 1-sig_level
 
-  # Remove unused arguments
-  remove_args <- !names(arguments) %in% c("sample_n1", "sample_n2", "effect_size", "B",
-                                          "sig_level", "seed")
-  arguments <- arguments[remove_args]
+  # Remove arguments
+  arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
+                                "effect_size", "B","sig_level", "seed"), remove = T)
 
   res <- replicate(B,{
     x1 <- rnorm(sample_n1, mean=0, sd=1)
@@ -57,13 +57,12 @@ analysis_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_l
       arguments$y <- x2
     }
 
-
     do.call(t.test,arguments)
   })
 
   return(res)
   }
-#----    analysis_correlation    ----
+#----    retrospective_correlation    ----
 
 #' Title
 #'
@@ -77,20 +76,14 @@ analysis_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_l
 #' @importFrom MASS mvrnorm
 #' @importFrom stats cor.test
 #'
-analysis_correlation <- function(sample_n1, effect_size, alternative, sig_level, B, ...){
+retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_level, B, ...){
 
   arguments <- as.list(match.call()[-1])
   arguments$conf.level <- 1-sig_level
 
-  # Check sample_n2
-  if(!is.null(arguments$sample_n2)){
-    warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
-  }
-
-  # Remove unused arguments
-  remove_args <- !names(arguments) %in% c("sample_n1", "sample_n2", "effect_size", "B",
-                                          "sig_level", "seed")
-  arguments <- arguments[remove_args]
+  # Remove arguments
+  arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
+                                "effect_size", "B", "sig_level", "seed"), remove = T)
 
   res <- replicate(B,{
     obs<-mvrnorm(n = sample_n1, mu=c(0,0), Sigma=matrix(c(1, effect_size, effect_size, 1), ncol=2))

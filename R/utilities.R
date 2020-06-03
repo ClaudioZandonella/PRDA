@@ -37,10 +37,19 @@ match_call <- function(definition = sys.function(sys.parent()),
   match.call(definition, call, TRUE, envir)
 }
 
-#----
+#----    is_single_numeric    ----
 
 is_single_numeric <- function(x){
   is.finite(x) && length(x) == 1
 }
+
+#----    Select arguments    ----
+
+select_arguments <- function(arguments, names, remove=FALSE){
+  selected_arg <- names(arguments) %in% names
+  if (remove==TRUE){selected_arg <- !selected_arg}
+  arguments[selected_arg]
+}
+
 #----
 
