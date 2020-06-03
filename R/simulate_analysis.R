@@ -32,6 +32,7 @@
 #' @param sample_n2 numeric value
 #' @param effect_size numeric value
 #' @param alternative character value
+#' @param sig_level numeric value.
 #' @param B numeric value
 #' @param ... other variables passed to
 #'
@@ -42,7 +43,6 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 
 
   arguments <- as.list(match.call()[-1])
-  arguments$conf.level <- 1-sig_level
 
   # Remove arguments
   arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
@@ -69,6 +69,7 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 #' @param sample_n1 numeric value
 #' @param effect_size numeric value
 #' @param alternative character value
+#' @param sig_level numeric value.
 #' @param B numeric value
 #' @param ... other variables passed to
 #'
@@ -79,7 +80,6 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_level, B, ...){
 
   arguments <- as.list(match.call()[-1])
-  arguments$conf.level <- 1-sig_level
 
   # Remove arguments
   arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",

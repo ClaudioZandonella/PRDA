@@ -11,7 +11,7 @@ retrospective(
   effect_type = c("cohen_d", "correlation"),
   alternative = c("two.sided", "less", "greater"),
   sig_level = 0.05,
-  B = 1000,
+  B = 10000,
   seed = NULL,
   ...
 )

@@ -51,5 +51,14 @@ select_arguments <- function(arguments, names, remove=FALSE){
   arguments[selected_arg]
 }
 
-#----
+#----    define_conf_level    ----
 
+define_conf_level <- function(arguments){
+  if("conf.level" %in% names(arguments)){
+    warning("conf.level is set according to sig_level.")
+  }
+ 1 - arguments$sig_level
+}
+
+
+#----
