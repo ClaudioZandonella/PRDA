@@ -40,7 +40,7 @@ match_call <- function(definition = sys.function(sys.parent()),
 #----    is_single_numeric    ----
 
 is_single_numeric <- function(x){
-  is.finite(x) && length(x) == 1
+  length(x) == 1L && is.finite(x)
 }
 
 #----    Select arguments    ----
