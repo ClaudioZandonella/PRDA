@@ -44,20 +44,18 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 
   arguments <- as.list(match.call()[-1])
 
-  # Remove arguments
-  arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
+  # Check and get test method
+  method <- do.call(check_test_method,arguments)
+
+  # Select arguments for t.test (remove)
+  arguments <- select_arguments(arguments, c("sample_n1", "sample_n2", "effect_type",
                                 "effect_size", "B","sig_level", "seed"), remove = T)
 
   res <- replicate(B,{
-    x1 <- rnorm(sample_n1, mean=0, sd=1)
-    arguments$x <- x1
+    groups <- sample_groups(sample_n1, effect_size, sample_n2)
 
-    if(!is.null(sample_n2)){
-      x2 <- rnorm(sample_n2, mean=effect_size, sd=1)
-      arguments$y <- x2
-    }
-
-    do.call(t.test,arguments)
+    sim <- list(p_value = do.call(t.test,c(groups,arguments))$p.value,
+                effct = mean(groups$x))
   })
 
   return(res)
@@ -81,7 +79,7 @@ retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_l
 
   arguments <- as.list(match.call()[-1])
 
-  # Remove arguments
+  # Select arguments for cor.test (remove)
   arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
                                 "effect_size", "B", "sig_level", "seed"), remove = T)
 

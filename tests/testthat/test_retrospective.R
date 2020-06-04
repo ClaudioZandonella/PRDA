@@ -16,6 +16,7 @@ B_text <- "B has to be a single integer value grater than 1."
 seed_text <- "If specified, seed has to be a single finite number."
 correlation_text <- "If effect_type is set to 'correlation', sample_n2 is ignored."
 conf.level_text <- "conf.level is set according to sig_level."
+paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
 
 test_that("inputs are correctly specified", {
   expect_error(retrospective(sample_n1 = 1, effect_size = .3), sample_n1_text)
@@ -52,10 +53,17 @@ test_that("inputs are correctly specified", {
   expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation"),
                  correlation_text)
 
+  # conf.level test
   expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "cohen_d", conf.level=.8),
                  conf.level_text)
   expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation", conf.level=.8),
                  conf.level_text)
+
+  # paired_t.test
+  expect_error(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "cohen_d", paired=T),
+                 paired_t.test)
+  expect_error(retrospective(sample_n1 = 20, sample_n2 = NULL, effect_size = .3, effect_type = "cohen_d", paired=T),
+                 paired_t.test)
 })
 
 

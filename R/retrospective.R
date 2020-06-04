@@ -57,7 +57,7 @@ retrospective <- function(sample_n1,
   alternative <- match.arg(alternative)
 
   # Save call
-  design_fit <- list(design_analysis = list(type="retrospective"),
+  design_fit <- list(design_analysis = "retrospective",
                      call_arguments = as.list(match_call(default = TRUE))[-1])
 
   #----    Set seed    ----
@@ -75,7 +75,7 @@ retrospective <- function(sample_n1,
   if(effect_type == "cohen_d"){
     # Cohen's d
 
-    # Define conf-level according to sig_level
+    # Define conf.level according to sig_level
     design_fit$call_arguments$conf.level <- define_conf_level(design_fit$call_arguments)
 
     design_fit$retrospective_res <- do.call("retrospective_cohen",
@@ -84,7 +84,7 @@ retrospective <- function(sample_n1,
   } else if (effect_type == "correlation"){
     # Correlation
 
-    # Define conf-level according to sig_level
+    # Define conf.level according to sig_level
     design_fit$call_arguments$conf.level <- define_conf_level(design_fit$call_arguments)
 
     # Check sample_n2
