@@ -56,23 +56,11 @@ define_conf_level <- function(arguments){
 
 }
 
-#----    sample_groups    ----
-
-sample_groups <- function(sample_n1, effect_size, sample_n2=NULL){
-
-  res <- list(x = rnorm(sample_n1, mean=effect_size, sd=1),
-              y = NULL)
-
-  if(!is.null(sample_n2)){
-    res$y <- rnorm(sample_n2, mean=0, sd=1)
-  }
-  return(res)
-}
-
 #----    check_test_method    ----
 
 check_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NULL, paired=FALSE, ...){
 
+  method <- " "
   # Cohen d
   if(effect_type == "cohen_d"){
     if(paired && ((is.null(sample_n2) || sample_n1!=sample_n2))){
@@ -87,6 +75,27 @@ check_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = N
   return(method)
 }
 
+#----    list2data    ----
+
+list2data <- function(list, transpose=TRUE, select=NULL){
+  if(transpose) list <- t(list)
+
+  if(!is.null(select)){
+    slected_arg = dimnames(list)[[2]] %in% select
+
+    save_names = dimnames(list)[[2]][slected_arg]
+    save_dim = dim(list)
+    save_dim[2] = length(save_names)
+
+    list <- list[rep(slected_arg, each=dim(list)[1])]
+    dim(list) <- save_dim
+    dimnames(list) <- list(NULL,save_names)
+  }
+
+  data <- as.data.frame(matrix(unlist(list),ncol=dim(list)[2], dimnames = dimnames(list)))
+
+  return(data)
+}
 
 
 #----
