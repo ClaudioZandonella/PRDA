@@ -11,6 +11,7 @@ retrospective_cohen(
   alternative,
   sig_level,
   B,
+  effect_type,
   ...
 )
 }
@@ -26,6 +27,8 @@ retrospective_cohen(
 \item{sig_level}{numeric value.}
 
 \item{B}{numeric value}
+
+\item{effect_type}{character value}
 
 \item{...}{other variables passed to}
 }

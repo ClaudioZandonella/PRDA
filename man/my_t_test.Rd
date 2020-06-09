@@ -7,6 +7,7 @@
 my_t_test(
   x,
   y = NULL,
+  method,
   alternative = "two.sided",
   mu = 0,
   paired = FALSE,
@@ -19,6 +20,8 @@ my_t_test(
 \item{x}{numeric value}
 
 \item{y}{numeric value}
+
+\item{method}{a character string}
 
 \item{alternative}{character value}
 

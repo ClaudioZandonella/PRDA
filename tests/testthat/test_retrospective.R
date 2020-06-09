@@ -50,13 +50,13 @@ test_that("inputs are correctly specified", {
   expect_error(retrospective(sample_n1 = 20, effect_size = .3, seed = "ciao"), seed_text)
   expect_error(retrospective(sample_n1 = 20, effect_size = .3, seed = c(10,20)), seed_text)
 
-  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation"),
+  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation", B=10),
                  correlation_text)
 
   # conf.level test
-  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "cohen_d", conf.level=.8),
+  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "cohen_d", conf.level=.8, B=10),
                  conf.level_text)
-  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation", conf.level=.8),
+  expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation", conf.level=.8, B=10),
                  conf.level_text)
 
   # paired_t.test

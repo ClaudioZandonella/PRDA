@@ -56,25 +56,6 @@ define_conf_level <- function(arguments){
 
 }
 
-#----    check_test_method    ----
-
-check_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NULL, paired=FALSE, ...){
-
-  method <- " "
-  # Cohen d
-  if(effect_type == "cohen_d"){
-    if(paired && ((is.null(sample_n2) || sample_n1!=sample_n2))){
-      stop("If paired = TRUE sample_n1 and sample_n2 must be equal.")
-    }
-
-    groups <- sample_groups(sample_n1, effect_size, sample_n2)
-
-    method <- t.test(groups$x, groups$y, paired=paired,...)$method
-  }
-
-  return(method)
-}
-
 #----    list2data    ----
 
 list2data <- function(list, transpose=TRUE, select=NULL){
