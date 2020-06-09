@@ -78,7 +78,7 @@ retrospective <- function(sample_n1,
     # Define conf.level according to sig_level
     design_fit$call_arguments$conf.level <- define_conf_level(design_fit$call_arguments)
 
-    design_fit$retrospective_res <- do.call("retrospective_cohen",
+    design_fit$retrospective_res <- do.call(retrospective_cohen,
                                             design_fit$call_arguments)
 
   } else if (effect_type == "correlation"){
@@ -93,7 +93,7 @@ retrospective <- function(sample_n1,
       warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
     }
 
-    design_fit$retrospective_res <- do.call("retrospective_correlation",
+    design_fit$retrospective_res <- do.call(retrospective_correlation,
                                             design_fit$call_arguments)
   }
 

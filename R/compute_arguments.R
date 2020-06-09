@@ -79,7 +79,7 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL, method){
       df1 <- sample_n1-1
       df2 <- sample_n2-1
       df <- ((sample_n1+sample_n2)^2 * df1 * df2)/(sample_n1^2*df1 + sample_n2^2*df2)
-    } else {
+    } else if (method %in% c("one_sample","paired")){
       df <- sample_n1-1
     }
   }
@@ -128,8 +128,8 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, me
       critical_effect <- critical_t /sqrt(sample_n1)
     } else if (method == "paired"){
       critical_effect <- critical_t /sqrt(sample_n1) + mu
-    } else {
-      critical_effect <- critical_t /sqrt((sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
+    } else if (method %in% c("two_samples", "welch")) {
+      critical_effect <- critical_t * sqrt((sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
     }
   }
 
