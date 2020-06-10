@@ -8,10 +8,10 @@ retrospective_cohen(
   sample_n1,
   sample_n2,
   effect_size,
+  test_method,
   alternative,
   sig_level,
   B,
-  effect_type,
   ...
 )
 }
@@ -22,13 +22,13 @@ retrospective_cohen(
 
 \item{effect_size}{numeric value}
 
+\item{test_method}{character value}
+
 \item{alternative}{character value}
 
 \item{sig_level}{numeric value.}
 
 \item{B}{numeric value}
-
-\item{effect_type}{character value}
 
 \item{...}{other variables passed to}
 }

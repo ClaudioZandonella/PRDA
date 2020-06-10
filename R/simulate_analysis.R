@@ -31,25 +31,20 @@
 #' @param sample_n1 numeric value
 #' @param sample_n2 numeric value
 #' @param effect_size numeric value
+#' @param test_method character value
 #' @param alternative character value
 #' @param sig_level numeric value.
 #' @param B numeric value
-#' @param effect_type character value
-#' @param test_method character value
 #' @param ... other variables passed to
 #'
 #' @return a matrix
 #' @importFrom stats rnorm t.test
 #'
-retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, sig_level,
-                                B, effect_type, test_method, ...){
+retrospective_cohen <- function(sample_n1, sample_n2, effect_size, test_method,
+                                alternative, sig_level, B, ...){
 
 
   arguments <- as.list(match.call()[-1])
-
-  # Select arguments for t.test (remove)
-  arguments <- select_arguments(arguments, c("effect_type",
-                                "effect_size", "B","sig_level", "seed"), remove = T)
 
   sim_res <- replicate(B,{
     groups <- sample_groups(sample_n1, effect_size, sample_n2)
@@ -74,26 +69,20 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 #'
 #' @param sample_n1 numeric value
 #' @param effect_size numeric value
+#' @param test_method character value
 #' @param alternative character value
 #' @param sig_level numeric value.
 #' @param B numeric value
-#' @param effect_type character value
-#' @param test_method character value
 #' @param ... other variables passed to
 #'
 #' @return a matrix
 #'
 #' @importFrom stats cor.test
 #'
-retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_level,
-                                      B, effect_type, ...){
+retrospective_correlation <- function(sample_n1, effect_size, test_method,
+                                      alternative, sig_level, B, ...){
 
   arguments <- as.list(match.call()[-1])
-
-  # Select arguments for t.test (remove)
-  arguments <- select_arguments(arguments, c("effect_type", "sample_n2",
-                                             "effect_size", "B","sig_level", "seed"), remove = T)
-
 
   Eigen_matrix <- compute_eigen_matrix(effect_size = effect_size)
 

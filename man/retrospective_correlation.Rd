@@ -7,10 +7,10 @@
 retrospective_correlation(
   sample_n1,
   effect_size,
+  test_method,
   alternative,
   sig_level,
   B,
-  effect_type,
   ...
 )
 }
@@ -19,13 +19,13 @@ retrospective_correlation(
 
 \item{effect_size}{numeric value}
 
+\item{test_method}{character value}
+
 \item{alternative}{character value}
 
 \item{sig_level}{numeric value.}
 
 \item{B}{numeric value}
-
-\item{effect_type}{character value}
 
 \item{...}{other variables passed to}
 }

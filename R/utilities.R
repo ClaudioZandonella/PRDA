@@ -37,13 +37,13 @@ is_single_numeric <- function(x){
 
 #----    Select arguments    ----
 
-select_arguments <- function(arguments, names, remove=FALSE){
-
-  selected_arg <- names(arguments) %in% names
-  if (remove==TRUE){selected_arg <- !selected_arg}
-  arguments[selected_arg]
-
-}
+# select_arguments <- function(arguments, names, remove=FALSE){
+#
+#   selected_arg <- names(arguments) %in% names
+#   if (remove==TRUE){selected_arg <- !selected_arg}
+#   arguments[selected_arg]
+#
+# }
 
 #----    define_conf_level    ----
 
