@@ -10,6 +10,7 @@ retrospective_correlation(
   alternative,
   sig_level,
   B,
+  effect_type,
   ...
 )
 }
@@ -23,6 +24,8 @@ retrospective_correlation(
 \item{sig_level}{numeric value.}
 
 \item{B}{numeric value}
+
+\item{effect_type}{character value}
 
 \item{...}{other variables passed to}
 }

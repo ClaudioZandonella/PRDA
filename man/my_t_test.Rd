@@ -7,7 +7,7 @@
 my_t_test(
   x,
   y = NULL,
-  method,
+  test_method,
   alternative = "two.sided",
   mu = 0,
   paired = FALSE,
@@ -21,7 +21,7 @@ my_t_test(
 
 \item{y}{numeric value}
 
-\item{method}{a character string}
+\item{test_method}{a character string}
 
 \item{alternative}{character value}
 
@@ -36,7 +36,7 @@ my_t_test(
 \item{...}{other options}
 }
 \value{
-list with p.values and Cohen's d estimates
+list with p.values and Cohen's d estimate
 }
 \description{
 my_t_test

@@ -46,10 +46,10 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 
   arguments <- as.list(match.call()[-1])
 
-  # Evaluate test method
-  method <- do.call(eval_test_method, arguments)
+  # Evaluate test test_method
+  test_method <- do.call(eval_test_method, arguments)
   #Compute df and critical value
-  crit_values <- compute_critical_effect(effect_type, sample_n1, sample_n2, method,
+  crit_values <- compute_critical_effect(effect_type, sample_n1, sample_n2, test_method,
                           sig_level, alternative, ...)
 
 
@@ -62,7 +62,7 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 
     sim <- do.call(my_t_test,c(groups,
                                arguments,
-                               method = method))
+                               test_method = test_method))
   })
 
 
@@ -73,7 +73,7 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
                         true_value = effect_size,
                         sig_level = sig_level, alternative = alternative, B = B)
 
-  res <- c(method = method, sample_n1 = sample_n1, sample_n2 = sample_n2,
+  res <- c(test_method = test_method, sample_n1 = sample_n1, sample_n2 = sample_n2,
            crit_values, res_errors)
   return(res)
   }
@@ -86,27 +86,47 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_size, alternative, 
 #' @param alternative character value
 #' @param sig_level numeric value.
 #' @param B numeric value
+#' @param effect_type character value
 #' @param ... other variables passed to
 #'
 #' @return a matrix
-#' @importFrom MASS mvrnorm
+#'
 #' @importFrom stats cor.test
 #'
-retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_level, B, ...){
+retrospective_correlation <- function(sample_n1, effect_size, alternative, sig_level,
+                                      B, effect_type, ...){
 
   arguments <- as.list(match.call()[-1])
 
-  # Select arguments for cor.test (remove)
-  arguments <- select_arguments(arguments, c("sample_n1", "sample_n2",
-                                "effect_size", "B", "sig_level", "seed"), remove = T)
+  # Evaluate test method
+  test_method <- do.call(eval_test_method, arguments)
+  #Compute df and critical value
+  crit_values <- compute_critical_effect(effect_type, sample_n1,
+                                         test_method, sig_level, alternative, ...)
 
-  res <- replicate(B,{
-    obs<-mvrnorm(n = sample_n1, mu=c(0,0), Sigma=matrix(c(1, effect_size, effect_size, 1), ncol=2))
-    arguments$x <- obs[,1]
-    arguments$y <- obs[,2]
 
-    do.call(cor.test,arguments)
+  # Select arguments for t.test (remove)
+  arguments <- select_arguments(arguments, c("effect_type", "sample_n2",
+                                             "effect_size", "B","sig_level", "seed"), remove = T)
+
+
+  Eigen_matrix <- compute_eigen_matrix(effect_size = effect_size)
+
+  sim_res <- replicate(B,{
+    groups <- my_mvrnorm(sample_n1, Eigen_matrix =Eigen_matrix)
+
+    sim <- do.call(my_cor_test,c(groups, arguments))
   })
+
+  sim_res <- list2data(sim_res)
+
+  res_errors <- compute_errors(p.values = sim_res$p.value,
+                               estimates = sim_res$estimate,
+                               true_value = effect_size,
+                               sig_level = sig_level, alternative = alternative, B = B)
+
+  res <- c(test_method = test_method, sample_n1 = sample_n1,
+           crit_values, res_errors)
 
   return(res)
 }

@@ -2,6 +2,7 @@
 
 export(retrospective)
 importFrom(MASS,mvrnorm)
+importFrom(stats,cor)
 importFrom(stats,cor.test)
 importFrom(stats,pt)
 importFrom(stats,qt)
