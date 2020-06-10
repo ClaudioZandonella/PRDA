@@ -57,8 +57,11 @@ retrospective <- function(sample_n1,
   alternative <- match.arg(alternative)
 
   # Save call
-  design_fit <- list(design_analysis = "retrospective",
-                     call_arguments = as.list(match_call(default = TRUE))[-1])
+  design_analysis = "retrospective"
+  call_arguments = as.list(match_call(default = TRUE))[-1]
+
+  # Define conf.level according to sig_level
+  call_arguments$conf.level <- define_conf_level(call_arguments)
 
   #----    Set seed    ----
 
@@ -69,39 +72,45 @@ retrospective <- function(sample_n1,
     set.seed(seed = seed)
   }
 
+  #----    Get test info    ----
 
+  # Evaluate test test_method
+  test_method <- do.call(eval_test_method, call_arguments)
+  #Compute df and critical value
+  crit_values <- compute_critical_effect(effect_type, sample_n1, sample_n2, test_method,
+                                         sig_level, alternative, ...)
+
+  test_info <- c(test_method = test_method,
+                    crit_values)
   #----    Retrospective analysis    ----
 
   if(effect_type == "cohen_d"){
     # Cohen's d
-
-    # Define conf.level according to sig_level
-    design_fit$call_arguments$conf.level <- define_conf_level(design_fit$call_arguments)
-
-    design_fit$retrospective_res <- do.call(retrospective_cohen,
-                                            design_fit$call_arguments)
+    retrospective_res <- do.call(retrospective_cohen,
+                                 c(call_arguments,
+                                   test_method = test_method))
 
   } else if (effect_type == "correlation"){
     # Correlation
 
-    # Define conf.level according to sig_level
-    design_fit$call_arguments$conf.level <- define_conf_level(design_fit$call_arguments)
-
     # Check sample_n2
-    if(!is.null(design_fit$call_arguments$sample_n2)){
-      design_fit$call_arguments["sample_n2"] <- list(NULL)
+    if(!is.null(call_arguments$sample_n2)){
+      call_arguments["sample_n2"] <- list(NULL)
       warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
     }
 
-    design_fit$retrospective_res <- do.call(retrospective_correlation,
-                                            design_fit$call_arguments)
+    retrospective_res <- do.call(retrospective_correlation,
+                                 c(call_arguments,
+                                   test_method = test_method))
   }
 
-  #----    Get test info    ----
 
+  #----    save results    ----
+  design_fit <- list(design_analysis = design_analysis,
+                     call_arguments = call_arguments,
+                     test_info = test_info,
+                     retrospective_res = retrospective_res)
 
-
-  #----
   return(design_fit)
 
 }
