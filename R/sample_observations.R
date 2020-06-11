@@ -47,7 +47,7 @@ my_mvrnorm <-function(n = 1, Eigen_matrix){
 
 #----    sample_effect    ----
 
-sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf){
+sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
   if(!is.function(formula) || length(formals(formula))!=1L)
     stop(c("formula has to be a random generating function of the type 'function(x) my_function(x, ...)',\n",
            "  with only one single variable 'x' that represent the number of samples.\n",
@@ -68,12 +68,15 @@ sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf){
     if(tl>tu) stop("'tl' has to be greater than 'tu'.")
 
     sel_iter <- effect_samples < tl | effect_samples > tu
-    sum(sel_iter)
-    while(sum(sel_iter) != 0L){
+    i <- 1
+    while(sum(sel_iter) != 0L && i < tol){
       args[[1]] <- sum(sel_iter)
       effect_samples[sel_iter] <- do.call(formula, args)
       sel_iter <- effect_samples < tl | effect_samples > tu
+      i <- i+1
     }
+
+    if(i == tol) stop("Truncation requires too long computational time, consider possible misspecification.")
   }
 
   effect_summary <- summary(effect_samples)

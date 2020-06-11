@@ -18,6 +18,7 @@ with_seed <- function(seed, code) {
 
 error_truncation <- "'tl' has to be greater than 'tu'."
 message_truncation <- "Truncation could require long computational time."
+error_tol <- "Truncation requires too long computational time, consider possible misspecification."
 
 
 #----    eval_my_mvrnorm    ----
@@ -45,7 +46,7 @@ test_that("evaluate sample_effect", {
   expect_message(sample_effect(formula = function(x) rnorm(x), B_effect = 100, tl=0), message_truncation)
   expect_error(sample_effect(formula = function(x) rnorm(x), B_effect = 100, tl=0, tu=-1), error_truncation)
 
-
+  expect_error(sample_effect(function(x)runif(x), B_effect = 100, tl=2), error_tol)
   })
 sample_effect
 #----
