@@ -44,5 +44,44 @@ my_mvrnorm <-function(n = 1, Eigen_matrix){
 
   return(list(x = X[1,], y = X[2,]))
 }
+
+#----    sample_effect    ----
+
+sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf){
+  if(!is.function(formula) || length(formals(formula))!=1L)
+    stop(c("formula has to be a random generating function of the type 'function(x) my_function(x, ...)',\n",
+           "  with only one single variable 'x' that represent the number of samples.\n",
+           "  E.s. 'function(x) rnorm(x, mean = 0, sd = 1)'"))
+
+  args <- list(x = B_effect)
+
+  if(names(formals(formula))!="x")
+    names(args) <- names(formals(formula))
+
+  effect_function <- body(formula)
+  effect_samples <- do.call(formula, args)
+
+  # Truncate distribution
+  if(is.finite(tl) || is.finite(tu)){
+    message("Truncation could require long computational time.")
+
+    if(tl>tu) stop("'tl' has to be greater than 'tu'.")
+
+    sel_iter <- effect_samples < tl | effect_samples > tu
+    sum(sel_iter)
+    while(sum(sel_iter) != 0L){
+      args[[1]] <- sum(sel_iter)
+      effect_samples[sel_iter] <- do.call(formula, args)
+      sel_iter <- effect_samples < tl | effect_samples > tu
+    }
+  }
+
+  effect_summary <- summary(effect_samples)
+
+  return(list(effect_function = effect_function,
+              effect_summary = effect_summary,
+              effect_samples = effect_samples))
+}
+
 #----
 

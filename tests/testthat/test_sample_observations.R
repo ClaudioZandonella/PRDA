@@ -8,17 +8,22 @@ library(PRDAbeta)
 
 context("Evaluate functions to sample observations")
 
+with_seed <- function(seed, code) {
+  code <- substitute(code)
+  orig.seed <- .Random.seed
+  on.exit(.Random.seed <<- orig.seed)
+  set.seed(seed)
+  eval.parent(code)
+}
+
+error_truncation <- "'tl' has to be greater than 'tu'."
+message_truncation <- "Truncation could require long computational time."
+
 
 #----    eval_my_mvrnorm    ----
 
 test_that("evaluate my_mvrnorm", {
-  with_seed <- function(seed, code) {
-    code <- substitute(code)
-    orig.seed <- .Random.seed
-    on.exit(.Random.seed <<- orig.seed)
-    set.seed(seed)
-    eval.parent(code)
-  }
+
 
   Eigen_matrix <- compute_eigen_matrix(effect_size = .3)
 
@@ -29,4 +34,18 @@ test_that("evaluate my_mvrnorm", {
 
 })
 
+#----    sample_effect    ----
+test_that("evaluate sample_effect", {
+  expect_equal(with_seed(2020, sample_effect(formula = function(x) rnorm(x), B_effect = 100)$effect_samples),
+               with_seed(2020, rnorm(100)))
+
+  expect_error(sample_effect(formula = function(x,y) rnorm(x,y), B_effect = 100))
+  expect_error(sample_effect(formula = "ciao", B_effect = 100))
+
+  expect_message(sample_effect(formula = function(x) rnorm(x), B_effect = 100, tl=0), message_truncation)
+  expect_error(sample_effect(formula = function(x) rnorm(x), B_effect = 100, tl=0, tu=-1), error_truncation)
+
+
+  })
+sample_effect
 #----
