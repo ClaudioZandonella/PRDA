@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper,openright,twoside]{article}
+\usepackage[english]{babel}
+\usepackage{newlfont}
+\usepackage{color}
+\textwidth=450pt\oddsidemargin=0pt
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{sidecap}
+\usepackage[rlft]{floatflt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage[utf8x]{inputenc}
+\usepackage{fullpage}
+\usepackage[Lenny]{fncychap}
+\usepackage[T1]{fontenc}
+\usepackage[normalem]{ulem}
+\usepackage{booktabs}
+\usepackage{enumerate}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{light-gray}{gray}{0.95}
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\itshape\color{RedViolet},
+    showstringspaces=false,
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE, ggplot, data.frame, theme, ylab, xlab},
+    deletekeywords={data, frame, beta, c, par, colours, contour, scale,
+                    panel, grid, hat},
+    keywordstyle=\color{RoyalBlue},
+    commentstyle=\itshape\color{PineGreen},
+    backgroundcolor=\color{light-gray}
+}
+
+\title{Design Analysis with Bayesian Factor}
+\author{}
+\date{}
+
+
+
+
+
+\begin{document}
+
+\maketitle
+
+
+%\vspace{15mm}
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=0.7]{plot_R1.pdf}
+%\caption{First example. Minimum test statistic $g_{\min}(l)$ and maximum critical value $c_{\max}(l)$ for the null hypotesis on $R=\{3,4\}$.}
+%\label{fig:ex1.post}
+%\end{figure}
+
+
+
+
+\section{Effect Size}
+Consider $n_1$ observations $\mathbf{x}_1$ from a $\mathcal{N}(0,1)$ distribution, and $n_2$ observations $\mathbf{x}_2$ from a $\mathcal{N}(\theta,1)$ distribution. We want to evaluate the effect size $\theta$ by considering Cohen's $d$, Hedges' $g$ (unbiased estimator of $\theta$ derived by correcting Cohen's $d$ by a multiplicative factor) or Glass' $\Delta$ (using only of the standard deviation of the control group). Moreover, we want to estimate the following quantities:
+\begin{itemize}
+\item $\beta=$ prob. of true positives (power);
+\item $\epsilon_S=$ prob. that a significant effect is estimated in the wrong direction;
+\item $\epsilon_M=$ average overestimation of an effect that emerges as significant;
+\item $\epsilon_N=$ prob. of false negatives;
+\item $\epsilon_I=$ prob. of an inconclusive result when the effect is significant;
+\end{itemize}
+
+Table \ref{ee} shows the possible effect sizes $e$. Let $Z$ be the effect scaled by an appropriate multiplicative factor; then $Z$ follows a noncentral $t$-distribution $T_{\nu,\theta N}$, with $\nu$ degrees of freedom and noncentrality parameter $\theta N$, where
+\begin{align*}
+N=\sqrt{\frac{n_1\,n_2}{n_1+n_2}}.
+\end{align*}
+
+\begin{table}[h!]
+\centering
+\caption{Effect sizes.}
+\label{ee}
+\begin{tabular}{cccc}
+\toprule
+ & Effect $e$ & Scaled effect $Z$ & Degrees of freedom $\nu$\\
+\midrule
+Cohen & $\frac{\bar{X}_2-\bar{X}_1}{s}$ & $e N$ & $n_1+n_2-2$\\
+Hedges & $\left(1-\frac{3}{4\nu-1}\right)\frac{\bar{X}_2-\bar{X}_1}{s}$ & $eN\left(1-\frac{3}{4\nu-1}\right)^{-1}$ & $n_1+n_2-2$\\
+Glass & $\frac{\bar{X}_2-\bar{X}_1}{s_1}$ & $eN$ & $n_1-1$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{15mm}
+
+
+
+\section{Frequentist Approach}
+Consider the null hypothesis $H_0:\,\theta=0$, and the alternative hypothesis $H_1:\,\theta\neq 0$. Under $H_0$, $Z$ follows a centered $t$-distribution $T_{\nu}$ with $\nu$ degrees of freedom. The p-value corresponding to an observed value $z$ is
+\begin{align*}
+\text{p-value}=P(Z>|z|).
+\end{align*}
+
+For a given statistical significance $\alpha$ (e.g. $\alpha=0.05$):
+\begin{itemize}
+\item if p-value $\geq \alpha$, then the evidence supports $H_0$;
+\item if  p-value $< \alpha$, then the evidence supports $H_1$.
+\end{itemize}
+
+Moreover:
+\begin{align*}
+& \beta= \\
+& e_S= & e_M=\\
+& e_N=1-\beta & e_I=0.
+\end{align*}
+
+
+
+\vspace{15mm}
+
+
+\section{Bayesian Approach}
+Consider the null hypothesis $H_0:\,\theta=0$, and the alternative hypothesis $H_1\,:\, \theta\sim F$, where $F$ is a distribution (analysis prior) on a set $D$ containing zero. For simplicity, assume that $F$ is continuous with density $f$. Then the Bayes factor is
+\begin{align*}
+B = \frac{P(z\,|\,H_1)}{P(z\,|\,H_0)}=\frac{\int_D P(z\,|\,\theta=w)\,f(w)\,\text{d}w}{P(z\,|\,\theta=0)}=\frac{\int_D t_{\eta,wN}(z)\,f(w)\,\text{d}w}{t_{\eta,0}(z)}
+\end{align*}
+where $t_{\eta,\theta N}$ denotes the pdf of $Z$.
+
+For a given threshold $k$ (e.g. $k=3$):
+\begin{itemize}
+\item if $B < 1/k$, then the evidence supports $H_0$;
+\item if $1/k \leq B \leq k$, then the analysis is inconclusive;
+\item if $B > k$, then the evidence supports $H_1$.
+\end{itemize}
+
+Moreover:
+\begin{align*}
+& \beta=P(B>k\,|\,H_1) \\
+& e_S=P(B>k,\; \text{sgn}(e)\neq\text{sgn}(\theta)\,|\,H_1,\;B>k) & e_M=\frac{\text{mean}\{|e|\,:\,B>k\}}{\theta}\\
+& e_N=P\left(B< \frac{1}{k}\,|\,H_1\right) & e_I=P\left(\frac{1}{k} \leq B \leq k\,|\,H_1\right).
+\end{align*}
+
+
+
+
+
+
+\end{document}
