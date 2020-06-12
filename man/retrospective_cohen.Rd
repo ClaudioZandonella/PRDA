@@ -7,7 +7,7 @@
 retrospective_cohen(
   sample_n1,
   sample_n2,
-  effect_size,
+  effect_target,
   test_method,
   alternative,
   sig_level,
@@ -20,7 +20,7 @@ retrospective_cohen(
 
 \item{sample_n2}{numeric value}
 
-\item{effect_size}{numeric value}
+\item{effect_target}{numeric value}
 
 \item{test_method}{character value}
 

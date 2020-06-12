@@ -4,12 +4,12 @@
 \alias{sample_obs_cor}
 \title{Title}
 \usage{
-sample_obs_cor(sample_n1, effect_size)
+sample_obs_cor(sample_n1, effect_target)
 }
 \arguments{
 \item{sample_n1}{numeric value}
 
-\item{effect_size}{numeric value}
+\item{effect_target}{numeric value}
 }
 \value{
 matrix of observations

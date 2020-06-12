@@ -31,18 +31,18 @@ with_seed <- function(seed, code) {
 #----    eval_test_method    ----
 
 test_that("evaluate the correct test method", {
-  expect_match(eval_test_method(effect_type = "cohen_d", effect_size = .3, sample_n1 = nx, sample_n2 = NULL), "one_sample")
-  expect_match(eval_test_method(effect_type = "cohen_d", effect_size = .3, sample_n1 = nx, sample_n2 = ny, paired=TRUE), "paired")
-  expect_match(eval_test_method(effect_type = "cohen_d", effect_size = .3, sample_n1 = nx, sample_n2 = ny, var.equal=TRUE), "two_samples")
-  expect_match(eval_test_method(effect_type = "cohen_d", effect_size = .3, sample_n1 = nx, sample_n2 = ny), "welch")
+  expect_match(eval_test_method(effect_type = "cohen_d", effect_target = .3, sample_n1 = nx, sample_n2 = NULL), "one_sample")
+  expect_match(eval_test_method(effect_type = "cohen_d", effect_target = .3, sample_n1 = nx, sample_n2 = ny, paired=TRUE), "paired")
+  expect_match(eval_test_method(effect_type = "cohen_d", effect_target = .3, sample_n1 = nx, sample_n2 = ny, var.equal=TRUE), "two_samples")
+  expect_match(eval_test_method(effect_type = "cohen_d", effect_target = .3, sample_n1 = nx, sample_n2 = ny), "welch")
 
-  expect_match(eval_test_method(effect_type = "correlation", effect_size = .3, sample_n1 = nx, sample_n2 = ny), "pearson")
-  expect_match(eval_test_method(effect_type = "correlation", effect_size = .3, sample_n1 = nx, method = "pearson"), "pearson")
+  expect_match(eval_test_method(effect_type = "correlation", effect_target = .3, sample_n1 = nx, sample_n2 = ny), "pearson")
+  expect_match(eval_test_method(effect_type = "correlation", effect_target = .3, sample_n1 = nx, method = "pearson"), "pearson")
 
   error_spearman <- "correlation with method = 'spearman' is not implemented. Only method = 'pearson' is available."
-  expect_error(eval_test_method(effect_type = "correlation", effect_size = .3, sample_n1 = nx, method = "spearman"), error_spearman)
+  expect_error(eval_test_method(effect_type = "correlation", effect_target = .3, sample_n1 = nx, method = "spearman"), error_spearman)
   error_kendall <- "correlation with method = 'kendall' is not implemented. Only method = 'pearson' is available."
-  expect_error(eval_test_method(effect_type = "correlation", effect_size = .3, sample_n1 = nx, method = "kendall"), error_kendall)
+  expect_error(eval_test_method(effect_type = "correlation", effect_target = .3, sample_n1 = nx, method = "kendall"), error_kendall)
 })
 
 

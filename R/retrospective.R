@@ -64,27 +64,35 @@ retrospective <- function(sample_n1,
 
   #----    Evaluate effect size    ----
 
-  effect_info <- eval_effect_size(effect_type = effect_type, effect_size = effect_size,
-                                  tl = tl, tu = tu, B_effect = B_effect)
+  effect_info <- eval_effect_size(effect_type = effect_type,
+                                  effect_size = effect_size,
+                                  tl = tl,
+                                  tu = tu,
+                                  B_effect = B_effect)
+  effect_target = effect_info$effect_summary[["Mean"]]
 
   #----    Get test info    ----
 
   # Evaluate test test_method
-  test_method <- do.call(eval_test_method, call_arguments)
+  test_method <- do.call(eval_test_method, c(call_arguments,
+                                             effect_target = effect_target))
   #Compute df and critical value
-  crit_values <- compute_critical_effect(effect_type, sample_n1, sample_n2, test_method,
-                                         sig_level, alternative, ...)
+  crit_values <- do.call(compute_critical_effect,
+                         c(call_arguments,
+                           test_method = test_method))
 
   test_info <- c(test_method = test_method,
-                    crit_values)
+                 crit_values)
 
   #----    Retrospective analysis    ----
 
   if(effect_type == "cohen_d"){
     # Cohen's d
-    retrospective_res <- do.call(retrospective_cohen,
-                                 c(call_arguments,
-                                   test_method = test_method))
+    retrospective_res <- sapply(effect_info$effect_samples,
+                                FUN = function(effect_target) do.call(retrospective_cohen,
+                                                             c(call_arguments,
+                                                               effect_target = effect_target,
+                                                               test_method = test_method)))
 
   } else if (effect_type == "correlation"){
     # Correlation
@@ -95,11 +103,14 @@ retrospective <- function(sample_n1,
       warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
     }
 
-    retrospective_res <- do.call(retrospective_correlation,
-                                 c(call_arguments,
-                                   test_method = test_method))
+    retrospective_res <- sapply(effect_info$effect_samples,
+                                FUN = function(effect_target) do.call(retrospective_correlation,
+                                                              c(call_arguments,
+                                                                effect_target = effect_target,
+                                                                test_method = test_method)))
   }
 
+  retrospective_res <- list2data(retrospective_res)
 
   #----    save results    ----
   design_fit <- list(design_analysis = design_analysis,

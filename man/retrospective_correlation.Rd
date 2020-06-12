@@ -6,7 +6,7 @@
 \usage{
 retrospective_correlation(
   sample_n1,
-  effect_size,
+  effect_target,
   test_method,
   alternative,
   sig_level,
@@ -17,7 +17,7 @@ retrospective_correlation(
 \arguments{
 \item{sample_n1}{numeric value}
 
-\item{effect_size}{numeric value}
+\item{effect_target}{numeric value}
 
 \item{test_method}{character value}
 

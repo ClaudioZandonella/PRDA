@@ -81,7 +81,7 @@ test_that("inputs are correctly specified", {
 })
 
 
-#----
+#----    obtain same results    ----
 
 test_that("same results as previous run", {
   expect_known_value(retrospective(sample_n1 = 10,effect_size = .3,effect_type = "correlation",seed = 2020)$effect_info,
@@ -91,7 +91,13 @@ test_that("same results as previous run", {
   expect_known_value(retrospective(sample_n1 = 10,effect_size = .3,effect_type = "cohen_d",seed = 2020)$retrospective_res,
                             file="test_cache/res_cohen_single", update= FALSE)
 
-  #expect_equal_to_reference(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x),effect_type = "correlation",seed = 2020)$effect_info)
+  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "correlation",
+                                   seed = 2020,B = 10, B_effect = 10)$effect_info, file = "test_cache/effect_info_dist")
+  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "correlation",
+                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_corr_dist")
+  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "cohen_d",
+                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_cohen_dist")
+
   })
 
 

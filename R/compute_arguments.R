@@ -65,7 +65,7 @@ eval_effect_size <- function(effect_type, effect_size,
 }
 #----    eval_test_method    ----
 
-eval_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NULL,
+eval_test_method <- function(effect_type, effect_target, sample_n1, sample_n2 = NULL,
                              paired=FALSE, var.equal = FALSE,
                              method = c("pearson", "kendall", "spearman"), ...){
   test_method <- " "
@@ -76,7 +76,7 @@ eval_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NU
       stop("If paired = TRUE sample_n1 and sample_n2 must be equal.")
     }
 
-    groups <- sample_groups(sample_n1, effect_size, sample_n2)
+    groups <- sample_groups(sample_n1, effect_target, sample_n2)
     t.test(groups$x, groups$y, paired=paired,...)
 
     if(is.null(sample_n2)){
@@ -92,7 +92,7 @@ eval_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NU
   } else if (effect_type == "correlation"){
     method <- match.arg(method)
 
-    groups <- sample_obs_cor(sample_n1, effect_size)
+    groups <- sample_obs_cor(sample_n1, effect_target)
     cor.test(groups$x, groups$y, ...)
 
     if(method == "pearson"){
@@ -121,9 +121,9 @@ pool_sd <- function(x, y){
 
 #----    compute_eigen_matrix    ----
 
-compute_eigen_matrix <- function(effect_size){
+compute_eigen_matrix <- function(effect_target){
 
-  Sigma = matrix(c(1,effect_size,effect_size,1),ncol=2)
+  Sigma = matrix(c(1,effect_target,effect_target,1),ncol=2)
   eS <- eigen(Sigma, symmetric = TRUE)
   ev <- eS$values
   Eign_matrix <- eS$vectors %*% diag(sqrt(pmax(ev, 0)), 2)
@@ -204,8 +204,12 @@ compute_critical_t <- function(df, sig_level, alternative = "two.sided"){
 compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, test_method,
                                     sig_level, alternative, mu = 0, ...){
 
-  df <- compute_df(effect_type = effect_type, sample_n1 = sample_n1,
-                   sample_n2 = sample_n2, test_method = test_method)
+
+  df <- compute_df(effect_type = effect_type,
+                   sample_n1 = sample_n1,
+                   sample_n2 = sample_n2,
+                   test_method = test_method)
+
   critical_t <- compute_critical_t(df, sig_level, alternative)
 
   critical_effect <- NULL
