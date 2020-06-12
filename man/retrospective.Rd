@@ -19,7 +19,7 @@ retrospective(
 \arguments{
 \item{sample_n1}{numeric value.}
 
-\item{effect_size}{numeric value.}
+\item{effect_size}{numeric value or function.}
 
 \item{sample_n2}{numeric value.}
 

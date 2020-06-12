@@ -3,6 +3,66 @@
 #################################
 
 
+#----    eval_arguments    ----
+
+eval_arguments <- function(sample_n1, effect_size, sample_n2, effect_type,
+                           alternative, sig_level, B, seed, tl, tu, B_effect, ...){
+  # Check inputs arguments
+  if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
+    stop("sample_n1 has to be a single integer value grater than 1.")
+
+  if(!is.function(effect_size) && !is_single_numeric(effect_size))
+    stop("effect_size has to be a single numeric value or a function.")
+
+  if(!is.null(sample_n2) && (!is_single_numeric(sample_n2) || sample_n2 <= 1))
+    stop("If specified, sample_n2 has to be a single integer value grater than 1.")
+
+  if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
+    stop("sig_level has to be a single value between 0 and 1.")
+
+  if(!is_single_numeric(B) || B <= 1)
+    stop("B has to be a single integer value grater than 1.")
+
+  if(!is.null(seed) && (!is_single_numeric(seed)))
+    stop("If specified, seed has to be a single finite number.")
+
+  if(!is_single_numeric(tl) && !is.infinite(tl))
+    stop("tl has to be a single numeric value.")
+
+  if(!is_single_numeric(tu) && !is.infinite(tu))
+    stop("tu has to be a single numeric value.")
+
+  if(!is_single_numeric(B_effect) || B_effect <= 1)
+    stop("B_effect has to be a single integer value grater than 1.")
+}
+#----    eval_effect_size    ----
+
+eval_effect_size <- function(effect_type, effect_size,
+                             tl = -Inf, tu = Inf, B_effect = 250){
+  correlation <- effect_type == "correlation"
+  sample_fun <- is.function(effect_size)
+
+  if(!sample_fun){
+    res <- list(effect_function = "single_value",
+                effect_summary = summary(effect_size),
+                effect_samples = effect_size)
+
+    if(correlation && (effect_size < -1 || effect_size > 1))
+      stop("If 'correlation' effect_size must be between -1 and 1")
+  } else {
+
+    if(correlation && (tl < -1 || tu > 1)){
+      tl <- max(-1, tl)
+      tu <- min(tu, 1)
+      message(paste("If 'correlation' effect_size distribution is truncated between",
+      tl,"and", tu))
+    }
+
+    res <- sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
+  }
+
+  return(res)
+}
 #----    eval_test_method    ----
 
 eval_test_method <- function(effect_type, effect_size, sample_n1, sample_n2 = NULL,

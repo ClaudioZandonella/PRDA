@@ -47,19 +47,19 @@ my_mvrnorm <-function(n = 1, Eigen_matrix){
 
 #----    sample_effect    ----
 
-sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
-  if(!is.function(formula) || length(formals(formula))!=1L)
-    stop(c("formula has to be a random generating function of the type 'function(x) my_function(x, ...)',\n",
+sample_effect <- function(FUN, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
+  if(!is.function(FUN) || length(formals(FUN))!=1L)
+    stop(c("FUN has to be a random generating function of the type 'function(x) my_function(x, ...)',\n",
            "  with only one single variable 'x' that represent the number of samples.\n",
            "  E.s. 'function(x) rnorm(x, mean = 0, sd = 1)'"))
 
   args <- list(x = B_effect)
 
-  if(names(formals(formula))!="x")
-    names(args) <- names(formals(formula))
+  if(names(formals(FUN))!="x")
+    names(args) <- names(formals(FUN))
 
-  effect_function <- body(formula)
-  effect_samples <- do.call(formula, args)
+  effect_function <- body(FUN)
+  effect_samples <- do.call(FUN, args)
 
   # Truncate distribution
   if(is.finite(tl) || is.finite(tu)){
@@ -71,7 +71,7 @@ sample_effect <- function(formula, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
     i <- 1
     while(sum(sel_iter) != 0L && i < tol){
       args[[1]] <- sum(sel_iter)
-      effect_samples[sel_iter] <- do.call(formula, args)
+      effect_samples[sel_iter] <- do.call(FUN, args)
       sel_iter <- effect_samples < tl | effect_samples > tu
       i <- i+1
     }

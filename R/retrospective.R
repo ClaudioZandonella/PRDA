@@ -7,13 +7,16 @@
 #' Retrospective
 #'
 #' @param sample_n1 numeric value.
-#' @param effect_size numeric value.
+#' @param effect_size numeric value or function.
 #' @param sample_n2 numeric value.
 #' @param effect_type character value.
 #' @param alternative character value.
 #' @param sig_level numeric value.
 #' @param B numeric value.
 #' @param seed numeric value.
+#' @param tl numaric value.
+#' @param tu numeric value.
+#' @param B_effect numeric value.
 #' @param ... optional argument.
 #'
 #' @return a list
@@ -27,30 +30,14 @@ retrospective <- function(sample_n1,
                           sig_level = .05,
                           B = 1e4,
                           seed = NULL,
+                          tl = -Inf,
+                          tu = Inf,
+                          B_effect = 250,
                           ...){
 
 
 
   #----    Save call    ----
-
-  # Check inputs arguments
-  if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
-    stop("sample_n1 has to be a single integer value grater than 1.")
-
-  if(!is_single_numeric(effect_size))
-    stop("effect_size has to be a single numeric value.")
-
-  if(!is.null(sample_n2) && (!is_single_numeric(sample_n2) || sample_n2 <= 1))
-    stop("If specified, sample_n2 has to be a single integer value grater than 1.")
-
-  if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
-    stop("sig_level has to be a single value between 0 and 1.")
-
-  if(!is_single_numeric(B) || B <= 1)
-    stop("B has to be a single integer value grater than 1.")
-
-  if(!is.null(seed) && (!is_single_numeric(seed)))
-    stop("If specified, seed has to be a single finite number.")
 
   # Match arguments
   effect_type <- match.arg(effect_type)
@@ -59,6 +46,9 @@ retrospective <- function(sample_n1,
   # Save call
   design_analysis = "retrospective"
   call_arguments = as.list(match_call(default = TRUE))[-1]
+
+  # eval possible errors
+  do.call(eval_arguments,call_arguments)
 
   # Define conf.level according to sig_level
   call_arguments$conf.level <- define_conf_level(call_arguments)
@@ -72,6 +62,11 @@ retrospective <- function(sample_n1,
     set.seed(seed = seed)
   }
 
+  #----    Evaluate effect size    ----
+
+  effect_info <- eval_effect_size(effect_type = effect_type, effect_size = effect_size,
+                                  tl = tl, tu = tu, B_effect = B_effect)
+
   #----    Get test info    ----
 
   # Evaluate test test_method
@@ -82,6 +77,7 @@ retrospective <- function(sample_n1,
 
   test_info <- c(test_method = test_method,
                     crit_values)
+
   #----    Retrospective analysis    ----
 
   if(effect_type == "cohen_d"){
@@ -108,6 +104,7 @@ retrospective <- function(sample_n1,
   #----    save results    ----
   design_fit <- list(design_analysis = design_analysis,
                      call_arguments = call_arguments,
+                     effect_info = effect_info,
                      test_info = test_info,
                      retrospective_res = retrospective_res)
 
