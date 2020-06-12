@@ -8,20 +8,21 @@ library(PRDAbeta)
 
 context("retrospective inputs specification")
 
-sample_n1_text <- "sample_n1 has to be a single integer value grater than 1."
-effect_size_text <- "effect_size has to be a single numeric value or a function."
-sample_n2_text <- "If specified, sample_n2 has to be a single integer value grater than 1."
-sig_level_text <- "sig_level has to be a single value between 0 and 1."
-B_text <- "B has to be a single integer value grater than 1."
-seed_text <- "If specified, seed has to be a single finite number."
-correlation_text <- "If effect_type is set to 'correlation', sample_n2 is ignored."
-conf.level_text <- "conf.level is set according to sig_level."
-paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
-tl_text <- "tl has to be a single numeric value."
-tu_text <- "tu has to be a single numeric value."
-B_effect_text <- "B_effect has to be a single integer value grater than 1."
-
 test_that("inputs are correctly specified", {
+
+  sample_n1_text <- "sample_n1 has to be a single integer value grater than 1."
+  effect_size_text <- "effect_size has to be a single numeric value or a function."
+  sample_n2_text <- "If specified, sample_n2 has to be a single integer value grater than 1."
+  sig_level_text <- "sig_level has to be a single value between 0 and 1."
+  B_text <- "B has to be a single integer value grater than 1."
+  seed_text <- "If specified, seed has to be a single finite number."
+  correlation_text <- "If effect_type is set to 'correlation', sample_n2 is ignored."
+  conf.level_text <- "conf.level is set according to sig_level."
+  paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
+  tl_text <- "tl has to be a single numeric value."
+  tu_text <- "tu has to be a single numeric value."
+  B_effect_text <- "B_effect has to be a single integer value grater than 1."
+
   expect_error(retrospective(sample_n1 = 1, effect_size = .3), sample_n1_text)
   expect_error(retrospective(sample_n1 = Inf, effect_size = .3), sample_n1_text)
   expect_error(retrospective(sample_n1 = -3, effect_size = .3), sample_n1_text)

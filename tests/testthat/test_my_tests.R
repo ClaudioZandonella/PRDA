@@ -59,6 +59,15 @@ test_that("my_t_test gives the same p-value as t.test", {
 
 
 test_that("my_t_test gives the correct estimate", {
+  pool_sd <- function(x, y){
+    nx <- length(x)
+    ny <- length(y)
+    mx <- mean(x)
+    my <- mean(y)
+
+    sqrt((sum((x-mx)^2)+sum((y-my)^2))/(nx + ny -2))
+  }
+
   # One sample t-test
   expect_equal(my_t_test(x, test_method = "one_sample", df = nx-1)$estimate, mx/sd(x))
   expect_equal(my_t_test(x, test_method = "one_sample", df = nx-1, mu = 10)$estimate, (mx-10)/sd(x))

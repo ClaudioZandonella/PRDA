@@ -48,7 +48,8 @@ retrospective <- function(sample_n1,
   call_arguments = as.list(match_call(default = TRUE))[-1]
 
   # eval possible errors
-  do.call(eval_arguments,call_arguments)
+  do.call(eval_arguments_retrospective,
+          call_arguments)
 
   # Define conf.level according to sig_level
   call_arguments$conf.level <- define_conf_level(call_arguments)
