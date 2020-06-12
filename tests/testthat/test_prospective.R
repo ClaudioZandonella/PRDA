@@ -27,7 +27,7 @@ test_that("inputs are correctly specified", {
   tol_text <- "tol has to be a single value between 0 and 1."
   display_text <- "display_message has to be logical."
 
-  correlation_text <- "If effect_type is set to 'correlation', sample_n2 is ignored."
+  correlation_text <- "If effect_type is set to 'correlation', ratio_n2 is set to 1"
   conf.level_text <- "conf.level is set according to sig_level."
   paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
 
@@ -92,12 +92,8 @@ test_that("inputs are correctly specified", {
   expect_error(prospective(effect_size = .3, power = .8, display_message = "ciao"), display_text)
   expect_error(prospective(effect_size = .3, power = .8, display_message = c(.1,.2)), display_text)
 
-
-
-
-
-   # expect_warning(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "correlation", B=10),
-   #               correlation_text)
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2),
+                 correlation_text)
 
   # conf.level test
   expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10),

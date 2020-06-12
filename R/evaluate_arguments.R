@@ -109,6 +109,16 @@ eval_effect_size <- function(effect_type, effect_size,
 
   return(res)
 }
+
+#----    eval_samples    ----
+
+eval_samples <- function(ratio_n2, current_n){
+  sample_n1 <- current_n
+  sample_n2 <- round(sample_n1 * ratio_n2,0)
+
+  return(list(sample_n1 = sample_n1, sample_n2 = sample_n2))
+}
+
 #----    eval_test_method    ----
 
 eval_test_method <- function(effect_type, effect_target, sample_n1, sample_n2 = NULL,

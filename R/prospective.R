@@ -49,15 +49,25 @@ prospective <- function(effect_size,
     set.seed(seed = seed)
   }
 
-  # #----    Evaluate effect size    ----
-  #
-  # effect_info <- eval_effect_size(effect_type = effect_type,
-  #                                 effect_size = effect_size,
-  #                                 tl = tl,
-  #                                 tu = tu,
-  #                                 B_effect = B_effect)
-  # effect_target = effect_info$effect_summary[["Mean"]]
-  #
+  #----    Evaluate effect size    ----
+
+  effect_info <- eval_effect_size(effect_type = effect_type,
+                                  effect_size = effect_size,
+                                  tl = tl,
+                                  tu = tu,
+                                  B_effect = B_effect)
+  effect_target = effect_info$effect_summary[["Mean"]]
+
+  #----    Evaluate samples    ----
+
+  if(effect_type == "correlation" && ratio_n2 != 1){
+    call_arguments["ratio_n2"] <- list(1)
+    warning("If effect_type is set to 'correlation', ratio_n2 is set to 1")
+  }
+
+  sample_info <- eval_samples(ratio_n2 = ratio_n2,
+                              current_n = sample_range[2])
+
   # #----    Get test info    ----
   #
   # # Evaluate test test_method
@@ -106,7 +116,7 @@ prospective <- function(effect_size,
   #                    test_info = test_info,
   #                    retrospective_res = retrospective_res)
   #
-  # return(design_fit)
+  return(list(call_arguments,sample_info))
 
 }
 
