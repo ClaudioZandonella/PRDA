@@ -13,6 +13,9 @@ retrospective(
   sig_level = 0.05,
   B = 10000,
   seed = NULL,
+  tl = -Inf,
+  tu = Inf,
+  B_effect = 250,
   ...
 )
 }
@@ -32,6 +35,12 @@ retrospective(
 \item{B}{numeric value.}
 
 \item{seed}{numeric value.}
+
+\item{tl}{numeric value.}
+
+\item{tu}{numeric value.}
+
+\item{B_effect}{numeric value.}
 
 \item{...}{optional argument.}
 }

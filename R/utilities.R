@@ -31,8 +31,13 @@ match_call <- function(definition = sys.function(sys.parent()),
 
 #----    is_single_numeric    ----
 
-is_single_numeric <- function(x){
-  length(x) == 1L && is.finite(x)
+is_single_numeric <- function(x, infinite = FALSE){
+
+  if(infinite){
+    length(x) == 1L && is.numeric(x)
+  }else{
+    length(x) == 1L && is.finite(x)
+  }
 }
 
 #----    Select arguments    ----

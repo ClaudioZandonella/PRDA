@@ -26,10 +26,10 @@ eval_arguments <- function(sample_n1, effect_size, sample_n2, effect_type,
   if(!is.null(seed) && (!is_single_numeric(seed)))
     stop("If specified, seed has to be a single finite number.")
 
-  if(!is_single_numeric(tl) && !is.infinite(tl))
+  if(!is_single_numeric(tl, infinite = TRUE ))
     stop("tl has to be a single numeric value.")
 
-  if(!is_single_numeric(tu) && !is.infinite(tu))
+  if(!is_single_numeric(tu, infinite = TRUE))
     stop("tu has to be a single numeric value.")
 
   if(!is_single_numeric(B_effect) || B_effect <= 1)

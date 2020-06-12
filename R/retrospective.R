@@ -14,7 +14,7 @@
 #' @param sig_level numeric value.
 #' @param B numeric value.
 #' @param seed numeric value.
-#' @param tl numaric value.
+#' @param tl numeric value.
 #' @param tu numeric value.
 #' @param B_effect numeric value.
 #' @param ... optional argument.
