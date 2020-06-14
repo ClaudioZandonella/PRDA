@@ -54,6 +54,12 @@ retrospective <- function(sample_n1,
   # Define conf.level according to sig_level
   call_arguments$conf.level <- define_conf_level(call_arguments)
 
+  # Check sample_n2 for correlation
+  if(effect_type == "correlation" && !is.null(call_arguments$sample_n2)){
+    call_arguments["sample_n2"] <- list(NULL)
+    warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+  }
+
   #----    Set seed    ----
 
   # Set seed
@@ -87,31 +93,10 @@ retrospective <- function(sample_n1,
 
   #----    Retrospective analysis    ----
 
-  if(effect_type == "cohen_d"){
-    # Cohen's d
-    retrospective_res <- sapply(effect_info$effect_samples,
-                                FUN = function(effect_target) do.call(retrospective_cohen,
-                                                             c(call_arguments,
-                                                               effect_target = effect_target,
-                                                               test_method = test_method)))
-
-  } else if (effect_type == "correlation"){
-    # Correlation
-
-    # Check sample_n2
-    if(!is.null(call_arguments$sample_n2)){
-      call_arguments["sample_n2"] <- list(NULL)
-      warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
-    }
-
-    retrospective_res <- sapply(effect_info$effect_samples,
-                                FUN = function(effect_target) do.call(retrospective_correlation,
-                                                              c(call_arguments,
-                                                                effect_target = effect_target,
-                                                                test_method = test_method)))
-  }
-
-  retrospective_res <- list2data(retrospective_res)
+  retrospective_res <- do.call(simulate_analysis,
+                               c(call_arguments,
+                                 effect_info["effect_samples"],
+                                 test_method = test_method))
 
   #----    save results    ----
   design_fit <- list(design_analysis = design_analysis,
