@@ -33,7 +33,6 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     tstat <- (mx-mu)/stderr
     estimate <- (mx-mu)/sd(x)
   } else if (test_method == "paired"){
-    x <- x-y
     nx <- length(x)
     df <- nx-1
     mx <- mean(x)
@@ -81,6 +80,12 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
   return(rval)
 }
 
+#----    my_pearson_cor    ----
+
+# my_pearson_cor <- function(x, y = NULL){
+#     .Call(C_my_cor, x, y, 4, FALSE)
+# }
+# C_my_cor=get("C_cor", asNamespace("stats"))
 
 #----    my_cor_test    ----
 

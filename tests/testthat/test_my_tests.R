@@ -38,13 +38,13 @@ test_that("my_t_test gives the same p-value as t.test", {
   expect_equal(my_t_test(x,y, test_method = "two_samples", df = nx+ny-2, mu = 30)$p.value,
                t.test(x,y, paired=F, var.equal=T, mu = 30)$p.value)
 
-  expect_equal(my_t_test(x,y,  test_method = "paired", df = nx-1, alternative = "two.sided")$p.value,
+  expect_equal(my_t_test(diff,  test_method = "paired", df = nx-1, alternative = "two.sided")$p.value,
                t.test(x,y, paired=T, var.equal=F, alternative = "two.sided")$p.value)
-  expect_equal(my_t_test(x,y, test_method = "paired", df = nx-1, alternative = "greater")$p.value,
+  expect_equal(my_t_test(diff, test_method = "paired", df = nx-1, alternative = "greater")$p.value,
                t.test(x,y, paired=T, var.equal=F, alternative = "greater")$p.value)
-  expect_equal(my_t_test(x,y, test_method = "paired", df = nx-1, alternative = "less")$p.value,
+  expect_equal(my_t_test(diff, test_method = "paired", df = nx-1, alternative = "less")$p.value,
                t.test(x,y, paired=T, var.equal=F, alternative = "less")$p.value)
-  expect_equal(my_t_test(x,y, test_method = "paired", df = nx-1, mu = 30)$p.value,
+  expect_equal(my_t_test(diff, test_method = "paired", df = nx-1, mu = 30)$p.value,
                t.test(x,y, paired=T, var.equal=F, mu = 30)$p.value)
 
   expect_equal(my_t_test(x, test_method = "one_sample", df = nx-1, alternative = "two.sided")$p.value,
@@ -73,7 +73,7 @@ test_that("my_t_test gives the correct estimate", {
   expect_equal(my_t_test(x, test_method = "one_sample", df = nx-1, mu = 10)$estimate, (mx-10)/sd(x))
 
   # Paired t-test (Hedge's correction)
-  expect_equal(my_t_test(x,y, test_method = "paired", df = nx-1)$estimate,
+  expect_equal(my_t_test(diff, test_method = "paired", df = nx-1)$estimate,
                (nx-2)/(nx-1.25)*mean(diff)/sd(diff))
 
   # Two samples t-test (Hedge's correction)
