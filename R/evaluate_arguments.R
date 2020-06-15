@@ -48,8 +48,8 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2, effect_type
   if(!is_single_numeric(power) || power >= 1 || power <= 0)
     stop("power has to be a single value between 0 and 1.")
 
-  if(!is_single_numeric(ratio_n2) || ratio_n2 < 1)
-    stop("ratio_n2 has to be a single integer value grater or equal than 1.")
+  if(!is.null(ratio_n2) && (!is_single_numeric(ratio_n2) || ratio_n2 < 1))
+    stop("If specified, ratio_n2 has to be a single integer value grater or equal than 1.")
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("sig_level has to be a single value between 0 and 1.")
@@ -112,9 +112,19 @@ eval_effect_size <- function(effect_type, effect_size,
 
 #----    eval_samples    ----
 
-eval_samples <- function(ratio_n2, current_n){
+eval_samples <- function(ratio_n2, current_n, effect_type, paired = FALSE, ...){
+
+  if(effect_type == "cohen_d" && paired && ratio_n2 != 1){
+    stop("If paired = TRUE, ratio_n2 has to be 1")
+  }
+
   sample_n1 <- current_n
-  sample_n2 <- round(sample_n1 * ratio_n2,0)
+
+  if(is.null(ratio_n2)){
+    sample_n2 <- NULL
+  } else {
+    sample_n2 <- round(sample_n1 * ratio_n2,0)
+  }
 
   return(list(sample_n1 = sample_n1, sample_n2 = sample_n2))
 }

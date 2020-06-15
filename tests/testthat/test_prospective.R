@@ -26,9 +26,10 @@ test_that("inputs are correctly specified", {
   sample_range_text2 <- "sample_range minimum has to be grater than 1 and less than sample range maximum."
   tol_text <- "tol has to be a single value between 0 and 1."
   display_text <- "display_message has to be logical."
-
   correlation_text <- "If effect_type is set to 'correlation', ratio_n2 is set to 1"
+  paired_text <- "If paired = TRUE, ratio_n2 has to be 1"
   conf.level_text <- "conf.level is set according to sig_level."
+
   paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
 
 
@@ -92,13 +93,15 @@ test_that("inputs are correctly specified", {
   expect_error(prospective(effect_size = .3, power = .8, display_message = "ciao"), display_text)
   expect_error(prospective(effect_size = .3, power = .8, display_message = c(.1,.2)), display_text)
 
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2, seed = 2020),
                  correlation_text)
+  expect_error(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", paired = TRUE, B=10, ratio_n2 = 2),
+                 paired_text)
 
   # conf.level test
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10, seed =2020),
                  conf.level_text)
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10, seed = 2020),
                  conf.level_text)
 
   # # paired_t.test
@@ -108,23 +111,36 @@ test_that("inputs are correctly specified", {
   #              paired_t.test)
 })
 
+#----    get correct test_method     ----
+
+test_that("get correct test_method", {
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = NULL, B = 100, seed = 2020)$test_info$test_method, "one_sample")
+  expect_equal(prospective(effect_size = .3, power = .8, tol = .02, paired = TRUE, B = 100, seed = 2020)$test_info$test_method, "paired")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = TRUE, B = 100, seed = 2020)$test_info$test_method, "two_samples")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = FALSE, B = 100, seed = 2020)$test_info$test_method, "welch")
+
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 1, effect_type = "correlation", B = 100, seed = 2020)$test_info$test_method, "pearson")
+
+})
+
 
 #----    obtain same results    ----
 
 test_that("same results as previous run", {
-  expect_known_value(retrospective(sample_n1 = 10,effect_size = .3,effect_type = "correlation",seed = 2020)$effect_info,
-                     file = "test_cache/effect_info_single", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10,effect_size = .3,effect_type = "correlation",seed = 2020)$retrospective_res,
-                     file="test_cache/res_corr_single", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10,effect_size = .3,effect_type = "cohen_d",seed = 2020)$retrospective_res,
-                     file="test_cache/res_cohen_single", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, B = 100, seed = 2020)$effect_info,
+                     file = "test_cache/effect_info_single_pro", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "correlation", B = 100, seed = 2020)$prospective_res,
+                     file="test_cache/res_corr_single_pro", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", B = 100, seed = 2020)$prospective_res,
+                     file="test_cache/res_cohen_single_pro", update= FALSE)
 
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "correlation",
-                                   seed = 2020,B = 10, B_effect = 10)$effect_info, file = "test_cache/effect_info_dist")
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "correlation",
-                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_corr_dist")
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "cohen_d",
-                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_cohen_dist")
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020)$effect_info,
+                     file = "test_cache/effect_info_dist_pro")
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
+                                 B = 100, B_effect = 10, seed = 2020)$prospective_res, file = "test_cache/res_corr_dist_pro")
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen",
+                                 B = 100, B_effect = 10, seed = 2020)$prospective_res,
+                     file = "test_cache/res_cohen_dist_pro")
 
 })
 
