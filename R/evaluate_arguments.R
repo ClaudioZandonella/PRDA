@@ -70,7 +70,7 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2, effect_type
     stop("B_effect has to be a single integer value grater than 1.")
 
   if(length(sample_range)!=2L || sum(!is.finite(sample_range)))
-    stop("sample_range has to be a two length numeric vector.")
+    stop("sample_range has to be a length-2 numeric vector.")
   if(sample_range[1] <= 1 || sample_range[1] > sample_range[2])
     stop("sample_range minimum has to be grater than 1 and less than sample range maximum.")
 

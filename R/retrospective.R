@@ -4,16 +4,16 @@
 
 #----    Retrospective    ----
 
-#'Retrospective Design Analysis
+#' Retrospective Design Analysis
 #'
-#'Given the hypothetical population effect size and study sample size, the
-#'function \code{retrospective()} performs a retrospective design analysis for
-#'Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
-#'correlation test between two variables. According to the defined alternative
-#'hypothesis and significance level, inferential errors (i.e., Power level,
-#'Type-M error, and Type-S error) are computed together with the the critical
-#'effect value (i.e., the minimum absolute effect value that would result
-#'significant).
+#' Given the hypothetical population effect size and study sample size, the
+#' function \code{retrospective()} performs a retrospective design analysis for
+#' Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
+#' correlation test between two variables. According to the defined alternative
+#' hypothesis and significance level, inferential errors (i.e., Power level,
+#' Type-M error, and Type-S error) are computed together with the the critical
+#' effect value (i.e., the minimum absolute effect size value that would result
+#' significant).
 #'
 #'@param effect_size a numeric value or function (see details) indicating the
 #'  hypothetical population effect size.
@@ -64,7 +64,7 @@
 #'    case of \code{alternative = "two.sided"} is the absolute value and both
 #'    positive and negative values should be considered.}
 #'    \item{retrospective_res}{a data frame with the resulting inferential
-#'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}}
+#'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 #'
 #'@details Conduct a retrospective design analysis to evaluate inferential risks
 #'  according to study design. A general overview is provided in the

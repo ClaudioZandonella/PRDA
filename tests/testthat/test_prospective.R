@@ -22,7 +22,7 @@ test_that("inputs are correctly specified", {
   tl_text <- "tl has to be a single numeric value."
   tu_text <- "tu has to be a single numeric value."
   B_effect_text <- "B_effect has to be a single integer value grater than 1."
-  sample_range_text1 <- "sample_range has to be a two length numeric vector."
+  sample_range_text1 <- "sample_range has to be a length-2 numeric vector."
   sample_range_text2 <- "sample_range minimum has to be grater than 1 and less than sample range maximum."
   tol_text <- "tol has to be a single value between 0 and 1."
   display_text <- "display_message has to be logical."
