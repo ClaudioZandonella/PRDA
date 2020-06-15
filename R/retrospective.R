@@ -99,11 +99,12 @@ retrospective <- function(sample_n1,
                                  test_method = test_method))
 
   #----    save results    ----
-  design_fit <- list(design_analysis = design_analysis,
-                     call_arguments = call_arguments,
-                     effect_info = effect_info,
-                     test_info = test_info,
-                     retrospective_res = retrospective_res)
+  design_fit <- structure(list(design_analysis = design_analysis,
+                               call_arguments = call_arguments,
+                               effect_info = effect_info,
+                               test_info = test_info,
+                               retrospective_res = retrospective_res),
+                          class = c("design_analysis","list"))
 
   return(design_fit)
 

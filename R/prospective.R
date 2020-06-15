@@ -112,9 +112,9 @@ prospective <- function(effect_size,
   est_power <- mean(prospective_res$power)
 
   if ( est_power < power ) {
-    cat(paste0("Actual power = ", est_power, " with n = ", sample_range[2]),"\n")
-    cat(paste0("   try to increase maximum of sample_range > ", sample_range[2],"."),"\n")
-  } else {
+    stop(paste0("Actual power = ", est_power, " with n = ", sample_range[2],"\n",
+                "  try to increase maximum of sample_range > ", sample_range[2],"."))
+     } else {
 
     find_power <- FALSE
     n_seq <- seq( sample_range[1], sample_range[2], by = 1 )
@@ -143,7 +143,9 @@ prospective <- function(effect_size,
       if ( (est_power<=(power+tol)) && (est_power>=(power-tol)) ) {
         find_power <- TRUE
       } else {
-        if (length(n_seq)==1) { stop("Increase tolerance value")
+        if (length(n_seq)==1) {
+          message("Required power according to tolerance value can not be obtained.\nIncrease tolerance value.")
+          find_power <- TRUE
         } else if (est_power > (power+tol)) {
           (n_seq <- seq( min(n_seq), n_target-1, by = 1))
           (n_target <- round(median(n_seq)))
@@ -167,12 +169,14 @@ prospective <- function(effect_size,
                  crit_values)
 
   #----    save results    ----
-  design_fit <- list(design_analysis = design_analysis,
-                     call_arguments = call_arguments,
-                     effect_info = effect_info,
-                     sample_info = sample_info,
-                     test_info = test_info,
-                     prospective_res = prospective_res)
+  design_fit <- structure(list(design_analysis = design_analysis,
+                               call_arguments = call_arguments,
+                               effect_info = effect_info,
+                               sample_info = sample_info,
+                               test_info = test_info,
+                               prospective_res = prospective_res),
+                          class = c("design_analysis","list"))
+
 
 
   return(design_fit)

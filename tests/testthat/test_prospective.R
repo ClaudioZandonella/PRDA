@@ -30,9 +30,6 @@ test_that("inputs are correctly specified", {
   paired_text <- "If paired = TRUE, ratio_n2 has to be 1"
   conf.level_text <- "conf.level is set according to sig_level."
 
-  paired_t.test <- "If paired = TRUE sample_n1 and sample_n2 must be equal."
-
-
   expect_error(prospective(effect_size = Inf, power = .8), effect_size_text)
   expect_error(prospective(effect_size = "ciao", power = .8), effect_size_text)
   expect_error(prospective(effect_size = c(1,2), power = .8), effect_size_text)
@@ -104,13 +101,15 @@ test_that("inputs are correctly specified", {
   expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10, seed = 2020),
                  conf.level_text)
 
-  # # paired_t.test
-  # expect_error(retrospective(sample_n1 = 20, sample_n2 = 30, effect_size = .3, effect_type = "cohen_d", paired=T),
-  #              paired_t.test)
-  # expect_error(retrospective(sample_n1 = 20, sample_n2 = NULL, effect_size = .3, effect_type = "cohen_d", paired=T),
-  #              paired_t.test)
-})
+  # sample_range
+  sample_range <- "Actual power = 0.13 with n = 100\n  try to increase maximum of sample_range > 100."
+  expect_error(prospective(effect_size = .1, power = .8, effect_type = "cohen_d", sample_range =  c(5,100), B=100, seed =2020), sample_range)
 
+  tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
+  expect_message(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=100, sample_range = c(80,120),
+                             tol=.001, seed = 2020), tol_text)
+
+})
 #----    get correct test_method     ----
 
 test_that("get correct test_method", {
