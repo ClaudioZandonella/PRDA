@@ -100,7 +100,7 @@
 #'
 #'  In the case of \code{"cohen_d"} one-sample or two-samples \emph{t}-test are
 #'  considered following same options specification of basic function
-#'  \code{t.tes()}, note that default options of \code{t.tes()} are \code{paired
+#'  \code{t.test()}, note that default options of \code{t.test()} are \code{paired
 #'  = FALSE} and \code{var.equal = FALSE}. For one-sample \emph{t}-test only
 #'  \code{sample_n1} is specified and \code{sample_n2 = NULL} is required. For
 #'  paired \emph{t}-test \code{sample_n1} and \code{sample_n2} needs to be

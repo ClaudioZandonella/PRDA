@@ -21,6 +21,9 @@
 #' @importFrom stats pt sd var
 #'
 #
+
+alternative_set <- c("two.sided", "greater", "less")
+
 my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
                      mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95,
                      ...){
@@ -67,14 +70,12 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     tstat <- (mx - my - mu)/stderr
     estimate <- (mx-my)/sqrt((vx + vy)/2)
   }
+  alternative <- match.arg(tolower(alternative), alternative_set)
+  pval <- switch(alternative,
+               "two.sided" = 2*(pt(abs(tstat), df, lower.tail=FALSE)),
+               "greater" = pt(tstat, df, lower.tail=FALSE),
+               "less" = 1-pt(tstat, df, lower.tail=FALSE))
 
-  if (alternative == "two.sided") {
-    pval <- 2 * pt(-abs(tstat), df)
-  }else if (alternative == "greater") {
-    pval <- pt(tstat, df, lower.tail = FALSE)
-  }else {
-    pval <- pt(tstat, df)
-  }
   rval <- list(p.value = pval,
                estimate = estimate)
   return(rval)
@@ -105,13 +106,12 @@ my_cor_test <-function(x, y, alternative = "two.sided",...){
   r <- cor(x, y)
   df <- n - 2L
   tstat <- sqrt(df) * r / sqrt(1 - r^2)
-  pval <- switch(alternative,
-                 "less" = pt(tstat, df),
-                 "greater" = pt(tstat, df, lower.tail=FALSE),
-                 "two.sided" = 2 * pt(-abs(tstat), df)
-                  # min(pt(tstat, df),pt(tstat, df, lower.tail=FALSE))
-                 )
 
+  alternative <- match.arg(tolower(alternative), alternative_set)
+  pval <- switch(alternative,
+                 "two.sided" = 2*(pt(abs(tstat), df, lower.tail=FALSE)),
+                 "greater" = pt(tstat, df, lower.tail=FALSE),
+                 "less" = 1-pt(tstat, df, lower.tail=FALSE))
   rval <- list(p.value = pval,
                  estimate = r)
 
