@@ -71,7 +71,7 @@
 #'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
 #'    the absolute value and both positive and negative values should be
 #'    considered.}
-#'    \item{retrospective_res}{a data frame with the resulting inferential
+#'    \item{prospective_res}{a data frame with the resulting inferential
 #'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 #'
 #' @details Conduct a prospective design analysis to define the required sample
