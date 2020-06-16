@@ -117,9 +117,6 @@
 #'   \emph{t}-test, \code{ratio_n} can be specified according to user needs
 #'   (default option is \code{var.equal = FALSE}).
 #'
-#'   Another optional argument is \code{mu}, a number indicating the true value
-#'   of the standardize mean difference evaluated as null hypothesis.
-#'
 #'   In the case of \code{"correlation"}, only Pearson's correlation between two
 #'   variables is available and \code{ratio_n} is set to 1 (default). The
 #'   Kendall's \emph{tau} or Spearman's \emph{rho} are not implemented.
