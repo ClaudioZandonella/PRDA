@@ -60,18 +60,17 @@
 #'    \code{effect_summary} summary of the sampled effects;
 #'    \code{effect_samples} vector with the sampled effects (or unique value in
 #'    the case of single value).}
-#'    \item{sample_info}{a list with all the information regarding the required
-#'    sample size. The list includes: \code{sample_n1} the required sample size
-#'    in the first group; \code{sample_n2}, if relevant the required sample size
-#'    in the second group}
 #'    \item{test_info}{a list with all the information regarding the test
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
-#'    "two-samples", or "welch"); \code{df} degrees of freedom of the
-#'    statistical test; \code{critical_effect} the minimum absolute effect value
-#'    that would result significant. Note that \code{critical_effect} in the
-#'    case of \code{alternative = "two.sided"} is the absolute value and both
-#'    positive and negative values should be considered.}
+#'    "two-samples", or "welch"); the required sample size (\code{sample_n1} and
+#'    if relevant \code{sample_n2}), alternative hypothesis
+#'    (\code{alternative}}), significance level (\code{sig_level})  and  degrees
+#'    of freedom (\code{df}) of the statistical test; \code{critical_effect} the
+#'    minimum absolute effect value that would result significant. Note that
+#'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
+#'    the absolute value and both positive and negative values should be
+#'    considered.}
 #'    \item{retrospective_res}{a data frame with the resulting inferential
 #'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 #'
@@ -168,7 +167,9 @@
 #'  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
 #'  9(6), 641–651. https://doi.org/10.1177/1745691614551642
 #'
-#'  todo: Add our pre-print
+#'  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+#'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
+#'  for Pearson Correlation Coefficient. Retrieved from https://psyarxiv.com/q9f86/
 #'
 #' @export
 #'
@@ -208,6 +209,11 @@ prospective <- function(effect_size,
 
   # Define conf.level according to sig_level
   call_arguments$conf.level <- define_conf_level(call_arguments)
+
+  # Check for mu argument
+  if("mu" %in% names(call_arguments) && mu != 0){
+    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0. ")
+  }
 
   #----    Set seed    ----
 
@@ -313,13 +319,16 @@ prospective <- function(effect_size,
                            test_method = test_method))
 
   test_info <- c(test_method = test_method,
+                 sample_info,
+                 alternative = alternative,
+                 sig_level = sig_level,
                  crit_values)
+
 
   #----    save results    ----
   design_fit <- structure(list(design_analysis = design_analysis,
                                call_arguments = call_arguments,
                                effect_info = effect_info,
-                               sample_info = sample_info,
                                test_info = test_info,
                                prospective_res = prospective_res),
                           class = c("design_analysis","list"))

@@ -58,11 +58,14 @@
 #'    \item{test_info}{a list with all the information regarding the test
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
-#'    "two-samples", or "welch"); \code{df} degrees of freedom of the
-#'    statistical test; \code{critical_effect} the minimum absolute effect value
-#'    that would result significant. Note that \code{critical_effect} in the
-#'    case of \code{alternative = "two.sided"} is the absolute value and both
-#'    positive and negative values should be considered.}
+#'    "two-samples", or "welch"); sample size (\code{sample_n1} and if relevant
+#'    \code{sample_n2}), alternative hypothesis (\code{alternative}}),
+#'    significance level (\code{sig_level})  and  degrees of freedom (\code{df})
+#'    of the statistical test; \code{critical_effect} the minimum absolute
+#'    effect value that would result significant. Note that
+#'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
+#'    the absolute value and both positive and negative values should be
+#'    considered.}
 #'    \item{retrospective_res}{a data frame with the resulting inferential
 #'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 #'
@@ -109,9 +112,6 @@
 #'  \code{var.equal = TRUE} is required. For Welch \emph{t}-test, only
 #'  \code{sample_n1} and \code{sample_n2} are required (default option is
 #'  \code{var.equal = FALSE}).
-#'
-#'  Another optional argument is \code{mu}, a number indicating the true value
-#'  of the standardize mean difference evaluated as null hypothesis.
 #'
 #'  In the case of \code{"correlation"}, only Pearson's correlation between two
 #'  variables is available and \code{sample_n2} argument is ignored. The
@@ -163,7 +163,9 @@
 #'  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
 #'  9(6), 641–651. https://doi.org/10.1177/1745691614551642
 #'
-#'  todo: Add our pre-print
+#'  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+#'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
+#'  for Pearson Correlation Coefficient. Retrieved from https://psyarxiv.com/q9f86/
 #'
 #'@export
 
@@ -200,11 +202,18 @@ retrospective <- function(effect_size,
   call_arguments$conf.level <- define_conf_level(call_arguments)
 
   # Check sample_n2 for correlation
-  if(effect_type == "correlation" && !is.null(call_arguments$sample_n2)){
-    call_arguments["sample_n2"] <- list(NULL)
-    warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+  if(effect_type == "correlation"){
+    if(!is.null(sample_n2)){
+      call_arguments["sample_n2"] <- list(NULL)
+      warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+    }
+    sample_n2 <- sample_n1
   }
 
+  # Check for mu argument
+  if("mu" %in% names(call_arguments) && mu != 0){
+    stop("Desing Analysis is allowed only if the Null Hypothesis is 0")
+  }
   #----    Set seed    ----
 
   # Set seed
@@ -234,6 +243,10 @@ retrospective <- function(effect_size,
                            test_method = test_method))
 
   test_info <- c(test_method = test_method,
+                 sample_n1 = sample_n1,
+                 sample_n2 = list(sample_n2),
+                 alternative = alternative,
+                 sig_level = sig_level,
                  crit_values)
 
   #----    Retrospective analysis    ----
