@@ -14,6 +14,7 @@
 #'
 #' @importFrom stats rnorm t.test cor.test qt pt sd var cor
 #' @importFrom MASS mvrnorm
+#' @importFrom utils capture.output
 #'
 #' @docType package
 #' @name PRDAbeta

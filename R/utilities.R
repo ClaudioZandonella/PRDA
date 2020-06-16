@@ -83,5 +83,26 @@ list2data <- function(list, transpose=TRUE, select=NULL){
   return(data)
 }
 
+#----    round_arg    ----
+
+round_arg <- function(list_name, n_round){
+  arguments <- unlist(lapply(list_name, is.numeric))
+  if(sum(arguments)!=0){
+    list_name[arguments] <- lapply(list_name[arguments], round, n_round)
+  }
+  return(list_name)
+}
+
+#----    sing_effect    ----
+
+sign_effect <- function(critical_effect, alternative){
+  if(alternative == "two.sided"){
+    critical_effect <-  paste0("\u00b1 ",critical_effect)
+  } else {
+    critical_effect <-  paste0(critical_effect)
+  }
+
+  return(critical_effect)
+}
 
 #----
