@@ -165,11 +165,6 @@
 #'
 #'  todo: Add our pre-print
 #'
-#' @importFrom stats rnorm t.test
-#' @importFrom stats cor.test
-#' @importFrom stats qt
-#' @importFrom MASS mvrnorm
-#'
 #'@export
 
 retrospective <- function(effect_size,
