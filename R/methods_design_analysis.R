@@ -4,7 +4,17 @@
 
 #----    print.design_analysis    ----
 
-print.design_analysis <- function(da_fit, prefix="\t"){
+#' Print Method for design_analysis class
+#'
+#' @param x an object with class "design_analysis"
+#' @param ... urther arguments passed to or from other methods.
+#'
+#' @return a summary output
+#' @export
+#'
+print.design_analysis <- function(x, ...){
+  da_fit=x
+  prefix="\t"
   output_text <- da_fit
 
 
