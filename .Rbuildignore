@@ -1,0 +1,27 @@
+# Rproject files
+^.*\.Rproj$
+^\.Rproj\.user$
+
+# Renv files
+^renv$
+^renv\.lock$
+^\.renvignore$
+
+# Old folders
+^PRDA_old$
+^Old_notes$
+^PRDAbeta2$
+
+# Development files
+^R/zz_CRAN_checks\.R$
+
+# Vignette auxiliary folders
+^doc$
+^Meta$
+
+# Travis files
+^\.travis\.yml$
+
+# Todo list
+^Todo$
+^Todo\.html$

@@ -1,0 +1,37 @@
+Package: PRDAbeta
+Title: Conduct a Prospective or Retrospective Design Analysis
+Version: 0.1.0.9000
+Authors@R: c(
+    person("Massimiliano", "Pastore", role = c("aut", "cre"),
+           email = "massimiliano.pastore@unipd.it",
+           comment = c(ORCID = "0000-0002-7922-6365")),
+    person("Angela", "Andreella", role = c("aut"),
+           email = "a.andreella8@gmail.com",
+           comment = c(ORCID = "0000-0002-1141-3041")),
+    person("Anna", "Vesely", role = c("aut"),
+           email = "anna.vesely92@gmail.com",
+           comment = c(ORCID = "0000-0001-6696-2390")),
+    person("Claudio", "Zandonella Callegher", role = c("aut"),
+           email = "claudiozandonella@gmail.com",
+           comment = c(ORCID = "0000-0001-7721-6318")),
+    person("Gianmarco", "Altoè", role = c("aut"),
+           email = "gianmarco.altoe@unipd.it",
+           comment = c(ORCID = "0000-0003-1154-9528")))
+Description: An implementation of the "Design Analysis" proposed by 
+    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
+    with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
+    error (e.g. Sign).
+Depends: 
+    R (>= 3.6.0),
+    MASS
+Suggests:
+    devtools,
+    roxygen2,
+    testthat,
+    knitr,
+    rmarkdown
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+VignetteBuilder: knitr
