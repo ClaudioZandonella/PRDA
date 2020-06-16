@@ -19,15 +19,6 @@ sample_groups <- function(sample_n1, effect_target, sample_n2=NULL){
 
 #----    sample_obs_cor    ----
 
-#' Title
-#'
-#' @param sample_n1 numeric value
-#' @param effect_target numeric value
-#'
-#' @return matrix of observations
-#'
-#' @importFrom MASS mvrnorm
-#'
 sample_obs_cor <- function(sample_n1, effect_target){
 
   obs <- mvrnorm(n=sample_n1,mu=c(0,0),Sigma=matrix(c(1,effect_target,effect_target,1),ncol=2))

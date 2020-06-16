@@ -6,7 +6,7 @@
 #----    eval_arguments_retrospective    ----
 
 eval_arguments_retrospective <- function(sample_n1, effect_size, sample_n2, effect_type,
-                                         alternative, sig_level, B, seed, tl, tu, B_effect,...){
+                                         alternative, sig_level, B, seed, tl, tu, B_effect, mu = 0, ...){
   # Check inputs arguments
   if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
     stop("sample_n1 has to be a single integer value grater than 1.")
@@ -34,13 +34,17 @@ eval_arguments_retrospective <- function(sample_n1, effect_size, sample_n2, effe
 
   if(!is_single_numeric(B_effect) || B_effect <= 1)
     stop("B_effect has to be a single integer value grater than 1.")
+
+  if(mu != 0){
+    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0.")
+  }
 }
 
 #----    eval_arguments_prospective    ----
 
 eval_arguments_prospective <- function(effect_size, power, ratio_n2, effect_type, alternative,
                                        sig_level, B, seed, tl, tu, B_effect, sample_range,
-                                       tol, display_message, ...){
+                                       tol, display_message, mu = 0, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
     stop("effect_size has to be a single numeric value or a function.")
@@ -79,6 +83,10 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2, effect_type
 
   if(!is.logical(display_message))
     stop("display_message has to be logical.")
+
+  if(mu != 0){
+    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0.")
+  }
 }
 
 #----    eval_effect_size    ----
@@ -105,6 +113,9 @@ eval_effect_size <- function(effect_type, effect_size,
     }
 
     res <- sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
+    res <- c(res,
+             tl = tl,
+             tu = tu)
   }
 
   return(res)

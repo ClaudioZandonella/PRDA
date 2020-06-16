@@ -12,7 +12,7 @@
 # install.packages("../PRDAbeta_0.1.0.9000.tar.gz", repos = NULL, type = "source") # Install source
 # browseVignettes("PRDAbeta")  # See vignette
 
-#----    Add to .Rbouildignore    ----
+#----    Add to .Rbuildignore    ----
 
 # usethis::use_build_ignore(".renvignore")
 

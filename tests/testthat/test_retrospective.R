@@ -22,6 +22,8 @@ test_that("inputs are correctly specified", {
   tl_text <- "tl has to be a single numeric value."
   tu_text <- "tu has to be a single numeric value."
   B_effect_text <- "B_effect has to be a single integer value grater than 1."
+  mu_text <- "Desing Analysis is allowed only for  Null Hypothesis mu = 0."
+
 
   expect_error(retrospective(sample_n1 = 1, effect_size = .3), sample_n1_text)
   expect_error(retrospective(sample_n1 = Inf, effect_size = .3), sample_n1_text)
@@ -79,6 +81,9 @@ test_that("inputs are correctly specified", {
                  paired_t.test)
   expect_error(retrospective(sample_n1 = 20, sample_n2 = NULL, effect_size = .3, effect_type = "cohen_d", paired=T),
                  paired_t.test)
+
+  # mu
+  expect_error(retrospective(effect_size = .3, sample_n1 = 20, mu = .2), mu_text)
 })
 
 

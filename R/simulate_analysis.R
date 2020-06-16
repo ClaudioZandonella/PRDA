@@ -33,20 +33,6 @@ simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n
 
 #----    retrospective_cohen    ----
 
-#' Title
-#'
-#' @param sample_n1 numeric value
-#' @param sample_n2 numeric value
-#' @param effect_target numeric value
-#' @param test_method character value
-#' @param alternative character value
-#' @param sig_level numeric value.
-#' @param B numeric value
-#' @param ... other variables passed to
-#'
-#' @return a matrix
-#' @importFrom stats rnorm t.test
-#'
 retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method,
                                 alternative, sig_level, B, ...){
 
@@ -72,20 +58,6 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method
   }
 #----    retrospective_correlation    ----
 
-#' Title
-#'
-#' @param sample_n1 numeric value
-#' @param effect_target numeric value
-#' @param test_method character value
-#' @param alternative character value
-#' @param sig_level numeric value.
-#' @param B numeric value
-#' @param ... other variables passed to
-#'
-#' @return a matrix
-#'
-#' @importFrom stats cor.test
-#'
 retrospective_correlation <- function(sample_n1, effect_target, test_method,
                                       alternative, sig_level, B, ...){
 
