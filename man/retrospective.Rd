@@ -67,11 +67,11 @@ A list with class "design_analysis" containing the following
    function.}
    \item{effect_info}{a list with all the information regarding the
    considered hypothetical population effect size. The list includes:
-   \code{effect_function} indicating the function from which effect are
-   sampled or the string "single_value" if single value was provided;
-   \code{effect_summary} summary of the sampled effects;
-   \code{effect_samples} vector with the sampled effects (or unique value in
-   the case of single value).}
+   \code{effect_type} indicating the type of effect; \code{effect_function}
+   indicating the function from which effect are sampled or the string
+   "single_value" if single value was provided; \code{effect_summary} summary
+   of the sampled effects; \code{effect_samples} vector with the sampled
+   effects (or unique value in the case of single value).}
    \item{test_info}{a list with all the information regarding the test
    performed. The list includes: \code{test_method} character sting
    indicating the test method (e.g., "pearson", "one-sample", "paired",

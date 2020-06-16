@@ -50,11 +50,11 @@
 #'    function.}
 #'    \item{effect_info}{a list with all the information regarding the
 #'    considered hypothetical population effect size. The list includes:
-#'    \code{effect_function} indicating the function from which effect are
-#'    sampled or the string "single_value" if single value was provided;
-#'    \code{effect_summary} summary of the sampled effects;
-#'    \code{effect_samples} vector with the sampled effects (or unique value in
-#'    the case of single value).}
+#'    \code{effect_type} indicating the type of effect; \code{effect_function}
+#'    indicating the function from which effect are sampled or the string
+#'    "single_value" if single value was provided; \code{effect_summary} summary
+#'    of the sampled effects; \code{effect_samples} vector with the sampled
+#'    effects (or unique value in the case of single value).}
 #'    \item{test_info}{a list with all the information regarding the test
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
@@ -255,7 +255,8 @@ retrospective <- function(effect_size,
   #----    save results    ----
   design_fit <- structure(list(design_analysis = design_analysis,
                                call_arguments = call_arguments,
-                               effect_info = effect_info,
+                               effect_info = c(effect_type = effect_type,
+                                               effect_info),
                                test_info = test_info,
                                retrospective_res = retrospective_res),
                           class = c("design_analysis","list"))

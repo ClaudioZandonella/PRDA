@@ -77,11 +77,11 @@ A list with class "design_analysis" containing the following
    function.}
    \item{effect_info}{a list with all the information regarding the
    considered hypothetical population effect size. The list includes:
-   \code{effect_function} indicating the function from which effect are
-   sampled or the string "single_value" if single value was provided;
-   \code{effect_summary} summary of the sampled effects;
-   \code{effect_samples} vector with the sampled effects (or unique value in
-   the case of single value).}
+   \code{effect_type} indicating the type of effect; \code{effect_function}
+   indicating the function from which effect are sampled or the string
+   "single_value" if single value was provided; \code{effect_summary} summary
+   of the sampled effects; \code{effect_samples} vector with the sampled
+   effects (or unique value in the case of single value).}
    \item{test_info}{a list with all the information regarding the test
    performed. The list includes: \code{test_method} character sting
    indicating the test method (e.g., "pearson", "one-sample", "paired",
@@ -93,7 +93,7 @@ A list with class "design_analysis" containing the following
    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
    the absolute value and both positive and negative values should be
    considered.}
-   \item{retrospective_res}{a data frame with the resulting inferential
+   \item{prospective_res}{a data frame with the resulting inferential
    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 }
 \description{
@@ -149,9 +149,6 @@ Conduct a prospective design analysis to define the required sample
   needs and option \code{var.equal = TRUE} is required. For Welch
   \emph{t}-test, \code{ratio_n} can be specified according to user needs
   (default option is \code{var.equal = FALSE}).
-
-  Another optional argument is \code{mu}, a number indicating the true value
-  of the standardize mean difference evaluated as null hypothesis.
 
   In the case of \code{"correlation"}, only Pearson's correlation between two
   variables is available and \code{ratio_n} is set to 1 (default). The

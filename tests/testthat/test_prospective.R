@@ -138,12 +138,12 @@ test_that("same results as previous run", {
                      file="test_cache/res_cohen_single_pro", update= FALSE)
 
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020)$effect_info,
-                     file = "test_cache/effect_info_dist_pro")
+                     file = "test_cache/effect_info_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
-                                 B = 100, B_effect = 10, seed = 2020)$prospective_res, file = "test_cache/res_corr_dist_pro")
+                                 B = 100, B_effect = 10, seed = 2020)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen",
                                  B = 100, B_effect = 10, seed = 2020)$prospective_res,
-                     file = "test_cache/res_cohen_dist_pro")
+                     file = "test_cache/res_cohen_dist_pro",update= FALSE)
 
 })
 
