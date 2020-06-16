@@ -65,7 +65,7 @@
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
 #'    "two-samples", or "welch"); the required sample size (\code{sample_n1} and
 #'    if relevant \code{sample_n2}), alternative hypothesis
-#'    (\code{alternative}}), significance level (\code{sig_level})  and  degrees
+#'    (\code{alternative}), significance level (\code{sig_level})  and  degrees
 #'    of freedom (\code{df}) of the statistical test; \code{critical_effect} the
 #'    minimum absolute effect value that would result significant. Note that
 #'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
@@ -209,11 +209,6 @@ prospective <- function(effect_size,
 
   # Define conf.level according to sig_level
   call_arguments$conf.level <- define_conf_level(call_arguments)
-
-  # Check for mu argument
-  if("mu" %in% names(call_arguments) && mu != 0){
-    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0. ")
-  }
 
   #----    Set seed    ----
 

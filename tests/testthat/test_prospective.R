@@ -29,6 +29,7 @@ test_that("inputs are correctly specified", {
   correlation_text <- "If effect_type is set to 'correlation', ratio_n2 is set to 1"
   paired_text <- "If paired = TRUE, ratio_n2 has to be 1"
   conf.level_text <- "conf.level is set according to sig_level."
+  mu_text <- "Desing Analysis is allowed only for  Null Hypothesis mu = 0."
 
   expect_error(prospective(effect_size = Inf, power = .8), effect_size_text)
   expect_error(prospective(effect_size = "ciao", power = .8), effect_size_text)
@@ -108,6 +109,9 @@ test_that("inputs are correctly specified", {
   tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
   expect_message(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=100, sample_range = c(80,120),
                              tol=.001, seed = 2020), tol_text)
+
+  # mu
+  expect_error(prospective(effect_size = .3, power = .8, mu = .2), mu_text)
 
 })
 #----    get correct test_method     ----

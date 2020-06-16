@@ -59,7 +59,7 @@
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
 #'    "two-samples", or "welch"); sample size (\code{sample_n1} and if relevant
-#'    \code{sample_n2}), alternative hypothesis (\code{alternative}}),
+#'    \code{sample_n2}), alternative hypothesis (\code{alternative}),
 #'    significance level (\code{sig_level})  and  degrees of freedom (\code{df})
 #'    of the statistical test; \code{critical_effect} the minimum absolute
 #'    effect value that would result significant. Note that
@@ -210,10 +210,6 @@ retrospective <- function(effect_size,
     sample_n2 <- sample_n1
   }
 
-  # Check for mu argument
-  if("mu" %in% names(call_arguments) && mu != 0){
-    stop("Desing Analysis is allowed only if the Null Hypothesis is 0")
-  }
   #----    Set seed    ----
 
   # Set seed
