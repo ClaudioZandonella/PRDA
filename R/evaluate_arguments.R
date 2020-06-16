@@ -113,6 +113,9 @@ eval_effect_size <- function(effect_type, effect_size,
     }
 
     res <- sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
+    res <- c(res,
+             tl = tl,
+             tu = tu)
   }
 
   return(res)

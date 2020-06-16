@@ -59,7 +59,9 @@
 #'    indicating the function from which effect are sampled or the string
 #'    "single_value" if single value was provided; \code{effect_summary} summary
 #'    of the sampled effects; \code{effect_samples} vector with the sampled
-#'    effects (or unique value in the case of single value).}
+#'    effects (or unique value in the case of single value); if relevant
+#'    \code{tl} and \code{tu} specifying the lower upper truncation point
+#'    respectively.}
 #'    \item{test_info}{a list with all the information regarding the test
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (e.g., "pearson", "one-sample", "paired",
