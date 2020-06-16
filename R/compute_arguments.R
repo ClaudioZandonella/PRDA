@@ -60,15 +60,6 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL, test_method){
 
 #----    compute_critical_t    ----
 
-#' Title
-#'
-#' @param df numeric value
-#' @param sig_level numeric value
-#' @param alternative character value
-#'
-#' @return a numeric value
-#' @importFrom stats qt
-#'
 compute_critical_t <- function(df, sig_level, alternative = "two.sided"){
 
   critical_t <-  NULL
