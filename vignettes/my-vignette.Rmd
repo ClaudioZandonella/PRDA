@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(PRDAbeta)
+library(PRDA)
 ```
 
 ## A simple Example

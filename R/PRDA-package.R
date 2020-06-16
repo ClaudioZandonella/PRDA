@@ -4,20 +4,20 @@
 
 #----    Package documentation    ----
 
-#' PRDAbeta: A Package for Prospective and Retrospective Design Analysis.
+#' PRDA: A Package for Prospective and Retrospective Design Analysis.
 #'
-#' The PRDAbeta package provides two main important functions:
+#' The PRDA package provides two main important functions:
 #' \code{prospective()} and \code{retrospective()}.
 #'
-#' @section PRDAbeta functions:
-#' The PRDAbeta functions ...
+#' @section PRDA functions:
+#' The PRDA functions ...
 #'
 #' @importFrom stats rnorm t.test cor.test qt pt sd var cor
 #' @importFrom MASS mvrnorm
 #' @importFrom utils capture.output
 #'
 #' @docType package
-#' @name PRDAbeta
+#' @name PRDA
 NULL
 
 

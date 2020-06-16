@@ -2,7 +2,7 @@
 ####    Test prospective   ####
 ###############################
 
-library(PRDAbeta)
+library(PRDA)
 
 #----    input checks    ----
 
