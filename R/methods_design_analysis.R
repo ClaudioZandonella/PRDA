@@ -89,4 +89,29 @@ print.design_analysis <- function(x, ...){
   invisible(da_fit)
 }
 
+#----    summary.design_analysis    ----
+
+#' Print Method for design_analysis class
+#'
+#' @param object an object with class "design_analysis"
+#' @param ... urther arguments passed to or from other methods.
+#'
+#' @return a summary output
+#'
+#' @export
+#'
+summary.design_analysis <- function(object, ...){
+  print(object)
+  invisible(object)
+}
+
 #----
+
+
+
+
+
+
+
+
+
