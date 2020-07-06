@@ -2,7 +2,7 @@
 ####    Test compute arguments   ####
 #####################################
 
-library(PRDA)
+library(PRDAbeta)
 
 #----    input checks    ----
 

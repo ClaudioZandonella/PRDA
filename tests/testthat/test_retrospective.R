@@ -2,7 +2,7 @@
 ####    Test retrospective   ####
 #################################
 
-library(PRDA)
+library(PRDAbeta)
 
 #----    input checks    ----
 

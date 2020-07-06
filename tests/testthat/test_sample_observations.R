@@ -2,7 +2,7 @@
 ####    Test sample observations   ####
 #######################################
 
-library(PRDA)
+library(PRDAbeta)
 
 #----    input checks    ----
 

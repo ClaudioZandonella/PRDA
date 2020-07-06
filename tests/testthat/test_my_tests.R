@@ -2,7 +2,7 @@
 ####    Test my_tests   ####
 ############################
 
-library(PRDA)
+library(PRDAbeta)
 
 #----    evaluate my tests    ----
 

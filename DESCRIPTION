@@ -1,4 +1,4 @@
-Package: PRDA
+Package: PRDAbeta
 Title: Conduct a Prospective or Retrospective Design Analysis
 Version: 0.1.0.9000
 Authors@R: c(
@@ -22,7 +22,7 @@ Description: An implementation of the "Design Analysis" proposed by
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
     error (e.g. Sign).
 Depends: 
-    R (>= 3.2.0),
+    R (>= 3.6.0),
     MASS
 Suggests:
     devtools,

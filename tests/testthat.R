@@ -1,4 +1,4 @@
 library(testthat)
-library(PRDA)
+library(PRDAbeta)
 
-test_check("PRDA")
+test_check("PRDAbeta")

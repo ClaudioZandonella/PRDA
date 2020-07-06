@@ -2,7 +2,7 @@
 ####    Test evaluate arguments   ####
 ######################################
 
-library(PRDA)
+library(PRDAbeta)
 
 #----    input checks    ----
 
