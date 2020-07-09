@@ -5,3 +5,7 @@ meanC <- function(x) {
     .Call(`_PRDAbeta_meanC`, x)
 }
 
+varC <- function(x, mean) {
+    .Call(`_PRDAbeta_varC`, x, mean)
+}
+

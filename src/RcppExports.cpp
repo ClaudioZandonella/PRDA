@@ -16,9 +16,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// varC
+double varC(NumericVector x, double mean);
+RcppExport SEXP _PRDAbeta_varC(SEXP xSEXP, SEXP meanSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
+    rcpp_result_gen = Rcpp::wrap(varC(x, mean));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_PRDAbeta_meanC", (DL_FUNC) &_PRDAbeta_meanC, 1},
+    {"_PRDAbeta_varC", (DL_FUNC) &_PRDAbeta_varC, 2},
     {NULL, NULL, 0}
 };
 

@@ -13,27 +13,27 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
   if (test_method == "one_sample") {
     nx <- length(x)
     df <- nx-1
-    mx <- mean(x)
-    vx <- var(x)
+    mx <- meanC(x)
+    vx <- varC(x, mx)
     stderr <- sqrt(vx/nx)
     tstat <- (mx-mu)/stderr
     estimate <- (mx-mu)/sd(x)
   } else if (test_method == "paired"){
     nx <- length(x)
     df <- nx-1
-    mx <- mean(x)
-    vx <- var(x)
+    mx <- meanC(x)
+    vx <- varC(x, mx)
     stderr <- sqrt(vx/nx)
     tstat <- (mx-mu)/stderr
     estimate <- (nx-2)/(nx-1.25) * mx/sd(x)
   } else if (test_method == "two_samples") {
     nx <- length(x)
-    mx <- mean(x)
-    vx <- var(x)
+    mx <- meanC(x)
+    vx <- varC(x, mx)
     ny <- length(y)
     df <- nx+ny-2
-    my <- mean(y)
-    vy <- var(y)
+    my <- meanC(y)
+    vy <- varC(y, my)
     v <- (nx-1)*vx + (ny-1)*vy
     v <- v/df
     stderr <- sqrt(v*(1/nx+1/ny))
@@ -41,11 +41,11 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     estimate <- (1 - (3/((4*df)-1))) * (mx-my)/sqrt(v)
   } else {
     nx <- length(x)
-    mx <- mean(x)
-    vx <- var(x)
+    mx <- meanC(x)
+    vx <- varC(x, mx)
     ny <- length(y)
-    my <- mean(y)
-    vy <- var(y)
+    my <- meanC(y)
+    vy <- varC(y, my)
     stderrx_2 <- vx/nx
     stderry_2 <- vy/ny
     stderr <- sqrt(stderrx_2 + stderry_2)
