@@ -53,7 +53,7 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     tstat <- (mx - my - mu)/stderr
     estimate <- (mx-my)/sqrt((vx + vy)/2)
   }
-  alternative <- match.arg(tolower(alternative), alternative_set)
+  # alternative <- match.arg(tolower(alternative), alternative_set)
   pval <- switch(alternative,
                "two.sided" = 2*(pt(abs(tstat), df, lower.tail=FALSE)),
                "greater" = pt(tstat, df, lower.tail=FALSE),
@@ -79,7 +79,7 @@ my_cor_test <-function(x, y, alternative = "two.sided",...){
   df <- n - 2L
   tstat <- sqrt(df) * r / sqrt(1 - r^2)
 
-  alternative <- match.arg(tolower(alternative), alternative_set)
+  # alternative <- match.arg(tolower(alternative), alternative_set)
   pval <- switch(alternative,
                  "two.sided" = 2*(pt(abs(tstat), df, lower.tail=FALSE)),
                  "greater" = pt(tstat, df, lower.tail=FALSE),
