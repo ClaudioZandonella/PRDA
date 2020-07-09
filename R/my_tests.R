@@ -75,7 +75,7 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
 
 my_cor_test <-function(x, y, alternative = "two.sided",...){
   n <- length(x)
-  r <- cor(x, y)
+  r <- corC(x, y)
   df <- n - 2L
   tstat <- sqrt(df) * r / sqrt(1 - r^2)
 

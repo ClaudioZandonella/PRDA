@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// corC
+double corC(NumericVector x, NumericVector y);
+RcppExport SEXP _PRDAbeta_corC(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(corC(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // meanC
 double meanC(NumericVector x);
 RcppExport SEXP _PRDAbeta_meanC(SEXP xSEXP) {
@@ -30,6 +42,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_PRDAbeta_corC", (DL_FUNC) &_PRDAbeta_corC, 2},
     {"_PRDAbeta_meanC", (DL_FUNC) &_PRDAbeta_meanC, 1},
     {"_PRDAbeta_varC", (DL_FUNC) &_PRDAbeta_varC, 2},
     {NULL, NULL, 0}
