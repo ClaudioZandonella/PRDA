@@ -18,8 +18,21 @@
 #'
 #' @docType package
 #' @name PRDAbeta
+#'
 NULL
 
+
+#----    use_rcpp    ----
+
+## usethis namespace: start
+#' @useDynLib PRDAbeta, .registration = TRUE
+## usethis namespace: end
+NULL
+
+## usethis namespace: start
+#' @importFrom Rcpp sourceCpp
+## usethis namespace: end
+NULL
 
 #----    onAttach    ----
 
