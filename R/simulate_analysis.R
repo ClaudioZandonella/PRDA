@@ -34,7 +34,7 @@ simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n
 #----    retrospective_cohen    ----
 
 retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method,
-                                alternative, sig_level, B, ...){
+                                alternative, sig_level, B, paired = FALSE, var.equal = FALSE,...){
 
 
   arguments <- as.list(match.call()[-1])
@@ -42,8 +42,9 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method
   sim_res <- replicate(B,{
     groups <- sample_groups(sample_n1, effect_target, sample_n2)
 
-    sim <- do.call(my_t_test,c(groups,
-                               arguments))
+    sim <- my_t_test(x = groups$x, y = groups$y,
+                     test_method = test_method, alternative = alternative,
+                     paired = paired, var.equal = var.equal)
   })
 
 
@@ -68,7 +69,7 @@ retrospective_correlation <- function(sample_n1, effect_target, test_method,
   sim_res <- replicate(B,{
     groups <- my_mvrnorm(sample_n1, Eigen_matrix =Eigen_matrix)
 
-    sim <- do.call(my_cor_test,c(groups, arguments))
+    sim <- my_cor_test(x = groups$x, y = groups$y, alternative = alternative)
   })
 
   sim_res <- list2data(sim_res)
