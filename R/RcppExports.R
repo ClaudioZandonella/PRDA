@@ -5,6 +5,10 @@ corC <- function(x, y) {
     .Call(`_PRDAbeta_corC`, x, y)
 }
 
+cor_loop <- function(n, alternative, B, Eigen_matrix) {
+    .Call(`_PRDAbeta_cor_loop`, n, alternative, B, Eigen_matrix)
+}
+
 meanC <- function(x) {
     .Call(`_PRDAbeta_meanC`, x)
 }

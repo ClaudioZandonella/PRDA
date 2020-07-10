@@ -66,11 +66,13 @@ retrospective_correlation <- function(sample_n1, effect_target, test_method,
 
   Eigen_matrix <- compute_eigen_matrix(effect_target = effect_target)
 
-  sim_res <- replicate(B,{
-    groups <- my_mvrnorm(sample_n1, Eigen_matrix =Eigen_matrix)
+  # sim_res <- replicate(B,{
+  #   groups <- my_mvrnorm(sample_n1, Eigen_matrix =Eigen_matrix)
+  #
+  #   sim <- my_cor_test(x = groups$x, y = groups$y, alternative = alternative)
+  # })
 
-    sim <- my_cor_test(x = groups$x, y = groups$y, alternative = alternative)
-  })
+  sim_res <- cor_loop(n = sample_n1, alternative = 1, B = B, Eigen_matrix = Eigen_matrix)
 
   sim_res <- list2data(sim_res)
 

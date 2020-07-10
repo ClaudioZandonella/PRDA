@@ -18,6 +18,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cor_loop
+List cor_loop(int n, int alternative, int B, arma::mat Eigen_matrix);
+RcppExport SEXP _PRDAbeta_cor_loop(SEXP nSEXP, SEXP alternativeSEXP, SEXP BSEXP, SEXP Eigen_matrixSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type alternative(alternativeSEXP);
+    Rcpp::traits::input_parameter< int >::type B(BSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Eigen_matrix(Eigen_matrixSEXP);
+    rcpp_result_gen = Rcpp::wrap(cor_loop(n, alternative, B, Eigen_matrix));
+    return rcpp_result_gen;
+END_RCPP
+}
 // meanC
 double meanC(NumericVector x);
 RcppExport SEXP _PRDAbeta_meanC(SEXP xSEXP) {
@@ -55,6 +69,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_PRDAbeta_corC", (DL_FUNC) &_PRDAbeta_corC, 2},
+    {"_PRDAbeta_cor_loop", (DL_FUNC) &_PRDAbeta_cor_loop, 4},
     {"_PRDAbeta_meanC", (DL_FUNC) &_PRDAbeta_meanC, 1},
     {"_PRDAbeta_rmvrnorm_arma", (DL_FUNC) &_PRDAbeta_rmvrnorm_arma, 2},
     {"_PRDAbeta_varC", (DL_FUNC) &_PRDAbeta_varC, 1},
