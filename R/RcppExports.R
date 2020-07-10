@@ -9,6 +9,10 @@ meanC <- function(x) {
     .Call(`_PRDAbeta_meanC`, x)
 }
 
+rmvrnorm_arma <- function(x, Eigen_matrix) {
+    .Call(`_PRDAbeta_rmvrnorm_arma`, x, Eigen_matrix)
+}
+
 varC <- function(x, mean) {
     .Call(`_PRDAbeta_varC`, x, mean)
 }

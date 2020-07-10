@@ -30,8 +30,10 @@ sample_obs_cor <- function(sample_n1, effect_target){
 
 my_mvrnorm <-function(n = 1, Eigen_matrix){
 
-  X <- matrix(rnorm(2 * n), n)
-  X <- Eigen_matrix %*% t(X)
+  # X <- matrix(rnorm(2 * n), n)
+  # X <- Eigen_matrix %*% t(X)
+
+  X <- rmvrnorm_arma(n, Eigen_matrix)
 
   return(list(x = X[1,], y = X[2,]))
 }
