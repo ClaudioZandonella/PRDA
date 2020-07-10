@@ -12,13 +12,8 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-double varC(NumericVector x, double mean) {
-  int n = x.size();
-  double res = 0;
-  for (int i=0; i<n; ++i){
-    res += pow(x[i] - mean, 2);
-  }
-  return res / (n - 1);
+double varC(NumericVector x) {
+  return var(x);
 }
 
 

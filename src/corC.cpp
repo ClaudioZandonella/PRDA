@@ -17,33 +17,19 @@ double corC(NumericVector x, NumericVector y) {
   int n1 = n - 1;
 
   // compute means
-  double mx = 0;
-  double my = 0;
-  for (int i = 0; i < n; i++){
-    mx += x[i];
-    my += y[i];
-  }
-  mx /= n;
-  my /= n;
+  double mx = mean(x);
+  double my = mean(y);
 
   // compute cov and sds
   double cor = 0;
-  double sdx = 0;
-  double sdy = 0;
-  double xd = 0;
-  double yd = 0;
+  double sdx = sd(x);
+  double sdy = sd(y);
   for (int i = 0; i < n; i++){
-    xd = x[i] - mx;
-    yd = y[i] - my;
-    cor += xd * yd;
-    sdx += pow(xd, 2);
-    sdy += pow(yd, 2);
+    cor += (x[i] - mx) * (y[i] - my);
   }
 
   cor /= n1;
-  sdx /= n1;
-  sdy /= n1;
-  cor /= (sqrt(sdx) * sqrt(sdy));
+  cor /= (sdx * sdy);
 
   return cor;
 }

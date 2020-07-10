@@ -32,10 +32,10 @@ test_that("evaluate varC", {
   xm_bis <- mean(x_bis)
   ym_bis <- mean(y_bis)
 
-  expect_equal(var(x), varC(x, xm))
-  expect_equal(var(y), varC(y, ym))
-  expect_equal(var(x_bis), varC(x_bis, xm_bis))
-  expect_equal(var(y_bis), varC(y_bis, ym_bis))
+  expect_equal(var(x), varC(x))
+  expect_equal(var(y), varC(y))
+  expect_equal(var(x_bis), varC(x_bis))
+  expect_equal(var(y_bis), varC(y_bis))
 })
 
 #----    eval_corC    ----

@@ -14,7 +14,7 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     nx <- length(x)
     df <- nx-1
     mx <- meanC(x)
-    vx <- varC(x, mx)
+    vx <- varC(x)
     stderr <- sqrt(vx/nx)
     tstat <- (mx-mu)/stderr
     estimate <- (mx-mu)/sd(x)
@@ -22,18 +22,18 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     nx <- length(x)
     df <- nx-1
     mx <- meanC(x)
-    vx <- varC(x, mx)
+    vx <- varC(x)
     stderr <- sqrt(vx/nx)
     tstat <- (mx-mu)/stderr
     estimate <- (nx-2)/(nx-1.25) * mx/sd(x)
   } else if (test_method == "two_samples") {
     nx <- length(x)
     mx <- meanC(x)
-    vx <- varC(x, mx)
+    vx <- varC(x)
     ny <- length(y)
     df <- nx+ny-2
     my <- meanC(y)
-    vy <- varC(y, my)
+    vy <- varC(y)
     v <- (nx-1)*vx + (ny-1)*vy
     v <- v/df
     stderr <- sqrt(v*(1/nx+1/ny))
@@ -42,10 +42,10 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
   } else {
     nx <- length(x)
     mx <- meanC(x)
-    vx <- varC(x, mx)
+    vx <- varC(x)
     ny <- length(y)
     my <- meanC(y)
-    vy <- varC(y, my)
+    vy <- varC(y)
     stderrx_2 <- vx/nx
     stderry_2 <- vy/ny
     stderr <- sqrt(stderrx_2 + stderry_2)
