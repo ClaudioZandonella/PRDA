@@ -11,7 +11,7 @@ sample_groups <- function(sample_n1, effect_target, sample_n2=NULL){
                 y = NULL)
   }else{
     res <- list(x = rnorm(sample_n1, mean=effect_target, sd=1),
-                y = rnorm(sample_n1, mean=0, sd=1))
+                y = rnorm(sample_n2, mean=0, sd=1))
   }
 
   return(res)
