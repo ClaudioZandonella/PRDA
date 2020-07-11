@@ -19,13 +19,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cor_loop
-List cor_loop(int n, int alternative, int B, arma::mat Eigen_matrix);
+List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix);
 RcppExport SEXP _PRDAbeta_cor_loop(SEXP nSEXP, SEXP alternativeSEXP, SEXP BSEXP, SEXP Eigen_matrixSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< int >::type alternative(alternativeSEXP);
+    Rcpp::traits::input_parameter< String >::type alternative(alternativeSEXP);
     Rcpp::traits::input_parameter< int >::type B(BSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type Eigen_matrix(Eigen_matrixSEXP);
     rcpp_result_gen = Rcpp::wrap(cor_loop(n, alternative, B, Eigen_matrix));

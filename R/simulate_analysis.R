@@ -72,7 +72,7 @@ retrospective_correlation <- function(sample_n1, effect_target, test_method,
   #   sim <- my_cor_test(x = groups$x, y = groups$y, alternative = alternative)
   # })
 
-  sim_res <- cor_loop(n = sample_n1, alternative = 1, B = B, Eigen_matrix = Eigen_matrix)
+  sim_res <- cor_loop(n = sample_n1, alternative = alternative, B = B, Eigen_matrix = Eigen_matrix)
 
   sim_res <- list2data(sim_res)
 

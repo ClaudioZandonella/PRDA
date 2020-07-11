@@ -14,7 +14,7 @@ using namespace Rcpp;
 // available from R
 //
 // [[Rcpp::export]]
-List cor_loop(int n, int alternative, int B, arma::mat Eigen_matrix) {
+List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix) {
 
   NumericVector estimate(B);
   NumericVector pval(B);
@@ -49,7 +49,15 @@ List cor_loop(int n, int alternative, int B, arma::mat Eigen_matrix) {
 
     // compute test
     tstat = sqrt(df) * cor / sqrt(1 - pow(cor, 2));
-    pval[i] = 2*(Rf_pt(abs(tstat), df, false, false));
+
+    if (alternative == "two.sided"){
+      pval[i] = 2*(Rf_pt(abs(tstat), df, false, false));
+    } else if (alternative == "greater") {
+      pval[i] = Rf_pt(tstat, df, false, false);
+    } else {
+      pval[i] = 1-Rf_pt(tstat, df, false, false);
+    }
+
     estimate[i] = cor;
 
   }
