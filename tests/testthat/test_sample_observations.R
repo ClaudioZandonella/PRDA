@@ -8,14 +8,6 @@ library(PRDAbeta)
 
 context("Evaluate functions to sample observations")
 
-with_seed <- function(seed, code) {
-  code <- substitute(code)
-  orig.seed <- .Random.seed
-  on.exit(.Random.seed <<- orig.seed)
-  set.seed(seed)
-  eval.parent(code)
-}
-
 error_truncation <- "'tl' has to be greater than 'tu'."
 message_truncation <- "Truncation could require long computational time."
 error_tol <- "Truncation requires too long computational time, consider possible misspecification."

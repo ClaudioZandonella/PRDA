@@ -17,7 +17,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
 
   NumericVector estimate(B);
   NumericVector pval(B);
-  int df = 0;
+  double df = 0;
   double mx = 0;
   double vx = 0;
   double my = 0;
@@ -46,11 +46,12 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       estimate[i] = (mx - mu) / sd(x);
     } else if (test_method == "paired"){
       df = sample_n1-1;
-       mx = mean(x);
-      vx = var(x);
-      stderr = sqrt(vx / sample_n1);
-      tstat = (mx - mu) / stderr;
-      estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mx / sd(x);
+      NumericVector diff = x - y;
+      double mdiff = mean(diff);
+      double vdiff = var(diff);
+      stderr = sqrt(vdiff / sample_n1);
+      tstat = (mdiff - mu) / stderr;
+      estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mdiff / sd(diff);
     } else if (test_method == "two_samples") {
       mx = mean(x);
       vx = var(x);
@@ -85,6 +86,6 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
     }
   }
 
-  return List::create(Named("p.value")=pval,
-                      Named("estimate")=estimate);
+  return List::create(Named("p.value") = pval,
+                      Named("estimate") = estimate);
 }

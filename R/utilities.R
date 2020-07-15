@@ -105,4 +105,14 @@ sign_effect <- function(critical_effect, alternative){
   return(critical_effect)
 }
 
+#----    with_seed    ----
+
+with_seed <- function(seed, code) {
+  code <- substitute(code)
+  orig.seed <- .Random.seed
+  on.exit(.Random.seed <<- orig.seed)
+  set.seed(seed)
+  eval.parent(code)
+}
+
 #----
