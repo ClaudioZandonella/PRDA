@@ -51,7 +51,7 @@ List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix) {
     tstat = sqrt(df) * cor / sqrt(1 - pow(cor, 2));
 
     if (alternative == "two.sided"){
-      pval[i] = 2*(Rf_pt(abs(tstat), df, false, false));
+      pval[i] = 2*(Rf_pt(std::abs(tstat), df, false, false));
     } else if (alternative == "greater") {
       pval[i] = Rf_pt(tstat, df, false, false);
     } else {

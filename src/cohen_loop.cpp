@@ -78,7 +78,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
 
     // compute pval
     if (alternative == "two.sided"){
-      pval[i] = 2*(Rf_pt(abs(tstat), df, false, false));
+      pval[i] = 2*(Rf_pt(std::abs(tstat), df, false, false));
     } else if (alternative == "greater") {
       pval[i] = Rf_pt(tstat, df, false, false);
     } else {
