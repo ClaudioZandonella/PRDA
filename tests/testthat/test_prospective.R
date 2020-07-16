@@ -103,11 +103,11 @@ test_that("inputs are correctly specified", {
                  conf.level_text)
 
   # sample_range
-  sample_range <- "Actual power = 0.13 with n = 100\n  try to increase maximum of sample_range > 100."
+  sample_range <- "Actual power = 0.1 with n = 100\n  try to increase maximum of sample_range > 100."
   expect_error(prospective(effect_size = .1, power = .8, effect_type = "cohen_d", sample_range =  c(5,100), B=100, seed =2020), sample_range)
 
   tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
-  expect_message(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=100, sample_range = c(80,120),
+  expect_message(prospective(effect_size = .35, power = .8, effect_type = "correlation", B=100, sample_range = c(40,120),
                              tol=.001, seed = 2020), tol_text)
 
   # mu

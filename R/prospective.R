@@ -248,61 +248,50 @@ prospective <- function(effect_size,
 
   #----    Prospective ananlysis    ----
 
-  # Check with maximum N
-  prospective_res <- do.call(simulate_analysis,
-                             c(call_arguments,
-                               effect_info["effect_samples"],
-                               test_method = test_method,
-                               sample_info))
+  # Loop prospective
+  find_power <- FALSE
+  n_seq <- seq( sample_range[1], sample_range[2], by = 1 )
+  n_target <- round(median(n_seq))
 
-  est_power <- mean(prospective_res$power)
+  while( (!find_power) ) {
+    sample_info <- do.call(eval_samples,
+                           c(call_arguments,
+                             current_n = n_target))
 
-  if ( est_power < power ) {
-    stop(paste0("Actual power = ", est_power, " with n = ", sample_range[2],"\n",
-                "  try to increase maximum of sample_range > ", sample_range[2],"."))
-     } else {
+    prospective_res <- do.call(simulate_analysis,
+                               c(call_arguments,
+                                 effect_info["effect_samples"],
+                                 test_method = test_method,
+                                 sample_info))
 
-       # Loop prospective
-        find_power <- FALSE
-        n_seq <- seq( sample_range[1], sample_range[2], by = 1 )
+    est_power <- mean(prospective_res$power)
+
+    if (display_message == TRUE){
+      cat("Evaluate n =", n_target, fill=TRUE)
+      cat("Estimated power is", round(est_power,2), fill=TRUE)
+      cat("\n")
+    }
+
+    # Evaluate if power was obtained according to tolerance value
+    if ( (est_power<=(power+tol)) && (est_power>=(power-tol)) ) {
+      find_power <- TRUE
+    } else {
+      if (isTRUE(all.equal(n_target, sample_range[2])) && est_power<=(power+tol)) {
+        stop(paste0("Actual power = ", est_power, " with n = ", sample_range[2],"\n",
+                    "  try to increase maximum of sample_range > ", sample_range[2],"."))
+      } else if (length(n_seq)==1) {
+        message("Required power according to tolerance value can not be obtained.\nIncrease tolerance value.")
+        find_power <- TRUE
+      } else if (est_power > (power+tol)) {
+        n_seq <- seq( min(n_seq), n_target-1, by = 1)
         n_target <- round(median(n_seq))
+      } else {
+        n_seq <- seq(n_target+1, max(n_seq), by = 1)
+        n_target <- round(median(n_seq))
+      }
+    }
+  }
 
-        while( (!find_power) ) {
-          sample_info <- do.call(eval_samples,
-                                 c(call_arguments,
-                                   current_n = n_target))
-
-          prospective_res <- do.call(simulate_analysis,
-                                     c(call_arguments,
-                                       effect_info["effect_samples"],
-                                       test_method = test_method,
-                                       sample_info))
-
-          est_power <- mean(prospective_res$power)
-
-          if (display_message == TRUE){
-            cat("Evaluate n =", n_target, fill=TRUE)
-            cat("Estimated power is", round(est_power,2), fill=TRUE)
-            cat("\n")
-          }
-
-          # Evaluate if power was obtained according to tolerance value
-          if ( (est_power<=(power+tol)) && (est_power>=(power-tol)) ) {
-            find_power <- TRUE
-          } else {
-            if (length(n_seq)==1) {
-              message("Required power according to tolerance value can not be obtained.\nIncrease tolerance value.")
-              find_power <- TRUE
-            } else if (est_power > (power+tol)) {
-              (n_seq <- seq( min(n_seq), n_target-1, by = 1))
-              (n_target <- round(median(n_seq)))
-            } else {
-              (n_seq <- seq(n_target+1, max(n_seq), by = 1))
-              (n_target <- round(median(n_seq)))
-            }
-          }
-        }
-     }
 
   #----    Get test_info    ----
   #Compute df and critical value
