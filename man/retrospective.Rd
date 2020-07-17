@@ -15,7 +15,7 @@ retrospective(
   seed = NULL,
   tl = -Inf,
   tu = Inf,
-  B_effect = 250,
+  B_effect = 1000,
   ...
 )
 }
@@ -118,7 +118,9 @@ Conduct a retrospective design analysis to evaluate inferential risks
  Users can access sampled effects in the \code{effect_info} list included in
  the output to evaluate if sample is representative of their specification.
  Increase the number to obtain more accurate results but it will require more
- computational time (default is 250).
+ computational time (default is 1000). To avoid long computational time, we
+ suggest to adjust \code{B} when usong a function to define the hypothetical
+ population effect size.
 
  Optional arguments \code{tl} and \code{tu} allow to truncate the sampling
  distribution specifying the lower truncation point and upper  truncation
