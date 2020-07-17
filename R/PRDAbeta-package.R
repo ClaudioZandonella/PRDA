@@ -22,7 +22,7 @@
 NULL
 
 
-#----    use_rcpp    ----
+#----    use_rcpp and rcppArmadillo    ----
 
 ## usethis namespace: start
 #' @useDynLib PRDAbeta, .registration = TRUE
@@ -31,6 +31,7 @@ NULL
 
 ## usethis namespace: start
 #' @importFrom Rcpp sourceCpp
+#' @importFrom Rcpp evalCpp
 ## usethis namespace: end
 NULL
 
