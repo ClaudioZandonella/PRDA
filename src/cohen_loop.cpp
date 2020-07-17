@@ -23,7 +23,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
   double my = 0;
   double vy = 0;
   double v = 0;
-  double stderr = 0;
+  double stderror = 0;
   double stderrx_2 = 0;
   double stderry_2 = 0;
   double tstat = 0;
@@ -41,16 +41,16 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       df = sample_n1 - 1;
       mx = mean(x);
       vx = var(x);
-      stderr = sqrt(vx / sample_n1);
-      tstat = (mx - mu) / stderr;
+      stderror = sqrt(vx / sample_n1);
+      tstat = (mx - mu) / stderror;
       estimate[i] = (mx - mu) / sd(x);
     } else if (test_method == "paired"){
       df = sample_n1-1;
       NumericVector diff = x - y;
       double mdiff = mean(diff);
       double vdiff = var(diff);
-      stderr = sqrt(vdiff / sample_n1);
-      tstat = (mdiff - mu) / stderr;
+      stderror = sqrt(vdiff / sample_n1);
+      tstat = (mdiff - mu) / stderror;
       estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mdiff / sd(diff);
     } else if (test_method == "two_samples") {
       mx = mean(x);
@@ -60,8 +60,8 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       vy = var(y);
       v = (sample_n1-1)*vx + (sample_n2-1)*vy;
       v = v/df;
-      stderr = sqrt(v*(1/sample_n1 + 1/sample_n2));
-      tstat = (mx - my - mu)/stderr;
+      stderror = sqrt(v*(1/sample_n1 + 1/sample_n2));
+      tstat = (mx - my - mu)/stderror;
       estimate[i] = (1 - (3/((4*df)-1))) * (mx-my)/sqrt(v);
     } else {
       mx = mean(x);
@@ -70,9 +70,9 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       vy = var(y);
       stderrx_2 = vx/sample_n1;
       stderry_2 = vy/sample_n2;
-      stderr = sqrt(stderrx_2 + stderry_2);
-      df = pow(stderr, 4)/(pow(stderrx_2, 2)/(sample_n1-1) + pow(stderry_2, 2)/(sample_n2-1));
-      tstat = (mx - my - mu)/stderr;
+      stderror = sqrt(stderrx_2 + stderry_2);
+      df = pow(stderror, 4)/(pow(stderrx_2, 2)/(sample_n1-1) + pow(stderry_2, 2)/(sample_n2-1));
+      tstat = (mx - my - mu)/stderror;
       estimate[i] = (mx-my)/sqrt((vx + vy)/2);
     }
 
