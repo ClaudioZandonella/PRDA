@@ -91,24 +91,24 @@ test_that("inputs are correctly specified", {
   expect_error(prospective(effect_size = .3, power = .8, display_message = "ciao"), display_text)
   expect_error(prospective(effect_size = .3, power = .8, display_message = c(.1,.2)), display_text)
 
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2, seed = 2020),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2, seed = 2020, display_message = FALSE),
                  correlation_text)
   expect_error(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", paired = TRUE, B=10, ratio_n2 = 2),
                  paired_text)
 
   # conf.level test
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10, seed =2020),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10, seed =2020, display_message = FALSE),
                  conf.level_text)
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10, seed = 2020),
+  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10, seed = 2020, display_message = FALSE),
                  conf.level_text)
 
   # sample_range
   sample_range <- "Actual power = 0.1 with n = 100\n  try to increase maximum of sample_range > 100."
-  expect_error(prospective(effect_size = .1, power = .8, effect_type = "cohen_d", sample_range =  c(5,100), B=100, seed =2020), sample_range)
+  expect_error(prospective(effect_size = .1, power = .8, effect_type = "cohen_d", sample_range =  c(5,100), B=100, seed =2020, display_message = FALSE), sample_range)
 
   tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
   expect_message(prospective(effect_size = .35, power = .8, effect_type = "correlation", B=100, sample_range = c(40,120),
-                             tol=.001, seed = 2020), tol_text)
+                             tol=.001, seed = 2020, display_message = FALSE), tol_text)
 
   # mu
   expect_error(prospective(effect_size = .3, power = .8, mu = .2), mu_text)
@@ -117,12 +117,12 @@ test_that("inputs are correctly specified", {
 #----    get correct test_method     ----
 
 test_that("get correct test_method", {
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = NULL, B = 100, seed = 2020)$test_info$test_method, "one_sample")
-  expect_equal(prospective(effect_size = .3, power = .8, tol = .02, paired = TRUE, B = 100, seed = 2020)$test_info$test_method, "paired")
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = TRUE, B = 100, seed = 2020)$test_info$test_method, "two_samples")
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = FALSE, B = 100, seed = 2020)$test_info$test_method, "welch")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = NULL, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "one_sample")
+  expect_equal(prospective(effect_size = .3, power = .8, tol = .02, paired = TRUE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "paired")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = TRUE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "two_samples")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = FALSE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "welch")
 
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 1, effect_type = "correlation", B = 100, seed = 2020)$test_info$test_method, "pearson")
+  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 1, effect_type = "correlation", B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "pearson")
 
 })
 
@@ -130,19 +130,19 @@ test_that("get correct test_method", {
 #----    obtain same results    ----
 
 test_that("same results as previous run", {
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, B = 100, seed = 2020)$effect_info,
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, B = 100, seed = 2020, display_message = FALSE)$effect_info,
                      file = "test_cache/effect_info_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "correlation", B = 100, seed = 2020)$prospective_res,
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "correlation", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_corr_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", B = 100, seed = 2020)$prospective_res,
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_cohen_single_pro", update= FALSE)
 
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020)$effect_info,
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
                      file = "test_cache/effect_info_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
-                                 B = 100, B_effect = 10, seed = 2020)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
+                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen",
-                                 B = 100, B_effect = 10, seed = 2020)$prospective_res,
+                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
                      file = "test_cache/res_cohen_dist_pro",update= FALSE)
 
 })
