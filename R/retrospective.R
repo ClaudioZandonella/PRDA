@@ -11,7 +11,7 @@
 #' Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
 #' correlation test between two variables. According to the defined alternative
 #' hypothesis and significance level, inferential errors (i.e., Power level,
-#' Type-M error, and Type-S error) are computed together with the the critical
+#' Type-M error, and Type-S error) are computed together with the critical
 #' effect value (i.e., the minimum absolute effect size value that would result
 #' significant).
 #'
@@ -21,8 +21,8 @@
 #'  group.
 #'@param sample_n2 an optional numeric value indicating the sample size of the
 #'  second group.
-#'@param effect_type a character string specifying the effect type, must be
-#'  "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
+#'@param effect_type a character string specifying the effect type, must be one
+#'  of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
 #'  "pearson" (Pearson's correlation). You can specify just the initial letter.
 #'@param alternative a character string specifying the alternative hypothesis,
 #'  must be one of "two.sided" (default), "greater" or "less". You can specify
@@ -32,7 +32,7 @@
 #'@param B a numeric  value indicating the number of iterations. Increase the
 #'  number of iterations to obtain more stable results.
 #'@param seed a numeric value indicating the seed for random number generation.
-#'  Set the seed to obtain results reproducible.
+#'  Set the seed to obtain reproducible results.
 #'@param tl optional value indicating the lower truncation point if
 #'  \code{effect_size} is defined as a function.
 #'@param tu optional value indicating the upper truncation point if
@@ -52,9 +52,9 @@
 #'    considered hypothetical population effect size. The list includes:
 #'    \code{effect_type} indicating the type of effect; \code{effect_function}
 #'    indicating the function from which effect are sampled or the string
-#'    "single_value" if single value was provided; \code{effect_summary} summary
+#'    "single_value" if a single value was provided; \code{effect_summary} summary
 #'    of the sampled effects; \code{effect_samples} vector with the sampled
-#'    effects (or unique value in the case of single value). if relevant
+#'    effects (or unique value in the case of a single value). if relevant
 #'    \code{tl} and \code{tu} specifying the lower upper truncation point
 #'    respectively.}
 #'    \item{test_info}{a list with all the information regarding the test
@@ -86,15 +86,15 @@
 #'  users to define hypothetical effect size distribution according to their
 #'  needs.
 #'
-#'  Argument \code{B_effect} allows to define the number of sampled effect size.
+#'  Argument \code{B_effect} allows defining the number of sampled effect size.
 #'  Users can access sampled effects in the \code{effect_info} list included in
-#'  the output to evaluate if sample is representative of their specification.
-#'  Increase the number to obtain more accurate results but it will require more
-#'  computational time (default is 1000). To avoid long computational time, we
-#'  suggest to adjust \code{B} when usong a function to define the hypothetical
-#'  population effect size.
+#'  the output to evaluate if the sample is representative of their
+#'  specification. Increase the number to obtain more accurate results but it
+#'  will require more computational time (default is 1000). To avoid long
+#'  computational times, we suggest adjusting \code{B} when using a function to
+#'  define the hypothetical population effect size.
 #'
-#'  Optional arguments \code{tl} and \code{tu} allow to truncate the sampling
+#'  Optional arguments \code{tl} and \code{tu} allow truncating the sampling
 #'  distribution specifying the lower truncation point and upper  truncation
 #'  point respectively. Note that if \code{effect_type = "correlation"},
 #'  distribution is automatically truncated between -1 and 1.
@@ -119,7 +119,7 @@
 #'
 #'  In the case of \code{"correlation"}, only Pearson's correlation between two
 #'  variables is available and \code{sample_n2} argument is ignored. The
-#'  Kendall's \emph{tau} or Spearman's \emph{rho} are not implemented.
+#'  Kendall's \emph{tau} and Spearman's \emph{rho} are not implemented.
 #'
 #'  \strong{Study design}
 #'
@@ -150,11 +150,12 @@
 #'               seed = 2020)
 #'
 #' \dontrun{
-#' # Define effect_size using functions (long computational time)
+#' # Define effect_size using functions (long computational times)
+#' # Remember to adjust B
 #' retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-#'               effect_type = "correlation", seed = 2020)
+#'               effect_type = "correlation", tl = .15, B = 1e3, seed = 2020)
 #' retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-#'               effect_type = "cohen_d", tl = .2, tu = .4, seed = 2020)
+#'               effect_type = "cohen_d", tl = .2, tu = .4, B = 1e3, seed = 2020)
 #' }
 #'
 #'@references Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
