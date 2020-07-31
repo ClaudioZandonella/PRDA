@@ -11,7 +11,7 @@
 #' Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
 #' correlation test between two variables. According to the defined alternative
 #' hypothesis and significance level, inferential errors (i.e., Power level,
-#' Type-M error, and Type-S error) are computed together with the critical
+#' Type M error, and Type S error) are computed together with the critical
 #' effect value (i.e., the minimum absolute effect size value that would result
 #' significant).
 #'
@@ -73,7 +73,7 @@
 #'
 #'@details Conduct a retrospective design analysis to evaluate inferential risks
 #'  according to study design. A general overview is provided in the
-#'  \code{vignette(todo)}.
+#'  \code{vignette("retrospective")}.
 #'
 #'  \strong{Population effect size}
 #'

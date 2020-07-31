@@ -1,0 +1,77 @@
+---
+title: "PRDAbeta: Prospective and Retrospective Design Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: PRDA.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+{PRDAbeta} performs a prospective or retrospective design analysis given a plausible value of effect size to evaluate inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
+
+### Some background information
+
+The term *Design Analysis* was introduced by @gelmanPowerCalculationsAssessing2014 as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on the  statistical significance. Design analysis, instead, evaluates other inferential risks (i.e., Type M error and Type S error) together with power levels, to asses estimates uncertainty under hypothetical replications of a study.
+
+Given a *plausible effect size* and study characteristics (i.e., sample size, statistical test directionality, $\alpha$ level), design analysis evaluates:
+
+- **Power**: the probability that the test rejects the null hypothesis.
+- **Type M error** (Magnitude): the factor by which a statistically significant effect is on average exaggerated, also known as *Exaggeration Ratio*.
+- **Type S error** (Sign): the probability to find a statistically significant result in the opposite direction to the plausible one.
+
+Although Type M error and Type S error depends directly on power level, they allow enhancing researchers' awareness about the inferential risks related to their studies. For example, obtaining a  significant result in a study with 40% of power could sound a promising finding to the researchers. However, knowing that this is associated with a Type M error of almost 1.60 (i.e., on average significant results are an overestimation of 60%) would warn researchers to interpret their results with caution.
+
+Moreover, @gelmanPowerCalculationsAssessing2014 distinguished between two type of design analysis according to the study phase:
+
+- **Prospective Design Analysis**: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.
+- **Retrospective Design Analysis**: if the analysis is performed in a later stage when data have been already collected. This is still useful to evaluate the inferential risks associated with the study.
+
+It is important to not mistake a retrospective design analysis for a post-hoc power analysis. The former defines the plausible effect size according to indications from the literature, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
+
+To know more about design analysis consider @gelmanPowerCalculationsAssessing2014. While for an introduction about design analysis considering examples in psychology see @altoeEnhancingStatisticalInference2020 and  @bertoldoDesigningStudiesEvaluating2020.
+
+### The package
+
+PRDAbeta package can be used for Personson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's d respectively.
+
+#### Install
+
+To install the github version type in R:
+
+```{r setup, eval = F}
+# if devtools is not installed yet: 
+# install.packages( "devtools" )  
+devtools::install_github("CaludioZandonella/PRDAbeta",
+                         build_vignettes = TRUE)
+library(PRDAbeta)
+```
+
+#### Functions
+
+In {PRDAbeta} there are two main functions:
+
+- **`rerospective()`**.
+Given the hypothetical population effect size and study sample size, the function `retrospective()` performs a retrospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and significance level, inferential errors (i.e., Power level, Type M error, and Type S error) are computed together with the the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples `?rerospective()` or see `vignette("retrospective")`.
+
+- **`prospective()`**.
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and significance level, the required sample size is computed together with the associated Type M error, Type S error, and the the critical correlation value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples `?prospective()` or see `vignette("prospective")`.
+
+#### Hypothetical effect size
+
+The hypothetical population effect size (argument `effect_size`) can be set to a single value or a function that allows to sample values from a given distribution. The function has to be of the type `function(x) my_function(x, ...)`, with only one single variable x that represent the number of samples (e.g., `function(x) rnorm(x, mean = 0, sd = 1)`; `function(x) sample(c(.1,.3,.5), x, replace = TRUE)`). Optional arguments tl and tu allow to truncate the sampling distribution specifying the lower truncation point and upper truncation point respectively.
+
+This is an important feature of {PRDAbeta} that allows users to define hypothetical effect size distribution according to their needs. For an example of application see `vignette("retrospective")`.
+
+### References
+
+
+

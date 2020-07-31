@@ -10,7 +10,7 @@
 
 Performs a prospective or retrospective design analysis given a plausible value of effect size to evaluate inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
 
-`PRDAbeta` package can be used for Personson's correlation between two variables or mean comparisons  (one-sample, paired, two-samples, and Welch's *t*-test) considering a palusible value of $\rho$ or Cohen's *d* respectively. 
+`PRDAbeta` package can be used for Personson's correlation between two variables or mean comparisons  (one-sample, paired, two-samples, and Welch's *t*-test) considering a plausible value of $\rho$ or Cohen's *d* respectively. 
 
 
 ### Set up
@@ -21,7 +21,7 @@ To install this github version type in R:
 # if devtools is not installed yet: 
 # install.packages( "devtools" )  
 library( devtools )
-install_github( "CaludioZandonella/PRDAbeta" )
+install_github( "CaludioZandonella/PRDAbeta", build_vignettes = TRUE)
 ```
 
 ### Functions

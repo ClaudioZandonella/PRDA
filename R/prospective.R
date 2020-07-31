@@ -12,7 +12,7 @@
 #' Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
 #' correlation test between two variables. According to the defined alternative
 #' hypothesis and significance level, the required sample size is computed
-#' together with the associated Type-M error, Type-S error, and the critical
+#' together with the associated Type M error, Type S error, and the critical
 #' correlation value (i.e., the minimum absolute effect size value that would
 #' result significant).
 #'
@@ -78,7 +78,7 @@
 #'
 #' @details Conduct a prospective design analysis to define the required sample
 #'   size and the associated inferential risks according to study design. A
-#'   general overview is provided in the \code{vignette(todo)}.
+#'   general overview is provided in the \code{vignette("prospective")}.
 #'
 #'   \strong{Population effect size}
 #'
