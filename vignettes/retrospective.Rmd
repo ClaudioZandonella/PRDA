@@ -1,0 +1,19 @@
+---
+title: "Retrospective Design Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{retrospective}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: PRDA.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+Description of `PRDAbeta::retrospective()`
