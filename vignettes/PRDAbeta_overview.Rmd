@@ -2,7 +2,7 @@
 title: "PRDAbeta: Prospective and Retrospective Design Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{PRDAbeta_overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: PRDA.bib
