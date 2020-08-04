@@ -24,12 +24,12 @@ compute_errors <- function(p.values, estimates, true_value, sig_level, alternati
 
   power = sum_sig_p / B
   typeS = 0
-  if(alternative == "two.sided") {
-    if(true_value >= 0) {
-      typeS <- sum(sig_p.value & (estimates < 0)) / sum_sig_p
-    } else {
-      typeS <- sum(sig_p.value & (estimates > 0)) / sum_sig_p}
-  }
+
+  if(true_value >= 0) {
+    typeS <- sum(sig_p.value & (estimates < 0)) / sum_sig_p
+  } else {
+    typeS <- sum(sig_p.value & (estimates > 0)) / sum_sig_p}
+
   typeM <- mean(abs(estimates[sig_p.value])) / abs(true_value)
 
   res <- list(power = power, typeM = typeM, typeS = typeS)
