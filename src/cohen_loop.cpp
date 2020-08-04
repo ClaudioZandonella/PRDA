@@ -46,12 +46,11 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       estimate[i] = (mx - mu) / sd(x);
     } else if (test_method == "paired"){
       df = sample_n1-1;
-      NumericVector diff = x - y;
-      double mdiff = mean(diff);
-      double vdiff = var(diff);
-      stderror = sqrt(vdiff / sample_n1);
-      tstat = (mdiff - mu) / stderror;
-      estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mdiff / sd(diff);
+      mx = mean(x);
+      vx = var(x);
+      stderror = sqrt(vx / sample_n1);
+      tstat = (mx - mu) / stderror;
+      estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mx / sd(x);
     } else if (test_method == "two_samples") {
       mx = mean(x);
       vx = var(x);

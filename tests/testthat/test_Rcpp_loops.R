@@ -35,7 +35,7 @@ ny <- length(y)
 
 test_that("cohen_loop gives the same p-value as t.test", {
 
-  # Wetch t-test
+  # Welch t-test
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "welch",alternative = "two.sided", mu = 0, B = 1 ))$p.value,
                t.test(x,y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
@@ -64,20 +64,23 @@ test_that("cohen_loop gives the same p-value as t.test", {
                t.test(x,y, paired=F, var.equal=T, mu = 1.5)$p.value)
 
   # Paired t-test
+  # Note that for paired t.test the Cohen's d is calculated by dividing the mean difference
+  # by the standard deviation of the difference. Thus, given the effect we directly sample
+  # the difference as x and ignore y. Thus, cohen_loop is compared to t.test one sample
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "paired",alternative = "two.sided", mu = 0, B = 1 ))$p.value,
-               t.test(x,y, paired=T, var.equal=F, alternative = "two.sided")$p.value)
+               t.test(x, var.equal=F, alternative = "two.sided")$p.value)
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "paired",alternative = "greater", mu = 0, B = 1 ))$p.value,
-               t.test(x,y, paired=T, var.equal=F, alternative = "greater")$p.value)
+               t.test(x, var.equal=F, alternative = "greater")$p.value)
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "paired",alternative = "less", mu = 0, B = 1 ))$p.value,
-               t.test(x,y, paired=T, var.equal=F, alternative = "less")$p.value)
+               t.test(x, var.equal=F, alternative = "less")$p.value)
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "paired",alternative = "two.sided", mu = 1.5, B = 1 ))$p.value,
-               t.test(x,y, paired=T, var.equal=F, mu = 1.5)$p.value)
+               t.test(x, var.equal=F, mu = 1.5)$p.value)
 
-  # One smaple t-test
+  # One sample t-test
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 0,
                         test_method = "one_sample",alternative = "two.sided", mu = 0, B = 1 ))$p.value,
                t.test(x, alternative = "two.sided")$p.value)
@@ -103,9 +106,12 @@ test_that("cohen_loop gives the correct estimate", {
                (mx-10)/sd(x))
 
   # Paired t-test (Hedge's correction)
+  # Note that for paired t.test the Cohen's d is calculated by dividing the mean difference
+  # by the standard deviation of the difference. Thus, given the effect we directly sample
+  # the difference as x and ignore y.
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
                         test_method = "paired",alternative = "two.sided", mu = 0, B = 1 ))$estimate,
-               (nx-2)/(nx-1.25)*mean(diff)/sd(diff))
+               (nx-2)/(nx-1.25)*mean(x)/sd(x))
 
   # Two samples t-test (Hedge's correction)
   expect_equal(with_seed(2020, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 20,
