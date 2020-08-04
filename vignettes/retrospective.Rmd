@@ -3,9 +3,11 @@ title: "Retrospective Design Analysis"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{retrospective}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 bibliography: PRDA.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -13,7 +15,114 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+
 ```
 
+```{r, message=FALSE}
+library(tidyverse)
+library(PRDAbeta)
+```
 
-Description of `PRDAbeta::retrospective()`
+Given the hypothetical population effect size and study sample size, the function `retrospective()` performs a retrospective design analysis. Retrospective design analysis allows to evaluate the inferential risks associated with a study design when data has been already collected.  Function arguments are:
+
+```{r, eval=FALSE, echo = T}
+retrospective(effect_size, sample_n1, sample_n2 = NULL,
+              effect_type = c("cohen_d","correlation"),
+              alternative = c("two.sided","less","greater"),
+              sig_level = .05, B = 1e4, seed = NULL,
+              tl = -Inf, tu = Inf, B_effect = 1e3, ...)
+```
+
+Arguments complete description is provided in the function help page `?retrospective`. In the following sections, instead, different function applications are presented.
+
+
+
+### Retrospective Design Analysis for Means Comparison
+
+To conduct a retrospective design analysis considering means comparisons, we need to specify `effect_type = "cohen_d"` (default option). We can define the appropriate *t*-test (i.e., One-sample, Paired, Two-sample, or Welch's *t*-test) using the same arguments `paired` and `var.equal` as in the basic function `t.test()` from {stats} package. Arguments specifications for the different *t*-tests are presented in the following Table. Remember that default setting for `paired` and `var.equal` is `FALSE`.
+
+
+| Test                | Settings                           |
+| -------------------:|:-----------------------------------|
+| One-sample *t*-test | `sample_n2 = NULL`                 | 
+| Paired *t*-test     | `paired = TRUE`                    | 
+| Two-sample *t*-test | `paired = TRUE, var.equal = TRUE`  |
+| Welch's *t*-test    | `paired = TRUE, var.equal = FALSE` |
+
+#### Example 1: Paired *t*-test
+
+Consider a study were the same group ($n = 25$) was measured twice (i.e., pre- and post-test). Knowing that from the literature we would expect an effect size of $d = .35$, which are the inferential risks related to the present study design? We can use the function `retrospective()` specifying the corresponding arguments. We use the option `paired = TRUE`  and set the `seed` argument to obtain reproducible results.
+
+```{r, example1}
+retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 25,
+              effect_type ="cohen_d", paired = TRUE, seed = 2020)
+```
+
+In the output, we have summary information about the hypothesized population effect, the study characteristics, and inferential risks. We obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S of 0.001. That means statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% of probability to obtain a statistically significant result whit the opposite sign. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are $d  =  \pm 0.413$.  Note that paired *t*-tests were conducted considering `"two.sided"` alternative hypothesis and a significance level of .05 (the default settings). 
+
+#### Example 2: two sample *t*-test
+
+Consider now the case were two groups (i.e., treatment and control group) with respectively 25 and 35 subjects were compared. Again we hypothesize an effect size of $d = .35$, but this time we specify a one-sided alternative hypothesis and a significance level of .10. We can do that using the arguments `alternative` and `sig_level`.
+
+```{r, example2}
+retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 35,
+              alternative = "great", sig_level = .10, 
+              var.equal = TRUE, B = 1e5, seed = 2020)
+```
+
+The option `var.equal = TRUE` is used to conduct two sample *t*-test and `B = 1e5` to increase the number of replication for more robust results. We obtained a statistical power of around 50% that is associated with a Type M error of almost 1.60. Note that in the case of one-sided tests, the type S error will be always 0 or 1 depending on whether the hypothesized effect is coherent with the alternative hypothesis. Finally, the critical value is $d = .34$.
+
+### Retrospective Design Analysis for Correlation
+
+To conduct a retrospective design analysis considering correlation between two variables, we need to specify `effect_type = "correlation"`. Note that, only Pearson's correlation is available, while the Kendall's $\tau$ and Spearman's $\rho$ are not implemented.
+
+#### Example 3: Pearson's correlation
+
+Consider a study that evaluates the correlation between two variables with a sample of 30 subjects. Suppose that form the literature the hypothesized effect is $\rho = .25$. We can evaluate the inferential risks related to the present study design setting the argument `effect_type = "correlation"`.
+
+```{r, example3}
+retrospective(effect_size = .25, sample_n1 = 30,
+              effect_type = "correlation", seed = 2020)
+```
+
+In this case, we obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S of 0.003. Finally, the critical value is $\rho = \pm.36$. Note that, in the case of correlation it is not necessary to specify `sample_2` argument.
+
+### Population effect size distribution
+
+Defining the hypothetical population effect size as a single value could be limiting. Instead, researchers may prefer to use a probability distribution representing their expectations or literature indications. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
+
+To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single variable `x` that represent the number of samples. For example, `function(x) rnorm(x, mean = 0, sd = 1)` would allow to sample from a normal distribution with mean 0 and standard deviation 1; or `function(x) sample(c(.1,.3,.5), x, replace = TRUE)` would allow to sample form a set of equally plausible values. This allows users to define hypothetical effect size distribution according to their needs.
+
+Argument `B_effect` defines the number of sampled effects. Increase the number to obtain more accurate results, although this will require more computational time (default is `B_effect = 1000`). To avoid long computational times, we suggest adjusting `B` (i.e., the number of simulation per each effect) when using a function to define the hypothetical population effect size.
+
+Optional arguments `tl` and `tu` allow truncating the sampling distribution defining the lower truncation point and upper truncation point respectively. Specifying truncation point is recommended as it allows avoiding unreasonable results in the case of unbounded distributions (i.e., too large effects, effects close to zero, or effects in the opposite direction from the expected ones). Note that if `effect_type = "correlation"`, distribution is automatically truncated between -1 and 1.
+
+
+#### Example 4: Effect size distribution
+
+Consider again the previous example, this time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between  .15 and .45.
+
+```{r, example4}
+retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
+              tl = .15, tu = .45, B_effect = 1e3, B = 1e3,
+              effect_type = "correlation", seed = 2020)
+```
+
+Note that we adjusted `B_effect` and `B` to find a good trade-off between computational times and results robustness. Differently from previous outputs, we have now a summary for the sampled effects distribution and the inferential risks.
+
+#### Graphical representation
+
+```{r, data_plot}
+da_fit <- retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
+              tl = .15, tu = .45, B_effect = 1e3, B = 1e3,
+              effect_type = "correlation", seed = 2020)
+
+plot(hist(da_fit$effect_info$effect_samples))
+plot(hist(da_fit$retrospective_res$power))
+plot(hist(da_fit$retrospective_res$typeM))
+plot(hist(da_fit$retrospective_res$typeS))
+```
+
+### References
+

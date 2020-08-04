@@ -37,7 +37,7 @@
 #'  \code{effect_size} is defined as a function.
 #' @param tu optional value indicating the upper truncation point if
 #'  \code{effect_size} is defined as a function.
-#' @param B_effect a numeric  value indicating the number of sampled effect size
+#' @param B_effect a numeric  value indicating the number of sampled effects
 #'  if \code{effect_size} is defined as a function. Increase the number to
 #'  obtain more stable results.
 #' @param sample_range a length-2 numeric vector indicating the minimum and
@@ -91,9 +91,9 @@
 #'   users to define hypothetical effect size distribution according to their
 #'   needs.
 #'
-#'   Argument \code{B_effect} allows defining the number of sampled effect
-#'   size. Users can access sampled effects in the \code{effect_info} list
-#'   included in the output to evaluate if the sample is representative of their
+#'   Argument \code{B_effect} allows defining the number of sampled effects.
+#'   Users can access sampled effects in the \code{effect_info} list included in
+#'   the output to evaluate if the sample is representative of their
 #'   specification. Increase the number to obtain more accurate results but it
 #'   will require more computational time (default is 1000). To avoid long
 #'   computational times, we suggest adjusting \code{B} when using a function to
