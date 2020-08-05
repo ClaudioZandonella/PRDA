@@ -29,7 +29,8 @@ Suggests:
     roxygen2,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidyverse
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

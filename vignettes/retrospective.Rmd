@@ -13,8 +13,7 @@ editor_options:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
-)
+  comment = "#>")
 
 
 ```
@@ -34,7 +33,7 @@ retrospective(effect_size, sample_n1, sample_n2 = NULL,
               tl = -Inf, tu = Inf, B_effect = 1e3, ...)
 ```
 
-Arguments complete description is provided in the function help page `?retrospective`. In the following sections, instead, different function applications are presented.
+Arguments complete description is provided in the function help page `?retrospective`. In the following sections, instead, different function applications are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
 
 
 
@@ -101,7 +100,7 @@ Optional arguments `tl` and `tu` allow truncating the sampling distribution defi
 
 #### Example 4: Effect size distribution
 
-Consider again the previous example, this time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between  .15 and .45.
+Consider again the previous example, but this time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between .15 and .45.
 
 ```{r, example4}
 retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
@@ -113,16 +112,63 @@ Note that we adjusted `B_effect` and `B` to find a good trade-off between comput
 
 #### Graphical representation
 
+Currently there are no personalized plot functions in {PRDAbeta}. However, it is easy to access all the results and use them to create the plots according to your needs. Here we present an example using {tidyverse} and {ggplot2}. 
+
+The function `retrospective()` returns an object of class `"design_analysis"` that contains:
+
+- `design_analysis` - a character string indicating the type of design analysis (prospective or retrospective).
+- `call_arguments` - a list with all the arguments passed to the function. 
+- `effect_info` - a list with all the information regarding the considered hypothetical population effect size. In particular, in `effect_samples` we find the vector with the sampled effects (or unique value in the case of a single value).
+- `test_info` - a list with all the information regarding the test performed.
+- `retrospective_res` - a data frame with the resulting inferential errors.
+
+Output complete description is provided in the function help page `?retrospective`.
+
 ```{r, data_plot}
 da_fit <- retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
               tl = .15, tu = .45, B_effect = 1e3, B = 1e3,
               effect_type = "correlation", seed = 2020)
 
-plot(hist(da_fit$effect_info$effect_samples))
-plot(hist(da_fit$retrospective_res$power))
-plot(hist(da_fit$retrospective_res$typeM))
-plot(hist(da_fit$retrospective_res$typeS))
+str(da_fit, max.level = 1)
 ```
+
+Note that the inferential risks associated to the *i* value of the `effect_samples` vector are reported at the *i* row of `retrospective_res` dataframe. Thus, we can simply add `effect_samples` as a new column of the dataframe.
+
+```{r}
+data_plot <- da_fit$retrospective_res %>%
+  mutate(effect = da_fit$effect_info$effect_samples)
+```
+
+Plotting the distribution of sampled effects, we can evaluate whether their accurately represent the intended distribution. If not we could  increase the number of sampled effects.
+
+```{r, fig.dim= c(4, 3)}
+ggplot(data_plot)+
+  geom_histogram(aes(effect, y = ..density..),
+                 col = "black", fill = "#00BFC4", alpha = .8,
+                 breaks=seq(.15,.45,.02))+
+  scale_x_continuous(breaks = seq(.1,.5,.05), limits = c(.1,.5))+
+  labs(x = "Sampled Effects",
+       y = "Density")+
+  theme_bw()
+```
+
+We can also plot the distributions of Power, Type M error, and Type S error.
+
+```{r, fig.dim = c(7.23, 2.5)}
+data_plot %>%
+  pivot_longer(cols = c("power", "typeM", "typeS"), 
+               names_to = "Criteria", values_to = "Value") %>%
+  mutate(Criteria = recode(Criteria, power = "Power", typeM = "Type M",  typeS = "Type S")) %>%
+  ggplot(aes(x = Value, y = ..density.., fill = Criteria)) +
+  geom_histogram(col = "black", alpha = .7, bins = 15) + 
+  facet_wrap(.~ Criteria, scales = "free") +
+  labs(y = "Density") +
+  theme_bw() +
+  theme(legend.position = "none") 
+ 
+  
+```
+
 
 ### References
 
