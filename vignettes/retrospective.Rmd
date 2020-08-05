@@ -33,7 +33,7 @@ retrospective(effect_size, sample_n1, sample_n2 = NULL,
               tl = -Inf, tu = Inf, B_effect = 1e3, ...)
 ```
 
-Arguments complete description is provided in the function help page `?retrospective`. In the following sections, instead, different function applications are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
+Arguments complete description is provided in the function help page `?retrospective`. In the following sections, instead, different examples are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
 
 
 
@@ -85,7 +85,7 @@ retrospective(effect_size = .25, sample_n1 = 30,
               effect_type = "correlation", seed = 2020)
 ```
 
-In this case, we obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S of 0.003. Finally, the critical value is $\rho = \pm.36$. Note that, in the case of correlation it is not necessary to specify `sample_2` argument.
+In this case, we obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S of 0.003. Finally, the critical values are $\rho = \pm.36$. Note that, in the case of correlation it is not necessary to specify `sample_2` argument.
 
 ### Population effect size distribution
 
@@ -108,7 +108,7 @@ retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
               effect_type = "correlation", seed = 2020)
 ```
 
-Note that we adjusted `B_effect` and `B` to find a good trade-off between computational times and results robustness. Differently from previous outputs, we have now a summary for the sampled effects distribution and the inferential risks.
+Note that we adjusted `B_effect` and `B` to find a good trade-off between computational times and results robustness. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.
 
 #### Graphical representation
 
