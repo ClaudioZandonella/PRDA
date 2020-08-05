@@ -215,7 +215,7 @@ prospective <- function(effect_size,
 
   # Set seed
   if(!is.null(seed)){
-    if(!exists(".Random.seed")) runif(1)
+    if(!exists(".Random.seed")) rnorm(1)
     old_seed <- .Random.seed
     on.exit( { .Random.seed <<- old_seed })
     set.seed(seed = seed)
