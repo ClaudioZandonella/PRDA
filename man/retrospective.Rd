@@ -85,15 +85,15 @@ A list with class "design_analysis" containing the following
    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
    the absolute value and both positive and negative values should be
    considered.}
-   \item{retrospective_res}{a data frame with the resulting inferential
-   errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
+   \item{retrospective_res}{a data frame with the results of the design
+   analysis. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 }
 \description{
-Given the hypothetical population effect size and study sample size, the
+Given the hypothetical population effect size and the study sample size, the
 function \code{retrospective()} performs a retrospective design analysis for
 Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
 correlation test between two variables. According to the defined alternative
-hypothesis and significance level, inferential errors (i.e., Power level,
+hypothesis and the significance level, inferential risks (i.e., Power level,
 Type M error, and Type S error) are computed together with the critical
 effect value (i.e., the minimum absolute effect size value that would result
 significant).

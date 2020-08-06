@@ -11,7 +11,7 @@
 #' the function \code{prospective()} performs a prospective design analysis for
 #' Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
 #' correlation test between two variables. According to the defined alternative
-#' hypothesis and significance level, the required sample size is computed
+#' hypothesis and the significance level, the required sample size is computed
 #' together with the associated Type M error, Type S error, and the critical
 #' correlation value (i.e., the minimum absolute effect size value that would
 #' result significant).
@@ -73,8 +73,8 @@
 #'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
 #'    the absolute value and both positive and negative values should be
 #'    considered.}
-#'    \item{prospective_res}{a data frame with the resulting inferential
-#'    errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
+#'    \item{prospective_res}{a data frame with the results of the design
+#'    analysis. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 #'
 #' @details Conduct a prospective design analysis to define the required sample
 #'   size and the associated inferential risks according to study design. A

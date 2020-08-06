@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(PRDAbeta)
 ```
 
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. Prospective design analysis allows to define the sample size needed to obtain a required level of power computing also the associated inferential risks.  Function arguments are:
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. Prospective design analysis allows to define the sample size needed to obtain a required level of power computing also the associated inferential risks. Function arguments are:
 
 ```{r, eval=FALSE, echo = T}
 retrospective(effect_size, power, ratio_n2 = 1,
@@ -33,7 +33,7 @@ retrospective(effect_size, power, ratio_n2 = 1,
               display_message = TRUE, ...)
 ```
 
-Arguments complete description is provided in the function help page `?prospective`. In the following sections, instead, different examples are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
+Complete arguments description is provided in the function documentation `?prospective`. In the following sections, instead, different examples are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
 
 ### Prospective Design Analysis for Means Comparison
 
@@ -41,18 +41,18 @@ To conduct a retrospective design analysis considering means comparisons, we nee
 
 #### Example 1: Paired *t*-test
 
-Consider we are planning a study were the same group is measured twice (i.e., pre- and post-test). Knowing that from the literature we would expect an effect size of $d = .35$, which are the required sample size to obtain a power of 80%? We can use the function `prospective()` specifying the corresponding arguments. We use the option `paired = TRUE`  and set the `seed` argument to obtain reproducible results.
+Imagine that we are planning a study where the same group is measured twice (i.e., pre- and post-test). Knowing from the literature that we expect an effect size of $d = .35$, which is the required sample size to obtain a power of 80%? We can use the function `prospective()` specifying the corresponding arguments. We use the option `paired = TRUE` for paired *t*-test and set the `seed` argument to obtain reproducible results.
 
 ```{r, example1}
 prospective(effect_size = .35, power = .8,
             effect_type ="cohen_d", paired = TRUE, seed = 2020)
 ```
 
-Note that default option `display_message = TRUE` prints the different steps to find the required sample size. In the output, we have summary information about the hypothesized population effect, the study characteristics, and inferential risks. To obtain a power of 80%, the required sample size is $n=68$ and the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are $d  =  \pm 0.242$.  Note that paired *t*-tests were conducted considering `"two.sided"` alternative hypothesis and a significance level of .05 (the default settings).
+Note that default option `display_message = TRUE` prints the different steps to find the required sample size. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of 80%, the required sample size is $n=68$, the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are $d  =  \pm 0.242$.  Note that paired *t*-tests were conducted considering `"two.sided"` alternative hypothesis and a significance level of .05 (the default settings).
 
 #### Example 2: two sample *t*-test
 
-Consider now the case where two groups (i.e., treatment and control group) will be compared. However, we know in advance that participants in the two groups will be different (e.g., the number of participants in the treatment group could be limited due to selecting criteria). We can define the ratio between the two groups using the `ratio_n2` argument. Again we hypothesize an effect size of $d = .35$, but this time we specify a one-sided alternative hypothesis and a significance level of .10. We can do that using the arguments `alternative` and `sig_level`.
+Imagine now the case where two groups (i.e., treatment and control group) will be compared. However, we know in advance that sample size in the two groups will be different (e.g., the number of participants in the treatment group could be limited due to strict selecting criteria). We can define the ratio between the two groups using the `ratio_n2` argument. Again, we hypothesize an effect size of $d = .35$, but this time we specify a one-sided alternative hypothesis and a significance level of .10. We can do that using respectively the arguments `alternative` and `sig_level`.
 
 ```{r, example2}
 prospective(effect_size = .35, power = .80, ratio_n2 = 1.5,
@@ -60,26 +60,26 @@ prospective(effect_size = .35, power = .80, ratio_n2 = 1.5,
               var.equal = TRUE, seed = 2020, display_message = FALSE)
 ```
 
-The option `var.equal = TRUE` is used to conduct two sample *t*-test. To obtain a power of 80%, we need at least 60 participants and the first group and 90 participants in the second group. The associated Type M error is around 1.20 and an approximately 0 Type S error. Finally, the critical value is $d = .215$.
+The option `var.equal = TRUE` is used to conduct two sample *t*-test. To obtain a power of 80%, we would need at least 60 participants in the first group and 90 participants in the second group. The associated Type M error is almost 1.20 and the Type S error is approximately 0. Finally, the critical value is $d = .215$.
 
 ### Prospective Design Analysis for Correlation
 
-To conduct a prospective design analysis considering correlation between two variables, we need to specify `effect_type = "correlation"`. Note that, only Pearson's correlation is available, while the Kendall's $\tau$ and Spearman's $\rho$ are not implemented.
+To conduct a prospective design analysis considering a correlation between two variables, we need to specify `effect_type = "correlation"`. Note that, only Pearson's correlation is available, while the Kendall's $\tau$ and Spearman's $\rho$ are not implemented.
 
 #### Example 3: Pearson's correlation
 
-Consider a study that will evaluate the correlation between two variables. Knowing that from the literature we would expect an effect size of $\rho = .25$, which are the required sample size to obtain a power of 60%? We can use the function `prospective()` setting the argument `effect_type = "correlation"`.
+Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of $\rho = .25$, which is the required sample size to obtain a power of 60%? We can use the function `prospective()` setting the argument `effect_type = "correlation"`.
 
 ```{r, example3}
 prospective(effect_size = .25, power = .60, effect_type = "correlation",
             seed = 2020, display_message = FALSE)
 ```
 
-In this case, to obtain a power of around 60% the required sample size is $n = 76$ and the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values are $\rho = \pm.226$.
+In this case, to obtain a power of around 60% the required sample size is $n = 76$, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values are $\rho = \pm.226$.
 
 ### Population effect size distribution
 
-Defining the hypothetical population effect size as a single value could be limiting. Instead, researchers may prefer to use a probability distribution representing their expectations or literature indications. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
+Defining the hypothetical population effect size as a single value could be limiting.  Instead, researchers may prefer to use a probability distribution representing their uncertainty regarding the hypothetical population effect. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
 
 To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single variable `x` that represent the number of samples (e.g., `function(x) rnorm(x, mean = 0, sd = 1)`). See [`vignette("retrospective")`](retrospective.html) for further details.
 
@@ -93,19 +93,19 @@ prospective(effect_size = function(x) rnorm(x, .3, .1), power = .60,
             effect_type = "correlation", seed = 2020, display_message = FALSE)
 ```
 
-Note that we adjusted `B_effect` and `B` to find a good trade-off between computational times and results robustness. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.
+Note that we adjusted `B_effect` and `B` to find a good trade-off between computational times and results accuracy. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.
 
 #### Graphical representation
 
 Currently there are no personalized plot functions in {PRDAbeta}. However, it is easy to access all the results and use them to create the plots according to your needs. 
 
-The function `prospective()` returns an object of class `"design_analysis"` that contains:
+The function `prospective()` returns a list with class `"design_analysis"` that contains:
 
 - `design_analysis` - a character string indicating the type of design analysis (prospective or retrospective).
 - `call_arguments` - a list with all the arguments passed to the function. 
 - `effect_info` - a list with all the information regarding the considered hypothetical population effect size. In particular, in `effect_samples` we find the vector with the sampled effects (or unique value in the case of a single value).
 - `test_info` - a list with all the information regarding the test performed.
-- `prospective_res` - a data frame with the resulting inferential errors.
+- `prospective_res` - a data frame with the results of the design analysis (i.e., `power`, `typeM`, and `typeS`).
 
 Output complete description is provided in the function help page `?prospective`.
 
