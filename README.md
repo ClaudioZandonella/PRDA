@@ -34,7 +34,7 @@ To know more about design analysis consider Gelman and Carlin (2014). While, for
 
 ### The package
 
-PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's d respectively. See [`vignette("retrospective")`](doc/retrospective.html) to know how to set function arguments for the different effect types. 
+PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's d respectively. See `vignette("retrospective")` to know how to set function arguments for the different effect types. 
 
 #### Install
 
@@ -55,14 +55,14 @@ library(PRDAbeta)
 In {PRDAbeta} there are two main functions:
 
 - **`retrospective()`**.
-Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective()` and  [`vignette("retrospective")`](doc/retrospective.html)
+Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective()` and  `vignette("retrospective")`.
 
 - **`prospective()`**.
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective()` and [`vignette("prospective")`](doc/prospective.html).
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Cohen's d (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective()` and `vignette("prospective")`.
 
 #### Hypothetical effect size
 
-The hypothetical population effect size can be defined as a single value or as a probability distribution. This is a useful feature of {PRDAbeta}, as it allows users to define hypothetical effect size according to a distribution that represents their expectations or literature indications. For an example of application see [`vignette("retrospective")`](doc/retrospective.html).
+The hypothetical population effect size can be defined as a single value or as a probability distribution. This is a useful feature of {PRDAbeta}, as it allows users to define hypothetical effect size according to a distribution that represents their expectations or literature indications. For an example of application see `vignette("retrospective")`.
 
 ### References
 
