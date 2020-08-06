@@ -4,13 +4,63 @@
 
 #----    Package documentation    ----
 
-#' PRDAbeta: A Package for Prospective and Retrospective Design Analysis.
+#' PRDAbeta: Prospective and Retrospective Design Analysis.
 #'
-#' The PRDAbeta package provides two main important functions:
-#' \code{prospective()} and \code{retrospective()}.
+#' Given a plausible value of effect size, {PRDAbeta} performs a prospective or
+#' retrospective design analysis to evaluate the inferential risks (i.e., power,
+#' Type M error, and Type S error) related to the study design. See
+#' \code{vignette("PRDAbeta_overview")} for a brief introduction to \emph{Design
+#' Analysis}.
 #'
-#' @section PRDAbeta functions:
-#' The PRDAbeta functions ...
+#' PRDAbeta package can be used for Pearson's correlation between two variables
+#' or mean comparisons (one-sample, paired, two-samples, and Welch's t-test)
+#' considering a plausible value of \eqn{\rho} or Cohen's \emph{d} respectively.
+#' See \code{vignette("retrospective")} for more details.
+#'
+#' @section Functions:
+#' In {PRDAbeta} there are two main functions:
+#' \itemize{
+#' \item{\strong{\code{retrospective()}}}. Given the hypothetical population effect size
+#' and the study sample size, the function \code{retrospective()} performs a
+#' retrospective design analysis. According to the defined alternative
+#' hypothesis and the significance level, the inferential risks (i.e., Power
+#' level, Type M error, and Type S error) are computed together with the
+#' critical effect value (i.e., the minimum absolute effect size value that
+#' would result significant). To know more about function arguments and examples
+#' see the function documentation \code{\link[PRDAbeta:retrospective]{?retrospective()}} and
+#' \code{vignette("retrospective")}.
+#'
+#' \item{\strong{\code{prospective()}}}. Given the hypothetical population effect size
+#' and the required power level, the function \code{prospective()} performs a
+#' prospective design analysis. According to the defined alternative hypothesis
+#' and the significance level, the required sample size is computed together
+#' with the associated Type M error, Type S error, and the critical correlation
+#' value (i.e., the minimum absolute effect size value that would result
+#' significant).  To know more about function arguments and examples see the
+#' function documentation \code{\link[PRDAbeta:prospective]{?prospective()}} and
+#' \code{vignette("prospective")}.
+#' }
+#'
+#' @section Hypothetical Effect Size:
+#' The hypothetical population effect size can be defined as a single value or
+#' as a probability distribution. This is a useful feature of {PRDAbeta}, as it
+#' allows users to define hypothetical effect size according to a distribution
+#' that represents their expectations or literature indications. For an example
+#' of application see \code{vignette("retrospective")}.
+#'
+#' @references Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
+#'  Calcagnì, A., Finos, L., & Pastore, M. (2020). Enhancing Statistical
+#'  Inference in Psychological Research via Prospective and Retrospective Design
+#'  Analysis. Frontiers in Psychology, 10.
+#'  \url{https://doi.org/10.3389/fpsyg.2019.02893}
+#'
+#'  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
+#'  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
+#'  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
+#'
+#'  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+#'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
+#'  for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
 #'
 #' @importFrom stats rnorm t.test cor.test qt pt sd var cor
 #' @importFrom MASS mvrnorm
@@ -18,8 +68,8 @@
 #'
 #' @docType package
 #' @name PRDAbeta
-#'
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 
 #----    use_rcpp and rcppArmadillo    ----

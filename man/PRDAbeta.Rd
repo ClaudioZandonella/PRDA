@@ -3,13 +3,83 @@
 \docType{package}
 \name{PRDAbeta}
 \alias{PRDAbeta}
-\title{PRDAbeta: A Package for Prospective and Retrospective Design Analysis.}
+\alias{PRDAbeta-package}
+\title{PRDAbeta: Prospective and Retrospective Design Analysis.}
 \description{
-The PRDAbeta package provides two main important functions:
-\code{prospective()} and \code{retrospective()}.
+Given a plausible value of effect size, {PRDAbeta} performs a prospective or
+retrospective design analysis to evaluate the inferential risks (i.e., power,
+Type M error, and Type S error) related to the study design. See
+\code{vignette("PRDAbeta_overview")} for a brief introduction to \emph{Design
+Analysis}.
 }
-\section{PRDAbeta functions}{
+\details{
+PRDAbeta package can be used for Pearson's correlation between two variables
+or mean comparisons (one-sample, paired, two-samples, and Welch's t-test)
+considering a plausible value of \eqn{\rho} or Cohen's \emph{d} respectively.
+See \code{vignette("retrospective")} for more details.
+}
+\section{Functions}{
 
-The PRDAbeta functions ...
+In {PRDAbeta} there are two main functions:
+\itemize{
+\item{\strong{\code{retrospective()}}}. Given the hypothetical population effect size
+and the study sample size, the function \code{retrospective()} performs a
+retrospective design analysis. According to the defined alternative
+hypothesis and the significance level, the inferential risks (i.e., Power
+level, Type M error, and Type S error) are computed together with the
+critical effect value (i.e., the minimum absolute effect size value that
+would result significant). To know more about function arguments and examples
+see the function documentation \code{\link[PRDAbeta:retrospective]{?retrospective()}} and
+\code{vignette("retrospective")}.
+
+\item{\strong{\code{prospective()}}}. Given the hypothetical population effect size
+and the required power level, the function \code{prospective()} performs a
+prospective design analysis. According to the defined alternative hypothesis
+and the significance level, the required sample size is computed together
+with the associated Type M error, Type S error, and the critical correlation
+value (i.e., the minimum absolute effect size value that would result
+significant).  To know more about function arguments and examples see the
+function documentation \code{\link[PRDAbeta:prospective]{?prospective()}} and
+\code{vignette("prospective")}.
+}
 }
 
+\section{Hypothetical Effect Size}{
+
+The hypothetical population effect size can be defined as a single value or
+as a probability distribution. This is a useful feature of {PRDAbeta}, as it
+allows users to define hypothetical effect size according to a distribution
+that represents their expectations or literature indications. For an example
+of application see \code{vignette("retrospective")}.
+}
+
+\references{
+Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
+ Calcagnì, A., Finos, L., & Pastore, M. (2020). Enhancing Statistical
+ Inference in Psychological Research via Prospective and Retrospective Design
+ Analysis. Frontiers in Psychology, 10.
+ \url{https://doi.org/10.3389/fpsyg.2019.02893}
+
+ Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
+ (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
+ 9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
+
+ Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+ Designing Studies and Evaluating Research Results: Type M and Type S Errors
+ for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
+}
+\author{
+\strong{Maintainer}: Claudio Zandonella Callegher \email{claudiozandonella@gmail.com} (\href{https://orcid.org/0000-0001-7721-6318}{ORCID})
+
+Authors:
+\itemize{
+  \item Massimiliano Pastore \email{massimiliano.pastore@unipd.it} (\href{https://orcid.org/0000-0002-7922-6365}{ORCID})
+  \item Angela Andreella \email{a.andreella8@gmail.com} (\href{https://orcid.org/0000-0002-1141-3041}{ORCID})
+  \item Anna Vesely \email{anna.vesely92@gmail.com} (\href{https://orcid.org/0000-0001-6696-2390}{ORCID})
+  \item Giulia Bertoldo \email{giuliabertoldo94@gmail.com} (\href{https://orcid.org/0000-0002-6960-3980}{ORCID})
+  \item Enrico Toffalini \email{enrico.toffalini@yahoo.it} (\href{https://orcid.org/0000-0002-1404-5133}{ORCID})
+  \item Gianmarco Altoè \email{gianmarco.altoe@unipd.it} (\href{https://orcid.org/0000-0003-1154-9528}{ORCID})
+}
+
+}
+\keyword{internal}
