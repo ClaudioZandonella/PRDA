@@ -31,7 +31,8 @@ second group.}
 
 \item{effect_type}{a character string specifying the effect type, must be one
 of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
-"pearson" (Pearson's correlation). You can specify just the initial letter.}
+"correlation" (Pearson's correlation). You can specify just the initial
+letter.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
 must be one of "two.sided" (default), "greater" or "less". You can specify

@@ -11,6 +11,7 @@
 #'
 #' @return a summary output
 #' @export
+#' @noRd
 #'
 print.design_analysis <- function(x, ...){
   da_fit=x
@@ -99,6 +100,7 @@ print.design_analysis <- function(x, ...){
 #' @return a summary output
 #'
 #' @export
+#' @noRd
 #'
 summary.design_analysis <- function(object, ...){
   print(object)

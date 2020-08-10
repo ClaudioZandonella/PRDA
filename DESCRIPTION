@@ -28,14 +28,13 @@ Description: An implementation of the "Design Analysis" proposed by
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
     error (e.g. Sign).
 Depends: 
-    R (>= 3.6.0),
-    MASS
+    R (>= 3.5.0)
 Suggests:
     devtools,
-    roxygen2,
-    testthat,
     knitr,
     rmarkdown,
+    roxygen2,
+    testthat,
     tidyverse
 License: GPL-3
 Encoding: UTF-8
@@ -44,5 +43,6 @@ RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp, RcppArmadillo
-Imports: 
+Imports:
+    MASS,
     Rcpp

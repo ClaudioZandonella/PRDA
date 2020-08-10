@@ -33,7 +33,8 @@ and \code{sample_n2}.}
 
 \item{effect_type}{a character string specifying the effect type, must be one
 of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
-"pearson" (Pearson's correlation). You can specify just the initial letter.}
+"correlation" (Pearson's correlation). You can specify just the initial
+letter.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
 must be one of "two.sided" (default), "greater" or "less". You can specify
@@ -186,9 +187,11 @@ prospective(effect_size = .3, power = .8, effect_type = "correlation",
 \dontrun{
 # Define effect_size using functions (long computational time)
 prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-              effect_type = "correlation", seed = 2020)
+            effect_type = "correlation", B_effect = 500, B = 500,
+            tl = .15, seed = 2020)
 prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-              effect_type = "cohen_d", tl = .2, tu = .4, seed = 2020)
+            effect_type = "cohen_d", B_effect = 500, B = 500,
+            tl = .2, tu = .4, seed = 2020)
 }
 
 }

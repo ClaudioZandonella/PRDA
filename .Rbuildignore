@@ -25,3 +25,5 @@
 # Todo list
 ^Todo$
 ^Todo\.html$
+^Todo_rOpenSci\.md$
+^Todo\.md$

@@ -85,17 +85,5 @@ NULL
 ## usethis namespace: end
 NULL
 
-#----    onAttach    ----
-
-#' Initial message
-#'
-#' @param libname used to define the libname
-#' @param pkgname used to define the pkgname
-#'
-#' @return Initial message with suggestion to loook at vignettas
-#'
-.onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Welcome to PRDA (beta version) \nTo get started look at vignettas")
-}
 
 #----
