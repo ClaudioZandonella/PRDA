@@ -11,7 +11,7 @@ https://arxiv.org/pdf/1901.09581.pdf
 https://www.datanovia.com/en/lessons/t-test-effect-size-using-cohens-d-measure/ riporta:
 $$d = \frac{nx-2}{nx-1.25} \times \frac{mx}{sd(x)}$$
 
-- [ ] Come calcoare il valore critico di Cohen's d dato il valre della statostoca test.
+- [ ] Come calcolare il valore critico di Cohen's d dato il valre della statistica test.
 https://www.bwgriffin.com/gsu/courses/edur9131/content/Effect_Sizes_pdf5.pdf riporta delle formule da controllare.
 https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full altre formule (meglio). Ci vanno oppure no le correzioni?
   - One.sampled t-test $d = t / \sqrt{n}$
@@ -20,7 +20,9 @@ https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full altre formule
   - Welch t-test $d =  t \sqrt{\frac{n_x+n_y}{n_x n_y}} + \mu$ (noi facciamo in realtà il smpling con entrampe le pop variance = 1 quindi dovrebbe essere uguale al t-test?)
   
   
-- [ ] troncare le distribuzioni basta eliminare i valori non voluti e continuare il sampling?
+- [ ] Troncare le distribuzioni basta eliminare i valori non voluti e continuare il sampling?
+
+- [ ] In prospective quando utilizzo una distribuzione per definire gli effetti considero raggiunto il livello di potenza considerando la media delle potenze. Potrebbe essere meglio considerare la mediana o la media va bene?
 
 
 

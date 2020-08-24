@@ -39,12 +39,12 @@ Complete arguments description is provided in the function documenntation `?retr
 To conduct a retrospective design analysis considering means comparisons, we need to specify `effect_type = "cohen_d"` (default option). We can define the appropriate *t*-test (i.e., One-sample, Paired, Two-sample, or Welch's *t*-test) using the same arguments `paired` and `var.equal` as in the basic function `t.test()` from {stats} package. Arguments specifications for the different *t*-tests are presented in the following Table. Remember that the default setting for `paired` and `var.equal` is `FALSE`.
 
 
-| Test                | Settings                           |
-| -------------------:|:-----------------------------------|
-| One-sample *t*-test | `sample_n2 = NULL`                 | 
-| Paired *t*-test     | `paired = TRUE`                    | 
-| Two-sample *t*-test | `paired = TRUE, var.equal = TRUE`  |
-| Welch's *t*-test    | `paired = TRUE, var.equal = FALSE` |
+| Test                | Settings                            |
+| -------------------:|:------------------------------------|
+| One-sample *t*-test | `sample_n2 = NULL`                  | 
+| Paired *t*-test     | `paired = TRUE`                     | 
+| Two-sample *t*-test | `paired = FALSE, var.equal = TRUE`  |
+| Welch's *t*-test    | `paired = FALSE, var.equal = FALSE` |
 
 #### Example 1: Paired *t*-test
 
