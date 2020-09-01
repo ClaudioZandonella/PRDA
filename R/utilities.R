@@ -29,6 +29,7 @@ match_call <- function(definition = sys.function(sys.parent()),
   match.call(definition, call, TRUE, envir)
 }
 
+
 #----    is_single_numeric    ----
 
 is_single_numeric <- function(x, infinite = FALSE){
@@ -40,6 +41,7 @@ is_single_numeric <- function(x, infinite = FALSE){
   }
 }
 
+
 #----    Select arguments    ----
 
 # select_arguments <- function(arguments, names, remove=FALSE){
@@ -50,16 +52,6 @@ is_single_numeric <- function(x, infinite = FALSE){
 #
 # }
 
-#----    define_conf_level    ----
-
-define_conf_level <- function(arguments){
-
-  if("conf.level" %in% names(arguments) && arguments$conf.level != (1 - arguments$sig_level)){
-    warning("conf.level is set according to sig_level.")
-  }
- 1 - arguments$sig_level
-
-}
 
 #----    list2data    ----
 
@@ -83,6 +75,7 @@ list2data <- function(list, transpose=TRUE, select=NULL){
   return(data)
 }
 
+
 #----    round_arg    ----
 
 round_arg <- function(list_name, n_round){
@@ -92,6 +85,7 @@ round_arg <- function(list_name, n_round){
   }
   return(list_name)
 }
+
 
 #----    sing_effect    ----
 
@@ -105,6 +99,7 @@ sign_effect <- function(critical_effect, alternative){
   return(critical_effect)
 }
 
+
 #----    with_seed    ----
 
 with_seed <- function(seed, code) {
@@ -112,7 +107,8 @@ with_seed <- function(seed, code) {
   orig.seed <- .Random.seed
   on.exit(.Random.seed <<- orig.seed)
   set.seed(seed)
-  eval.parent(code)
+  return(eval.parent(code))
 }
+
 
 #----

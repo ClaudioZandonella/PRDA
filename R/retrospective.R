@@ -178,23 +178,25 @@
 retrospective <- function(effect_size,
                           sample_n1,
                           sample_n2 = NULL,
-                          effect_type = c("cohen_d","correlation"),
+                          effect_type = c("correlation", "cohen_d"),
+                          test_method = c("pearson", "two_samples", "one_sample",
+                                          "paired", "welch"),
                           alternative = c("two.sided","less","greater"),
                           sig_level = .05,
                           B = 1e4,
                           seed = NULL,
                           tl = -Inf,
                           tu = Inf,
-                          B_effect = 1e3,
-                          ...){
+                          B_effect = 1e3){
 
 
 
   #----    Save call    ----
 
   # Match arguments
-  effect_type <- match.arg(effect_type)
-  alternative <- match.arg(alternative)
+  effect_type = match.arg(effect_type)
+  alternative = match.arg(alternative)
+  test_method = match.arg(test_method)
 
   # Save call
   design_analysis = "retrospective"
@@ -204,69 +206,66 @@ retrospective <- function(effect_size,
   do.call(eval_arguments_retrospective,
           call_arguments)
 
-  # Define conf.level according to sig_level
-  call_arguments$conf.level <- define_conf_level(call_arguments)
-
   # Check sample_n2 for correlation
   if(effect_type == "correlation"){
     if(!is.null(sample_n2)){
-      call_arguments["sample_n2"] <- list(NULL)
-      warning("If effect_type is set to 'correlation', sample_n2 is ignored.")
+      call_arguments["sample_n2"] = list(NULL)
+      warning("If 'effect_type = correlation', argument 'sample_n2' is ignored.")
     }
-    sample_n2 <- sample_n1
+    sample_n2 = sample_n1
   }
 
   #----    Set seed    ----
 
   # Set seed
   if(!is.null(seed)){
-    if(!exists(".Random.seed")) rnorm(1)
-    old_seed <- .Random.seed
+    if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
+    old_seed = .Random.seed
     on.exit( { .Random.seed <<- old_seed })
     set.seed(seed = seed)
   }
 
   #----    Evaluate effect size    ----
 
-  effect_info <- eval_effect_size(effect_type = effect_type,
-                                  effect_size = effect_size,
-                                  tl = tl,
-                                  tu = tu,
-                                  B_effect = B_effect)
+  effect_info = eval_effect_size(effect_type = effect_type,
+                                 effect_size = effect_size,
+                                 tl = tl,
+                                 tu = tu,
+                                 B_effect = B_effect)
+
   effect_target = effect_info$effect_summary[["Mean"]]
 
   #----    Get test info    ----
 
   # Evaluate test test_method
-  test_method <- do.call(eval_test_method, c(call_arguments,
-                                             effect_target = effect_target))
-  #Compute df and critical value
-  crit_values <- do.call(compute_critical_effect,
-                         c(call_arguments,
-                           test_method = test_method))
+  # (use t.test or cor.tes() to evaluate possible errors)
+  do.call(eval_test_method, c(call_arguments,
+                              effect_target = effect_target))
 
-  test_info <- c(test_method = test_method,
-                 sample_n1 = sample_n1,
-                 sample_n2 = list(sample_n2),
-                 alternative = alternative,
-                 sig_level = sig_level,
-                 crit_values)
+  # Compute df and critical value
+  crit_values = do.call(compute_critical_effect, call_arguments)
+
+  test_info = c(test_method = test_method,
+                sample_n1 = sample_n1,
+                sample_n2 = list(sample_n2), # list() used to deal with NULL
+                alternative = alternative,
+                sig_level = sig_level,
+                crit_values)
 
   #----    Retrospective analysis    ----
 
-  retrospective_res <- do.call(simulate_analysis,
-                               c(call_arguments,
-                                 effect_info["effect_samples"],
-                                 test_method = test_method))
+  retrospective_res = do.call(simulate_analysis,
+                              c(call_arguments,
+                                effect_info["effect_samples"]))
 
   #----    save results    ----
-  design_fit <- structure(list(design_analysis = design_analysis,
-                               call_arguments = call_arguments,
-                               effect_info = c(effect_type = effect_type,
-                                               effect_info),
-                               test_info = test_info,
-                               retrospective_res = retrospective_res),
-                          class = c("design_analysis","list"))
+  design_fit = structure(list(design_analysis = design_analysis,
+                              call_arguments = call_arguments,
+                              effect_info = c(effect_type = effect_type,
+                                              effect_info),
+                              test_info = test_info,
+                              retrospective_res = retrospective_res),
+                         class = c("design_analysis","list"))
 
   return(design_fit)
 

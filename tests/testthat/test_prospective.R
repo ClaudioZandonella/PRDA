@@ -13,117 +13,149 @@ context("prospective inputs specification")
 
 test_that("inputs are correctly specified", {
 
-  effect_size_text <- "effect_size has to be a single numeric value or a function."
-  power_text <- "power has to be a single value between 0 and 1."
-  ratio_n2_text <- "ratio_n2 has to be a single integer value grater or equal than 1."
-  sig_level_text <- "sig_level has to be a single value between 0 and 1."
-  B_text <- "B has to be a single integer value grater than 1."
-  seed_text <- "If specified, seed has to be a single finite number."
-  tl_text <- "tl has to be a single numeric value."
-  tu_text <- "tu has to be a single numeric value."
-  B_effect_text <- "B_effect has to be a single integer value grater than 1."
-  sample_range_text1 <- "sample_range has to be a length-2 numeric vector."
-  sample_range_text2 <- "sample_range minimum has to be grater than 1 and less than sample range maximum."
-  tol_text <- "tol has to be a single value between 0 and 1."
-  display_text <- "display_message has to be logical."
-  correlation_text <- "If effect_type is set to 'correlation', ratio_n2 is set to 1"
-  paired_text <- "If paired = TRUE, ratio_n2 has to be 1"
-  conf.level_text <- "conf.level is set according to sig_level."
-  mu_text <- "Desing Analysis is allowed only for  Null Hypothesis mu = 0."
+  # Redefine function to avoid specify arguments each the times
+  test_prospective <- function(effect_size = .3, power = .8, ratio_n2 = 1,
+                               effect_type = "correlation", test_method = "pearson",
+                               alternative = "two.sided", sig_level = .05, B = 10,
+                               seed = 2020, tl = -Inf, tu = Inf, B_effect = 10,
+                               sample_range = c(2, 1000), tol = .01, display_message = FALSE){
+    prospective(effect_size = effect_size, power = power, ratio_n2 = ratio_n2,
+                effect_type = effect_type, test_method = test_method,
+                alternative = alternative, sig_level = sig_level, B = B, seed = seed,
+                tl = tl, tu = tu, B_effect = B_effect, sample_range = sample_range,
+                tol = tol, display_message = display_message)
+  }
 
-  expect_error(prospective(effect_size = Inf, power = .8), effect_size_text)
-  expect_error(prospective(effect_size = "ciao", power = .8), effect_size_text)
-  expect_error(prospective(effect_size = c(1,2), power = .8), effect_size_text)
+  #----    Arguments    ----
 
-  expect_error(prospective(effect_size = .3, power = Inf), power_text)
-  expect_error(prospective(effect_size = .3, power = "ciao"), power_text)
-  expect_error(prospective(effect_size = .3, power = c(.5,.6)), power_text)
-  expect_error(prospective(effect_size = .3, power = 1), power_text)
-  expect_error(prospective(effect_size = .3, power = -1), power_text)
+  # effect_size
+  effect_size_text <- "Argument 'effect_size' has to be a single numeric value or a function"
+  expect_error(test_prospective(effect_size = Inf), effect_size_text)
+  expect_error(test_prospective(effect_size = "ciao"), effect_size_text)
+  expect_error(test_prospective(effect_size = c(1,2)), effect_size_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, ratio_n2 = Inf), ratio_n2_text)
-  expect_error(prospective(effect_size = .3, power = .8, ratio_n2 = "ciao"), ratio_n2_text)
-  expect_error(prospective(effect_size = .3, power = .8, ratio_n2 = c(.5,.6)), ratio_n2_text)
-  expect_error(prospective(effect_size = .3, power = .8, ratio_n2 = .5), ratio_n2_text)
+  # power
+  power_text <- "Argument 'power' has to be a single value between 0 and 1"
+  expect_error(test_prospective(power = Inf), power_text)
+  expect_error(test_prospective(power = "ciao"), power_text)
+  expect_error(test_prospective(power = c(.5,.6)), power_text)
+  expect_error(test_prospective(power = 1), power_text)
+  expect_error(test_prospective(power = -1), power_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, sig_level = 1), sig_level_text)
-  expect_error(prospective(effect_size = .3, power = .8, sig_level = Inf), sig_level_text)
-  expect_error(prospective(effect_size = .3, power = .8, sig_level = 0), sig_level_text)
-  expect_error(prospective(effect_size = .3, power = .8, sig_level = "ciao"), sig_level_text)
-  expect_error(prospective(effect_size = .3, power = .8, sig_level = c(.1,.2)), sig_level_text)
+  # ratio_n2
+  ratio_n2_text <- "If specified, argument 'ratio_n2' has to be a single integer value grater or equal than 1"
+  expect_error(test_prospective(ratio_n2 = Inf), ratio_n2_text)
+  expect_error(test_prospective(ratio_n2 = "ciao"), ratio_n2_text)
+  expect_error(test_prospective(ratio_n2 = c(.5,.6)), ratio_n2_text)
+  expect_error(test_prospective(ratio_n2 = .5), ratio_n2_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, B = 1), B_text)
-  expect_error(prospective(effect_size = .3, power = .8, B = Inf), B_text)
-  expect_error(prospective(effect_size = .3, power = .8, B = "ciao"), B_text)
-  expect_error(prospective(effect_size = .3, power = .8, B = c(10,20)), B_text)
+  # sig_level
+  sig_level_text <- "Argument 'sig_level' has to be a single value between 0 and 1"
+  expect_error(test_prospective(sig_level = 1), sig_level_text)
+  expect_error(test_prospective(sig_level = Inf), sig_level_text)
+  expect_error(test_prospective(sig_level = 0), sig_level_text)
+  expect_error(test_prospective(sig_level = "ciao"), sig_level_text)
+  expect_error(test_prospective(sig_level = c(.1,.2)), sig_level_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, seed = Inf), seed_text)
-  expect_error(prospective(effect_size = .3, power = .8, seed = "ciao"), seed_text)
-  expect_error(prospective(effect_size = .3, power = .8, seed = c(10,20)), seed_text)
+  # B
+  B_text <- "Argument 'B' has to be a single integer value grater than 1"
+  expect_error(test_prospective(B = 1), B_text)
+  expect_error(test_prospective(B = Inf), B_text)
+  expect_error(test_prospective(B = "ciao"), B_text)
+  expect_error(test_prospective(B = c(10,20)), B_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, tl = "ciao"), tl_text)
-  expect_error(prospective(effect_size = .3, power = .8, tl = c(10,20)), tl_text)
+  # seed
+  seed_text <- "If specified, argument 'seed' has to be a single finite number"
+  expect_error(test_prospective(seed = Inf), seed_text)
+  expect_error(test_prospective(seed = "ciao"), seed_text)
+  expect_error(test_prospective(seed = c(10,20)), seed_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, tu = "ciao"), tu_text)
-  expect_error(prospective(effect_size = .3, power = .8, tu = c(10,20)), tu_text)
+  # tl
+  tl_text <- "Argument 'tl' has to be a single numeric value"
+  expect_error(test_prospective(tl = "ciao"), tl_text)
+  expect_error(test_prospective(tl = c(10,20)), tl_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, B_effect = 1), B_effect_text)
-  expect_error(prospective(effect_size = .3, power = .8, B_effect = Inf), B_effect_text)
-  expect_error(prospective(effect_size = .3, power = .8, B_effect = "ciao"), B_effect_text)
-  expect_error(prospective(effect_size = .3, power = .8, B_effect = c(10,20)), B_effect_text)
+  # tu
+  tu_text <- "Argument 'tu' has to be a single numeric value"
+  expect_error(test_prospective(tu = "ciao"), tu_text)
+  expect_error(test_prospective(tu = c(10,20)), tu_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = 1), sample_range_text1)
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = c(10,20,20)), sample_range_text1)
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = c(10,"20")), sample_range_text1)
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = c(10,Inf)), sample_range_text1)
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = c(10,8)), sample_range_text2)
-  expect_error(prospective(effect_size = .3, power = .8, sample_range = c(1,8)), sample_range_text2)
+  # B_effect
+  B_effect_text <- "Argument 'B_effect' has to be a single integer value grater than 1"
+  expect_error(test_prospective(B_effect = 1), B_effect_text)
+  expect_error(test_prospective(B_effect = Inf), B_effect_text)
+  expect_error(test_prospective(B_effect = "ciao"), B_effect_text)
+  expect_error(test_prospective(B_effect = c(10,20)), B_effect_text)
 
-  expect_error(prospective(effect_size = .3, power = .8, tol = 1), tol_text)
-  expect_error(prospective(effect_size = .3, power = .8, tol = Inf), tol_text)
-  expect_error(prospective(effect_size = .3, power = .8, tol = 0), tol_text)
-  expect_error(prospective(effect_size = .3, power = .8, tol = "ciao"), tol_text)
-  expect_error(prospective(effect_size = .3, power = .8, tol = c(.1,.2)), tol_text)
+  # sample_range
+  sample_range_text1 <- "Argument 'sample_range' has to be a length-2 numeric vector"
+  sample_range_text2 <- "Argument 'sample_range' minimum has to be grater than 1 and less than sample range maximum"
+  expect_error(test_prospective(sample_range = 1), sample_range_text1)
+  expect_error(test_prospective(sample_range = c(10,20,20)), sample_range_text1)
+  expect_error(test_prospective(sample_range = c(10,"20")), sample_range_text1)
+  expect_error(test_prospective(sample_range = c(10,Inf)), sample_range_text1)
+  expect_error(test_prospective(sample_range = c(10,8)), sample_range_text2)
+  expect_error(test_prospective(sample_range = c(1,8)), sample_range_text2)
 
-  expect_error(prospective(effect_size = .3, power = .8, display_message = 1), display_text)
-  expect_error(prospective(effect_size = .3, power = .8, display_message = Inf), display_text)
-  expect_error(prospective(effect_size = .3, power = .8, display_message = NULL), display_text)
-  expect_error(prospective(effect_size = .3, power = .8, display_message = "ciao"), display_text)
-  expect_error(prospective(effect_size = .3, power = .8, display_message = c(.1,.2)), display_text)
+  # tol
+  tol_text <- "Argument 'tol' has to be a single value between 0 and 1"
+  expect_error(test_prospective(tol = 1), tol_text)
+  expect_error(test_prospective(tol = Inf), tol_text)
+  expect_error(test_prospective(tol = 0), tol_text)
+  expect_error(test_prospective(tol = "ciao"), tol_text)
+  expect_error(test_prospective(tol = c(.1,.2)), tol_text)
 
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", B=10, ratio_n2 = 2, seed = 2020, display_message = FALSE),
-                 correlation_text)
-  expect_error(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", paired = TRUE, B=10, ratio_n2 = 2),
+  # display_message
+  display_text <- "Argument 'display_message' has to be logical"
+  expect_error(test_prospective(display_message = 1), display_text)
+  expect_error(test_prospective(display_message = Inf), display_text)
+  expect_error(test_prospective(display_message = NULL), display_text)
+  expect_error(test_prospective(display_message = "ciao"), display_text)
+  expect_error(test_prospective(display_message = c(.1,.2)), display_text)
+
+
+  #----    Other cases    ----
+
+  # coherence effect_type and test_method
+  coherence_corr = "If  'effect_type = correlation', argument 'test_method' has to be 'pearson'"
+  expect_error(test_prospective(effect_type = "correlation", test_method = "paired"),
+               coherence_corr)
+  coherence_cohen = "No appropriate 'test_method' for 'effect_type = cohen_d'"
+  expect_error(test_prospective(effect_type = "cohen_d", test_method = "pearson"),
+               coherence_cohen)
+
+  # correlation and ratio_n2
+  correlation_text <- "If 'effect_type = correlation', argument 'ratio_n2' is set to 1"
+  expect_warning(test_prospective(effect_type = "correlation", test_method = "pearson",
+                                  ratio_n2 = 2), correlation_text)
+
+  # one_sample and ratio_n2
+  one_sample_text = "If 'test_method = one_sample', argument 'ratio_n2' must be set to NULL"
+  expect_error(test_prospective(ratio_n2 = 3, effect_type = "cohen_d", test_method = "one_sample"),
+               one_sample_text)
+
+  # paired and ratio_n2
+  paired_text <- "If 'test_method = paired', argument 'ratio_n2' has to be 1"
+  expect_error(test_prospective(effect_type = "cohen_d", test_method = "paired", ratio_n2 = 2),
                  paired_text)
+  expect_error(test_prospective(effect_type = "cohen_d", test_method = "paired", ratio_n2 = NULL),
+               paired_text)
 
-  # conf.level test
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", conf.level=.8, B=10, seed =2020, display_message = FALSE),
-                 conf.level_text)
-  expect_warning(prospective(effect_size = .3, power = .8, effect_type = "correlation", conf.level=.8, B=10, seed = 2020, display_message = FALSE),
-                 conf.level_text)
+  # two_samples or welch and ratio_n2
+  t_test_text = "Argument 'ratio_n2' is required for the specified 'test_method'"
+  expect_error(test_prospective(ratio_n2 = NULL, effect_type = "cohen_d", test_method = "two_samples"),
+               t_test_text)
+  expect_error(test_prospective(ratio_n2 = NULL, effect_type = "cohen_d", test_method = "welch"),
+               t_test_text)
 
   # sample_range
   sample_range <- "Actual power = 0.1 with n = 100\n  try to increase maximum of sample_range > 100."
-  expect_error(prospective(effect_size = .1, power = .8, effect_type = "cohen_d", sample_range =  c(5,100), B=100, seed =2020, display_message = FALSE), sample_range)
+  expect_error(test_prospective(effect_size = .1, effect_type = "cohen_d", test_method = "two_samples",
+                                sample_range =  c(5,100), B=100), sample_range)
 
   tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
-  expect_message(prospective(effect_size = .35, power = .8, effect_type = "correlation", B=100, sample_range = c(40,120),
-                             tol=.001, seed = 2020, display_message = FALSE), tol_text)
-
-  # mu
-  expect_error(prospective(effect_size = .3, power = .8, mu = .2), mu_text)
-
-})
-#----    get correct test_method     ----
-
-test_that("get correct test_method", {
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = NULL, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "one_sample")
-  expect_equal(prospective(effect_size = .3, power = .8, tol = .02, paired = TRUE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "paired")
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = TRUE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "two_samples")
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 2, var.equal = FALSE, B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "welch")
-
-  expect_equal(prospective(effect_size = .3, power = .8, ratio_n = 1, effect_type = "correlation", B = 100, seed = 2020, display_message = FALSE)$test_info$test_method, "pearson")
-
+  expect_message(test_prospective(effect_size = .35, B=100, sample_range = c(40,120),
+                                  tol=.001), tol_text)
 })
 
 
@@ -131,17 +163,26 @@ test_that("get correct test_method", {
 
 test_that("same results as previous run", {
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, B = 100, seed = 2020, display_message = FALSE)$effect_info,
-                     file = "test_cache/effect_info_single_pro", update= FALSE)
+                     file = "test_cache/effect_info_single_pro_cor", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, B = 100, seed = 2020, display_message = FALSE,
+                                 effect_type = "cohen_d", test_method = "two_samples")$effect_info,
+                     file = "test_cache/effect_info_single_pro_cohen", update= FALSE)
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "correlation", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_corr_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = NULL, effect_type = "cohen_d", test_method = "one_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
+                     file="test_cache/res_one_sample_single_pro", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_cohen_single_pro", update= FALSE)
 
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
+
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "welch", power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
                      file = "test_cache/effect_info_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
                                  B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen",
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = NULL, effect_type = "cohen_d", test_method = "one_sample",
+                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
+                     file = "test_cache/res_one_sample_dist_pro",update= FALSE)
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch",
                                  B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
                      file = "test_cache/res_cohen_dist_pro",update= FALSE)
 

@@ -5,181 +5,203 @@
 
 #----    eval_arguments_retrospective    ----
 
-eval_arguments_retrospective <- function(sample_n1, effect_size, sample_n2, effect_type,
-                                         alternative, sig_level, B, seed, tl, tu, B_effect, mu = 0, ...){
+eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
+                                         effect_type, test_method,
+                                         sig_level, B, seed, tl, tu, B_effect, ...){
   # Check inputs arguments
-  if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
-    stop("sample_n1 has to be a single integer value grater than 1.")
-
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
-    stop("effect_size has to be a single numeric value or a function.")
+    stop("Argument 'effect_size' has to be a single numeric value or a function")
+
+  if(!is_single_numeric(sample_n1) || sample_n1 <= 1 )
+    stop("Argument 'sample_n1' has to be a single integer value grater than 1")
 
   if(!is.null(sample_n2) && (!is_single_numeric(sample_n2) || sample_n2 <= 1))
-    stop("If specified, sample_n2 has to be a single integer value grater than 1.")
+    stop("If specified, argument 'sample_n2' has to be a single integer value grater than 1")
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
-    stop("sig_level has to be a single value between 0 and 1.")
+    stop("Argument 'sig_level' has to be a single value between 0 and 1")
 
   if(!is_single_numeric(B) || B <= 1)
-    stop("B has to be a single integer value grater than 1.")
+    stop("Argument 'B' has to be a single integer value grater than 1")
 
   if(!is.null(seed) && (!is_single_numeric(seed)))
-    stop("If specified, seed has to be a single finite number.")
+    stop("If specified, argument 'seed' has to be a single finite number")
 
   if(!is_single_numeric(tl, infinite = TRUE ))
-    stop("tl has to be a single numeric value.")
+    stop("Argument 'tl' has to be a single numeric value")
 
   if(!is_single_numeric(tu, infinite = TRUE))
-    stop("tu has to be a single numeric value.")
+    stop("Argument 'tu' has to be a single numeric value")
 
   if(!is_single_numeric(B_effect) || B_effect <= 1)
-    stop("B_effect has to be a single integer value grater than 1.")
+    stop("Argument 'B_effect' has to be a single integer value grater than 1")
 
-  if(mu != 0){
-    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0.")
-  }
+  # Check coherence effect_type, test_method and others
+  if(effect_type == "correlation" && test_method != "pearson")
+    stop("If  'effect_type = correlation', argument 'test_method' has to be 'pearson'")
+
+  if(effect_type == "cohen_d" && test_method == "pearson")
+    stop("No appropriate 'test_method' for 'effect_type = cohen_d'")
+
+  if(test_method == "one_sample" && !is.null(sample_n2))
+    stop("If 'test_method = one_sample', argument 'sample_n2' must be set to NULL")
+
+  if(test_method == 'paired' && ((is.null(sample_n2) || sample_n1!=sample_n2)))
+    stop("If 'test_method = paired', arguments 'sample_n1' and 'sample_n2' must be equal")
+
+  if(test_method %in% c("two_samples", "welch") && is.null(sample_n2))
+    stop("Argument 'sample_n2' is required for the specified 'test_method'")
+
+
 }
+
 
 #----    eval_arguments_prospective    ----
 
-eval_arguments_prospective <- function(effect_size, power, ratio_n2, effect_type, alternative,
-                                       sig_level, B, seed, tl, tu, B_effect, sample_range,
-                                       tol, display_message, mu = 0, ...){
+eval_arguments_prospective <- function(effect_size, power, ratio_n2,
+                                       effect_type, test_method,
+                                       sig_level, B, seed, tl, tu, B_effect,
+                                       sample_range, tol, display_message, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
-    stop("effect_size has to be a single numeric value or a function.")
+    stop("Argument 'effect_size' has to be a single numeric value or a function")
 
   if(!is_single_numeric(power) || power >= 1 || power <= 0)
-    stop("power has to be a single value between 0 and 1.")
+    stop("Argument 'power' has to be a single value between 0 and 1")
 
   if(!is.null(ratio_n2) && (!is_single_numeric(ratio_n2) || ratio_n2 < 1))
-    stop("If specified, ratio_n2 has to be a single integer value grater or equal than 1.")
+    stop("If specified, argument 'ratio_n2' has to be a single integer value grater or equal than 1")
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
-    stop("sig_level has to be a single value between 0 and 1.")
+    stop("Argument 'sig_level' has to be a single value between 0 and 1")
 
   if(!is_single_numeric(B) || B <= 1)
-    stop("B has to be a single integer value grater than 1.")
+    stop("Argument 'B' has to be a single integer value grater than 1")
 
   if(!is.null(seed) && (!is_single_numeric(seed)))
-    stop("If specified, seed has to be a single finite number.")
+    stop("If specified, argument 'seed' has to be a single finite number")
 
   if(!is_single_numeric(tl, infinite = TRUE ))
-    stop("tl has to be a single numeric value.")
+    stop("Argument 'tl' has to be a single numeric value")
 
   if(!is_single_numeric(tu, infinite = TRUE))
-    stop("tu has to be a single numeric value.")
+    stop("Argument 'tu' has to be a single numeric value")
 
   if(!is_single_numeric(B_effect) || B_effect <= 1)
-    stop("B_effect has to be a single integer value grater than 1.")
+    stop("Argument 'B_effect' has to be a single integer value grater than 1")
 
   if(length(sample_range)!=2L || sum(!is.finite(sample_range)))
-    stop("sample_range has to be a length-2 numeric vector.")
+    stop("Argument 'sample_range' has to be a length-2 numeric vector")
   if(sample_range[1] <= 1 || sample_range[1] > sample_range[2])
-    stop("sample_range minimum has to be grater than 1 and less than sample range maximum.")
+    stop("Argument 'sample_range' minimum has to be grater than 1 and less than sample range maximum")
 
   if(!is_single_numeric(tol) || tol <= 0 || tol >= 1)
-    stop("tol has to be a single value between 0 and 1.")
+    stop("Argument 'tol' has to be a single value between 0 and 1")
 
   if(!is.logical(display_message))
-    stop("display_message has to be logical.")
+    stop("Argument 'display_message' has to be logical")
 
-  if(mu != 0){
-    stop("Desing Analysis is allowed only for  Null Hypothesis mu = 0.")
-  }
+  # Check coherence effect_type, test_method and others
+  if(effect_type == "correlation" && test_method != "pearson")
+    stop("If  'effect_type = correlation', argument 'test_method' has to be 'pearson'")
+
+  if(effect_type == "cohen_d" && test_method == "pearson")
+    stop("No appropriate 'test_method' for 'effect_type = cohen_d'")
+
+  if(test_method == "paired" && (is.null(ratio_n2) || ratio_n2 != 1))
+    stop("If 'test_method = paired', argument 'ratio_n2' has to be 1")
+
+  if(test_method == "one_sample" && !is.null(ratio_n2))
+    stop("If 'test_method = one_sample', argument 'ratio_n2' must be set to NULL")
+
+  if(test_method %in% c("two_samples", "welch") && is.null(ratio_n2))
+    stop("Argument 'ratio_n2' is required for the specified 'test_method'")
+
 }
+
 
 #----    eval_effect_size    ----
 
 eval_effect_size <- function(effect_type, effect_size,
                              tl = -Inf, tu = Inf, B_effect = 250){
-  correlation <- effect_type == "correlation"
-  sample_fun <- is.function(effect_size)
+  correlation = effect_type == "correlation"
+  sample_fun = is.function(effect_size)
 
   if(!sample_fun){
-    res <- list(effect_function = "single_value",
-                effect_summary = summary(effect_size),
-                effect_samples = effect_size)
+    res = list(effect_function = "single_value",
+               effect_summary = summary(effect_size),
+               effect_samples = effect_size)
 
     if(correlation && (effect_size < -1 || effect_size > 1))
-      stop("If 'correlation' effect_size must be between -1 and 1")
+      stop("If 'effect_type = correlation', argument 'effect_size' must be between -1 and 1")
   } else {
 
     if(correlation && (tl < -1 || tu > 1)){
-      tl <- max(-1, tl)
-      tu <- min(tu, 1)
-      message(paste("If 'correlation' effect_size distribution is truncated between",
+      tl = max(-1, tl)
+      tu = min(tu, 1)
+      message(paste("If 'effect_type = correlation', effect_size distribution is truncated between",
                     tl,"and", tu))
     }
 
-    res <- sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
-    res <- c(res,
-             tl = tl,
-             tu = tu)
+    res = sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
+    res = c(res,
+            tl = tl,
+            tu = tu)
   }
 
   return(res)
 }
 
+
 #----    eval_samples    ----
 
-eval_samples <- function(ratio_n2, current_n, effect_type, paired = FALSE, ...){
+eval_samples <- function(ratio_n2, current_n){
 
-  if(effect_type == "cohen_d" && paired && ratio_n2 != 1){
-    stop("If paired = TRUE, ratio_n2 has to be 1")
-  }
-
-  sample_n1 <- current_n
+  sample_n1 = current_n
 
   if(is.null(ratio_n2)){
-    sample_n2 <- NULL
+    sample_n2 = NULL
   } else {
-    sample_n2 <- round(sample_n1 * ratio_n2,0)
+    sample_n2 = round(sample_n1 * ratio_n2,0)
   }
 
   return(list(sample_n1 = sample_n1, sample_n2 = sample_n2))
 }
 
+
 #----    eval_test_method    ----
 
-eval_test_method <- function(effect_type, effect_target, sample_n1, sample_n2 = NULL,
-                             paired=FALSE, var.equal = FALSE,
-                             method = c("pearson", "kendall", "spearman"), ...){
-  test_method <- " "
+eval_test_method <- function(effect_type, effect_target, test_method,
+                             sample_n1, sample_n2 = NULL,
+                             alternative, sig_level, ...){
+
+  # Define conf.level according to sig_level
+  conf.level = 1 - sig_level
 
   # Cohen d
   if(effect_type == "cohen_d"){
-    if(paired && ((is.null(sample_n2) || sample_n1!=sample_n2))){
-      stop("If paired = TRUE sample_n1 and sample_n2 must be equal.")
+
+    paired = FALSE
+    var.equal = FALSE
+
+    if(test_method == 'paired'){
+      paired = TRUE
+    } else if(test_method == 'two_samples'){
+      var.equal = TRUE
     }
 
-    groups <- sample_groups(sample_n1, effect_target, sample_n2)
-    t.test(groups$x, groups$y, paired=paired,...)
+    groups = sample_groups(sample_n1, effect_target, sample_n2)
+    t.test(groups$x, groups$y, paired = paired, var.equal = var.equal,
+           alternative = alternative, conf.level = conf.level)
 
-    if(is.null(sample_n2)){
-      test_method <- "one_sample"
-    } else if(paired){
-      test_method <- "paired"
-    } else if(var.equal) {
-      test_method <- "two_samples"
-    } else {
-      test_method <- "welch"
-    }
 
   } else if (effect_type == "correlation"){
-    method <- match.arg(method)
 
-    groups <- sample_obs_cor(sample_n1, effect_target)
-    cor.test(groups$x, groups$y, ...)
-
-    if(method == "pearson"){
-      test_method <- "pearson"
-    } else if(method == "spearman"){
-      stop("correlation with method = 'spearman' is not implemented. Only method = 'pearson' is available.")
-    } else if(method == "kendall") {
-      stop("correlation with method = 'kendall' is not implemented. Only method = 'pearson' is available.")
+    groups = sample_obs_cor(sample_n1, effect_target)
+    cor.test(groups$x, groups$y, method = test_method,
+             alternative = alternative, conf.level = conf.level)
     }
-  }
-
-  return(test_method)
 }
+
+#----
+
