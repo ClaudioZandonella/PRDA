@@ -18,7 +18,7 @@ compute_eigen_matrix <- function(effect_target){
 
 #----    compute_errors    ----
 
-compute_errors <- function(p.values, estimates, true_value, sig_level, alternative,B){
+compute_errors <- function(p.values, estimates, true_value, sig_level,B){
 
   sig_p.value = p.values < sig_level
   sum_sig_p = sum(sig_p.value)
@@ -63,11 +63,11 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL, test_method){
 
 #----    compute_critical_t    ----
 
-compute_critical_t <- function(df, sig_level, alternative = "two.sided"){
+compute_critical_t <- function(df, sig_level, alternative = "two_sided"){
 
   critical_t =  NULL
 
-  if(alternative == "two.sided"){
+  if(alternative == "two_sided"){
     critical_t = qt(1-sig_level/2, df)
   } else if(alternative == "greater"){
     critical_t = qt(1-sig_level, df)

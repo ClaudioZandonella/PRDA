@@ -28,7 +28,7 @@ mu2 = -.5
 test_that("evaluate the correct test method", {
   test_eval_test_method <- function(effect_type = "cohen_d", effect_target = .3,
                                     test_method, sample_n1 = nx, sample_n2 = ny,
-                                    sig_level = .05, alternative = "two.sided"){
+                                    sig_level = .05, alternative = "two_sided"){
     with_seed(2020, eval_test_method(effect_type = effect_type, effect_target = effect_target,
                      test_method = test_method, sample_n1 = sample_n1,
                      sample_n2 = sample_n2, sig_level = sig_level,

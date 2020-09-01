@@ -37,7 +37,7 @@ test_that("evaluate the correct df", {
 
 test_that("evaluate the correct critical effect", {
   expect_equal(compute_critical_effect(effect_type = "cohen_d", sample_n1 = nx, sample_n2 = ny2,
-                                       test_method = "one_sample", sig_level = .10, alternative = "two.sided"),
+                                       test_method = "one_sample", sig_level = .10, alternative = "two_sided"),
                list(df = nx-1, critical_effect = qt(1-sig_level/2, df = nx-1)/sqrt(nx)))
 
   expect_equal(compute_critical_effect(effect_type = "cohen_d", sample_n1 = nx, sample_n2 = ny,
@@ -48,7 +48,7 @@ test_that("evaluate the correct critical effect", {
                list(df = nx-1, critical_effect = qt(1-sig_level, df = nx-1)/sqrt(nx)+mu))
 
   expect_equal(compute_critical_effect(effect_type = "cohen_d", sample_n1 = nx, sample_n2 = ny2,
-                                       test_method = "two_samples", sig_level = .10, alternative = "two.sided"),
+                                       test_method = "two_samples", sig_level = .10, alternative = "two_sided"),
                list(df = nx+ny2-2, critical_effect = qt(1-sig_level/2, df = nx+ny2-2)*sqrt((nx+ny2)/(nx*ny2))))
   expect_equal(compute_critical_effect(effect_type = "cohen_d", sample_n1 = nx, sample_n2 = ny2,
                                        test_method = "two_samples", sig_level = .10, alternative = "less", mu = mu2),
@@ -60,12 +60,12 @@ test_that("evaluate the correct critical effect", {
                     critical_effect = qt(1-sig_level, df = ((nx+ny2)^2 * (nx-1) * (ny2-1))/(nx^2*(nx-1) + ny2^2*(ny2-1))
                                                         )*sqrt((nx+ny2)/(nx*ny2))))
   expect_equal(compute_critical_effect(effect_type = "cohen_d", sample_n1 = nx, sample_n2 = ny2,
-                                       test_method = "welch", sig_level = .10, alternative = "two.sided", mu = mu2),
+                                       test_method = "welch", sig_level = .10, alternative = "two_sided", mu = mu2),
                list(df = ((nx+ny2)^2 * (nx-1) * (ny2-1))/(nx^2*(nx-1) + ny2^2*(ny2-1)),
                     critical_effect = qt(1-sig_level/2, df = ((nx+ny2)^2 * (nx-1) * (ny2-1))/(nx^2*(nx-1) + ny2^2*(ny2-1))
                                          )*sqrt((nx+ny2)/(nx*ny2)) + mu2))
 
-  expect_equal(compute_critical_effect(effect_type = "correlation", sample_n1 = nx, sig_level = .10, alternative = "two.sided"),
+  expect_equal(compute_critical_effect(effect_type = "correlation", sample_n1 = nx, sig_level = .10, alternative = "two_sided"),
                list(df = nx-2, critical_effect = qt(1-sig_level/2, df = nx-2)/sqrt(nx-2+qt(1-sig_level/2, df = nx-2)^2)))
   expect_equal(compute_critical_effect(effect_type = "correlation", sample_n1 = nx, sig_level = .10, alternative = "greater"),
                list(df = nx-2, critical_effect = qt(1-sig_level, df = nx-2)/sqrt(nx-2+qt(1-sig_level, df = nx-2)^2)))

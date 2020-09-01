@@ -16,7 +16,7 @@ test_that("inputs are correctly specified", {
   # Redefine function to avoid specify arguments each the times
   test_prospective <- function(effect_size = .3, power = .8, ratio_n2 = 1,
                                effect_type = "correlation", test_method = "pearson",
-                               alternative = "two.sided", sig_level = .05, B = 10,
+                               alternative = "two_sided", sig_level = .05, B = 10,
                                seed = 2020, tl = -Inf, tu = Inf, B_effect = 10,
                                sample_range = c(2, 1000), tol = .01, display_message = FALSE){
     prospective(effect_size = effect_size, power = power, ratio_n2 = ratio_n2,

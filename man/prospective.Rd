@@ -8,8 +8,9 @@ prospective(
   effect_size,
   power,
   ratio_n2 = 1,
-  effect_type = c("cohen_d", "correlation"),
-  alternative = c("two.sided", "less", "greater"),
+  effect_type = c("correlation", "cohen_d"),
+  test_method = c("pearson", "two_samples", "one_sample", "paired", "welch"),
+  alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
   B = 10000,
   seed = NULL,
@@ -18,8 +19,7 @@ prospective(
   B_effect = 1000,
   sample_range = c(2, 1000),
   tol = 0.01,
-  display_message = TRUE,
-  ...
+  display_message = TRUE
 )
 }
 \arguments{
@@ -37,7 +37,7 @@ of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
 letter.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
-must be one of "two.sided" (default), "greater" or "less". You can specify
+must be one of "two_sided" (default), "greater" or "less". You can specify
 just the initial letter.}
 
 \item{sig_level}{a numeric value indicating the significance level on which
@@ -93,7 +93,7 @@ A list with class "design_analysis" containing the following
    (\code{alternative}), significance level (\code{sig_level})  and  degrees
    of freedom (\code{df}) of the statistical test; \code{critical_effect} the
    minimum absolute effect value that would result significant. Note that
-   \code{critical_effect} in the case of \code{alternative = "two.sided"} is
+   \code{critical_effect} in the case of \code{alternative = "two_sided"} is
    the absolute value and both positive and negative values should be
    considered.}
    \item{prospective_res}{a data frame with the results of the design

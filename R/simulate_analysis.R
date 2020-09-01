@@ -43,7 +43,7 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method
   res_errors = compute_errors(p.values = sim_res$p.value,
                         estimates = sim_res$estimate,
                         true_value = effect_target,
-                        sig_level = sig_level, alternative = alternative, B = B)
+                        sig_level = sig_level, B = B)
 
   return(res_errors)
 }
@@ -63,7 +63,7 @@ retrospective_correlation <- function(sample_n1, effect_target, test_method,
   res_errors = compute_errors(p.values = sim_res$p.value,
                                estimates = sim_res$estimate,
                                true_value = effect_target,
-                               sig_level = sig_level, alternative = alternative, B = B)
+                               sig_level = sig_level, B = B)
 
   return(res_errors)
 }

@@ -26,7 +26,7 @@
 #'  "correlation" (Pearson's correlation). You can specify just the initial
 #'  letter.
 #'@param alternative a character string specifying the alternative hypothesis,
-#'  must be one of "two.sided" (default), "greater" or "less". You can specify
+#'  must be one of "two_sided" (default), "greater" or "less". You can specify
 #'  just the initial letter.
 #'@param sig_level a numeric value indicating the significance level on which
 #'  the alternative hypothesis is evaluated.
@@ -66,7 +66,7 @@
 #'    significance level (\code{sig_level})  and  degrees of freedom (\code{df})
 #'    of the statistical test; \code{critical_effect} the minimum absolute
 #'    effect value that would result significant. Note that
-#'    \code{critical_effect} in the case of \code{alternative = "two.sided"} is
+#'    \code{critical_effect} in the case of \code{alternative = "two_sided"} is
 #'    the absolute value and both positive and negative values should be
 #'    considered.}
 #'    \item{retrospective_res}{a data frame with the results of the design
@@ -181,7 +181,7 @@ retrospective <- function(effect_size,
                           effect_type = c("correlation", "cohen_d"),
                           test_method = c("pearson", "two_samples", "one_sample",
                                           "paired", "welch"),
-                          alternative = c("two.sided","less","greater"),
+                          alternative = c("two_sided","less","greater"),
                           sig_level = .05,
                           B = 1e4,
                           seed = NULL,

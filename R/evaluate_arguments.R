@@ -178,6 +178,10 @@ eval_test_method <- function(effect_type, effect_target, test_method,
   # Define conf.level according to sig_level
   conf.level = 1 - sig_level
 
+  # Set correct alternative
+  if(alternative == "two_sided")
+    alternative = "two.sided"
+
   # Cohen d
   if(effect_type == "cohen_d"){
 

@@ -13,7 +13,7 @@ test_that("inputs are correctly specified", {
   # Redefine function to avoid specify arguments each the times
   test_retrospective <- function(effect_size = .3, sample_n1 = 20, sample_n2 = NULL,
                                  effect_type = "correlation", test_method = "pearson",
-                                 alternative = "two.sided", sig_level = .05, B = 10,
+                                 alternative = "two_sided", sig_level = .05, B = 10,
                                  seed = 2020, tl = -Inf, tu = Inf, B_effect = 10){
     retrospective(effect_size = effect_size, sample_n1 = sample_n1, sample_n2 = sample_n2,
                   effect_type = effect_type, test_method = test_method, alternative = alternative,
