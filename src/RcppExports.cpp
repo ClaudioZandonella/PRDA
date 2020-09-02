@@ -7,8 +7,8 @@
 using namespace Rcpp;
 
 // cohen_loop
-List cohen_loop(double sample_n1, double effect_target, double sample_n2, String test_method, String alternative, double mu, int B);
-RcppExport SEXP _PRDAbeta_cohen_loop(SEXP sample_n1SEXP, SEXP effect_targetSEXP, SEXP sample_n2SEXP, SEXP test_methodSEXP, SEXP alternativeSEXP, SEXP muSEXP, SEXP BSEXP) {
+List cohen_loop(double sample_n1, double effect_target, double sample_n2, String test_method, String alternative, double ratio_sd, double mu, int B);
+RcppExport SEXP _PRDAbeta_cohen_loop(SEXP sample_n1SEXP, SEXP effect_targetSEXP, SEXP sample_n2SEXP, SEXP test_methodSEXP, SEXP alternativeSEXP, SEXP ratio_sdSEXP, SEXP muSEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,9 +17,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type sample_n2(sample_n2SEXP);
     Rcpp::traits::input_parameter< String >::type test_method(test_methodSEXP);
     Rcpp::traits::input_parameter< String >::type alternative(alternativeSEXP);
+    Rcpp::traits::input_parameter< double >::type ratio_sd(ratio_sdSEXP);
     Rcpp::traits::input_parameter< double >::type mu(muSEXP);
     Rcpp::traits::input_parameter< int >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(cohen_loop(sample_n1, effect_target, sample_n2, test_method, alternative, mu, B));
+    rcpp_result_gen = Rcpp::wrap(cohen_loop(sample_n1, effect_target, sample_n2, test_method, alternative, ratio_sd, mu, B));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -85,7 +86,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_PRDAbeta_cohen_loop", (DL_FUNC) &_PRDAbeta_cohen_loop, 7},
+    {"_PRDAbeta_cohen_loop", (DL_FUNC) &_PRDAbeta_cohen_loop, 8},
     {"_PRDAbeta_corC", (DL_FUNC) &_PRDAbeta_corC, 2},
     {"_PRDAbeta_cor_loop", (DL_FUNC) &_PRDAbeta_cor_loop, 4},
     {"_PRDAbeta_meanC", (DL_FUNC) &_PRDAbeta_meanC, 1},

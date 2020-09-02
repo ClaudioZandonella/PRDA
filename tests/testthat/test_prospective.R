@@ -16,14 +16,15 @@ test_that("inputs are correctly specified", {
   # Redefine function to avoid specify arguments each the times
   test_prospective <- function(effect_size = .3, power = .8, ratio_n2 = 1,
                                effect_type = "correlation", test_method = "pearson",
-                               alternative = "two_sided", sig_level = .05, B = 10,
-                               seed = 2020, tl = -Inf, tu = Inf, B_effect = 10,
-                               sample_range = c(2, 1000), tol = .01, display_message = FALSE){
+                               alternative = "two_sided", sig_level = .05,
+                               ratio_sd = 1, B = 10, seed = 2020, tl = -Inf, tu = Inf,
+                               B_effect = 10, sample_range = c(2, 1000), tol = .01,
+                               display_message = FALSE){
     prospective(effect_size = effect_size, power = power, ratio_n2 = ratio_n2,
                 effect_type = effect_type, test_method = test_method,
-                alternative = alternative, sig_level = sig_level, B = B, seed = seed,
-                tl = tl, tu = tu, B_effect = B_effect, sample_range = sample_range,
-                tol = tol, display_message = display_message)
+                alternative = alternative, sig_level = sig_level, ratio_sd = ratio_sd,
+                B = B, seed = seed, tl = tl, tu = tu, B_effect = B_effect,
+                sample_range = sample_range, tol = tol, display_message = display_message)
   }
 
   #----    Arguments    ----
@@ -56,6 +57,14 @@ test_that("inputs are correctly specified", {
   expect_error(test_prospective(sig_level = 0), sig_level_text)
   expect_error(test_prospective(sig_level = "ciao"), sig_level_text)
   expect_error(test_prospective(sig_level = c(.1,.2)), sig_level_text)
+
+  # ratio_sd
+  ratio_sd_text = "Argument 'ratio_sd' has to be a single finite number grater than 0"
+  expect_error(test_prospective(ratio_sd = -1), ratio_sd_text)
+  expect_error(test_prospective(ratio_sd = Inf), ratio_sd_text)
+  expect_error(test_prospective(ratio_sd = 0), ratio_sd_text)
+  expect_error(test_prospective(ratio_sd = "ciao"), ratio_sd_text)
+  expect_error(test_prospective(ratio_sd = c(.1,.2)), ratio_sd_text)
 
   # B
   B_text <- "Argument 'B' has to be a single integer value grater than 1"
@@ -153,9 +162,18 @@ test_that("inputs are correctly specified", {
   expect_error(test_prospective(effect_size = .1, effect_type = "cohen_d", test_method = "two_samples",
                                 sample_range =  c(5,100), B=100), sample_range)
 
+  # tol issue
   tol_text <- "Required power according to tolerance value can not be obtained.\nIncrease tolerance value."
   expect_message(test_prospective(effect_size = .35, B=100, sample_range = c(40,120),
                                   tol=.001), tol_text)
+
+  # welch and ratio_sd
+  t_test_ratio_text1 = "Argument 'ratio_sd' is required only for 'test_method = welch'"
+  t_test_ratio_text2 = "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead"
+  expect_error(test_prospective(ratio_sd = 1.5, effect_type = "cohen_d", test_method = "two_samples"),
+               t_test_ratio_text1)
+  expect_error(test_prospective(ratio_sd = 1, effect_type = "cohen_d", test_method = "welch"),
+               t_test_ratio_text2)
 })
 
 
@@ -171,18 +189,18 @@ test_that("same results as previous run", {
                      file="test_cache/res_corr_single_pro", update= FALSE)
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = NULL, effect_type = "cohen_d", test_method = "one_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_one_sample_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
+  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5, B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_cohen_single_pro", update= FALSE)
 
 
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "welch", power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5, power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
                      file = "test_cache/effect_info_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
                                  B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = NULL, effect_type = "cohen_d", test_method = "one_sample",
                                  B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
                      file = "test_cache/res_one_sample_dist_pro",update= FALSE)
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch",
+  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5,
                                  B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
                      file = "test_cache/res_cohen_dist_pro",update= FALSE)
 

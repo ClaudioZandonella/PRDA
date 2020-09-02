@@ -41,7 +41,8 @@ compute_errors <- function(p.values, estimates, true_value, sig_level,B){
 
 #----    compute_df    ----
 
-compute_df <- function(effect_type, sample_n1, sample_n2 = NULL, test_method){
+compute_df <- function(effect_type, sample_n1, sample_n2 = NULL,
+                       ratio_sd =1, test_method){
   df = NULL
   if(effect_type == "cohen_d"){
     if (test_method == "two_samples") {
@@ -49,7 +50,11 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL, test_method){
     } else if (test_method == "welch"){
       df1 = sample_n1-1L
       df2 = sample_n2-1L
-      df = ((sample_n1+sample_n2)^2 * df1 * df2)/(sample_n1^2*df1 + sample_n2^2*df2)
+      var1 = ratio_sd^2
+      var2 = 1
+      ratio1 = var1/sample_n1
+      ratio2 = var2/sample_n2
+      df = (ratio1 + ratio2)^2/(ratio1^2/df1 + ratio2^2/df2)
     } else if (test_method %in% c("one_sample","paired")){
       df = sample_n1-1L
     }
@@ -82,13 +87,14 @@ compute_critical_t <- function(df, sig_level, alternative = "two_sided"){
 #----    compute_critical_effect    ----
 
 compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, test_method,
-                                    sig_level, alternative, mu = 0, ...){
+                                    sig_level, alternative, ratio_sd = 1, mu = 0, ...){
 
 
   df = compute_df(effect_type = effect_type,
                   sample_n1 = sample_n1,
                   sample_n2 = sample_n2,
-                  test_method = test_method)
+                  test_method = test_method,
+                  ratio_sd = ratio_sd)
 
   critical_t = compute_critical_t(df, sig_level, alternative)
 
@@ -99,8 +105,12 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, te
       critical_effect = critical_t /sqrt(sample_n1)
     } else if (test_method == "paired"){
       critical_effect = critical_t /sqrt(sample_n1) + mu
-    } else if (test_method %in% c("two_samples", "welch")) {
+    } else if (test_method == "two_samples") {
       critical_effect = critical_t * sqrt((sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
+    } else if (test_method == "welch") {
+      var1 = ratio_sd^2
+      var2 = 1
+      critical_effect = critical_t * sqrt(2/(sample_n1 * sample_n2) * (var1*sample_n2 + var2*sample_n1)/(var1 + var2)) + mu
     }
   } else if(effect_type == "correlation"){
     critical_effect = critical_t /sqrt(sample_n1-2+critical_t^2)

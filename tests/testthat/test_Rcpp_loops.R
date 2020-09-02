@@ -30,28 +30,22 @@ my <- mean(y)
 nx <- length(x)
 ny <- length(y)
 
+# for case ratio_sd = 2
+obs2 <- with_seed(2020, list(x = rnorm(20, .3, 2),
+                             y = rnorm(20, 0, 1)))
+
 
 #----    eval_cohen_loop    ----
 
 # Redefine function to avoid specify arguments each the times
 test_cohen_loop <- function(sample_n1 =20 ,effect_target = .3, sample_n2 = 20,
-                            test_method, alternative, mu = 0, B = 1){
+                            test_method, alternative, ratio_sd = 1, mu = 0, B = 1){
   with_seed(2020, cohen_loop(sample_n1 = sample_n1, effect_target = effect_target,
                              sample_n2 = sample_n2, test_method = test_method,
-                             alternative = alternative, mu = mu, B = B))
+                             alternative = alternative, ratio_sd = ratio_sd, mu = mu, B = B))
 }
 
 test_that("cohen_loop gives the same p-value as t.test", {
-
-  # Welch t-test
-  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided")$p.value,
-               t.test(x,y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater")$p.value,
-               t.test(x,y, paired=F, var.equal=F, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less")$p.value,
-               t.test(x,y, paired=F, var.equal=F, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", mu = 1.5)$p.value,
-               t.test(x,y, paired=F, var.equal=F, mu = 1.5)$p.value)
 
   # Two sample t-test
   expect_equal(test_cohen_loop(test_method = "two_samples", alternative = "two_sided")$p.value,
@@ -85,6 +79,25 @@ test_that("cohen_loop gives the same p-value as t.test", {
                t.test(x, alternative = "less")$p.value)
   expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "two_sided", mu = 1.5)$p.value,
                t.test(x, mu = 1.5)$p.value)
+
+  # Welch t-test case ratio_sd = 1
+  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided")$p.value,
+               t.test(x,y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater")$p.value,
+               t.test(x,y, paired=F, var.equal=F, alternative = "greater")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less")$p.value,
+               t.test(x,y, paired=F, var.equal=F, alternative = "less")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", mu = 1.5)$p.value,
+               t.test(x,y, paired=F, var.equal=F, mu = 1.5)$p.value)
+  # case ratio_sd = 2
+  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided", ratio_sd = 2)$p.value,
+               t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater", ratio_sd = 2)$p.value,
+               t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "greater")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less", ratio_sd = 2)$p.value,
+               t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "less")$p.value)
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", ratio_sd = 2, mu = 1.5)$p.value,
+               t.test(obs2$x,obs2$y, paired=F, var.equal=F, mu = 1.5)$p.value)
 })
 
 test_that("cohen_loop gives the correct estimate", {
@@ -106,9 +119,12 @@ test_that("cohen_loop gives the correct estimate", {
   expect_equal(test_cohen_loop(test_method = "two_samples",alternative = "two_sided")$estimate,
                (1 - (3/(4*(nx+ny)-9)))*(mx-my)/pool_sd(x,y))
 
-  # Welch t-test
+  # Welch t-test case ratio_sd = 1
   expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided")$estimate,
                (mx-my)/sqrt((var(x)+var(y))/2))
+  # case ratio_sd = 2
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", ratio_sd = 2)$estimate,
+               (mean(obs2$x)-mean(obs2$y))/sqrt((var(obs2$x)+var(obs2$y))/2))
 })
 
 

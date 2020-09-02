@@ -4,7 +4,8 @@
 
 #----    simulate_analysis    ----
 
-simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n1, sample_n2, alternative, sig_level, B, ...){
+simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n1,
+                              sample_n2, alternative, sig_level, ratio_sd, B, ...){
 
   arguments <-  as.list(match.call()[-1])
 
@@ -33,11 +34,11 @@ simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n
 #----    retrospective_cohen    ----
 
 retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method,
-                                alternative, sig_level, B, mu = 0, ...){
+                                alternative, sig_level, ratio_sd, B, mu = 0, ...){
 
   sample_n2_new = ifelse(is.null(sample_n2), 0, sample_n2) # C++ do not use NULL so set to 0
   sim_res = cohen_loop(sample_n1 = sample_n1, effect_target = effect_target, sample_n2 = sample_n2_new,
-                        test_method = test_method, alternative = alternative, mu = mu,  B = B)
+                        test_method = test_method, alternative = alternative, ratio_sd = ratio_sd,  mu = mu,  B = B)
   sim_res = list2data(sim_res)
 
   res_errors = compute_errors(p.values = sim_res$p.value,

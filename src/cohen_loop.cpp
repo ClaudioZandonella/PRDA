@@ -13,10 +13,13 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 List cohen_loop(double sample_n1, double effect_target, double sample_n2,
-                  String test_method, String alternative, double mu, int B) {
+                  String test_method, String alternative, double ratio_sd = 1,
+                  double mu = 0, int B = 1000) {
 
   NumericVector estimate(B);
   NumericVector pval(B);
+  NumericVector x(sample_n1);
+  NumericVector y = 0;
   double df = 0;
   double mx = 0;
   double vx = 0;
@@ -30,11 +33,12 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
 
   for(int i = 0; i < B; i++){
     // sample obs
-    NumericVector x = rnorm(sample_n1, effect_target, 1);
-    NumericVector y = 0;
     if(sample_n2 != 0){
+      x = rnorm(sample_n1, effect_target, ratio_sd);
       y = rnorm(sample_n2, 0, 1);
-      }
+    } else {
+      x = rnorm(sample_n1, effect_target, 1);
+    }
 
     // compute test statisttic
     if (test_method == "one_sample") {

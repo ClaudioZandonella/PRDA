@@ -12,6 +12,7 @@ retrospective(
   test_method = c("pearson", "two_samples", "one_sample", "paired", "welch"),
   alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
+  ratio_sd = 1,
   B = 10000,
   seed = NULL,
   tl = -Inf,

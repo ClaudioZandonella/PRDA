@@ -26,13 +26,16 @@ mu2 = -.5
 #----    eval_test_method    ----
 
 test_that("evaluate the correct test method", {
+
+  # Redefine function to avoid specify arguments each the times
   test_eval_test_method <- function(effect_type = "cohen_d", effect_target = .3,
                                     test_method, sample_n1 = nx, sample_n2 = ny,
-                                    sig_level = .05, alternative = "two_sided"){
+                                    sig_level = .05, alternative = "two_sided",
+                                    ratio_sd = 1){
     with_seed(2020, eval_test_method(effect_type = effect_type, effect_target = effect_target,
                      test_method = test_method, sample_n1 = sample_n1,
                      sample_n2 = sample_n2, sig_level = sig_level,
-                     alternative = alternative))
+                     alternative = alternative, ratio_sd = ratio_sd))
   }
 
   # Cohen's d
@@ -43,6 +46,12 @@ test_that("evaluate the correct test method", {
   expect_equal(test_eval_test_method(test_method = "two_samples", sample_n2 = ny),
                t.test(groups$x, groups$y, var.equal = TRUE))
   expect_equal(test_eval_test_method(test_method = "welch", sample_n2 = ny),
+               t.test(groups$x, groups$y))
+
+  # welch and ratio_n2
+  groups = with_seed(2020, list(x = rnorm(15, .3, 1.5),
+                                 y = rnorm(15, 0, 1)))
+  expect_equal(test_eval_test_method(test_method = "welch", sample_n2 = ny, ratio_sd = 1.5),
                t.test(groups$x, groups$y))
 
   #Correlation

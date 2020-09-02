@@ -13,11 +13,11 @@ test_that("inputs are correctly specified", {
   # Redefine function to avoid specify arguments each the times
   test_retrospective <- function(effect_size = .3, sample_n1 = 20, sample_n2 = NULL,
                                  effect_type = "correlation", test_method = "pearson",
-                                 alternative = "two_sided", sig_level = .05, B = 10,
-                                 seed = 2020, tl = -Inf, tu = Inf, B_effect = 10){
+                                 alternative = "two_sided", sig_level = .05, ratio_sd = 1,
+                                 B = 10, seed = 2020, tl = -Inf, tu = Inf, B_effect = 10){
     retrospective(effect_size = effect_size, sample_n1 = sample_n1, sample_n2 = sample_n2,
                   effect_type = effect_type, test_method = test_method, alternative = alternative,
-                  sig_level = sig_level, B = B, seed = seed, tl = tl, tu = tu,
+                  sig_level = sig_level, ratio_sd = ratio_sd, B = B, seed = seed, tl = tl, tu = tu,
                   B_effect = B_effect)
   }
 
@@ -52,6 +52,14 @@ test_that("inputs are correctly specified", {
   expect_error(test_retrospective(sig_level = 0), sig_level_text)
   expect_error(test_retrospective(sig_level = "ciao"), sig_level_text)
   expect_error(test_retrospective(sig_level = c(.1,.2)), sig_level_text)
+
+  # ratio_sd
+  ratio_sd_text = "Argument 'ratio_sd' has to be a single finite number grater than 0"
+  expect_error(test_retrospective(ratio_sd = -1), ratio_sd_text)
+  expect_error(test_retrospective(ratio_sd = Inf), ratio_sd_text)
+  expect_error(test_retrospective(ratio_sd = 0), ratio_sd_text)
+  expect_error(test_retrospective(ratio_sd = "ciao"), ratio_sd_text)
+  expect_error(test_retrospective(ratio_sd = c(.1,.2)), ratio_sd_text)
 
   # B
   B_text = "Argument 'B' has to be a single integer value grater than 1"
@@ -117,6 +125,14 @@ test_that("inputs are correctly specified", {
                t_test_text)
   expect_error(test_retrospective(sample_n2 = NULL, effect_type = "cohen_d", test_method = "welch"),
                t_test_text)
+
+  # welch and ratio_sd
+  t_test_ratio_text1 = "Argument 'ratio_sd' is required only for 'test_method = welch'"
+  t_test_ratio_text2 = "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead"
+  expect_error(test_retrospective(sample_n2 = 20, ratio_sd = 1.5, effect_type = "cohen_d", test_method = "two_samples"),
+               t_test_ratio_text1)
+  expect_error(test_retrospective(sample_n2 = 20, ratio_sd = 1, effect_type = "cohen_d", test_method = "welch"),
+               t_test_ratio_text2)
 })
 
 
@@ -128,11 +144,11 @@ test_that("same results as previous run", {
   expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "one_sample",
                                    seed = 2020)$effect_info, file = "test_cache/effect_info_single_cohen", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, effect_type = "correlation", seed = 2020)$retrospective_res,
-                            file="test_cache/res_corr_single", update= FALSE)
+                            file = "test_cache/res_corr_single", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "one_sample",
                                    seed = 2020)$retrospective_res, file="test_cache/res_cohen_single", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "welch",
-                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_welch", update= FALSE)
+                                   ratio_sd = 1.5, seed = 2020)$retrospective_res, file="test_cache/res_cohen_welch", update= FALSE)
 
 
   expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "correlation",
@@ -142,7 +158,7 @@ test_that("same results as previous run", {
   expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "one_sample",
                                    seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_cohen_dist", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "welch",
-                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_welch_dist", update= FALSE)
+                                   ratio_sd = 1.5, seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_welch_dist", update= FALSE)
 
   })
 

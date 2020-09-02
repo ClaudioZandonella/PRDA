@@ -6,8 +6,8 @@
 #----    eval_arguments_retrospective    ----
 
 eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
-                                         effect_type, test_method,
-                                         sig_level, B, seed, tl, tu, B_effect, ...){
+                                         effect_type, test_method, sig_level,
+                                         ratio_sd, B, seed, tl, tu, B_effect, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
     stop("Argument 'effect_size' has to be a single numeric value or a function")
@@ -20,6 +20,9 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("Argument 'sig_level' has to be a single value between 0 and 1")
+
+  if(!is_single_numeric(ratio_sd) || ratio_sd <= 0)
+    stop("Argument 'ratio_sd' has to be a single finite number grater than 0")
 
   if(!is_single_numeric(B) || B <= 1)
     stop("Argument 'B' has to be a single integer value grater than 1")
@@ -52,7 +55,11 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
   if(test_method %in% c("two_samples", "welch") && is.null(sample_n2))
     stop("Argument 'sample_n2' is required for the specified 'test_method'")
 
+  if(!isTRUE(all.equal(ratio_sd, 1)) && test_method != "welch")
+    stop("Argument 'ratio_sd' is required only for 'test_method = welch'")
 
+  if(test_method == "welch" && isTRUE(all.equal(ratio_sd, 1)))
+    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead")
 }
 
 
@@ -60,7 +67,7 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
 eval_arguments_prospective <- function(effect_size, power, ratio_n2,
                                        effect_type, test_method,
-                                       sig_level, B, seed, tl, tu, B_effect,
+                                       sig_level, ratio_sd, B, seed, tl, tu, B_effect,
                                        sample_range, tol, display_message, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
@@ -74,6 +81,9 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2,
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("Argument 'sig_level' has to be a single value between 0 and 1")
+
+  if(!is_single_numeric(ratio_sd) || ratio_sd <= 0)
+    stop("Argument 'ratio_sd' has to be a single finite number grater than 0")
 
   if(!is_single_numeric(B) || B <= 1)
     stop("Argument 'B' has to be a single integer value grater than 1")
@@ -116,6 +126,12 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2,
 
   if(test_method %in% c("two_samples", "welch") && is.null(ratio_n2))
     stop("Argument 'ratio_n2' is required for the specified 'test_method'")
+
+  if(!isTRUE(all.equal(ratio_sd, 1)) && test_method != "welch")
+    stop("Argument 'ratio_sd' is required only for 'test_method = welch'")
+
+  if(test_method == "welch" && isTRUE(all.equal(ratio_sd, 1)))
+    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead")
 
 }
 
@@ -173,7 +189,7 @@ eval_samples <- function(ratio_n2, current_n){
 
 eval_test_method <- function(effect_type, effect_target, test_method,
                              sample_n1, sample_n2 = NULL,
-                             alternative, sig_level, ...){
+                             alternative, sig_level, ratio_sd = 1, ...){
 
   # Define conf.level according to sig_level
   conf.level = 1 - sig_level
@@ -194,7 +210,7 @@ eval_test_method <- function(effect_type, effect_target, test_method,
       var.equal = TRUE
     }
 
-    groups = sample_groups(sample_n1, effect_target, sample_n2)
+    groups = sample_groups(sample_n1, effect_target, sample_n2, ratio_sd)
     t.test(groups$x, groups$y, paired = paired, var.equal = var.equal,
            alternative = alternative, conf.level = conf.level)
 
