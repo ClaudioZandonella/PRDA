@@ -65,7 +65,7 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
 #----    eval_arguments_prospective    ----
 
-eval_arguments_prospective <- function(effect_size, power, ratio_n2,
+eval_arguments_prospective <- function(effect_size, power, ratio_n,
                                        effect_type, test_method,
                                        sig_level, ratio_sd, B, seed, tl, tu, B_effect,
                                        sample_range, tol, display_message, ...){
@@ -76,8 +76,8 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2,
   if(!is_single_numeric(power) || power >= 1 || power <= 0)
     stop("Argument 'power' has to be a single value between 0 and 1")
 
-  if(!is.null(ratio_n2) && (!is_single_numeric(ratio_n2) || ratio_n2 < 1))
-    stop("If specified, argument 'ratio_n2' has to be a single integer value grater or equal than 1")
+  if(!is.null(ratio_n) && (!is_single_numeric(ratio_n) || ratio_n < 1))
+    stop("If specified, argument 'ratio_n' has to be a single integer value grater or equal than 1")
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("Argument 'sig_level' has to be a single value between 0 and 1")
@@ -118,14 +118,14 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2,
   if(effect_type == "cohen_d" && test_method == "pearson")
     stop("No appropriate 'test_method' for 'effect_type = cohen_d'")
 
-  if(test_method == "paired" && (is.null(ratio_n2) || ratio_n2 != 1))
-    stop("If 'test_method = paired', argument 'ratio_n2' has to be 1")
+  if(test_method == "paired" && (is.null(ratio_n) || ratio_n != 1))
+    stop("If 'test_method = paired', argument 'ratio_n' has to be 1")
 
-  if(test_method == "one_sample" && !is.null(ratio_n2))
-    stop("If 'test_method = one_sample', argument 'ratio_n2' must be set to NULL")
+  if(test_method == "one_sample" && !is.null(ratio_n))
+    stop("If 'test_method = one_sample', argument 'ratio_n' must be set to NULL")
 
-  if(test_method %in% c("two_sample", "welch") && is.null(ratio_n2))
-    stop("Argument 'ratio_n2' is required for the specified 'test_method'")
+  if(test_method %in% c("two_sample", "welch") && is.null(ratio_n))
+    stop("Argument 'ratio_n' is required for the specified 'test_method'")
 
   if(!isTRUE(all.equal(ratio_sd, 1)) && test_method != "welch")
     stop("Argument 'ratio_sd' is required only for 'test_method = welch'")
@@ -171,14 +171,15 @@ eval_effect_size <- function(effect_type, effect_size,
 
 #----    eval_samples    ----
 
-eval_samples <- function(ratio_n2, current_n){
+eval_samples <- function(ratio_n, current_n){
 
-  sample_n1 = current_n
 
-  if(is.null(ratio_n2)){
+  if(is.null(ratio_n)){
+    sample_n1 = current_n
     sample_n2 = NULL
   } else {
-    sample_n2 = round(sample_n1 * ratio_n2,0)
+    sample_n1 = round(current_n * ratio_n,0)
+    sample_n2 = current_n
   }
 
   return(list(sample_n1 = sample_n1, sample_n2 = sample_n2))
@@ -201,16 +202,18 @@ eval_test_method <- function(effect_type, effect_target, test_method,
   # Cohen d
   if(effect_type == "cohen_d"){
 
+    groups = sample_groups(sample_n1, effect_target, sample_n2, ratio_sd)
+
     paired = FALSE
     var.equal = FALSE
-
     if(test_method == 'paired'){
       paired = TRUE
+      groups$x = groups$x -groups$y
+      groups$y = rep(0, sample_n1)
     } else if(test_method == 'two_sample'){
       var.equal = TRUE
     }
 
-    groups = sample_groups(sample_n1, effect_target, sample_n2, ratio_sd)
     t.test(groups$x, groups$y, paired = paired, var.equal = var.equal,
            alternative = alternative, conf.level = conf.level)
 
