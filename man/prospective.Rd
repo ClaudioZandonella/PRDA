@@ -9,15 +9,17 @@ prospective(
   power,
   ratio_n2 = 1,
   effect_type = c("correlation", "cohen_d"),
-  test_method = c("pearson", "two_samples", "one_sample", "paired", "welch"),
+  test_method = c("pearson", "two_sample", "welch", "paired", "one_sample"),
   alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
+  ratio_sd = 1,
   B = 10000,
   seed = NULL,
   tl = -Inf,
   tu = Inf,
   B_effect = 1000,
   sample_range = c(2, 1000),
+  eval_power = c("median", "mean"),
   tol = 0.01,
   display_message = TRUE
 )

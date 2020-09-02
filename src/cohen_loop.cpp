@@ -55,7 +55,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       stderror = sqrt(vx / sample_n1);
       tstat = (mx - mu) / stderror;
       estimate[i] = (sample_n1-2)/(sample_n1-1.25) * mx / sd(x);
-    } else if (test_method == "two_samples") {
+    } else if (test_method == "two_sample") {
       mx = mean(x);
       vx = var(x);
       df = sample_n1+sample_n2-2;

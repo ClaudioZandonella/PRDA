@@ -45,7 +45,7 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL,
                        ratio_sd =1, test_method){
   df = NULL
   if(effect_type == "cohen_d"){
-    if (test_method == "two_samples") {
+    if (test_method == "two_sample") {
       df = sample_n1 + sample_n2 - 2L
     } else if (test_method == "welch"){
       df1 = sample_n1-1L
@@ -105,7 +105,7 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, te
       critical_effect = critical_t /sqrt(sample_n1)
     } else if (test_method == "paired"){
       critical_effect = critical_t /sqrt(sample_n1) + mu
-    } else if (test_method == "two_samples") {
+    } else if (test_method == "two_sample") {
       critical_effect = critical_t * sqrt((sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
     } else if (test_method == "welch") {
       var1 = ratio_sd^2

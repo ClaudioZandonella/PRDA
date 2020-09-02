@@ -25,6 +25,10 @@
 #'  of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
 #'  "correlation" (Pearson's correlation). You can specify just the initial
 #'  letter.
+#'@param test_method a character string specifying the test type, must be one
+#'  of "pearson" (default, Pearson's correlation), "two_sample" (independent
+#'  two-sample). You can specify just the initial
+#'  letter.
 #'@param alternative a character string specifying the alternative hypothesis,
 #'  must be one of "two_sided" (default), "greater" or "less". You can specify
 #'  just the initial letter.
@@ -179,8 +183,8 @@ retrospective <- function(effect_size,
                           sample_n1,
                           sample_n2 = NULL,
                           effect_type = c("correlation", "cohen_d"),
-                          test_method = c("pearson", "two_samples", "one_sample",
-                                          "paired", "welch"),
+                          test_method = c("pearson", "two_sample", "welch",
+                                          "paired", "one_sample"),
                           alternative = c("two_sided","less","greater"),
                           sig_level = .05,
                           ratio_sd = 1,

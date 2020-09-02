@@ -52,14 +52,14 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
   if(test_method == 'paired' && ((is.null(sample_n2) || sample_n1!=sample_n2)))
     stop("If 'test_method = paired', arguments 'sample_n1' and 'sample_n2' must be equal")
 
-  if(test_method %in% c("two_samples", "welch") && is.null(sample_n2))
+  if(test_method %in% c("two_sample", "welch") && is.null(sample_n2))
     stop("Argument 'sample_n2' is required for the specified 'test_method'")
 
   if(!isTRUE(all.equal(ratio_sd, 1)) && test_method != "welch")
     stop("Argument 'ratio_sd' is required only for 'test_method = welch'")
 
   if(test_method == "welch" && isTRUE(all.equal(ratio_sd, 1)))
-    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead")
+    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_sample' instead")
 }
 
 
@@ -124,14 +124,14 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n2,
   if(test_method == "one_sample" && !is.null(ratio_n2))
     stop("If 'test_method = one_sample', argument 'ratio_n2' must be set to NULL")
 
-  if(test_method %in% c("two_samples", "welch") && is.null(ratio_n2))
+  if(test_method %in% c("two_sample", "welch") && is.null(ratio_n2))
     stop("Argument 'ratio_n2' is required for the specified 'test_method'")
 
   if(!isTRUE(all.equal(ratio_sd, 1)) && test_method != "welch")
     stop("Argument 'ratio_sd' is required only for 'test_method = welch'")
 
   if(test_method == "welch" && isTRUE(all.equal(ratio_sd, 1)))
-    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead")
+    stop("Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_sample' instead")
 
 }
 
@@ -206,7 +206,7 @@ eval_test_method <- function(effect_type, effect_target, test_method,
 
     if(test_method == 'paired'){
       paired = TRUE
-    } else if(test_method == 'two_samples'){
+    } else if(test_method == 'two_sample'){
       var.equal = TRUE
     }
 

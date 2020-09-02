@@ -48,13 +48,13 @@ test_cohen_loop <- function(sample_n1 =20 ,effect_target = .3, sample_n2 = 20,
 test_that("cohen_loop gives the same p-value as t.test", {
 
   # Two sample t-test
-  expect_equal(test_cohen_loop(test_method = "two_samples", alternative = "two_sided")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "two_sided")$p.value,
                t.test(x,y, paired=F, var.equal=T, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_samples", alternative = "greater")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "greater")$p.value,
                t.test(x,y, paired=F, var.equal=T, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_samples",alternative = "less")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "less")$p.value,
                t.test(x,y, paired=F, var.equal=T, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_samples",alternative = "two_sided", mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "two_sided", mu = 1.5)$p.value,
                t.test(x,y, paired=F, var.equal=T, mu = 1.5)$p.value)
 
   # Paired t-test
@@ -116,7 +116,7 @@ test_that("cohen_loop gives the correct estimate", {
                (nx-2)/(nx-1.25)*mean(x)/sd(x))
 
   # Two samples t-test (Hedge's correction)
-  expect_equal(test_cohen_loop(test_method = "two_samples",alternative = "two_sided")$estimate,
+  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "two_sided")$estimate,
                (1 - (3/(4*(nx+ny)-9)))*(mx-my)/pool_sd(x,y))
 
   # Welch t-test case ratio_sd = 1
@@ -141,12 +141,12 @@ test_that("cohen_loop works for different sample_n2", {
 
   # p.value
   expect_equal(with_seed(2021, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 30,
-                        test_method = "two_samples",alternative = "two_sided", mu = 0, B = 1 ))$p.value,
+                        test_method = "two_sample",alternative = "two_sided", mu = 0, B = 1 ))$p.value,
                t.test(x_bis, y_bis, paired=F, var.equal=T, alternative = "two.sided")$p.value)
 
   # effect
   expect_equal(with_seed(2021, cohen_loop(sample_n1 = 20, effect_target = .3, sample_n2 = 30,
-                        test_method = "two_samples",alternative = "two_sided", mu = 0, B = 1 ))$estimate,
+                        test_method = "two_sample",alternative = "two_sided", mu = 0, B = 1 ))$estimate,
                (1 - (3/(4*(nx_bis+ny_bis)-9)))*(mx_bis-my_bis)/pool_sd(x_bis,y_bis))
 
 })

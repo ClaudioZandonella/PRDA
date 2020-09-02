@@ -26,7 +26,7 @@ my_t_test <-function(x, y = NULL, test_method, alternative = "two.sided",
     stderr <- sqrt(vx/nx)
     tstat <- (mx-mu)/stderr
     estimate <- (nx-2)/(nx-1.25) * mx/sd(x)
-  } else if (test_method == "two_samples") {
+  } else if (test_method == "two_sample") {
     nx <- length(x)
     mx <- meanC(x)
     vx <- varC(x)

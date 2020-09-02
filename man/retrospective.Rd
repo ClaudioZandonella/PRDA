@@ -9,7 +9,7 @@ retrospective(
   sample_n1,
   sample_n2 = NULL,
   effect_type = c("correlation", "cohen_d"),
-  test_method = c("pearson", "two_samples", "one_sample", "paired", "welch"),
+  test_method = c("pearson", "two_sample", "welch", "paired", "one_sample"),
   alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
   ratio_sd = 1,
@@ -33,6 +33,11 @@ second group.}
 \item{effect_type}{a character string specifying the effect type, must be one
 of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
 "correlation" (Pearson's correlation). You can specify just the initial
+letter.}
+
+\item{test_method}{a character string specifying the test type, must be one
+of "pearson" (default, Pearson's correlation), "two_sample" (independent
+two-sample). You can specify just the initial
 letter.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,

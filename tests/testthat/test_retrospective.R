@@ -119,17 +119,17 @@ test_that("inputs are correctly specified", {
   expect_error(test_retrospective(sample_n1 = 20, sample_n2 = NULL, effect_type = "cohen_d", test_method = "paired"),
                paired_text)
 
-  # two_samples or welch and sample_n2
+  # two_sample or welch and sample_n2
   t_test_text = "Argument 'sample_n2' is required for the specified 'test_method'"
-  expect_error(test_retrospective(sample_n2 = NULL, effect_type = "cohen_d", test_method = "two_samples"),
+  expect_error(test_retrospective(sample_n2 = NULL, effect_type = "cohen_d", test_method = "two_sample"),
                t_test_text)
   expect_error(test_retrospective(sample_n2 = NULL, effect_type = "cohen_d", test_method = "welch"),
                t_test_text)
 
   # welch and ratio_sd
   t_test_ratio_text1 = "Argument 'ratio_sd' is required only for 'test_method = welch'"
-  t_test_ratio_text2 = "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_samples' instead"
-  expect_error(test_retrospective(sample_n2 = 20, ratio_sd = 1.5, effect_type = "cohen_d", test_method = "two_samples"),
+  t_test_ratio_text2 = "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_sample' instead"
+  expect_error(test_retrospective(sample_n2 = 20, ratio_sd = 1.5, effect_type = "cohen_d", test_method = "two_sample"),
                t_test_ratio_text1)
   expect_error(test_retrospective(sample_n2 = 20, ratio_sd = 1, effect_type = "cohen_d", test_method = "welch"),
                t_test_ratio_text2)
