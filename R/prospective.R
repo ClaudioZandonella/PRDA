@@ -194,6 +194,7 @@ prospective <- function(effect_size,
                         tu = Inf,
                         B_effect = 1e3,
                         sample_range = c(2, 1000),
+                        eval_power = c("median", "mean"),
                         tol = .01,
                         display_message = TRUE){
 
@@ -205,6 +206,7 @@ prospective <- function(effect_size,
   effect_type = match.arg(effect_type)
   alternative = match.arg(alternative)
   test_method = match.arg(test_method)
+  eval_power = match.arg(eval_power)
 
   # Save call
   design_analysis = "prospective"
@@ -268,7 +270,7 @@ prospective <- function(effect_size,
                                 effect_info["effect_samples"],
                                 sample_info))
 
-    est_power = mean(prospective_res$power)
+    est_power = do.call(eval_power, list(prospective_res$power))
 
     if (display_message == TRUE){
       cat("Evaluate n =", n_target, fill=TRUE)

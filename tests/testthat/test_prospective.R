@@ -196,12 +196,13 @@ test_that("same results as previous run", {
   expect_known_value(prospective(effect_size = function(x) rnorm(x), effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5, power = .8, ratio_n2 = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
                      file = "test_cache/effect_info_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "correlation",
-                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res, file = "test_cache/res_corr_dist_pro",update= FALSE)
+                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
+                     file = "test_cache/res_corr_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = NULL, effect_type = "cohen_d", test_method = "one_sample",
-                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
+                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
                      file = "test_cache/res_one_sample_dist_pro",update= FALSE)
   expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n2 = 1, effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5,
-                                 B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$prospective_res,
+                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
                      file = "test_cache/res_cohen_dist_pro",update= FALSE)
 
 })
