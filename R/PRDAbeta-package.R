@@ -62,7 +62,7 @@
 #'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
 #'  for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
 #'
-#' @importFrom stats rnorm t.test cor.test qt pt sd var cor
+#' @importFrom stats rnorm t.test cor.test qt pt sd var cor median
 #' @importFrom MASS mvrnorm
 #' @importFrom utils capture.output
 #'
