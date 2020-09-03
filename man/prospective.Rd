@@ -7,7 +7,7 @@
 prospective(
   effect_size,
   power,
-  ratio_n2 = 1,
+  ratio_n = 1,
   effect_type = c("correlation", "cohen_d"),
   test_method = c("pearson", "two_sample", "welch", "paired", "one_sample"),
   alternative = c("two_sided", "less", "greater"),
@@ -30,13 +30,20 @@ hypothetical population effect size.}
 
 \item{power}{a numeric value indicating the required power level.}
 
-\item{ratio_n2}{a numeric value indicating the ratio between \code{sample_n1}
+\item{ratio_n}{a numeric value indicating the ratio between \code{sample_n1}
 and \code{sample_n2}.}
 
 \item{effect_type}{a character string specifying the effect type, must be one
-of "cohen_d" (default, Cohen's \emph{d} standardised means difference) or
-"correlation" (Pearson's correlation). You can specify just the initial
-letter.}
+of \code{"correlation"} (default, Pearson's correlation) or \code{"cohen_d"}
+(Cohen's \emph{d} standardized mean difference) or ". You can specify just
+the initial letters.}
+
+\item{test_method}{a character string specifying the test type, must be one of
+\code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
+(independent two-sample \emph{t}-test), \code{"welch"} (Welch's
+\emph{t}-test), \code{"paired"} (dependent \emph{t}-test for paired
+samples), or \code{"one_sample"} (one-sample \emph{t}-test). You can specify
+just the initial letters.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
 must be one of "two_sided" (default), "greater" or "less". You can specify
@@ -44,6 +51,10 @@ just the initial letter.}
 
 \item{sig_level}{a numeric value indicating the significance level on which
 the alternative hypothesis is evaluated.}
+
+\item{ratio_sd}{a numeric value indicating the ratio between the standard
+deviation in the first group and in the second group. This argument is
+required only in the case of Welch's \emph{t}-test.}
 
 \item{B}{a numeric  value indicating the number of iterations. Increase the
 number of iterations to obtain more stable results.}
@@ -64,12 +75,14 @@ obtain more stable results.}
 \item{sample_range}{a length-2 numeric vector indicating the minimum and
 maximum sample size of the first group (\code{sample_n1}).}
 
+\item{eval_power}{a character string specifying the function used to summarize
+the resulting distribution of power values. Must be one of "median"
+(default) or "mean". You can specify just the initial letters.}
+
 \item{tol}{a numeric value indicating the tolerance of required power level.}
 
 \item{display_message}{a logical variable indicating whether to display or
 not the information about computational steps.}
-
-\item{...}{further arguments to be passed to or from methods.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -89,8 +102,8 @@ A list with class "design_analysis" containing the following
    point respectively.}
    \item{test_info}{a list with all the information regarding the test
    performed. The list includes: \code{test_method} character sting
-   indicating the test method (e.g., "pearson", "one-sample", "paired",
-   "two-samples", or "welch"); the required sample size (\code{sample_n1} and
+   indicating the test method (i.e., "pearson", "one_sample", "paired",
+   "two_sample", or "welch"); the required sample size (\code{sample_n1} and
    if relevant \code{sample_n2}), the alternative hypothesis
    (\code{alternative}), significance level (\code{sig_level})  and  degrees
    of freedom (\code{df}) of the statistical test; \code{critical_effect} the
@@ -104,8 +117,8 @@ A list with class "design_analysis" containing the following
 \description{
 Given the hypothetical population effect size and the required power level,
 the function \code{prospective()} performs a prospective design analysis for
-Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
-correlation test between two variables. According to the defined alternative
+Pearson's correlation test between two variables or \emph{t}-test comparing
+group means (Cohen's \emph{d}). According to the defined alternative
 hypothesis and the significance level, the required sample size is computed
 together with the associated Type M error, Type S error, and the critical
 correlation value (i.e., the minimum absolute effect size value that would
@@ -140,26 +153,28 @@ Conduct a prospective design analysis to define the required sample
   point respectively. Note that if \code{effect_type = "correlation"},
   distribution is automatically truncated between -1 and 1.
 
-  \strong{Effect type options}
+  \strong{Effect type and test method options}
 
-  The \code{effect_type} argument can be set to \code{"cohen_d"} (default)
-  for standardized mean difference or \code{"correlation"} if Pearson's
-  correlation is evaluated.
-
-  In the case of \code{"cohen_d"} one-sample or two-samples \emph{t}-test are
-  considered following same options specification of basic function
-  \code{t.test()}, note that default options of \code{t.test()} are
-  \code{paired = FALSE} and \code{var.equal = FALSE}. For one-sample
-  \emph{t}-test \code{ratio_n = NULL} is required. For paired \emph{t}-test
-  \code{ratio_n = 1} and option \code{paired = TRUE} are required. For
-  two-samples \emph{t}-test \code{ratio_n} can be specified according to user
-  needs and option \code{var.equal = TRUE} is required. For Welch
-  \emph{t}-test, \code{ratio_n} can be specified according to user needs
-  (default option is \code{var.equal = FALSE}).
+  The \code{effect_type} argument can be set to \code{"correlation"}
+  (default) if a correlation is evaluated or \code{"cohen_d"} for
+  standardized mean difference.
 
   In the case of \code{"correlation"}, only Pearson's correlation between two
-  variables is available and \code{ratio_n} is set to 1 (default). The
-  Kendall's \emph{tau} and Spearman's \emph{rho} are not implemented.
+  variables is available. In this case \code{"pearson"} has to be set as
+  \code{test_method} and \code{ratio_n} argument is ignored. The Kendall's
+  \emph{tau} and Spearman's \emph{rho} are not implemented.
+
+  In the case of \code{"cohen_d"}, the available \emph{t}-tests can be
+  selected specifying the argument \code{test_method}. For independent
+  two-sample \emph{t}-test, use \code{"two_sample"} and indicate the ratio
+  between the sample size of the first group and the second group
+  (\code{ratio_n}). For Welch's \emph{t}-test, use \code{"welch"} and
+  indicate the ratio between the sample size of the first group and the
+  second group (\code{ratio_n}) and the ratio between the standard deviation
+  in the first group and in the second group (\code{ratio_sd}). For dependent
+  \emph{t}-test for paired samples, use \code{"paired"} (\code{ratio_n} has
+  to be 1). For one-sample \emph{t}-test, use \code{"one_sample"}
+  (\code{ratio_n} has to be \code{NULL}).
 
   \strong{Study design}
 
@@ -169,31 +184,37 @@ Conduct a prospective design analysis to define the required sample
 }
 \examples{
 
-# One-sample t-test
-prospective(effect_size = .3, power = .8, ratio_n = NULL,
-            effect_type = "cohen_d", seed = 2020, B = 1e3)
-# Paired t-test
-prospective(effect_size = .3, power = .8, ratio_n = 1,
-            effect_type = "cohen_d", paired = TRUE, seed = 2020, B = 1e3)
-# Two-samples t-test
-prospective(effect_size = .3, power = .8, ratio_n = 1.5,
-            effect_type ="cohen_d", var.equal = TRUE, seed = 2020, B = 1e3)
-# Welch t-test
-prospective(effect_size = .3, power = .8, ratio_n = 2,
-            effect_type ="cohen_d", seed = 2020, B = 1e3)
-
 # Pearson's correlation
 prospective(effect_size = .3, power = .8, effect_type = "correlation",
+            test_method = "pearson", seed = 2020, B = 1e3)
+
+# Two-sample t-test
+prospective(effect_size = .3, power = .8, ratio_n = 1.5,
+            effect_type = "cohen_d", test_method = "two_sample",
             seed = 2020, B = 1e3)
+# Welch t-test
+prospective(effect_size = .3, power = .8, ratio_n = 2,
+            effect_type ="cohen_d", test_method = "welch",
+            seed = 2020, B = 1e3)
+# Paired t-test
+prospective(effect_size = .3, power = .8, ratio_n = 1,
+            effect_type = "cohen_d", test_method = "paired",
+             seed = 2020, B = 1e3)
+# One-sample t-test
+prospective(effect_size = .3, power = .8, ratio_n = NULL,
+            effect_type = "cohen_d", test_method =" one_sample",
+            seed = 2020, B = 1e3)
+
+
 
 \dontrun{
 # Define effect_size using functions (long computational time)
 prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-            effect_type = "correlation", B_effect = 500, B = 500,
-            tl = .15, seed = 2020)
+            effect_type = "correlation", test_method = "pearson",
+            B_effect = 500, B = 500, tl = .15, seed = 2020)
 prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-            effect_type = "cohen_d", B_effect = 500, B = 500,
-            tl = .2, tu = .4, seed = 2020)
+            effect_type = "cohen_d", test_method = "two_sample", ratio_n = 1,
+            B_effect = 500, B = 500, tl = .2, tu = .4, seed = 2020)
 }
 
 }

@@ -202,14 +202,13 @@ eval_test_method <- function(effect_type, effect_target, test_method,
   # Cohen d
   if(effect_type == "cohen_d"){
 
-    groups = sample_groups(sample_n1, effect_target, sample_n2, ratio_sd)
+    correct_diff = compute_correct_diff(effect_target, test_method, ratio_sd)
+    groups = sample_groups(sample_n1, correct_diff, sample_n2, ratio_sd)
 
     paired = FALSE
     var.equal = FALSE
     if(test_method == 'paired'){
       paired = TRUE
-      groups$x = groups$x -groups$y
-      groups$y = rep(0, sample_n1)
     } else if(test_method == 'two_sample'){
       var.equal = TRUE
     }

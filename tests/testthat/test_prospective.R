@@ -189,6 +189,8 @@ test_that("same results as previous run", {
                      file="test_cache/res_corr_single_pro", update= FALSE)
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = NULL, effect_type = "cohen_d", test_method = "one_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_one_sample_single_pro", update= FALSE)
+  expect_known_value(prospective(effect_size = .3, power = .8, effect_type = "cohen_d", test_method = "paired", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
+                     file="test_cache/res_cohen_paired_pro", update= FALSE)
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 1, effect_type = "cohen_d", test_method = "welch", ratio_sd = 1.5, B = 100, seed = 2020, display_message = FALSE)$prospective_res,
                      file="test_cache/res_cohen_single_pro", update= FALSE)
   expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 2, effect_type = "cohen_d", test_method = "two_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,

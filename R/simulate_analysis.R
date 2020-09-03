@@ -37,12 +37,10 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method
                                 alternative, sig_level, ratio_sd, B, mu = 0, ...){
 
   # Get the correct mean difference from the effect value
-  corr_diff = ifelse(test_method == "welch",
-                     effect_target * sqrt((ratio_sd^2 + 1)/2), #yes
-                     effect_target)
+  correct_diff =  compute_correct_diff(effect_target, test_method, ratio_sd)
 
   sample_n2_new = ifelse(is.null(sample_n2), 0, sample_n2) # C++ do not use NULL so set to 0
-  sim_res = cohen_loop(sample_n1 = sample_n1, effect_target = corr_diff, sample_n2 = sample_n2_new,
+  sim_res = cohen_loop(sample_n1 = sample_n1, mean_diff = correct_diff, sample_n2 = sample_n2_new,
                        test_method = test_method, alternative = alternative, ratio_sd = ratio_sd,  mu = mu,  B = B)
   sim_res = list2data(sim_res)
 

@@ -12,7 +12,7 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-List cohen_loop(double sample_n1, double effect_target, double sample_n2,
+List cohen_loop(double sample_n1, double mean_diff, double sample_n2,
                   String test_method, String alternative, double ratio_sd = 1,
                   double mu = 0, int B = 1000) {
 
@@ -34,10 +34,10 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
   for(int i = 0; i < B; i++){
     // sample obs
     if(sample_n2 != 0){
-      x = rnorm(sample_n1, effect_target, ratio_sd);
+      x = rnorm(sample_n1, mean_diff, ratio_sd);
       y = rnorm(sample_n2, 0, 1);
     } else {
-      x = rnorm(sample_n1, effect_target, 1);
+      x = rnorm(sample_n1, mean_diff, 1);
     }
 
     // compute test statistic
@@ -49,6 +49,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       tstat = (mx - mu) / stderror;
       estimate[i] = (mx - mu) / sd(x);
     } else if (test_method == "paired"){
+      x = x - y;
       df = sample_n1-1;
       mx = mean(x);
       vx = var(x);

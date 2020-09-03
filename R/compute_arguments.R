@@ -121,4 +121,24 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, te
   return(res)
 }
 
+
+#----    compute_correct_diff    ----
+
+compute_correct_diff <- function(effect_target, test_method, ratio_sd){
+  if(test_method == "paired"){
+    correct_diff = effect_target * sqrt(2)
+  } else if(test_method == "welch"){
+    correct_diff = effect_target * sqrt((ratio_sd^2 + 1)/2)
+  } else {
+    correct_diff = effect_target
+  }
+
+  return(correct_diff)
+}
+
+
+
 #----
+
+
+

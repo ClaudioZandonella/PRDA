@@ -41,17 +41,21 @@ test_that("evaluate the correct test method", {
   # Cohen's d
   expect_equal(test_eval_test_method(test_method = "one_sample", sample_n2 = NULL),
                t.test(groups$x))
-  expect_equal(test_eval_test_method(test_method = "paired", sample_n2 = ny),
-               t.test(groups$x, groups$y, paired = TRUE))
   expect_equal(test_eval_test_method(test_method = "two_sample", sample_n2 = ny),
                t.test(groups$x, groups$y, var.equal = TRUE))
   expect_equal(test_eval_test_method(test_method = "welch", sample_n2 = ny),
                t.test(groups$x, groups$y))
 
+  # paired
+  groups = with_seed(2020, list(x = rnorm(15, .3*sqrt(2), 1),
+                                y = rnorm(15, 0, 1)))
+  expect_equal(test_eval_test_method(test_method = "paired", sample_n2 = ny),
+               t.test(groups$x, groups$y, paired = TRUE))
+
   # welch and ratio_n2
-  groups = with_seed(2020, list(x = rnorm(15, .3, 1.5),
+  groups = with_seed(2020, list(x = rnorm(15, .3*sqrt(5/2), 2),
                                  y = rnorm(15, 0, 1)))
-  expect_equal(test_eval_test_method(test_method = "welch", sample_n2 = ny, ratio_sd = 1.5),
+  expect_equal(test_eval_test_method(test_method = "welch", sample_n2 = ny, ratio_sd = 2),
                t.test(groups$x, groups$y))
 
   #Correlation

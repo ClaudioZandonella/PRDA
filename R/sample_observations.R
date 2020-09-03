@@ -4,13 +4,13 @@
 
 #----    sample_groups    ----
 
-sample_groups <- function(sample_n1, effect_target, sample_n2=NULL, ratio_sd = 1){
+sample_groups <- function(sample_n1, mean_diff, sample_n2=NULL, ratio_sd = 1){
 
   if(is.null(sample_n2)){
-    res <- list(x = rnorm(sample_n1, mean = effect_target, sd = 1),
+    res <- list(x = rnorm(sample_n1, mean = mean_diff, sd = 1),
                 y = NULL)
   }else{
-    res <- list(x = rnorm(sample_n1, mean = effect_target, sd = ratio_sd),
+    res <- list(x = rnorm(sample_n1, mean = mean_diff, sd = ratio_sd),
                 y = rnorm(sample_n2, mean = 0, sd = 1))
   }
 

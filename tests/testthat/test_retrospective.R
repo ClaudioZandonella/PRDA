@@ -147,6 +147,10 @@ test_that("same results as previous run", {
                             file = "test_cache/res_corr_single", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "one_sample",
                                    seed = 2020)$retrospective_res, file="test_cache/res_cohen_single", update= FALSE)
+  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "paired",
+                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_paired", update= FALSE)
+  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 20, effect_size = .3, effect_type = "cohen_d", test_method = "two_sample",
+                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_two_sample", update= FALSE)
   expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3, effect_type = "cohen_d", test_method = "welch",
                                    ratio_sd = 1.5, seed = 2020)$retrospective_res, file="test_cache/res_cohen_welch", update= FALSE)
 
