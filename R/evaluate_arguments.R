@@ -76,8 +76,8 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n,
   if(!is_single_numeric(power) || power >= 1 || power <= 0)
     stop("Argument 'power' has to be a single value between 0 and 1")
 
-  if(!is.null(ratio_n) && (!is_single_numeric(ratio_n) || ratio_n < 1))
-    stop("If specified, argument 'ratio_n' has to be a single integer value grater or equal than 1")
+  if(!is.null(ratio_n) && (!is_single_numeric(ratio_n) || ratio_n < 0))
+    stop("If specified, argument 'ratio_n' has to be a single positive value")
 
   if(!is_single_numeric(sig_level) || sig_level >= 1 || sig_level <= 0)
     stop("Argument 'sig_level' has to be a single value between 0 and 1")

@@ -40,7 +40,7 @@ List cohen_loop(double sample_n1, double effect_target, double sample_n2,
       x = rnorm(sample_n1, effect_target, 1);
     }
 
-    // compute test statisttic
+    // compute test statistic
     if (test_method == "one_sample") {
       df = sample_n1 - 1;
       mx = mean(x);

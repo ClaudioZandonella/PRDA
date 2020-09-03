@@ -44,11 +44,11 @@ test_that("inputs are correctly specified", {
   expect_error(test_prospective(power = -1), power_text)
 
   # ratio_n
-  ratio_n_text <- "If specified, argument 'ratio_n' has to be a single integer value grater or equal than 1"
+  ratio_n_text <- "If specified, argument 'ratio_n' has to be a single positive value"
   expect_error(test_prospective(ratio_n = Inf), ratio_n_text)
   expect_error(test_prospective(ratio_n = "ciao"), ratio_n_text)
   expect_error(test_prospective(ratio_n = c(.5,.6)), ratio_n_text)
-  expect_error(test_prospective(ratio_n = .5), ratio_n_text)
+  expect_error(test_prospective(ratio_n = -.5), ratio_n_text)
 
   # sig_level
   sig_level_text <- "Argument 'sig_level' has to be a single value between 0 and 1"
