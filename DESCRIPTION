@@ -26,7 +26,7 @@ Authors@R: c(
 Description: An implementation of the "Design Analysis" proposed by 
     Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
-    error (e.g. Sign).
+    error (e.g. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).
 Depends: 
     R (>= 3.5.0)
 Suggests:

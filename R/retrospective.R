@@ -41,8 +41,6 @@
 #'  needed in the case of Welch's \emph{t}-test.
 #'@param B a numeric  value indicating the number of iterations. Increase the
 #'  number of iterations to obtain more stable results.
-#'@param seed a numeric value indicating the seed for random number generation.
-#'  Set the seed to obtain reproducible results.
 #'@param tl optional value indicating the lower truncation point if
 #'  \code{effect_size} is defined as a function.
 #'@param tu optional value indicating the upper truncation point if
@@ -50,6 +48,9 @@
 #'@param B_effect a numeric  value indicating the number of sampled effects
 #'  if \code{effect_size} is defined as a function. Increase the number to
 #'  obtain more stable results.
+#'@param seed a numeric value indicating the seed for random number generation.
+#'  Set the seed to obtain reproducible results.
+
 #'
 #'@return A list with class "design_analysis" containing the following
 #'  components:
@@ -147,10 +148,11 @@
 #'
 #' # Two-sample t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-#'               effect_type =" cohen_d", test_method = "two_sample", seed = 2020)
+#'               effect_type = "cohen_d", test_method = "two_sample", seed = 2020)
 #' # Welch t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-#'               effect_type = "cohen_d", test_method = "welch", seed = 2020)
+#'               effect_type = "cohen_d", test_method = "welch",
+#'               ratio_sd = 1.5, seed = 2020)
 #' # Paired t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
 #'               effect_type = "cohen_d", test_method = "paired", seed = 2020)
@@ -179,13 +181,15 @@
 #'  Analysis. Frontiers in Psychology, 10.
 #'  \url{https://doi.org/10.3389/fpsyg.2019.02893}
 #'
+#'  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+#'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
+#'  for Pearson Correlation Coefficient. Retrieved from
+#'  \url{https://psyarxiv.com/q9f86/}
+#'
 #'  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
 #'  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
 #'  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
 #'
-#'  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
-#'  Designing Studies and Evaluating Research Results: Type M and Type S Errors
-#'  for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
 #'
 #'@export
 
@@ -199,10 +203,10 @@ retrospective <- function(effect_size,
                           sig_level = .05,
                           ratio_sd = 1,
                           B = 1e4,
-                          seed = NULL,
                           tl = -Inf,
                           tu = Inf,
-                          B_effect = 1e3){
+                          B_effect = 1e3,
+                          seed = NULL){
 
 
 

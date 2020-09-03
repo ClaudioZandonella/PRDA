@@ -90,7 +90,7 @@ round_arg <- function(list_name, n_round){
 #----    sing_effect    ----
 
 sign_effect <- function(critical_effect, alternative){
-  if(alternative == "two.sided"){
+  if(alternative == "two_sided"){
     critical_effect <-  paste0("\u00b1 ",critical_effect)
   } else {
     critical_effect <-  paste0(critical_effect)

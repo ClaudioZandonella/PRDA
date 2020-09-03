@@ -14,10 +14,10 @@ retrospective(
   sig_level = 0.05,
   ratio_sd = 1,
   B = 10000,
-  seed = NULL,
   tl = -Inf,
   tu = Inf,
-  B_effect = 1000
+  B_effect = 1000,
+  seed = NULL
 )
 }
 \arguments{
@@ -56,9 +56,6 @@ needed in the case of Welch's \emph{t}-test.}
 \item{B}{a numeric  value indicating the number of iterations. Increase the
 number of iterations to obtain more stable results.}
 
-\item{seed}{a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.}
-
 \item{tl}{optional value indicating the lower truncation point if
 \code{effect_size} is defined as a function.}
 
@@ -68,6 +65,9 @@ Set the seed to obtain reproducible results.}
 \item{B_effect}{a numeric  value indicating the number of sampled effects
 if \code{effect_size} is defined as a function. Increase the number to
 obtain more stable results.}
+
+\item{seed}{a numeric value indicating the seed for random number generation.
+Set the seed to obtain reproducible results.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -174,10 +174,11 @@ retrospective(effect_size = .3, sample_n1 = 25, effect_type = "correlation",
 
 # Two-sample t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type =" cohen_d", test_method = "two_sample", seed = 2020)
+              effect_type = "cohen_d", test_method = "two_sample", seed = 2020)
 # Welch t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type = "cohen_d", test_method = "welch", seed = 2020)
+              effect_type = "cohen_d", test_method = "welch",
+              ratio_sd = 1.5, seed = 2020)
 # Paired t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
               effect_type = "cohen_d", test_method = "paired", seed = 2020)
@@ -207,11 +208,12 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  Analysis. Frontiers in Psychology, 10.
  \url{https://doi.org/10.3389/fpsyg.2019.02893}
 
+ Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+ Designing Studies and Evaluating Research Results: Type M and Type S Errors
+ for Pearson Correlation Coefficient. Retrieved from
+ \url{https://psyarxiv.com/q9f86/}
+
  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
-
- Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
- Designing Studies and Evaluating Research Results: Type M and Type S Errors
- for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
 }

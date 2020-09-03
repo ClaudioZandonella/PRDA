@@ -14,14 +14,14 @@ prospective(
   sig_level = 0.05,
   ratio_sd = 1,
   B = 10000,
-  seed = NULL,
   tl = -Inf,
   tu = Inf,
   B_effect = 1000,
   sample_range = c(2, 1000),
   eval_power = c("median", "mean"),
   tol = 0.01,
-  display_message = TRUE
+  display_message = TRUE,
+  seed = NULL
 )
 }
 \arguments{
@@ -59,9 +59,6 @@ required only in the case of Welch's \emph{t}-test.}
 \item{B}{a numeric  value indicating the number of iterations. Increase the
 number of iterations to obtain more stable results.}
 
-\item{seed}{a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.}
-
 \item{tl}{optional value indicating the lower truncation point if
 \code{effect_size} is defined as a function.}
 
@@ -77,12 +74,15 @@ maximum sample size of the first group (\code{sample_n1}).}
 
 \item{eval_power}{a character string specifying the function used to summarize
 the resulting distribution of power values. Must be one of "median"
-(default) or "mean". You can specify just the initial letters.}
+(default) or "mean". You can specify just the initial letters. See details.}
 
 \item{tol}{a numeric value indicating the tolerance of required power level.}
 
 \item{display_message}{a logical variable indicating whether to display or
 not the information about computational steps.}
+
+\item{seed}{a numeric value indicating the seed for random number generation.
+Set the seed to obtain reproducible results.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -153,6 +153,15 @@ Conduct a prospective design analysis to define the required sample
   point respectively. Note that if \code{effect_type = "correlation"},
   distribution is automatically truncated between -1 and 1.
 
+  When a distribution of effects is specified, a corresponding distribution
+  of power values is obtained as result. To evaluate whether the required
+  level of power is obtained, user can decide between the median or the mean
+  value as a summary of the distribution using the argument
+  \code{eval_power}. They answer two different questions. Which is the
+  required sample size to obtain 50% of the time a power equal or greater
+  than the required level (median)?; Which is the required sample size to
+  obtain on average a power equal or greater than the required level (mean)?.
+
   \strong{Effect type and test method options}
 
   The \code{effect_type} argument can be set to \code{"correlation"}
@@ -186,24 +195,24 @@ Conduct a prospective design analysis to define the required sample
 
 # Pearson's correlation
 prospective(effect_size = .3, power = .8, effect_type = "correlation",
-            test_method = "pearson", seed = 2020, B = 1e3)
+            test_method = "pearson", B = 1e3, seed = 2020)
 
 # Two-sample t-test
 prospective(effect_size = .3, power = .8, ratio_n = 1.5,
             effect_type = "cohen_d", test_method = "two_sample",
-            seed = 2020, B = 1e3)
+            B = 1e3, seed = 2020)
 # Welch t-test
 prospective(effect_size = .3, power = .8, ratio_n = 2,
             effect_type ="cohen_d", test_method = "welch",
-            seed = 2020, B = 1e3)
+            ratio_sd = 1.5, B = 1e3, seed = 2020)
 # Paired t-test
 prospective(effect_size = .3, power = .8, ratio_n = 1,
             effect_type = "cohen_d", test_method = "paired",
-             seed = 2020, B = 1e3)
+            B = 1e3, seed = 2020)
 # One-sample t-test
 prospective(effect_size = .3, power = .8, ratio_n = NULL,
-            effect_type = "cohen_d", test_method =" one_sample",
-            seed = 2020, B = 1e3)
+            effect_type = "cohen_d", test_method = "one_sample",
+            B = 1e3, seed = 2020)
 
 
 
@@ -225,11 +234,12 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  Analysis. Frontiers in Psychology, 10.
  \url{https://doi.org/10.3389/fpsyg.2019.02893}
 
+ Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+ Designing Studies and Evaluating Research Results: Type M and Type S Errors
+ for Pearson Correlation Coefficient. Retrieved from
+ \url{https://psyarxiv.com/q9f86/}
+
  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
-
- Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
- Designing Studies and Evaluating Research Results: Type M and Type S Errors
- for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
 }
