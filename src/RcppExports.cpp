@@ -24,18 +24,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// corC
-double corC(NumericVector x, NumericVector y);
-RcppExport SEXP _PRDAbeta_corC(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(corC(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cor_loop
 List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix);
 RcppExport SEXP _PRDAbeta_cor_loop(SEXP nSEXP, SEXP alternativeSEXP, SEXP BSEXP, SEXP Eigen_matrixSEXP) {
@@ -50,48 +38,10 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// meanC
-double meanC(NumericVector x);
-RcppExport SEXP _PRDAbeta_meanC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(meanC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rmvrnorm_arma
-arma::mat rmvrnorm_arma(int x, arma::mat Eigen_matrix);
-RcppExport SEXP _PRDAbeta_rmvrnorm_arma(SEXP xSEXP, SEXP Eigen_matrixSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type Eigen_matrix(Eigen_matrixSEXP);
-    rcpp_result_gen = Rcpp::wrap(rmvrnorm_arma(x, Eigen_matrix));
-    return rcpp_result_gen;
-END_RCPP
-}
-// varC
-double varC(NumericVector x);
-RcppExport SEXP _PRDAbeta_varC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(varC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_PRDAbeta_cohen_loop", (DL_FUNC) &_PRDAbeta_cohen_loop, 8},
-    {"_PRDAbeta_corC", (DL_FUNC) &_PRDAbeta_corC, 2},
     {"_PRDAbeta_cor_loop", (DL_FUNC) &_PRDAbeta_cor_loop, 4},
-    {"_PRDAbeta_meanC", (DL_FUNC) &_PRDAbeta_meanC, 1},
-    {"_PRDAbeta_rmvrnorm_arma", (DL_FUNC) &_PRDAbeta_rmvrnorm_arma, 2},
-    {"_PRDAbeta_varC", (DL_FUNC) &_PRDAbeta_varC, 1},
     {NULL, NULL, 0}
 };
 

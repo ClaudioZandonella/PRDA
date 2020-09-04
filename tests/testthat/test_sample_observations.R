@@ -1,31 +1,18 @@
-#######################################
-####    Test sample observations   ####
-#######################################
+#################################
+####    Test sample effect   ####
+#################################
 
 library(PRDAbeta)
 
 #----    input checks    ----
 
-context("Evaluate functions to sample observations")
+context("Evaluate functions to sample effect")
 
-error_truncation <- "'tl' has to be greater than 'tu'."
-message_truncation <- "Truncation could require long computational time."
-error_tol <- "Truncation requires too long computational time, consider possible misspecification."
-
-
-#----    eval_my_mvrnorm    ----
-
-test_that("evaluate my_mvrnorm", {
+error_truncation <- "Argument 'tl' has to be greater than argument 'tu'"
+message_truncation <- "Truncation could require long computational time"
+error_tol <- "Truncation requires too long computational time, consider possible misspecification"
 
 
-  Eigen_matrix <- compute_eigen_matrix(effect_target = .3)
-
-  expect_equal(with_seed(2020, my_mvrnorm(30, Eigen_matrix =Eigen_matrix)$x),
-               with_seed(2020, mvrnorm(n=30,mu=c(0,0),Sigma=matrix(c(1,.3,.3,1),ncol=2))[,1]))
-  expect_equal(with_seed(2020, my_mvrnorm(30, Eigen_matrix =Eigen_matrix)$y),
-               with_seed(2020, mvrnorm(n=30,mu=c(0,0),Sigma=matrix(c(1,.3,.3,1),ncol=2))[,2]))
-
-})
 
 #----    sample_effect    ----
 test_that("evaluate sample_effect", {

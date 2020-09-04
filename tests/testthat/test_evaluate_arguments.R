@@ -77,7 +77,7 @@ test_that("evaluate the correct effect size", {
   error_effect_corr <- "If 'effect_type = correlation', argument 'effect_size' must be between -1 and 1"
   expect_error(eval_effect_size(effect_type = "correlation", effect_size = 2), error_effect_corr)
   message_trunc_cor <- "If 'effect_type = correlation', effect_size distribution is truncated between -1 and 1\n"
-  message_trunc <- "Truncation could require long computational time.\n"
+  message_trunc <- "Truncation could require long computational time\n"
   res <- evaluate_promise(eval_effect_size(effect_type = "correlation", effect_size = function(x) rnorm(x),B_effect = 100))
   expect_equal(res$messages[1], message_trunc_cor)
   expect_equal(res$messages[2], message_trunc)
