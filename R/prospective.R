@@ -123,7 +123,7 @@
 #'   \code{eval_power}. They answer two different questions. Which is the
 #'   required sample size to obtain 50% of the time a power equal or greater
 #'   than the required level (median)?; Which is the required sample size to
-#'   obtain on average a power equal or greater than the required level (mean)?.
+#'   obtain on average a power equal or greater than the required level (mean)?
 #'
 #'   \strong{Effect type and test method options}
 #'
