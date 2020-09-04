@@ -43,7 +43,7 @@ To install the github version type in R:
 ```{r}
 # If devtools is not installed yet: 
 # install.packages( "devtools" )  
-devtools::install_github("CaludioZandonella/PRDAbeta",
+devtools::install_github("ClaudioZandonella/PRDAbeta",
                          ref = "develop",
                          build_vignettes = TRUE)
 library(PRDAbeta)
