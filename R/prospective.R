@@ -257,11 +257,11 @@ prospective <- function(effect_size,
 
   #----    Evaluate effect size    ----
 
-  effect_info <- eval_effect_size(effect_type = effect_type,
-                                  effect_size = effect_size,
-                                  tl = tl,
-                                  tu = tu,
-                                  B_effect = B_effect)
+  effect_info = eval_effect_size(effect_type = effect_type,
+                                 effect_size = effect_size,
+                                 tl = tl,
+                                 tu = tu,
+                                 B_effect = B_effect)
   effect_target = effect_info$effect_summary[["Mean"]]
 
   #----    Evaluate samples    ----

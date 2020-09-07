@@ -7,7 +7,7 @@
 simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n1,
                               sample_n2, alternative, sig_level, ratio_sd, B, ...){
 
-  arguments <-  as.list(match.call()[-1])
+  arguments =  as.list(match.call()[-1])
 
   if(effect_type == "cohen_d"){
     # Cohen's d

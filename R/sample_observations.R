@@ -7,10 +7,10 @@
 sample_groups <- function(sample_n1, mean_diff, sample_n2=NULL, ratio_sd = 1){
 
   if(is.null(sample_n2)){
-    res <- list(x = rnorm(sample_n1, mean = mean_diff, sd = 1),
+    res = list(x = rnorm(sample_n1, mean = mean_diff, sd = 1),
                 y = NULL)
   }else{
-    res <- list(x = rnorm(sample_n1, mean = mean_diff, sd = ratio_sd),
+    res = list(x = rnorm(sample_n1, mean = mean_diff, sd = ratio_sd),
                 y = rnorm(sample_n2, mean = 0, sd = 1))
   }
 
@@ -21,7 +21,7 @@ sample_groups <- function(sample_n1, mean_diff, sample_n2=NULL, ratio_sd = 1){
 
 sample_obs_cor <- function(sample_n1, effect_target){
 
-  obs <- mvrnorm(n=sample_n1,mu=c(0,0),Sigma=matrix(c(1,effect_target,effect_target,1),ncol=2))
+  obs = mvrnorm(n=sample_n1,mu=c(0,0),Sigma=matrix(c(1,effect_target,effect_target,1),ncol=2))
 
   return(list(x = obs[,1], y = obs[,2]))
 }
@@ -35,13 +35,13 @@ sample_effect <- function(FUN, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
            "  with only one single variable 'x' that represent the number of samples\n",
            "  E.s. 'function(x) rnorm(x, mean = 0, sd = 1)'"))
 
-  args <- list(x = B_effect)
+  args = list(x = B_effect)
 
   if(names(formals(FUN))!="x")
-    names(args) <- names(formals(FUN))
+    names(args) = names(formals(FUN))
 
-  effect_function <- body(FUN)
-  effect_samples <- do.call(FUN, args)
+  effect_function = body(FUN)
+  effect_samples = do.call(FUN, args)
 
   # Truncate distribution
   if(is.finite(tl) || is.finite(tu)){
@@ -49,19 +49,19 @@ sample_effect <- function(FUN, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
 
     if(tl>tu) stop("Argument 'tl' has to be greater than argument 'tu'")
 
-    sel_iter <- effect_samples < tl | effect_samples > tu
-    i <- 1
+    sel_iter = effect_samples < tl | effect_samples > tu
+    i = 1
     while(sum(sel_iter) != 0L && i < tol){
-      args[[1]] <- sum(sel_iter)
-      effect_samples[sel_iter] <- do.call(FUN, args)
-      sel_iter <- effect_samples < tl | effect_samples > tu
-      i <- i+1
+      args[[1]] = sum(sel_iter)
+      effect_samples[sel_iter] = do.call(FUN, args)
+      sel_iter = effect_samples < tl | effect_samples > tu
+      i = i+1
     }
 
     if(i == tol) stop("Truncation requires too long computational time, consider possible misspecification.")
   }
 
-  effect_summary <- summary(effect_samples)
+  effect_summary = summary(effect_samples)
 
   return(list(effect_function = effect_function,
               effect_summary = effect_summary,

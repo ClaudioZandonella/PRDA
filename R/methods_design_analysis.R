@@ -16,37 +16,37 @@
 print.design_analysis <- function(x, ...){
   da_fit=x
   prefix="\t"
-  output_text <- da_fit
+  output_text = da_fit
 
 
-  effect_type <- ifelse(da_fit$effect_info$effect_type=="cohen_d",
+  effect_type = ifelse(da_fit$effect_info$effect_type=="cohen_d",
                         "cohen_d", "rho")
-  sigle_value <- da_fit$effect_info$effect_function == "single_value"
+  sigle_value = da_fit$effect_info$effect_function == "single_value"
 
 
 
-  effect_info <- data.frame(effect_type = da_fit$effect_info$effect_type)
+  effect_info = data.frame(effect_type = da_fit$effect_info$effect_type)
 
   # test_info
-  test_info <- da_fit$test_info
-  test_info <- as.data.frame(t(round_arg(test_info, 3)))
-  critical_effect <- sign_effect(test_info$critical_effect, test_info$alternative)
-  test_info[["critical_effect"]] <- NULL
+  test_info = da_fit$test_info
+  test_info = as.data.frame(t(round_arg(test_info, 3)))
+  critical_effect = sign_effect(test_info$critical_effect, test_info$alternative)
+  test_info[["critical_effect"]] = NULL
 
   # res_info
   if(da_fit$design_analysis == "retrospective"){
-    res_info <- round_arg(da_fit$retrospective_res, 3)
+    res_info = round_arg(da_fit$retrospective_res, 3)
   } else {
-    res_info <- round_arg(da_fit$prospective_res, 3)
+    res_info = round_arg(da_fit$prospective_res, 3)
   }
 
 
   # effect_summary
-  effect_summary <- round(summary(da_fit$effect_info$effect_samples),3)
+  effect_summary = round(summary(da_fit$effect_info$effect_samples),3)
   effect_summary = c(length(da_fit$effect_info$effect_samples),
                      effect_summary)
-  names(effect_summary)[1] <- "n_effect"
-  effect_summary <- as.data.frame(t(round(effect_summary,3)))
+  names(effect_summary)[1] = "n_effect"
+  effect_summary = as.data.frame(t(round(effect_summary,3)))
 
   cat("\n")
   cat(strwrap("Design Analysis", prefix = prefix), sep = "\n")
@@ -77,7 +77,7 @@ print.design_analysis <- function(x, ...){
         cat(capture.output(print(res_info,
                              print.gap = 3, right = F, row.names = F)), sep = '\n')
       } else {
-        error_summary <- suppressWarnings(as.data.frame(t(do.call(cbind, lapply(res_info, summary)))))
+        error_summary = suppressWarnings(as.data.frame(t(do.call(cbind, lapply(res_info, summary)))))
         cat(capture.output(print(error_summary,print.gap = 3, right = F)), sep = "\n")
 
       }
