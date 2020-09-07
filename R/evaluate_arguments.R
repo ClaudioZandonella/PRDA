@@ -7,7 +7,8 @@
 
 eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
                                          effect_type, test_method, sig_level,
-                                         ratio_sd, B, seed, tl, tu, B_effect, ...){
+                                         ratio_sd, B, seed, tl, tu, B_effect,
+                                         ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
     stop("Argument 'effect_size' has to be a single numeric value or a function")
@@ -67,8 +68,9 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
 eval_arguments_prospective <- function(effect_size, power, ratio_n,
                                        effect_type, test_method,
-                                       sig_level, ratio_sd, B, seed, tl, tu, B_effect,
-                                       sample_range, tol, display_message, ...){
+                                       sig_level, ratio_sd, B, seed, tl, tu,
+                                       B_effect, sample_range, tol,
+                                       display_message, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
     stop("Argument 'effect_size' has to be a single numeric value or a function")
@@ -140,11 +142,11 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n,
 
 eval_effect_size <- function(effect_type, effect_size,
                              tl = -Inf, tu = Inf, B_effect = 250){
-  correlation = effect_type == "correlation"
-  sample_fun = is.function(effect_size)
+  correlation <- effect_type == "correlation"
+  sample_fun <- is.function(effect_size)
 
   if(!sample_fun){
-    res = list(effect_function = "single_value",
+    res <- list(effect_function = "single_value",
                effect_summary = summary(effect_size),
                effect_samples = effect_size)
 
@@ -153,14 +155,15 @@ eval_effect_size <- function(effect_type, effect_size,
   } else {
 
     if(correlation && (tl < -1 || tu > 1)){
-      tl = max(-1, tl)
-      tu = min(tu, 1)
+      tl <- max(-1, tl)
+      tu <- min(tu, 1)
       message(paste("If 'effect_type = correlation', effect_size distribution is truncated between",
                     tl,"and", tu))
     }
 
-    res = sample_effect(FUN = effect_size, B_effect = B_effect, tl = tl, tu = tu)
-    res = c(res,
+    res <- sample_effect(FUN = effect_size, B_effect = B_effect,
+                         tl = tl, tu = tu)
+    res <- c(res,
             tl = tl,
             tu = tu)
   }
@@ -175,11 +178,11 @@ eval_samples <- function(ratio_n, current_n){
 
 
   if(is.null(ratio_n)){
-    sample_n1 = current_n
-    sample_n2 = NULL
+    sample_n1 <- current_n
+    sample_n2 <- NULL
   } else {
-    sample_n1 = round(current_n * ratio_n,0)
-    sample_n2 = current_n
+    sample_n1 <- round(current_n * ratio_n,0)
+    sample_n2 <- current_n
   }
 
   return(list(sample_n1 = sample_n1, sample_n2 = sample_n2))
@@ -193,24 +196,24 @@ eval_test_method <- function(effect_type, effect_target, test_method,
                              alternative, sig_level, ratio_sd = 1, ...){
 
   # Define conf.level according to sig_level
-  conf.level = 1 - sig_level
+  conf.level <- 1 - sig_level
 
   # Set correct alternative
   if(alternative == "two_sided")
-    alternative = "two.sided"
+    alternative <- "two.sided"
 
   # Cohen d
   if(effect_type == "cohen_d"){
 
-    correct_diff = compute_correct_diff(effect_target, test_method, ratio_sd)
-    groups = sample_groups(sample_n1, correct_diff, sample_n2, ratio_sd)
+    correct_diff <- compute_correct_diff(effect_target, test_method, ratio_sd)
+    groups <- sample_groups(sample_n1, correct_diff, sample_n2, ratio_sd)
 
-    paired = FALSE
-    var.equal = FALSE
+    paired <- FALSE
+    var.equal <- FALSE
     if(test_method == 'paired'){
-      paired = TRUE
+      paired <- TRUE
     } else if(test_method == 'two_sample'){
-      var.equal = TRUE
+      var.equal <- TRUE
     }
 
     t.test(groups$x, groups$y, paired = paired, var.equal = var.equal,
@@ -219,7 +222,7 @@ eval_test_method <- function(effect_type, effect_target, test_method,
 
   } else if (effect_type == "correlation"){
 
-    groups = sample_obs_cor(sample_n1, effect_target)
+    groups <- sample_obs_cor(sample_n1, effect_target)
     cor.test(groups$x, groups$y, method = test_method,
              alternative = alternative, conf.level = conf.level)
     }

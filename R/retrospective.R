@@ -213,13 +213,13 @@ retrospective <- function(effect_size,
   #----    Save call    ----
 
   # Match arguments
-  effect_type = match.arg(effect_type)
-  alternative = match.arg(alternative)
-  test_method = match.arg(test_method)
+  effect_type <- match.arg(effect_type)
+  alternative <- match.arg(alternative)
+  test_method <- match.arg(test_method)
 
   # Save call
-  design_analysis = "retrospective"
-  call_arguments = as.list(match_call(default = TRUE))[-1]
+  design_analysis <- "retrospective"
+  call_arguments <- as.list(match_call(default = TRUE))[-1]
 
   # eval possible errors
   do.call(eval_arguments_retrospective,
@@ -228,10 +228,10 @@ retrospective <- function(effect_size,
   # Check sample_n2 for correlation
   if(effect_type == "correlation"){
     if(!is.null(sample_n2)){
-      call_arguments["sample_n2"] = list(NULL)
+      call_arguments["sample_n2"] <- list(NULL)
       warning("If 'effect_type = correlation', argument 'sample_n2' is ignored.")
     }
-    sample_n2 = sample_n1
+    sample_n2 <- sample_n1
   }
 
   #----    Set seed    ----
@@ -239,20 +239,20 @@ retrospective <- function(effect_size,
   # Set seed
   if(!is.null(seed)){
     if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
-    old_seed = .Random.seed
+    old_seed <- .Random.seed
     on.exit( { .Random.seed <<- old_seed })
     set.seed(seed = seed)
   }
 
   #----    Evaluate effect size    ----
 
-  effect_info = eval_effect_size(effect_type = effect_type,
-                                 effect_size = effect_size,
-                                 tl = tl,
-                                 tu = tu,
-                                 B_effect = B_effect)
+  effect_info <- eval_effect_size(effect_type = effect_type,
+                                  effect_size = effect_size,
+                                  tl = tl,
+                                  tu = tu,
+                                  B_effect = B_effect)
 
-  effect_target = effect_info$effect_summary[["Mean"]]
+  effect_target <- effect_info$effect_summary[["Mean"]]
 
   #----    Get test info    ----
 
@@ -262,29 +262,29 @@ retrospective <- function(effect_size,
                               effect_target = effect_target))
 
   # Compute df and critical value
-  crit_values = do.call(compute_critical_effect, call_arguments)
+  crit_values <- do.call(compute_critical_effect, call_arguments)
 
-  test_info = c(test_method = test_method,
-                sample_n1 = sample_n1,
-                sample_n2 = list(sample_n2), # list() used to deal with NULL
-                alternative = alternative,
-                sig_level = sig_level,
-                crit_values)
+  test_info <- c(test_method = test_method,
+                 sample_n1 = sample_n1,
+                 sample_n2 = list(sample_n2), # list() used to deal with NULL
+                 alternative = alternative,
+                 sig_level = sig_level,
+                 crit_values)
 
   #----    Retrospective analysis    ----
 
-  retrospective_res = do.call(simulate_analysis,
-                              c(call_arguments,
-                                effect_info["effect_samples"]))
+  retrospective_res <- do.call(simulate_analysis,
+                               c(call_arguments,
+                                 effect_info["effect_samples"]))
 
   #----    save results    ----
-  design_fit = structure(list(design_analysis = design_analysis,
-                              call_arguments = call_arguments,
-                              effect_info = c(effect_type = effect_type,
-                                              effect_info),
-                              test_info = test_info,
-                              retrospective_res = retrospective_res),
-                         class = c("design_analysis","list"))
+  design_fit <- structure(list(design_analysis = design_analysis,
+                               call_arguments = call_arguments,
+                               effect_info = c(effect_type = effect_type,
+                                               effect_info),
+                               test_info = test_info,
+                               retrospective_res = retrospective_res),
+                          class = c("design_analysis","list"))
 
   return(design_fit)
 

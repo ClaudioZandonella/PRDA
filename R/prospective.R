@@ -231,14 +231,14 @@ prospective <- function(effect_size,
   #----    Save call    ----
 
   # Match arguments
-  effect_type = match.arg(effect_type)
-  alternative = match.arg(alternative)
-  test_method = match.arg(test_method)
-  eval_power = match.arg(eval_power)
+  effect_type <- match.arg(effect_type)
+  alternative <- match.arg(alternative)
+  test_method <- match.arg(test_method)
+  eval_power <- match.arg(eval_power)
 
   # Save call
-  design_analysis = "prospective"
-  call_arguments = as.list(match_call(default = TRUE))[-1]
+  design_analysis <- "prospective"
+  call_arguments <- as.list(match_call(default = TRUE))[-1]
 
   # eval possible errors
   do.call(eval_arguments_prospective,
@@ -250,29 +250,29 @@ prospective <- function(effect_size,
   # Set seed
   if(!is.null(seed)){
     if(!exists(".Random.seed")) rnorm(1)
-    old_seed = .Random.seed
+    old_seed <- .Random.seed
     on.exit( { .Random.seed <<- old_seed })
     set.seed(seed = seed)
   }
 
   #----    Evaluate effect size    ----
 
-  effect_info = eval_effect_size(effect_type = effect_type,
-                                 effect_size = effect_size,
-                                 tl = tl,
-                                 tu = tu,
-                                 B_effect = B_effect)
-  effect_target = effect_info$effect_summary[["Mean"]]
+  effect_info <- eval_effect_size(effect_type = effect_type,
+                                  effect_size = effect_size,
+                                  tl = tl,
+                                  tu = tu,
+                                  B_effect = B_effect)
+  effect_target <- effect_info$effect_summary[["Mean"]]
 
   #----    Evaluate samples    ----
 
   if(effect_type == "correlation" && (is.null(ratio_n) || ratio_n != 1)){
     call_arguments["ratio_n"] = list(1)
-    ratio_n = 1
+    ratio_n <- 1
     warning("If 'effect_type = correlation', argument 'ratio_n' is set to 1")
   }
 
-  sample_info = eval_samples(ratio_n = ratio_n, current_n = sample_range[2])
+  sample_info <- eval_samples(ratio_n = ratio_n, current_n = sample_range[2])
 
   #----    Get test method    ----
 
@@ -286,19 +286,19 @@ prospective <- function(effect_size,
   #----    Prospective ananlysis    ----
 
   # Loop prospective
-  find_power = FALSE
-  n_seq = seq( sample_range[1], sample_range[2], by = 1 )
-  n_target = round(median(n_seq))
+  find_power <- FALSE
+  n_seq <- seq( sample_range[1], sample_range[2], by = 1 )
+  n_target <- round(median(n_seq))
 
   while( (!find_power) ) {
-    sample_info = eval_samples(ratio_n = ratio_n, current_n = n_target)
+    sample_info <- eval_samples(ratio_n = ratio_n, current_n = n_target)
 
-    prospective_res = do.call(simulate_analysis,
-                              c(call_arguments,
-                                effect_info["effect_samples"],
-                                sample_info))
+    prospective_res <- do.call(simulate_analysis,
+                               c(call_arguments,
+                                 effect_info["effect_samples"],
+                                 sample_info))
 
-    est_power = do.call(eval_power, list(prospective_res$power))
+    est_power <- do.call(eval_power, list(prospective_res$power))
 
     if (display_message == TRUE){
       cat("Evaluate n =", n_target, fill=TRUE)
@@ -308,20 +308,22 @@ prospective <- function(effect_size,
 
     # Evaluate if power was obtained according to tolerance value
     if ( (est_power <= (power+tol)) && (est_power >= (power-tol)) ) {
-      find_power = TRUE
+      find_power <- TRUE
     } else {
-      if (isTRUE(all.equal(n_target, sample_range[2])) && est_power<=(power+tol)) {
-        stop(paste0("Actual power = ", est_power, " with n = ", sample_range[2],"\n",
-                    "  try to increase maximum of sample_range > ", sample_range[2],"."))
+      if (isTRUE(all.equal(n_target, sample_range[2])) &&
+          est_power<=(power+tol)) {
+        stop(paste0("Actual power = ", est_power, " with n = ", sample_range[2],
+                    "\n", "  try to increase maximum of sample_range > ",
+                    sample_range[2],"."))
       } else if (length(n_seq)==1) {
         message("Required power according to tolerance value can not be obtained.\nIncrease tolerance value.")
-        find_power = TRUE
+        find_power <- TRUE
       } else if (est_power > (power+tol)) {
-        n_seq = seq( min(n_seq), n_target-1, by = 1)
-        n_target = round(median(n_seq))
+        n_seq <- seq( min(n_seq), n_target-1, by = 1)
+        n_target <- round(median(n_seq))
       } else {
-        n_seq = seq(n_target+1, max(n_seq), by = 1)
-        n_target = round(median(n_seq))
+        n_seq <- seq(n_target+1, max(n_seq), by = 1)
+        n_target <- round(median(n_seq))
       }
     }
   }
@@ -330,25 +332,25 @@ prospective <- function(effect_size,
   #----    Get test_info    ----
 
   #Compute df and critical value
-  crit_values = do.call(compute_critical_effect,
-                        c(call_arguments,
-                          sample_n1 = sample_info$sample_n1,
-                          sample_n2 = sample_info$sample_n2))
+  crit_values <- do.call(compute_critical_effect,
+                         c(call_arguments,
+                           sample_n1 = sample_info$sample_n1,
+                           sample_n2 = sample_info$sample_n2))
 
-  test_info = c(test_method = test_method,
-                sample_info,
-                alternative = alternative,
-                sig_level = sig_level,
-                crit_values)
+  test_info <- c(test_method = test_method,
+                 sample_info,
+                 alternative = alternative,
+                 sig_level = sig_level,
+                 crit_values)
 
 
   #----    save results    ----
-  design_fit = structure(list(design_analysis = design_analysis,
-                              call_arguments = call_arguments,
-                              effect_info = c(effect_type = effect_type, effect_info),
-                              test_info = test_info,
-                              prospective_res = prospective_res),
-                         class = c("design_analysis","list"))
+  design_fit <- structure(list(design_analysis = design_analysis,
+                               call_arguments = call_arguments,
+                               effect_info = c(effect_type = effect_type, effect_info),
+                               test_info = test_info,
+                               prospective_res = prospective_res),
+                          class = c("design_analysis","list"))
 
 
 
