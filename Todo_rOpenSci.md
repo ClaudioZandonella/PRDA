@@ -2,7 +2,7 @@
 
 - [x] You can choose to use = over <- as long you are consistent with one choice within your package. 
 - [ ] README should include: https://devguide.ropensci.org/building.html#readme
-- [ ] We recommend not creating README.md directly, but from a README.Rmd file (an R Markdown file) if you have any demonstration code. (usethis::use_readme_rmd())
+- [x] We recommend not creating README.md directly, but from a README.Rmd file (an R Markdown file) if you have any demonstration code. (usethis::use_readme_rmd())
 - [x] Add #' @noRd to internal functions.
 - [x] Only use package startup messages when necessary (function masking for instance). Avoid package startup messages like “This is foobar 2.4-0” or citation guidance because they can be annoying to the user. Rely on documentation for such guidance.
 - [ ] https://devguide.ropensci.org/building.html#website
@@ -25,6 +25,8 @@ send
 other:
 
 - [x] problema del welch's t test e correzione d di cohen
+- [ ] Add more description on hypothetical effect size in vignette overwie and readme
+- [ ] Update Zenodo
 
 After submission:
 

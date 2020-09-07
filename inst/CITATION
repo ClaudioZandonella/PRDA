@@ -1,22 +1,21 @@
 citHeader("To cite PRDAbeta in publications use:")
 
-citEntry(entry = "Article",
-  title        = "PRDA: Enanching statistical inference",
-  author       = personList(as.person("Massimiliano Pastore"),
+bibentry(
+  bibtype = "Misc",
+  title        = "{PRDbeta}: Prospective and Retrospective Design Analysis",
+  author       = personList(
+                   as.person("Claudio {Zandonella Callegher}"),
+                   as.person("Massimiliano Pastore"),
                    as.person("Angela Andreella"),
                    as.person("Anna Vesely"),
-                   as.person("Claudio Zandonella Callegher"),
+                   as.person("Enrico Toffalini"),
+                   as.person("Giulia Bertoldo"),
                    as.person("Gianmarco Altoè")),
-  journal      = "Journal name",
   year         = "2020",
-  volume       = "",
-  number       = "",
-  pages        = "",
-  url          = "",
+  publisher    = "Zenodo",
+  version      = "v0.1",
+  doi          = "10.5281/zenodo.3630733",
+  url          = "https://doi.org/10.5281/zenodo.3630733",
 
-  textVersion  =
-  paste("Massimiliano Pastore, Angela Andreella, Anna Vesely, Claudio Zandonella Callegher, Gianmarco Altoè (2020).",
-        "PRDA: Enanching statistical inference.",
-        "Journal name",
-        "URL ")
+  textVersion  = paste( "Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).", " PRDbeta: Prospective and Retrospective Design Analysis (Version v0.1).", "Zenodo.", "http://doi.org/10.5281/zenodo.3630733")
 )

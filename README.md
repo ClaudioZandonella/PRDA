@@ -217,7 +217,26 @@ indications. For an example of application see
 To propose a new feature or report a bug, please open an issue on
 [GitHub](https://github.com/ClaudioZandonella/PRDAbeta/issues).
 
-## Citation Information
+## Citation
+
+To cite PRDAbeta in publications use:
+
+Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella,
+Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè.
+(2020). PRDbeta: Prospective and Retrospective Design Analysis (Version
+v0.1). Zenodo. <http://doi.org/10.5281/zenodo.3630733>
+
+A BibTeX entry for LaTeX users is
+
+    @Misc{,
+        title = {{PRDbeta}: Prospective and Retrospective Design Analysis},
+        author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
+        year = {2020},
+        publisher = {Zenodo},
+        version = {v0.1},
+        doi = {10.5281/zenodo.3630733},
+        url = {https://doi.org/10.5281/zenodo.3630733},
+      }
 
 ## References
 

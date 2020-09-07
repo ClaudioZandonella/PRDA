@@ -2,12 +2,12 @@ Package: PRDAbeta
 Title: Conduct a Prospective or Retrospective Design Analysis
 Version: 0.1.0.9000
 Authors@R: c(
-    person("Massimiliano", "Pastore", role = c("aut"),
-           email = "massimiliano.pastore@unipd.it",
-           comment = c(ORCID = "0000-0002-7922-6365")),
     person("Claudio", "Zandonella Callegher", role = c("aut", "cre"),
            email = "claudiozandonella@gmail.com",
            comment = c(ORCID = "0000-0001-7721-6318")),
+    person("Massimiliano", "Pastore", role = c("aut"),
+           email = "massimiliano.pastore@unipd.it",
+           comment = c(ORCID = "0000-0002-7922-6365")),
     person("Angela", "Andreella", role = c("aut"),
            email = "a.andreella8@gmail.com",
            comment = c(ORCID = "0000-0002-1141-3041")),
