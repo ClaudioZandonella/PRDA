@@ -212,6 +212,11 @@ distribution that represents their expectations or literature
 indications. For an example of application see
 `vignette("retrospective")`.
 
+## Bugs and New Features
+
+To propose a new feature or report a bug, please open an issue on
+[GitHub](https://github.com/ClaudioZandonella/PRDAbeta/issues).
+
 ## Citation Information
 
 ## References

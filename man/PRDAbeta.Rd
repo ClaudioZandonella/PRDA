@@ -68,6 +68,13 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/ClaudioZandonella/PRDAbeta/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Claudio Zandonella Callegher \email{claudiozandonella@gmail.com} (\href{https://orcid.org/0000-0001-7721-6318}{ORCID})
 
