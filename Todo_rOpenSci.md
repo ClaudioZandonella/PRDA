@@ -1,6 +1,6 @@
 # Todo rOpenSci Packages
 
-- [ ] You can choose to use = over <- as long you are consistent with one choice within your package. 
+- [x] You can choose to use = over <- as long you are consistent with one choice within your package. 
 - [ ] README should include: https://devguide.ropensci.org/building.html#readme
 - [ ] We recommend not creating README.md directly, but from a README.Rmd file (an R Markdown file) if you have any demonstration code. (usethis::use_readme_rmd())
 - [x] Add #' @noRd to internal functions.
@@ -24,6 +24,13 @@ send
 
 other:
 
-- [ ] problema del welch's t test e correzione d di cohen
+- [x] problema del welch's t test e correzione d di cohen
+
+After submission:
+
+- [ ] Once you have submitted a package and it has passed editor checks, add a peer-review badge via... (https://devguide.ropensci.org/building.html#readme)
+- [ ] After a package is accepted but before transfer, the rOpenSci footer should be added to the bottom of the README file with the following markdown line... (https://devguide.ropensci.org/building.html#readme)
+- [ ] After transfer to our GitHub organization, rOpenSci Code of Conduct will apply to your project. Please add this text to the README (https://devguide.ropensci.org/collaboration.html#friendlyfiles)
+
 
 Lettto fino a 1.8 Authorship

@@ -35,13 +35,13 @@ Moreover, @gelmanPowerCalculationsAssessing2014 distinguished between two types 
 - **Prospective Design Analysis**: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.
 - **Retrospective Design Analysis**: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.
 
-It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to indications from the literature, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
+It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to previous results in the literature or experts' indications, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
 
 To know more about design analysis consider @gelmanPowerCalculationsAssessing2014. While, for an introduction about design analysis considering examples in psychology see @altoeEnhancingStatisticalInference2020 and  @bertoldoDesigningStudiesEvaluating2020.
 
 ### The package
 
-PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's d respectively. See [`vignette("retrospective")`](retrospective.html) to know how to set function arguments for the different effect types. 
+PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) to know how to set function arguments for the different effect types. 
 
 #### Install
 
@@ -60,10 +60,10 @@ library(PRDAbeta)
 In {PRDAbeta} there are two main functions:
 
 - **`retrospective()`**.
-Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis for Pearson's correlation test between two variables or Cohen's d (t-test comparing group means). According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective()` and  [`vignette("retrospective")`](retrospective.html).
+Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis for Pearson's correlation test between two variables or Cohen's *d* (t-test comparing group means). According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective()` and  [`vignette("retrospective")`](retrospective.html).
 
 - **`prospective()`**.
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Pearson's correlation test between two variables or Cohen's d (t-test comparing group means). According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective()` and [`vignette("prospective")`](prospective.html).
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Pearson's correlation test between two variables or Cohen's *d* (t-test comparing group means). According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective()` and [`vignette("prospective")`](prospective.html).
 
 #### Hypothetical effect size
 

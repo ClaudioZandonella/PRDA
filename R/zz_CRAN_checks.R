@@ -19,7 +19,7 @@
 
 #----    Check package    ----
 
-# devtools::check()
+# devtools::check(vignettes = FALSE)
 # devtools::check_win_devel(email= "claudiozandonella@gmail.com")
 
 
