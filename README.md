@@ -42,7 +42,11 @@ To install the github version type in R:
 
 ```{r}
 # If devtools is not installed yet: 
-# install.packages( "devtools" )  
+# install.packages( "devtools" )
+
+# tidyverse is needed to bouild vignettes. If it is not installed yet:
+# install.packages( "tidyverse" )
+
 devtools::install_github("ClaudioZandonella/PRDAbeta",
                          ref = "develop",
                          build_vignettes = TRUE)
