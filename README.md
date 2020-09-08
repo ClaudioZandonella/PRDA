@@ -11,7 +11,7 @@ status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](h
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta?branch=develop)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
 
 <hr>
