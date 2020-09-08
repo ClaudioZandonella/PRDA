@@ -29,3 +29,4 @@
 ^Todo\.md$
 ^README\.Rmd$
 ^LICENSE$
+^codecov\.yml$

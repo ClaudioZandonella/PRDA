@@ -30,6 +30,7 @@ Description: An implementation of the "Design Analysis" proposed by
 Depends: 
     R (>= 3.5.0)
 Suggests:
+    covr,
     devtools,
     knitr,
     rmarkdown,
