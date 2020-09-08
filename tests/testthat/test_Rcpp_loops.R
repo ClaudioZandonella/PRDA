@@ -11,10 +11,10 @@ context("Evaluate Rcpp loops")
 
 
 pool_sd <- function(x, y){
-  nx = length(x)
-  ny = length(y)
-  mx = mean(x)
-  my = mean(y)
+  nx <- length(x)
+  ny <- length(y)
+  mx <- mean(x)
+  my <- mean(y)
 
   sqrt((sum((x-mx)^2)+sum((y-my)^2))/(nx + ny -2))
 }
@@ -22,13 +22,13 @@ pool_sd <- function(x, y){
 obs <- with_seed(2020, list(x = rnorm(20, .3, 1),
                             y = rnorm(20, 0, 1)))
 
-x = obs$x
-y = obs$y
-diff = x-y
-mx = mean(x)
-my = mean(y)
-nx = length(x)
-ny = length(y)
+x <- obs$x
+y <- obs$y
+diff <- x-y
+mx <- mean(x)
+my <- mean(y)
+nx <- length(x)
+ny <- length(y)
 
 # for case ratio_sd = 2
 obs2 <- with_seed(2020, list(x = rnorm(20, .3, 2),
@@ -38,11 +38,10 @@ obs2 <- with_seed(2020, list(x = rnorm(20, .3, 2),
 #----    eval_cohen_loop    ----
 
 # Redefine function to avoid specify arguments each the times
-test_cohen_loop <- function(sample_n1 =20 , mean_diff = .3, sample_n2 = 20,
-                            test_method, alternative, ratio_sd = 1, mu = 0, B = 1){
-  with_seed(2020, cohen_loop(sample_n1 = sample_n1, mean_diff = mean_diff,
-                             sample_n2 = sample_n2, test_method = test_method,
-                             alternative = alternative, ratio_sd = ratio_sd, mu = mu, B = B))
+test_cohen_loop <- function(sample_n1 =20, mean_diff = .3, sample_n2 = 20,
+                        test_method, alternative, ratio_sd = 1, mu = 0, B = 1){
+  with_seed(2020, cohen_loop(sample_n1, mean_diff, sample_n2, test_method,
+                             alternative, ratio_sd, mu, B))
 }
 
 test_that("cohen_loop gives the same p-value as t.test", {
@@ -153,9 +152,9 @@ obs_cor <- with_seed(2020, mvrnorm(20, mu=c(0,0), Sigma=matrix(c(1,.3,.3,1),ncol
 
 
 # Redefine function to avoid specify arguments each the times
-test_cor_loop <- function(n = 20 , alternative, B = 1, Eigen_matrix = compute_eigen_matrix(.3)){
-  with_seed(2020, cor_loop(n = n , alternative = alternative,
-                           B = B, Eigen_matrix = Eigen_matrix))
+test_cor_loop <- function(n = 20 , alternative, B = 1,
+                          Eigen_matrix = compute_eigen_matrix(.3)){
+  with_seed(2020, cor_loop(n, alternative, B, Eigen_matrix))
 }
 
 test_that("cor_loop gives the same p-value as cor.test", {

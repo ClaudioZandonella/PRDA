@@ -86,9 +86,9 @@ compute_critical_t <- function(df, sig_level, alternative = "two_sided"){
 
 #----    compute_critical_effect    ----
 
-compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, test_method,
-                                    sig_level, alternative, ratio_sd = 1, mu = 0, ...){
-
+compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL,
+                                    test_method, sig_level, alternative,
+                                    ratio_sd = 1, mu = 0, ...){
 
   df <- compute_df(effect_type = effect_type,
                   sample_n1 = sample_n1,
@@ -106,11 +106,13 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL, te
     } else if (test_method == "paired"){
       critical_effect <- critical_t /sqrt(sample_n1) + mu
     } else if (test_method == "two_sample") {
-      critical_effect <- critical_t * sqrt((sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
+      critical_effect <- critical_t * sqrt(
+        (sample_n1+sample_n2)/(sample_n1*sample_n2)) + mu
     } else if (test_method == "welch") {
       var1 <- ratio_sd^2
       var2 <- 1
-      critical_effect <- critical_t * sqrt(2/(sample_n1 * sample_n2) * (var1*sample_n2 + var2*sample_n1)/(var1 + var2)) + mu
+      critical_effect <- critical_t * sqrt(2/(sample_n1 * sample_n2) * (
+        var1*sample_n2 + var2*sample_n1)/(var1 + var2)) + mu
     }
   } else if(effect_type == "correlation"){
     critical_effect <- critical_t /sqrt(sample_n1-2+critical_t^2)

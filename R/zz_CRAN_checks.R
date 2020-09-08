@@ -23,5 +23,11 @@
 # devtools::check_win_devel(email= "claudiozandonella@gmail.com")
 
 
+#----    Goodpractice    ----
+
+# g <- goodpractice::gp()
+# goodpractice::all_checks()
+# goodpractice::gp( checks = "covr")
+
 
 #----

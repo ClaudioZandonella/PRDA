@@ -80,7 +80,7 @@ print.design_analysis <- function(x, ...){
                              print.gap = 3, right = FALSE, row.names = FALSE)),
             sep = '\n')
       } else {
-        error_summary = suppressWarnings(as.data.frame(
+        error_summary <- suppressWarnings(as.data.frame(
           t(do.call(cbind, lapply(res_info, summary)))))
         cat(capture.output(print(error_summary,print.gap = 3, right = FALSE)),
             sep = "\n")

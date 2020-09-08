@@ -267,7 +267,7 @@ prospective <- function(effect_size,
   #----    Evaluate samples    ----
 
   if(effect_type == "correlation" && (is.null(ratio_n) || ratio_n != 1)){
-    call_arguments["ratio_n"] = list(1)
+    call_arguments["ratio_n"] <- list(1)
     ratio_n <- 1
     warning("If 'effect_type = correlation', argument 'ratio_n' is set to 1")
   }
@@ -347,7 +347,8 @@ prospective <- function(effect_size,
   #----    save results    ----
   design_fit <- structure(list(design_analysis = design_analysis,
                                call_arguments = call_arguments,
-                               effect_info = c(effect_type = effect_type, effect_info),
+                               effect_info = c(effect_type = effect_type,
+                                               effect_info),
                                test_info = test_info,
                                prospective_res = prospective_res),
                           class = c("design_analysis","list"))

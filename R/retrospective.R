@@ -62,11 +62,11 @@
 #'    considered hypothetical population effect size. The list includes:
 #'    \code{effect_type} indicating the type of effect; \code{effect_function}
 #'    indicating the function from which effect are sampled or the string
-#'    "single_value" if a single value was provided; \code{effect_summary} summary
-#'    of the sampled effects; \code{effect_samples} vector with the sampled
-#'    effects (or unique value in the case of a single value). if relevant
-#'    \code{tl} and \code{tu} specifying the lower upper truncation point
-#'    respectively.}
+#'    "single_value" if a single value was provided; \code{effect_summary}
+#'    summary of the sampled effects; \code{effect_samples} vector with the
+#'    sampled effects (or unique value in the case of a single value). if
+#'    relevant \code{tl} and \code{tu} specifying the lower upper truncation
+#'    point respectively.}
 #'    \item{test_info}{a list with all the information regarding the test
 #'    performed. The list includes: \code{test_method} character sting
 #'    indicating the test method (i.e., "pearson", "one_sample", "paired",
@@ -148,7 +148,8 @@
 #'
 #' # Two-sample t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-#'               effect_type = "cohen_d", test_method = "two_sample", seed = 2020)
+#'               effect_type = "cohen_d", test_method = "two_sample",
+#'               seed = 2020)
 #' # Welch t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
 #'               effect_type = "cohen_d", test_method = "welch",
@@ -158,7 +159,8 @@
 #'               effect_type = "cohen_d", test_method = "paired", seed = 2020)
 #' # One-sample t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
-#'               effect_type = "cohen_d", test_method = "one_sample", seed = 2020)
+#'               effect_type = "cohen_d", test_method = "one_sample",
+#'               seed = 2020)
 #'
 
 #'

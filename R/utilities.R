@@ -77,7 +77,7 @@ round_arg <- function(list_name, n_round){
 }
 
 
-#----    sing_effect    ----
+#----    sign_effect    ----
 
 sign_effect <- function(critical_effect, alternative){
   if(alternative == "two_sided"){

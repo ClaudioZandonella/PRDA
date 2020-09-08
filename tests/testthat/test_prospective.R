@@ -15,16 +15,15 @@ test_that("inputs are correctly specified", {
 
   # Redefine function to avoid specify arguments each the times
   test_prospective <- function(effect_size = .3, power = .8, ratio_n = 1,
-                               effect_type = "correlation", test_method = "pearson",
-                               alternative = "two_sided", sig_level = .05,
-                               ratio_sd = 1, B = 10, seed = 2020, tl = -Inf, tu = Inf,
-                               B_effect = 10, sample_range = c(2, 1000), tol = .01,
-                               display_message = FALSE){
-    prospective(effect_size = effect_size, power = power, ratio_n = ratio_n,
-                effect_type = effect_type, test_method = test_method,
-                alternative = alternative, sig_level = sig_level, ratio_sd = ratio_sd,
-                B = B, seed = seed, tl = tl, tu = tu, B_effect = B_effect,
-                sample_range = sample_range, tol = tol, display_message = display_message)
+                         effect_type = "correlation", test_method = "pearson",
+                         alternative = "two_sided", sig_level = .05,
+                         ratio_sd = 1, B = 10, tl = -Inf, tu = Inf,
+                         B_effect = 10, sample_range = c(2, 1000),
+                         eval_power = "mean", tol = .01,
+                         display_message = FALSE, seed = 2020){
+    prospective(effect_size, power, ratio_n, effect_type, test_method,
+                alternative, sig_level, ratio_sd, B, tl, tu, B_effect,
+                sample_range, eval_power, tol, display_message, seed)
   }
 
   #----    Arguments    ----
@@ -59,7 +58,7 @@ test_that("inputs are correctly specified", {
   expect_error(test_prospective(sig_level = c(.1,.2)), sig_level_text)
 
   # ratio_sd
-  ratio_sd_text = "Argument 'ratio_sd' has to be a single finite number grater than 0"
+  ratio_sd_text <- "Argument 'ratio_sd' has to be a single finite number grater than 0"
   expect_error(test_prospective(ratio_sd = -1), ratio_sd_text)
   expect_error(test_prospective(ratio_sd = Inf), ratio_sd_text)
   expect_error(test_prospective(ratio_sd = 0), ratio_sd_text)
@@ -126,10 +125,10 @@ test_that("inputs are correctly specified", {
   #----    Other cases    ----
 
   # coherence effect_type and test_method
-  coherence_corr = "If  'effect_type = correlation', argument 'test_method' has to be 'pearson'"
+  coherence_corr <- "If  'effect_type = correlation', argument 'test_method' has to be 'pearson'"
   expect_error(test_prospective(effect_type = "correlation", test_method = "paired"),
                coherence_corr)
-  coherence_cohen = "No appropriate 'test_method' for 'effect_type = cohen_d'"
+  coherence_cohen <- "No appropriate 'test_method' for 'effect_type = cohen_d'"
   expect_error(test_prospective(effect_type = "cohen_d", test_method = "pearson"),
                coherence_cohen)
 
@@ -139,7 +138,7 @@ test_that("inputs are correctly specified", {
                                   ratio_n = 2), correlation_text)
 
   # one_sample and ratio_n
-  one_sample_text = "If 'test_method = one_sample', argument 'ratio_n' must be set to NULL"
+  one_sample_text <- "If 'test_method = one_sample', argument 'ratio_n' must be set to NULL"
   expect_error(test_prospective(ratio_n = 3, effect_type = "cohen_d", test_method = "one_sample"),
                one_sample_text)
 
@@ -151,7 +150,7 @@ test_that("inputs are correctly specified", {
                paired_text)
 
   # two_sample or welch and ratio_n
-  t_test_text = "Argument 'ratio_n' is required for the specified 'test_method'"
+  t_test_text <- "Argument 'ratio_n' is required for the specified 'test_method'"
   expect_error(test_prospective(ratio_n = NULL, effect_type = "cohen_d", test_method = "two_sample"),
                t_test_text)
   expect_error(test_prospective(ratio_n = NULL, effect_type = "cohen_d", test_method = "welch"),
@@ -168,8 +167,8 @@ test_that("inputs are correctly specified", {
                                   tol=.001), tol_text)
 
   # welch and ratio_sd
-  t_test_ratio_text1 = "Argument 'ratio_sd' is required only for 'test_method = welch'"
-  t_test_ratio_text2 = "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_sample' instead"
+  t_test_ratio_text1 <- "Argument 'ratio_sd' is required only for 'test_method = welch'"
+  t_test_ratio_text2 <- "Argument 'ratio_sd' can not be 1 for 'test_method = welch'\n  Consider 'test_method = two_sample' instead"
   expect_error(test_prospective(ratio_sd = 1.5, effect_type = "cohen_d", test_method = "two_sample"),
                t_test_ratio_text1)
   expect_error(test_prospective(ratio_sd = 1, effect_type = "cohen_d", test_method = "welch"),

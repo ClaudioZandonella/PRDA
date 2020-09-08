@@ -63,7 +63,8 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
 
  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
  Designing Studies and Evaluating Research Results: Type M and Type S Errors
- for Pearson Correlation Coefficient. Retrieved from \url{https://psyarxiv.com/q9f86/}
+ for Pearson Correlation Coefficient. Retrieved from
+ \url{https://psyarxiv.com/q9f86/}
  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
@@ -71,6 +72,7 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/ClaudioZandonella/PRDAbeta}
   \item Report bugs at \url{https://github.com/ClaudioZandonella/PRDAbeta/issues}
 }
 
