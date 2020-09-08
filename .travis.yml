@@ -19,4 +19,4 @@ install:
 
 # Coverage tests
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov(token = "83209369-e8d6-449d-b7cf-1c3d7e53c164", branch = "develop")'

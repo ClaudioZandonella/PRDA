@@ -29,5 +29,13 @@
 # goodpractice::all_checks()
 # goodpractice::gp( checks = "covr")
 
+# spelling::spell_check_package()
+
+#----    covr    ----
+
+# covr::report()
+# covr::codecov()
 
 #----
+
+
