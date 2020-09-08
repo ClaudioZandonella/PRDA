@@ -70,7 +70,7 @@ Moreover, Gelman and Carlin (2014) distinguished between two types of design ana
 - **Prospective Design Analysis**: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.
 - **Retrospective Design Analysis**: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.
 
-It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to previous results in the literature or experts' indications, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice (Goodman 1994; Lenth 2007; Senn 2002).
+It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to previous results in the literature or experts indications, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice (Goodman 1994; Lenth 2007; Senn 2002).
 
 To know more about design analysis consider Gelman and Carlin (2014). While, for an introduction about design analysis considering examples in psychology see Altoè et al. (2020) and Bertoldo, Zandonella Callegher, and Altoè (2020).
 
@@ -96,7 +96,7 @@ retrospective(effect_size = .25, sample_n1 = 30,
               seed = 2020)
 ```
 
-In this case, the statistical power is almost 30% and the associated Type M error and Type S errer are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction.
+In this case, the statistical power is almost 30% and the associated Type M error and Type S error are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction.
 
 To know more about function arguments and examples see the function documentation `?retrospective()` and  `vignette("retrospective")`.
 

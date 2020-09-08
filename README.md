@@ -92,7 +92,7 @@ design analysis according to the study phase:
 
 It is important to do not mistake a retrospective design analysis for
 post-hoc power analysis. The former defines the plausible effect size
-according to previous results in the literature or experts’ indications,
+according to previous results in the literature or experts indications,
 whereas the latter defines the plausible effect size based on the same
 study results and it is a widely-deprecated practice (Goodman 1994;
 Lenth 2007; Senn 2002).
@@ -152,7 +152,7 @@ retrospective(effect_size = .25, sample_n1 = 30,
 ```
 
 In this case, the statistical power is almost 30% and the associated
-Type M error and Type S errer are respectively around 1.80 and 0.003.
+Type M error and Type S error are respectively around 1.80 and 0.003.
 That means, statistical significant results are on average an
 overestimation of 80% of the hypothesized population effect and there is
 a .3% of probability to obtain a statistically significant result in the
