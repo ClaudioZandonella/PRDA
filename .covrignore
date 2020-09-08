@@ -1,0 +1,5 @@
+# Ignore file for covr
+
+# RcppArmadillo functions
+
+renv/library/R-4.0/x86_64-apple-darwin19.5.0/RcppArmadillo/include/armadillo_bits
