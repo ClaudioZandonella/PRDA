@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=master&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
 [![Travis build
 status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
 [![Project Status: Active – The project has reached a stable, usable

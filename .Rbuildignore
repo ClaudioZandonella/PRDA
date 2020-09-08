@@ -30,3 +30,4 @@
 ^README\.Rmd$
 ^LICENSE$
 ^codecov\.yml$
+^appveyor\.yml$
