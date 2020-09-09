@@ -24,6 +24,8 @@ jobs:
           - /usr/local/lib/R
           - $RENV_PATHS_ROOT # global renv cache in MacOS (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
+      before_cache:
+        - brew cleanup
 
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
