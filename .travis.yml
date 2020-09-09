@@ -21,11 +21,13 @@ jobs:
       cache:
         directories:
           - $HOME/Library/Caches/Homebrew
+          - /usr/local/Homebrew
           - /usr/local/lib/R
           - $RENV_PATHS_ROOT # global renv cache in MacOS (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
       before_cache:
         - brew cleanup
+        - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
 
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
