@@ -1,26 +1,30 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-os:
-- linux
-- osx
-
 language: R
-cache: packages
 
-# safelist
-branches:
-  only:
-  - develop
+jobs:
+  include:
+    - name: "Linux"
+      os: linux
+      language: R
+      cache:
+        directories:
+          - /home/travis/.linuxbrew
+          - $HOME/.local/share/renv # global renv cache in linux (not used)
+          - $TRAVIS_BUILD_DIR/renv/library # local renv cache
 
-# Cache for R packages
-cache:
-  directories:
-  - $HOME/.local/share/renv
-  - $TRAVIS_BUILD_DIR/renv/library
+    - name: "macOS"
+      os: osx
+      language: R
+      env:
+        - RENV_PATHS_ROOT="$HOME/renv/cache"
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - /usr/local/lib/R
+          - $RENV_PATHS_ROOT # global renv cache in MacOS (not used)
+          - $TRAVIS_BUILD_DIR/renv/library # local renv cache
+
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
   - Rscript -e "renv::restore()"
-
-# Coverage tests
-after_success:
-  - Rscript -e 'covr::codecov(token = "83209369-e8d6-449d-b7cf-1c3d7e53c164", branch = "develop")'
