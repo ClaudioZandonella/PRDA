@@ -8,9 +8,6 @@
 
 <hr>
 
-Versione beta del pacchetto PRDA per svolgere *retrospective* e *prospective design analysis*.
+R package for conducting prospective and retrospective design analysis.
 
-Nella cartella [PRAD_old](./PRDA_old/) si trovano tutti i file della versione precedente del pacchetto.
-
-Nel file [Workflow.txt](./Workflow.txt) sono raccolte le idee per la struttura del pacchetto.
-
+See the [develop branch](https://github.com/ClaudioZandonella/PRDAbeta/tree/develop) for the latest available version of the package.
