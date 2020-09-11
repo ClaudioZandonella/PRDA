@@ -12,9 +12,9 @@
 - [x] Both test status and code coverage should be reported via badges in your package README.
 - [ ] R packages should have CI for all platforms when they contain Compiled code
 - [ ] https://devguide.ropensci.org/ci.html continuos integration
-- [ ] We urge package maintainers to make sure they are receiving GitHub notifications, as well as making sure emails from rOpenSci staff and CRAN maintainers are not going to their spam box.
+- [x] We urge package maintainers to make sure they are receiving GitHub notifications, as well as making sure emails from rOpenSci staff and CRAN maintainers are not going to their spam box.
 - [ ] If you would like your package to also be submitted to Journal of Open-Source Software (JOSS), it should include a paper.md file describing the package. More detail on JOSS’s requirements can be found at their website. https://joss.theoj.org/about#author_guidelines
-- [ ] use repostatus.org badges (which we recommend) https://www.repostatus.org/
+- [x] use repostatus.org badges (which we recommend) https://www.repostatus.org/
 - [ ] name function object_action()
 
 send
@@ -30,6 +30,7 @@ other:
 - [ ] Updarte URL in DESCRIPTION
 - [ ] Coverage for multiple CI (https://devguide.ropensci.org/ci.html#coverage)
 - [ ] Problem with .covrignore function RcppArmadillo
+- [ ] Fail CI on windows
 
 After submission:
 
@@ -37,5 +38,3 @@ After submission:
 - [ ] After a package is accepted but before transfer, the rOpenSci footer should be added to the bottom of the README file with the following markdown line... (https://devguide.ropensci.org/building.html#readme)
 - [ ] After transfer to our GitHub organization, rOpenSci Code of Conduct will apply to your project. Please add this text to the README (https://devguide.ropensci.org/collaboration.html#friendlyfiles)
 
-
-Lettto fino a 1.8 Authorship
