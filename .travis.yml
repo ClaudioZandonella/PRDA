@@ -2,6 +2,11 @@
 
 language: R
 
+# blocklist
+branches:
+  except:
+  - windows_ci
+
 jobs:
   include:
     - name: "Linux"
