@@ -18,7 +18,11 @@ jobs:
       language: R
       env:
         - RENV_PATHS_ROOT="$HOME/renv/cache"
+      before_install:
+        - brew update
+        - brew install ccache
       cache:
+        ccache: true
         directories:
           - $HOME/Library/Caches/Homebrew
           - /usr/local/Homebrew
