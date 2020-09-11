@@ -12,7 +12,6 @@ install:
 
 cache:
   - C:\RLibrary
-  - %LOCALAPPDATA%/renv
 
 environment:
   global:
@@ -29,9 +28,12 @@ environment:
 
 
 
+# build_script:
+#   - R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
+#   - R -e "renv::restore()"
+
 build_script:
-  - R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
-  - R -e "renv::restore()"
+  - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
