@@ -12,6 +12,7 @@ install:
 
 cache:
   - C:\RLibrary
+  - %LOCALAPPDATA%/renv
 
 environment:
   global:
