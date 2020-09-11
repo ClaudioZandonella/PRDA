@@ -9,8 +9,7 @@ init:
 
 install:
   - ps: Bootstrap
-  - cmd: Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
-  - cmd: Rscript -e "renv::restore()"
+
 
 cache:
   - C:\RLibrary
@@ -25,7 +24,8 @@ environment:
 # Adapt as necessary starting from here
 
 build_script:
-  - travis-tool.sh install_deps
+  - R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
+  - R -e "renv::restore()"
 
 test_script:
   - travis-tool.sh run_tests
