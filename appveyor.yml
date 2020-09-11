@@ -15,7 +15,10 @@ cache:
   - C:\RLibrary
 
 environment:
-  NOT_CRAN: true
+  global:
+    WARNINGS_ARE_ERRORS: 0
+    USE_RTOOLS: true
+    NOT_CRAN: true
   # env vars that may need to be set, at least temporarily, from time to time
   # see https://github.com/krlmlr/r-appveyor#readme for details
   # USE_RTOOLS: true
@@ -23,10 +26,8 @@ environment:
 
 # Adapt as necessary starting from here
 
-environment:
-      global:
-       WARNINGS_ARE_ERRORS: 0
-       USE_RTOOLS: true
+
+
 
 build_script:
   - R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
