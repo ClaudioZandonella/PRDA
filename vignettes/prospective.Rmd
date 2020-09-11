@@ -112,7 +112,7 @@ Now, to obtain a power of 80%, we would need at least 63 participants in the fir
 
 Defining the hypothetical population effect size as a single value could be limiting.  Instead, researchers may prefer to use a probability distribution representing their uncertainty regarding the hypothetical population effect. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
 
-To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single variable `x` that represent the number of samples (e.g., `function(x) rnorm(x, mean = 0, sd = 1)`). See [`vignette("retrospective")`](retrospective.html) for further details.
+To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single argument `x` representing the number of samples (e.g., `function(x) rnorm(x, mean = 0, sd = 1)`). See [`vignette("retrospective")`](retrospective.html) for further details.
 
 #### Example 5: Effect size distribution
 

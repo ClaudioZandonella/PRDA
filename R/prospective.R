@@ -95,13 +95,13 @@
 #'   \strong{Population effect size}
 #'
 #'   The hypothetical population effect size (\code{effect_size}) can be set to
-#'   a single value or a function that allows to sample values from a given
+#'   a single value or a function that allows sampling values from a given
 #'   distribution. The function has to be defined as \code{function(x)
-#'   my_function(x, ...)}, with only one single variable \code{x} that represent
-#'   the number of samples (e.g., \code{function(x) rnorm(x, mean = 0, sd = 1)};
-#'   \code{function(x) sample(c(.1,.3,.5), x, replace = TRUE)}). This allows
-#'   users to define hypothetical effect size distribution according to their
-#'   needs.
+#'   my_function(x, ...)}, with only one single argument \code{x} representing
+#'   the number of sampled values (e.g., \code{function(x) rnorm(x, mean = 0, sd
+#'   = 1)}; \code{function(x) sample(c(.1,.3,.5), x, replace = TRUE)}). This
+#'   allows users to define hypothetical effect size distribution according to
+#'   their needs.
 #'
 #'   Argument \code{B_effect} allows defining the number of sampled effects.
 #'   Users can access sampled effects in the \code{effect_info} list included in

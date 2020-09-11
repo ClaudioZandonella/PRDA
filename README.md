@@ -210,10 +210,10 @@ documentation `?prospective()` and `vignette("prospective")`.
 ### Hypothetical effect size
 
 The hypothetical population effect size can be defined as a single value
-or as a probability distribution. This is a useful feature of PRDAbeta,
-as it allows users to define hypothetical effect size according to a
-distribution that represents their expectations or literature
-indications. For an example of application see
+or as a distribution of plausible values. This is a useful feature of
+PRDAbeta, as it allows users to define hypothetical effect size
+according to a distribution representing their expectations or
+literature indications. For an example of application see
 `vignette("retrospective")`.
 
 ## Bugs and New Features

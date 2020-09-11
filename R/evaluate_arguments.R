@@ -228,5 +228,26 @@ eval_test_method <- function(effect_type, effect_target, test_method,
     }
 }
 
+
+#----    eval_rgn_function    ----
+
+eval_rgn_function <- function(FUN, n = 10){
+  if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
+  orig.seed <- .Random.seed
+
+  args <- list(x = n)
+
+  if(names(formals(FUN))!="x")
+    names(args) <- names(formals(FUN))
+
+  out <- do.call(FUN, args)
+
+  n_out <- length(out) == as.integer(n)
+  res <- is.numeric(out) && n_out
+
+  on.exit(.Random.seed <<- orig.seed)
+  return(res)
+}
+
 #----
 

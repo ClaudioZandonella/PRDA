@@ -86,4 +86,14 @@ test_that("evaluate the correct effect size", {
 })
 
 
+#----    eval_rgn_function    ----
+
+test_that("evaluate the correct number of sampled values", {
+  expect_true(eval_rgn_function(FUN = function(x) rnorm(x), n = 10))
+  expect_false(eval_rgn_function(FUN = function(x) x, n = 10))
+  expect_false(eval_rgn_function(FUN = function(x) sample(c(1,"2"),
+                                       x, replace = TRUE), n = 10))
+
+})
+
 #----

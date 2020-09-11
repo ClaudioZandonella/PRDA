@@ -21,7 +21,9 @@ test_that("evaluate sample_effect", {
                with_seed(2020, rnorm(100)))
 
   expect_error(sample_effect(FUN = function(x,y) rnorm(x,y), B_effect = 100))
+  expect_error(sample_effect(FUN = function(x) x, B_effect = 100))
   expect_error(sample_effect(FUN = "ciao", B_effect = 100))
+  expect_error(sample_effect(FUN = function(x) sample(c(1,"2"), x, replace = TRUE), B_effect = 100))
 
   expect_message(sample_effect(FUN = function(x) rnorm(x), B_effect = 100, tl=0), message_truncation)
   expect_error(sample_effect(FUN = function(x) rnorm(x), B_effect = 100, tl=0, tu=-1), error_truncation)
