@@ -9,6 +9,8 @@ init:
 
 install:
   ps: Bootstrap
+  - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
+  - Rscript -e "renv::restore()"
 
 cache:
   - C:\RLibrary
