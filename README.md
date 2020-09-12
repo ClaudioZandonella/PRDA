@@ -5,13 +5,13 @@
 
 <!-- badges: start -->
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
 [![Travis build
 status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test
 coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
