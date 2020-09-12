@@ -20,7 +20,7 @@ library(PRDAbeta)
 # PRDAbeta: Prospective and Retrospective Design Analysis
 
 <!-- badges: start -->
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=master&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
 [![Travis build status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Codecov test coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
