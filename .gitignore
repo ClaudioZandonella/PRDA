@@ -1,0 +1,21 @@
+# Mac auxiliary files
+.DS_Store
+
+# R auxiliary files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Old folders
+PRDA_old/
+PRDAbeta2/
+Old_notes/
+
+# Other
+inst/doc
+doc
+Meta
+renv/
+src/
+vignettes/
