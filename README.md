@@ -103,7 +103,7 @@ Lenth 2007; Senn 2002).
 
 To know more about design analysis consider Gelman and Carlin (2014).
 While, for an introduction about design analysis considering examples in
-psychology see Altoè et al. (2020) and Bertoldo, Zandonella Callegher,
+psychology see Altoè et al. (2020) and Bertoldo, Zandonella Callegher,
 and Altoè (2020).
 
 ## The Package
@@ -163,7 +163,7 @@ a .3% of probability to obtain a statistically significant result in the
 opposite direction.
 
 To know more about function arguments and examples see the function
-documentation `?retrospective()` and `vignette("retrospective")`.
+documentation `?retrospective` and `vignette("retrospective")`.
 
 #### • `prospective()`
 
@@ -205,7 +205,7 @@ The required sample size is \(n=126\), the associated Type M error is
 around 1.10 and the Type S error is approximately 0.
 
 To know more about function arguments and examples see the function
-documentation `?prospective()` and `vignette("prospective")`.
+documentation `?prospective` and `vignette("prospective")`.
 
 ### Hypothetical effect size
 
@@ -244,35 +244,59 @@ A BibTeX entry for LaTeX users is
 
 ## References
 
+<div id="refs" class="references">
+
+<div id="ref-altoeEnhancingStatisticalInference2020">
+
 Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico
 Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore.
 2020. “Enhancing Statistical Inference in Psychological Research via
-Prospective and Retrospective Design Analysis.” <em>Frontiers in
-Psychology</em> 10.
-<a href="https://doi.org/10.3389/fpsyg.2019.02893">https://doi.org/10.3389/fpsyg.2019.02893</a>.
+Prospective and Retrospective Design Analysis.” *Frontiers in
+Psychology* 10. <https://doi.org/10.3389/fpsyg.2019.02893>.
+
+</div>
+
+<div id="ref-bertoldoDesigningStudiesEvaluating2020">
 
 Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè.
 2020. “Designing Studies and Evaluating Research Results: Type M and
 Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv.
-<a href="https://doi.org/10.31234/osf.io/q9f86">https://doi.org/10.31234/osf.io/q9f86</a>.
+<https://doi.org/10.31234/osf.io/q9f86>.
+
+</div>
+
+<div id="ref-gelmanPowerCalculationsAssessing2014">
 
 Gelman, Andrew, and John Carlin. 2014. “Beyond Power Calculations:
-Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives
-on Psychological Science</em> 9 (6): 641–51.
-<a href="https://doi.org/10.1177/1745691614551642">https://doi.org/10.1177/1745691614551642</a>.
+Assessing Type S (Sign) and Type M (Magnitude) Errors.” *Perspectives on
+Psychological Science* 9 (6): 641–51.
+<https://doi.org/10.1177/1745691614551642>.
 
-</p>
+</div>
+
+<div id="ref-goodmanUsePredictedConfidence1994">
 
 Goodman, Steven N. 1994. “The Use of Predicted Confidence Intervals When
 Planning Experiments and the Misuse of Power When Interpreting Results.”
-<em>Annals of Internal Medicine</em> 121 (3): 200.
-<a href="https://doi.org/10.7326/0003-4819-121-3-199408010-00008">https://doi.org/10.7326/0003-4819-121-3-199408010-00008</a>.
+*Annals of Internal Medicine* 121 (3): 200.
+<https://doi.org/10.7326/0003-4819-121-3-199408010-00008>.
 
-Lenth, R. V. 2007. “Statistical Power Calculations1.” <em>Journal of
-Animal Science</em> 85 (suppl\_13): E24–E29.
-<a href="https://doi.org/10.2527/jas.2006-449">https://doi.org/10.2527/jas.2006-449</a>.
+</div>
+
+<div id="ref-lenthStatisticalPowerCalculations12007">
+
+Lenth, R. V. 2007. “Statistical Power Calculations1.” *Journal of Animal
+Science* 85 (suppl\_13): E24–E29.
+<https://doi.org/10.2527/jas.2006-449>.
+
+</div>
+
+<div id="ref-Senn1304">
 
 Senn, Stephen J. 2002. “Power Is Indeed Irrelevant in Interpreting
-Completed Studies.” <em>BMJ: British Medical Journal</em> 325 (7375):
-1304.
-<a href="https://doi.org/10.1136/bmj.325.7375.1304">https://doi.org/10.1136/bmj.325.7375.1304</a>.
+Completed Studies.” *BMJ: British Medical Journal* 325 (7375): 1304.
+<https://doi.org/10.1136/bmj.325.7375.1304>.
+
+</div>
+
+</div>
