@@ -146,7 +146,7 @@ retrospective(effect_size = .25, sample_n1 = 30,
 #> 
 #> Study characteristics:
 #>    test_method   sample_n1   sample_n2   alternative   sig_level   df
-#>    pearson       30          30          two_sided     0.05        28
+#>    pearson       30          NULL        two_sided     0.05        28
 #> 
 #> Inferential risks:
 #>    power   typeM   typeS
@@ -192,7 +192,7 @@ prospective(effect_size = .25, power = .80,
 #> 
 #> Study characteristics:
 #>    test_method   sample_n1   sample_n2   alternative   sig_level   df 
-#>    pearson       126         126         two_sided     0.05        124
+#>    pearson       126         NULL        two_sided     0.05        124
 #> 
 #> Inferential risks:
 #>    power   typeM   typeS

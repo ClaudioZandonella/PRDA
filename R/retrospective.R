@@ -231,9 +231,9 @@ retrospective <- function(effect_size,
   if(effect_type == "correlation"){
     if(!is.null(sample_n2)){
       call_arguments["sample_n2"] <- list(NULL)
-      warning("If 'effect_type = correlation', argument 'sample_n2' is ignored.")
+      warning("If 'effect_type = correlation', argument 'sample_n2' is set to NULL")
     }
-    sample_n2 <- sample_n1
+    sample_n2 <- NULL
   }
 
   #----    Set seed    ----

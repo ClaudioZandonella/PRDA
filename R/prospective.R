@@ -266,10 +266,12 @@ prospective <- function(effect_size,
 
   #----    Evaluate samples    ----
 
-  if(effect_type == "correlation" && (is.null(ratio_n) || ratio_n != 1)){
-    call_arguments["ratio_n"] <- list(1)
-    ratio_n <- 1
-    warning("If 'effect_type = correlation', argument 'ratio_n' is set to 1")
+  if(effect_type == "correlation" && !is.null(ratio_n)){
+    if(ratio_n != 1)
+      warning("If 'effect_type = correlation', argument 'ratio_n' is set to NULL")
+
+    call_arguments["ratio_n"] <- list(NULL)
+    ratio_n <- NULL
   }
 
   sample_info <- eval_samples(ratio_n = ratio_n, current_n = sample_range[2])

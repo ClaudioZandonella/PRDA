@@ -102,7 +102,7 @@ test_that("inputs are correctly specified", {
                coherence_cohen)
 
   # correlation and sample_n2
-  correlation_text <- "If 'effect_type = correlation', argument 'sample_n2' is ignored"
+  correlation_text <- "If 'effect_type = correlation', argument 'sample_n2' is set to NULL"
   expect_warning(test_retrospective(sample_n2 = 30, effect_type = "correlation"),
                  correlation_text)
 

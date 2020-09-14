@@ -6,7 +6,7 @@ Hypothesized effect:  rho = 0.3
 
 Study characteristics:
    test_method   sample_n1   sample_n2   alternative   sig_level   df
-   pearson       20          20          two_sided     0.05        18
+   pearson       20          NULL        two_sided     0.05        18
 
 Inferential risks:
    power   typeM   typeS

@@ -133,7 +133,7 @@ test_that("inputs are correctly specified", {
                coherence_cohen)
 
   # correlation and ratio_n
-  correlation_text <- "If 'effect_type = correlation', argument 'ratio_n' is set to 1"
+  correlation_text <- "If 'effect_type = correlation', argument 'ratio_n' is set to NULL"
   expect_warning(test_prospective(effect_type = "correlation", test_method = "pearson",
                                   ratio_n = 2), correlation_text)
 

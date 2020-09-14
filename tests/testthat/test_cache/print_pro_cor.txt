@@ -36,7 +36,7 @@ Hypothesized effect:  rho ~ rnorm(x, 0.3, 0.1) [tl =  0.15 ; tu = 0.45 ]
 
 Study characteristics:
    test_method   sample_n1   sample_n2   alternative   sig_level   df
-   pearson       76          76          two_sided     0.05        74
+   pearson       76          NULL        two_sided     0.05        74
 
 Inferential risks:
         Min.    1st Qu.   Median   Mean     3rd Qu.   Max. 
