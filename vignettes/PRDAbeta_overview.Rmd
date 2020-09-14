@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Given a plausible value of effect size, {PRDAbeta} performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
 
-### Some background information
+## Some background information
 
 The term *Design Analysis* was introduced by @gelmanPowerCalculationsAssessing2014 as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.
 
@@ -39,11 +39,11 @@ It is important to do not mistake a retrospective design analysis for post-hoc p
 
 To know more about design analysis consider @gelmanPowerCalculationsAssessing2014. While, for an introduction about design analysis considering examples in psychology see @altoeEnhancingStatisticalInference2020 and  @bertoldoDesigningStudiesEvaluating2020.
 
-### The package
+## The package
 
 PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) to know how to set function arguments for the different effect types. 
 
-#### Install
+### Install
 
 To install the github version type in R:
 
@@ -55,7 +55,7 @@ devtools::install_github("CaludioZandonella/PRDAbeta",
 library(PRDAbeta)
 ```
 
-#### Functions
+### Functions
 
 In {PRDAbeta} there are two main functions:
 
@@ -65,11 +65,11 @@ Given the hypothetical population effect size and the study sample size, the fun
 - **`prospective()`**.
 Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Pearson's correlation test between two variables or Cohen's *d* (t-test comparing group means). According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective()` and [`vignette("prospective")`](prospective.html).
 
-#### Hypothetical effect size
+### Hypothetical effect size
 
 The hypothetical population effect size can be defined as a single value or as a distribution of plausible values. This is a useful feature of {PRDAbeta}, as it allows users to define hypothetical effect size according to a distribution representing their expectations or literature indications. For an example of application see [`vignette("retrospective")`](retrospective.html).
 
-### References
+## References
 
 
 
