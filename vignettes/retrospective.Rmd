@@ -1,5 +1,6 @@
 ---
 title: "Retrospective Design Analysis"
+description: "This vignette shows how to conduct a retrospective design analysis using the function `retrospective()`."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{retrospective}

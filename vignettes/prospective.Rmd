@@ -1,5 +1,6 @@
 ---
 title: "Prospective Design Analysis"
+description: "This vignette shows how to conduct a prospective design analysis using the function `prospective()`."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{prospective}
