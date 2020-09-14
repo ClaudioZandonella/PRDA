@@ -15,7 +15,8 @@ Old_notes/
 # Other
 inst/doc
 doc
+renv/library/
+renv/staging/
 Meta
-renv/
 src/
 vignettes/
