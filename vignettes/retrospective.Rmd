@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 ```{r, message=FALSE}
 library(tidyverse)
+library(ggplot2)
 library(PRDAbeta)
 ```
 
@@ -156,7 +157,7 @@ data_plot <- da_fit$retrospective_res %>%
 
 Plotting the distribution of sampled effects, we can evaluate whether they accurately represent the intended distribution. If not, we could increase the number of sampled effects (`B_effect`).
 
-```{r, fig.dim= c(4, 3)}
+```{r, fig.dim= c(4, 3), dev='png'}
 ggplot(data_plot)+
   geom_histogram(aes(effect, y = ..density..),
                  col = "black", fill = "#00BFC4", alpha = .8,
@@ -169,7 +170,7 @@ ggplot(data_plot)+
 
 We can also plot the distributions of Power, Type M error, and Type S error.
 
-```{r, fig.dim = c(7.23, 2.5)}
+```{r, fig.dim = c(7.23, 2.5), dev='png'}
 data_plot %>%
   pivot_longer(cols = c("power", "typeM", "typeS"), 
                names_to = "Criteria", values_to = "Value") %>%

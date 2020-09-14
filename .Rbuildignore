@@ -32,3 +32,6 @@
 ^codecov\.yml$
 ^appveyor\.yml$
 ^\.covrignore$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
