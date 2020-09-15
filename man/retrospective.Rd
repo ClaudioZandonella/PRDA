@@ -210,7 +210,7 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  Analysis. Frontiers in Psychology, 10.
  \url{https://doi.org/10.3389/fpsyg.2019.02893}
 
- Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
+ Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020).
  Designing Studies and Evaluating Research Results: Type M and Type S Errors
  for Pearson Correlation Coefficient. Retrieved from
  \url{https://psyarxiv.com/q9f86/}

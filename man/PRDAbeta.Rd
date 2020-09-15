@@ -3,7 +3,6 @@
 \docType{package}
 \name{PRDAbeta}
 \alias{PRDAbeta}
-\alias{PRDAbeta-package}
 \title{PRDAbeta: Prospective and Retrospective Design Analysis.}
 \description{
 Given a plausible value of effect size, {PRDAbeta} performs a prospective or
@@ -30,7 +29,7 @@ alternative hypothesis and the significance level, the inferential risks
 with the critical effect value (i.e., the minimum absolute effect size value
 that would result significant). To know more about function arguments and
 examples see the function documentation
-\code{\link[PRDAbeta:retrospective]{?retrospective()}} and
+\code{\link[PRDAbeta:retrospective]{?retrospective}} and
 \code{vignette("retrospective")}.
 
 \item{\strong{\code{prospective()}}}. Given the hypothetical population
@@ -40,7 +39,7 @@ hypothesis and the significance level, the required sample size is computed
 together with the associated Type M error, Type S error, and the critical
 correlation value (i.e., the minimum absolute effect size value that would
 result significant).  To know more about function arguments and examples see
-the function documentation \code{\link[PRDAbeta:prospective]{?prospective()}}
+the function documentation \code{\link[PRDAbeta:prospective]{?prospective}}
 and \code{vignette("prospective")}.
 }
 }
@@ -69,26 +68,3 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
 }
-\seealso{
-Useful links:
-\itemize{
-  \item \url{https://github.com/ClaudioZandonella/PRDAbeta}
-  \item Report bugs at \url{https://github.com/ClaudioZandonella/PRDAbeta/issues}
-}
-
-}
-\author{
-\strong{Maintainer}: Claudio Zandonella Callegher \email{claudiozandonella@gmail.com} (\href{https://orcid.org/0000-0001-7721-6318}{ORCID})
-
-Authors:
-\itemize{
-  \item Massimiliano Pastore \email{massimiliano.pastore@unipd.it} (\href{https://orcid.org/0000-0002-7922-6365}{ORCID})
-  \item Angela Andreella \email{a.andreella8@gmail.com} (\href{https://orcid.org/0000-0002-1141-3041}{ORCID})
-  \item Anna Vesely \email{anna.vesely92@gmail.com} (\href{https://orcid.org/0000-0001-6696-2390}{ORCID})
-  \item Giulia Bertoldo \email{giuliabertoldo94@gmail.com} (\href{https://orcid.org/0000-0002-6960-3980}{ORCID})
-  \item Enrico Toffalini \email{enrico.toffalini@yahoo.it} (\href{https://orcid.org/0000-0002-1404-5133}{ORCID})
-  \item Gianmarco Altoè \email{gianmarco.altoe@unipd.it} (\href{https://orcid.org/0000-0003-1154-9528}{ORCID})
-}
-
-}
-\keyword{internal}

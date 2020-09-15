@@ -28,7 +28,7 @@
 #' with the critical effect value (i.e., the minimum absolute effect size value
 #' that would result significant). To know more about function arguments and
 #' examples see the function documentation
-#' \code{\link[PRDAbeta:retrospective]{?retrospective()}} and
+#' \code{\link[PRDAbeta:retrospective]{?retrospective}} and
 #' \code{vignette("retrospective")}.
 #'
 #' \item{\strong{\code{prospective()}}}. Given the hypothetical population
@@ -38,7 +38,7 @@
 #' together with the associated Type M error, Type S error, and the critical
 #' correlation value (i.e., the minimum absolute effect size value that would
 #' result significant).  To know more about function arguments and examples see
-#' the function documentation \code{\link[PRDAbeta:prospective]{?prospective()}}
+#' the function documentation \code{\link[PRDAbeta:prospective]{?prospective}}
 #' and \code{vignette("prospective")}.
 #' }
 #'
@@ -71,8 +71,7 @@
 #'
 #' @docType package
 #' @name PRDAbeta
-#' @keywords internal
-"_PACKAGE"
+NULL
 
 
 #----    use_rcpp and rcppArmadillo    ----
