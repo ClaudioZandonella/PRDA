@@ -5,7 +5,7 @@
 - [x] We recommend not creating README.md directly, but from a README.Rmd file (an R Markdown file) if you have any demonstration code. (usethis::use_readme_rmd())
 - [x] Add #' @noRd to internal functions.
 - [x] Only use package startup messages when necessary (function masking for instance). Avoid package startup messages like “This is foobar 2.4-0” or citation guidance because they can be annoying to the user. Rely on documentation for such guidance.
-- [ ] https://devguide.ropensci.org/building.html#website
+- [x] https://devguide.ropensci.org/building.html#website
 - [x] Use Imports instead of Depends for packages providing functions
 - [x] use the goodpractice package (goodpractice::gp()) as a guide to improve your package, since most exceptions to it will need to be justified
 - [x] Test coverage below 75% will likely require additional tests or explanation before being sent for review. Once you’ve set up CI, use your package’s code coverage report (cf this section of our book) to identify untested lines, and to add further tests. usethis::use_coverage()
