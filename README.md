@@ -20,11 +20,11 @@ coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/
 
 <!-- badges: end -->
 
-PRDAbeta allows performing a prospective or retrospective design
+{PRDAbeta} allows performing a prospective or retrospective design
 analysis to evaluate inferential risks (i.e., power, Type M error, and
 Type S error) in a study considering Pearson’s correlation between two
-variables or mean comparisons (one-sample, paired, two-samples, and
-Welch’s t-test).
+variables or mean comparisons (one-sample, paired, two-sample, and
+Welch’s *t*-test).
 
 For an introduction to design analysis and a general overview of the
 package see `vignettes("PRDAbeta_overview")`. Examples for retrospective
@@ -57,8 +57,8 @@ devtools::install_github("ClaudioZandonella/PRDAbeta",
 
 ## The Package
 
-PRDAbeta package can be used for Pearson’s correlation between two
-variables or mean comparisons (one-sample, paired, two-samples, and
+{PRDAbeta} package can be used for Pearson’s correlation between two
+variables or mean comparisons (one-sample, paired, two-sample, and
 Welch’s t-test) considering a hypothetical value of *ρ* or Cohen’s *d*
 respectively. See `vignette("retrospective")` and
 `vignette("prospective")` to know how to set function arguments for the
@@ -66,7 +66,7 @@ different effect types.
 
 ### Functions
 
-In PRDAbeta there are two main functions `retrospective()` and
+In {PRDAbeta} there are two main functions `retrospective()` and
 `prospective()`.
 
 #### • `retrospective()`
@@ -158,7 +158,7 @@ function documentation `?prospective` and `vignette("prospective")`.
 
 The hypothetical population effect size can be defined as a single value
 according to previous results in the literature or experts indications.
-Alternatively, PRDAbeta allows users to specify a distribution of
+Alternatively, {PRDAbeta} allows users to specify a distribution of
 plausible values to account for their uncertainty about the hypothetical
 population effect size. To know how to specify the hypothetical effect
 size according to a distribution and an example of application see
@@ -171,7 +171,7 @@ To propose a new feature or report a bug, please open an issue on
 
 ## Citation
 
-To cite PRDAbeta in publications use:
+To cite {PRDAbeta} in publications use:
 
 Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella,
 Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè.
