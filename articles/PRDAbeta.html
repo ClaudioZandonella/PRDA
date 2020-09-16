@@ -168,6 +168,9 @@
 <h2 class="hasAnchor">
 <a href="#case-study" class="anchor"></a>Case study</h2>
 <p><span class="citation">Eisenberger, Lieberman, and Williams (2003)</span> claimed that social and physical pain seem to share similar neural underpinnings. Their experiment included 13 participants, and they found a statistically significant correlation between perceived distress due to social exclusion and activity in the brain area associated with physical pain. However, the magnitude of the estimated correlation (<span class="math inline">\(r = .88\)</span>) is beyond what could be considered plausible. In this field correlations are likely to be around <span class="math inline">\(\rho = .25\)</span> <span class="citation">(for a complete discussion see Bertoldo, Zandonella Callegher, and Altoè 2020)</span>.</p>
+<div id="retrospective-design-analysis" class="section level3">
+<h3 class="hasAnchor">
+<a href="#retrospective-design-analysis" class="anchor"></a>Retrospective design analysis</h3>
 <p>The function <code><a href="../reference/retrospective.html">retrospective()</a></code> can be used to evaluate the inferential risks associated with the study.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ClaudioZandonella/PRDAbeta">PRDAbeta</a></span>)
@@ -190,6 +193,10 @@
 </pre></div>
 <p>In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% of probability to obtain a statistically significant result in the opposite direction.</p>
 <p>To know more about function arguments and examples see the function documentation <code><a href="../reference/retrospective.html">?retrospective</a></code> and <a href="retrospective.html"><code>vignette("retrospective")</code></a>.</p>
+</div>
+<div id="prospective-design-analysis" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prospective-design-analysis" class="anchor"></a>Prospective design analysis</h3>
 <p>Considering these results, researchers might consider planning a replicability study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.8</span>,
@@ -212,6 +219,7 @@
 </pre></div>
 <p>In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is <span class="math inline">\(n = 126\)</span>, the associated Type M error is around 1.10 and the Type S error is approximately 0.</p>
 <p>To know more about function arguments and examples see the function documentation <code><a href="../reference/prospective.html">?prospective</a></code> and <a href="prospective.html"><code>vignette("prospective")</code></a>.</p>
+</div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
