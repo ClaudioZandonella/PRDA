@@ -32,6 +32,11 @@ other:
 - [ ] Problem with .covrignore function RcppArmadillo
 - [x] Fail CI on windows
 
+Joss:
+
+- [ ] https://joss.readthedocs.io/en/latest/submitting.html
+
+
 After submission:
 
 - [ ] Once you have submitted a package and it has passed editor checks, add a peer-review badge via... (https://devguide.ropensci.org/building.html#readme)
