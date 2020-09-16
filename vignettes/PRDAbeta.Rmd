@@ -92,6 +92,8 @@ The hypothetical population effect size can be defined as a single value accordi
 
 @eisenbergerDoesRejectionHurt2003 claimed that social and physical pain seem to share similar neural underpinnings. Their experiment included 13 participants, and they found a statistically significant correlation between perceived distress due to social exclusion and activity in the brain area associated with physical pain. However, the magnitude of the estimated correlation ($r = .88$) is beyond what could be considered plausible. In this field correlations are likely to be around $\rho = .25$ [for a complete discussion see @bertoldoDesigningStudiesEvaluating2020].
 
+### Retrospective design analysis
+
 The function `retrospective()` can be used to evaluate the inferential risks associated with the study.
 
 ```{r, retro}
@@ -103,6 +105,8 @@ retrospective(effect_size = .25, sample_n1 = 13,
 In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% of probability to obtain a statistically significant result in the opposite direction.
 
 To know more about function arguments and examples see the function documentation `?retrospective` and  [`vignette("retrospective")`](retrospective.html).
+
+### Prospective design analysis
 
 Considering these results, researchers might consider planning a replicability study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
 
