@@ -9,7 +9,7 @@
 #' Given a hypothetical value of effect size, {PRDAbeta} performs a prospective
 #' or retrospective design analysis to evaluate the inferential risks (i.e.,
 #' power, Type M error, and Type S error) related to the study design. See
-#' \code{vignette("PRDAbeta_overview")} for a brief introduction to \emph{Design
+#' \code{vignette("PRDAbeta")} for a brief introduction to \emph{Design
 #' Analysis}.
 #'
 #' PRDAbeta package can be used for Pearson's correlation between two variables

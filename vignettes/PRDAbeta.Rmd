@@ -3,7 +3,7 @@ title: "PRDAbeta: Prospective and Retrospective Design Analysis"
 description: "This vignette offers a general overview of the PRDAbeta package, introducing the concept of design analysis and providing information about the main functions in the package."
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{PRDAbeta_overview}
+  %\VignetteIndexEntry{PRDAbeta}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 bibliography: PRDA.bib

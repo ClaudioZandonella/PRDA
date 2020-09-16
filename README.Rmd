@@ -32,8 +32,8 @@ library(PRDAbeta)
 
 {PRDAbeta} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). 
 
-For an introduction to design analysis and a general overview of the package see `vignettes("PRDAbeta_overview")`.
-Examples for retrospective design analysis and prospective design analysis are provided in `vignettes("retrospective")` and `vignettes("prospective")` respectively.
+For an introduction to design analysis and a general overview of the package see `vignette("PRDAbeta")`.
+Examples for retrospective design analysis and prospective design analysis are provided in `vignette("retrospective")` and `vignette("prospective")` respectively.
 
 ## Installation
 

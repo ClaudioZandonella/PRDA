@@ -27,10 +27,9 @@ variables or mean comparisons (one-sample, paired, two-sample, and
 Welch’s *t*-test).
 
 For an introduction to design analysis and a general overview of the
-package see `vignettes("PRDAbeta_overview")`. Examples for retrospective
-design analysis and prospective design analysis are provided in
-`vignettes("retrospective")` and `vignettes("prospective")`
-respectively.
+package see `vignette("PRDAbeta")`. Examples for retrospective design
+analysis and prospective design analysis are provided in
+`vignette("retrospective")` and `vignette("prospective")` respectively.
 
 ## Installation
 
