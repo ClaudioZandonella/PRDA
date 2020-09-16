@@ -37,6 +37,12 @@
 # covr::report()
 # covr::codecov()
 
+#----    pkgdown    ----
+
+# pkgdown::deploy_to_branch()
+
 #----
+
+
 
 
