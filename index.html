@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Conduct a Prospective or Retrospective Design Analysis">
-<meta property="og:description" content='An implementation of the "Design Analysis" proposed by
-    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis
+<meta property="og:description" content='An implementation of the "Design Analysis" proposed by 
+    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
     error (e.g. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).'>
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -43,8 +43,11 @@
 <li>
   <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
-
+     
   </a>
+</li>
+<li>
+  <a href="articles/PRDAbeta.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -52,14 +55,11 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
-
+     
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/PRDAbeta_overview.html">PRDAbeta: Prospective and Retrospective Design Analysis</a>
-    </li>
-    <li>
       <a href="articles/prospective.html">Prospective Design Analysis</a>
     </li>
     <li>
@@ -72,7 +72,7 @@
 <li>
   <a href="https://github.com/ClaudioZandonella/PRDAbeta/">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul>
@@ -83,7 +83,7 @@
 </div>
 <!--/.navbar -->
 
-
+      
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -92,8 +92,8 @@
 <a href="#prdabeta-prospective-and-retrospective-design-analysis" class="anchor"></a>PRDAbeta: Prospective and Retrospective Design Analysis</h1></div>
 <!-- badges: start -->
 
-<!-- badges: end --><p>Given a plausible value of effect size, PRDAbeta performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.</p>
-<p>For a general overview of the package see <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes("PRDAbeta_overview")</a></code>. Examples for retrospective design analysis and prospective design analysis are provided in <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes("retrospective")</a></code> and <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes("prospective")</a></code> respectively.</p>
+<!-- badges: end --><p>{PRDAbeta} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch’s <em>t</em>-test).</p>
+<p>For an introduction to design analysis and a general overview of the package see <code><a href="articles/PRDAbeta.html">vignette("PRDAbeta")</a></code>. Examples for retrospective design analysis and prospective design analysis are provided in <code><a href="articles/retrospective.html">vignette("retrospective")</a></code> and <code><a href="articles/prospective.html">vignette("prospective")</a></code> respectively.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -110,44 +110,20 @@
                          build_vignettes = <span class="fl">TRUE</span>)
 </pre></div>
 </div>
-<div id="some-background-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#some-background-information" class="anchor"></a>Some Background Information</h2>
-<p>The term <em>Design Analysis</em> was introduced by Gelman and Carlin (2014) as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.</p>
-<p>Given a <em>plausible effect size</em> and study characteristics (i.e., sample size, statistical test directionality, <span class="math inline"><em>α</em></span> level), design analysis evaluates:</p>
-<ul>
-<li>
-<strong>Power</strong>: the probability of the test rejecting the null hypothesis.</li>
-<li>
-<strong>Type M error</strong> (Magnitude): the factor by which a statistically significant effect is on average exaggerated, also known as <em>Exaggeration Ratio</em>.</li>
-<li>
-<strong>Type S error</strong> (Sign): the probability of finding a statistically significant result in the opposite direction to the plausible one.</li>
-</ul>
-<p>Although Type M error and Type S error depends directly on power level, they allow enhancing researchers awareness about the inferential risks related to their studies. For example, obtaining a significant result in a study with 40% of power could sound a promising finding to the researchers. However, knowing that this is associated with a Type M error of almost 1.60 (i.e., on average significant results are an overestimation of 60%) would warn researchers to interpret their results with caution.</p>
-<p>Moreover, Gelman and Carlin (2014) distinguished between two types of design analysis according to the study phase:</p>
-<ul>
-<li>
-<strong>Prospective Design Analysis</strong>: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.</li>
-<li>
-<strong>Retrospective Design Analysis</strong>: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.</li>
-</ul>
-<p>It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to previous results in the literature or experts indications, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice (Goodman 1994; Lenth 2007; Senn 2002).</p>
-<p>To know more about design analysis consider Gelman and Carlin (2014). While, for an introduction about design analysis considering examples in psychology see Altoè et al. (2020) and Bertoldo, Zandonella Callegher, and Altoè (2020).</p>
-</div>
 <div id="the-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-package" class="anchor"></a>The Package</h2>
-<p>PRDAbeta package can be used for Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch’s t-test) considering a plausible value of <em>ρ</em> or Cohen’s <em>d</em> respectively. See <code><a href="articles/retrospective.html">vignette("retrospective")</a></code> to know how to set function arguments for the different effect types.</p>
+<p>{PRDAbeta} package can be used for Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch’s t-test) considering a hypothetical value of <em>ρ</em> or Cohen’s <em>d</em> respectively. See <code><a href="articles/retrospective.html">vignette("retrospective")</a></code> and <code><a href="articles/prospective.html">vignette("prospective")</a></code> to know how to set function arguments for the different effect types.</p>
 <div id="functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#functions" class="anchor"></a>Functions</h3>
-<p>In PRDAbeta there are two main functions <code><a href="reference/retrospective.html">retrospective()</a></code> and <code><a href="reference/prospective.html">prospective()</a></code>.</p>
+<p>In {PRDAbeta} there are two main functions <code><a href="reference/retrospective.html">retrospective()</a></code> and <code><a href="reference/prospective.html">prospective()</a></code>.</p>
 <div id="-retrospective" class="section level4">
 <h4 class="hasAnchor">
 <a href="#-retrospective" class="anchor"></a>• <code>retrospective()</code>
 </h4>
-<p>Given the hypothetical population effect size and the study sample size, the function <code><a href="reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis for Cohen’s <em>d</em> (t-test comparing group means) or Pearson’s correlation test between two variables. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant).</p>
-<p>Considering a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is <em>ρ</em> = .25. To evaluate the inferential risks related to the study we use the function <code><a href="reference/retrospective.html">retrospective()</a></code>.</p>
+<p>Given the hypothetical population effect size and the study sample size, the function <code><a href="reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant).</p>
+<p>Consider a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is <em>ρ</em> = .25. To evaluate the inferential risks related to the study we use the function <code><a href="reference/retrospective.html">retrospective()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.25</span>, sample_n1 = <span class="fl">30</span>,
               effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>,
@@ -168,16 +144,16 @@
 <span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span>
 </pre></div>
 <p>In this case, the statistical power is almost 30% and the associated Type M error and Type S error are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction.</p>
-<p>To know more about function arguments and examples see the function documentation <code><a href="reference/retrospective.html">?retrospective</a></code> and <code><a href="articles/retrospective.html">vignette("retrospective")</a></code>.</p>
+<p>To know more about function arguments and further examples see the function documentation <code><a href="reference/retrospective.html">?retrospective</a></code> and <code><a href="articles/retrospective.html">vignette("retrospective")</a></code>.</p>
 </div>
 <div id="-prospective" class="section level4">
 <h4 class="hasAnchor">
 <a href="#-prospective" class="anchor"></a>• <code>prospective()</code>
 </h4>
-<p>Given the hypothetical population effect size and the required power level, the function <code><a href="reference/prospective.html">prospective()</a></code> performs a prospective design analysis for Cohen’s <em>d</em> (t-test comparing group means) or Pearson’s correlation test between two variables. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).</p>
-<p>Considering a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of <em>ρ</em> = .25, the function <code><a href="reference/prospective.html">prospective()</a></code> can be used to know the required sample size to obtain a power of 80%.</p>
+<p>Given the hypothetical population effect size and the required power level, the function <code><a href="reference/prospective.html">prospective()</a></code> performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).</p>
+<p>Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of <em>ρ</em> = .25, the function <code><a href="reference/prospective.html">prospective()</a></code> can be used to compute the required sample size to obtain a power of 80%.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.80</span>,
+<span class="fu"><a href="reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.80</span>, 
             effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>,
             display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
 <span class="co">#&gt; </span>
@@ -196,13 +172,13 @@
 <span class="co">#&gt; Critical value(s): rho  =  ± 0.175</span>
 </pre></div>
 <p>The required sample size is <span class="math inline"><em>n</em> = 126</span>, the associated Type M error is around 1.10 and the Type S error is approximately 0.</p>
-<p>To know more about function arguments and examples see the function documentation <code><a href="reference/prospective.html">?prospective</a></code> and <code><a href="articles/prospective.html">vignette("prospective")</a></code>.</p>
+<p>To know more about function arguments and further examples see the function documentation <code><a href="reference/prospective.html">?prospective</a></code> and <code><a href="articles/prospective.html">vignette("prospective")</a></code>.</p>
 </div>
 </div>
 <div id="hypothetical-effect-size" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hypothetical-effect-size" class="anchor"></a>Hypothetical effect size</h3>
-<p>The hypothetical population effect size can be defined as a single value or as a distribution of plausible values. This is a useful feature of PRDAbeta, as it allows users to define hypothetical effect size according to a distribution representing their expectations or literature indications. For an example of application see <code><a href="articles/retrospective.html">vignette("retrospective")</a></code>.</p>
+<p>The hypothetical population effect size can be defined as a single value according to previous results in the literature or experts indications. Alternatively, {PRDAbeta} allows users to specify a distribution of plausible values to account for their uncertainty about the hypothetical population effect size. To know how to specify the hypothetical effect size according to a distribution and an example of application see <code><a href="articles/retrospective.html">vignette("retrospective")</a></code>.</p>
 </div>
 </div>
 <div id="bugs-and-new-features" class="section level2">
@@ -213,11 +189,11 @@
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<p>To cite PRDAbeta in publications use:</p>
-<p>Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, &amp; Gianmarco Altoè. (2020). PRDbeta: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. <a href="http://doi.org/10.5281/zenodo.3630733" class="uri">http://doi.org/10.5281/zenodo.3630733</a></p>
+<p>To cite {PRDAbeta} in publications use:</p>
+<p>Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, &amp; Gianmarco Altoè. (2020). PRDAbeta: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. <a href="http://doi.org/10.5281/zenodo.3630733" class="uri">http://doi.org/10.5281/zenodo.3630733</a></p>
 <p>A BibTeX entry for LaTeX users is</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">@</span>Misc{,</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    title =<span class="st"> </span>{{PRDbeta}<span class="op">:</span><span class="st"> </span>Prospective and Retrospective Design Analysis},</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    title =<span class="st"> </span>{{PRDAbeta}<span class="op">:</span><span class="st"> </span>Prospective and Retrospective Design Analysis},</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    author =<span class="st"> </span>{Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},</span>
 <span id="cb4-4"><a href="#cb4-4"></a>    year =<span class="st"> </span>{<span class="dv">2020</span>},</span>
 <span id="cb4-5"><a href="#cb4-5"></a>    publisher =<span class="st"> </span>{Zenodo},</span>
@@ -231,22 +207,19 @@
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references">
 <div id="ref-altoeEnhancingStatisticalInference2020">
-<p>Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore. 2020. “Enhancing Statistical Inference in Psychological Research via Prospective and Retrospective Design Analysis.” <em>Frontiers in Psychology</em> 10. <a href="https://doi.org/10.3389/fpsyg.2019.02893" class="uri">https://doi.org/10.3389/fpsyg.2019.02893</a>.</p>
+<p>Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore.</p>
+<ol>
+<li>“Enhancing Statistical Inference in Psychological Research via Prospective and Retrospective Design Analysis.” <em>Frontiers in Psychology</em> 10. <a href="https://doi.org/10.3389/fpsyg.2019.02893" class="uri">https://doi.org/10.3389/fpsyg.2019.02893</a>.</li>
+</ol>
 </div>
 <div id="ref-bertoldoDesigningStudiesEvaluating2020">
-<p>Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè. 2020. “Designing Studies and Evaluating Research Results: Type M and Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/q9f86" class="uri">https://doi.org/10.31234/osf.io/q9f86</a>.</p>
+<p>Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè.</p>
+<ol>
+<li>“Designing Studies and Evaluating Research Results: Type M and Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/q9f86" class="uri">https://doi.org/10.31234/osf.io/q9f86</a>.</li>
+</ol>
 </div>
 <div id="ref-gelmanPowerCalculationsAssessing2014">
 <p>Gelman, Andrew, and John Carlin. 2014. “Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives on Psychological Science</em> 9 (6): 641–51. <a href="https://doi.org/10.1177/1745691614551642" class="uri">https://doi.org/10.1177/1745691614551642</a>.</p>
-</div>
-<div id="ref-goodmanUsePredictedConfidence1994">
-<p>Goodman, Steven N. 1994. “The Use of Predicted Confidence Intervals When Planning Experiments and the Misuse of Power When Interpreting Results.” <em>Annals of Internal Medicine</em> 121 (3): 200. <a href="https://doi.org/10.7326/0003-4819-121-3-199408010-00008" class="uri">https://doi.org/10.7326/0003-4819-121-3-199408010-00008</a>.</p>
-</div>
-<div id="ref-lenthStatisticalPowerCalculations12007">
-<p>Lenth, R. V. 2007. “Statistical Power Calculations1.” <em>Journal of Animal Science</em> 85 (suppl_13): E24–E29. <a href="https://doi.org/10.2527/jas.2006-449" class="uri">https://doi.org/10.2527/jas.2006-449</a>.</p>
-</div>
-<div id="ref-Senn1304">
-<p>Senn, Stephen J. 2002. “Power Is Indeed Irrelevant in Interpreting Completed Studies.” <em>BMJ: British Medical Journal</em> 325 (7375): 1304. <a href="https://doi.org/10.1136/bmj.325.7375.1304" class="uri">https://doi.org/10.1136/bmj.325.7375.1304</a>.</p>
 </div>
 </div>
 </div>
@@ -313,7 +286,7 @@
       </footer>
 </div>
 
-
+  
 
 
   </body>

@@ -40,10 +40,10 @@
 
 
 <meta property="og:title" content="PRDAbeta: Prospective and Retrospective Design Analysis. — PRDAbeta" />
-<meta property="og:description" content="Given a plausible value of effect size, PRDAbeta performs a prospective or
-retrospective design analysis to evaluate the inferential risks (i.e., power,
-Type M error, and Type S error) related to the study design. See
-vignette(&quot;PRDAbeta_overview&quot;) for a brief introduction to Design
+<meta property="og:description" content="Given a hypothetical value of effect size, PRDAbeta performs a prospective
+or retrospective design analysis to evaluate the inferential risks (i.e.,
+power, Type M error, and Type S error) related to the study design. See
+vignette(&quot;PRDAbeta&quot;) for a brief introduction to Design
 Analysis." />
 
 
@@ -89,6 +89,9 @@ Analysis." />
   </a>
 </li>
 <li>
+  <a href="../articles/PRDAbeta.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -98,9 +101,6 @@ Analysis." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/PRDAbeta_overview.html">PRDAbeta: Prospective and Retrospective Design Analysis</a>
-    </li>
     <li>
       <a href="../articles/prospective.html">Prospective Design Analysis</a>
     </li>
@@ -136,10 +136,10 @@ Analysis." />
     </div>
 
     <div class="ref-description">
-    <p>Given a plausible value of effect size, PRDAbeta performs a prospective or
-retrospective design analysis to evaluate the inferential risks (i.e., power,
-Type M error, and Type S error) related to the study design. See
-<code><a href='../articles/PRDAbeta_overview.html'>vignette("PRDAbeta_overview")</a></code> for a brief introduction to <em>Design
+    <p>Given a hypothetical value of effect size, PRDAbeta performs a prospective
+or retrospective design analysis to evaluate the inferential risks (i.e.,
+power, Type M error, and Type S error) related to the study design. See
+<code><a href='../articles/PRDAbeta.html'>vignette("PRDAbeta")</a></code> for a brief introduction to <em>Design
 Analysis</em>.</p>
     </div>
 
@@ -149,7 +149,7 @@ Analysis</em>.</p>
 
     <p>PRDAbeta package can be used for Pearson's correlation between two variables
 or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's
-t-test) considering a plausible value of \(\rho\) or Cohen's <em>d</em>
+t-test) considering a hypothetical value of \(\rho\) or Cohen's <em>d</em>
 respectively. See <code><a href='../articles/retrospective.html'>vignette("retrospective")</a></code> for more details.</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
@@ -164,7 +164,7 @@ alternative hypothesis and the significance level, the inferential risks
 with the critical effect value (i.e., the minimum absolute effect size value
 that would result significant). To know more about function arguments and
 examples see the function documentation
-<code><a href='retrospective.html'>?retrospective()</a></code> and
+<code><a href='retrospective.html'>?retrospective</a></code> and
 <code><a href='../articles/retrospective.html'>vignette("retrospective")</a></code>.</p></li>
 <li><p><strong><code><a href='prospective.html'>prospective()</a></code></strong>. Given the hypothetical population
 effect size and the required power level, the function <code><a href='prospective.html'>prospective()</a></code>
@@ -173,7 +173,7 @@ hypothesis and the significance level, the required sample size is computed
 together with the associated Type M error, Type S error, and the critical
 correlation value (i.e., the minimum absolute effect size value that would
 result significant).  To know more about function arguments and examples see
-the function documentation <code><a href='prospective.html'>?prospective()</a></code>
+the function documentation <code><a href='prospective.html'>?prospective</a></code>
 and <code><a href='../articles/prospective.html'>vignette("prospective")</a></code>.</p></li>
 </ul>
 
@@ -181,11 +181,13 @@ and <code><a href='../articles/prospective.html'>vignette("prospective")</a></co
 
     
 
-<p>The hypothetical population effect size can be defined as a single value or
-as a probability distribution. This is a useful feature of PRDAbeta, as it
-allows users to define hypothetical effect size according to a distribution
-that represents their expectations or literature indications. For an example
-of application see <code><a href='../articles/retrospective.html'>vignette("retrospective")</a></code>.</p>
+<p>The hypothetical population effect size can be defined as a single value
+according to previous results in the literature or experts indications.
+Alternatively, PRDAbeta allows users to specify a distribution of plausible
+values to account for their uncertainty about the hypothetical population
+effect size.  To know how to specify the hypothetical effect size according
+to a distribution and an example of application see
+<code><a href='../articles/retrospective.html'>vignette("retrospective")</a></code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
@@ -200,27 +202,6 @@ of application see <code><a href='../articles/retrospective.html'>vignette("retr
  Gelman, A., &amp; Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
  9(6), 641–651. <a href='https://doi.org/10.1177/1745691614551642'>https://doi.org/10.1177/1745691614551642</a></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://github.com/ClaudioZandonella/PRDAbeta'>https://github.com/ClaudioZandonella/PRDAbeta</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/ClaudioZandonella/PRDAbeta/issues'>https://github.com/ClaudioZandonella/PRDAbeta/issues</a></p></li>
-</ul>
-
-</div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p><strong>Maintainer</strong>: Claudio Zandonella Callegher <a href='mailto:claudiozandonella@gmail.com'>claudiozandonella@gmail.com</a> (<a href='https://orcid.org/0000-0001-7721-6318'>ORCID</a>)</p>
-<p>Authors:</p><ul>
-<li><p>Massimiliano Pastore <a href='mailto:massimiliano.pastore@unipd.it'>massimiliano.pastore@unipd.it</a> (<a href='https://orcid.org/0000-0002-7922-6365'>ORCID</a>)</p></li>
-<li><p>Angela Andreella <a href='mailto:a.andreella8@gmail.com'>a.andreella8@gmail.com</a> (<a href='https://orcid.org/0000-0002-1141-3041'>ORCID</a>)</p></li>
-<li><p>Anna Vesely <a href='mailto:anna.vesely92@gmail.com'>anna.vesely92@gmail.com</a> (<a href='https://orcid.org/0000-0001-6696-2390'>ORCID</a>)</p></li>
-<li><p>Giulia Bertoldo <a href='mailto:giuliabertoldo94@gmail.com'>giuliabertoldo94@gmail.com</a> (<a href='https://orcid.org/0000-0002-6960-3980'>ORCID</a>)</p></li>
-<li><p>Enrico Toffalini <a href='mailto:enrico.toffalini@yahoo.it'>enrico.toffalini@yahoo.it</a> (<a href='https://orcid.org/0000-0002-1404-5133'>ORCID</a>)</p></li>
-<li><p>Gianmarco Altoè <a href='mailto:gianmarco.altoe@unipd.it'>gianmarco.altoe@unipd.it</a> (<a href='https://orcid.org/0000-0003-1154-9528'>ORCID</a>)</p></li>
-</ul>
-
-
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
