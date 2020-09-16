@@ -185,6 +185,10 @@ data_plot %>%
   
 ```
 
+---
+nocite: | 
+  @gelmanPowerCalculationsAssessing2014
+...
 
 ### References
 

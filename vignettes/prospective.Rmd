@@ -154,5 +154,9 @@ str(da_fit, max.level = 1)
 
 Similarly to the examples provided in [`vignette("retrospective")`](retrospective.html), results can be used to create the plots according to your needs. See  [`vignette("retrospective")`](retrospective.html) for further details.
 
+---
+nocite: | 
+  @gelmanPowerCalculationsAssessing2014
+...
 
 ### References
