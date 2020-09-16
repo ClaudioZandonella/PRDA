@@ -31,6 +31,9 @@ package see `vignette("PRDAbeta")`. Examples for retrospective design
 analysis and prospective design analysis are provided in
 `vignette("retrospective")` and `vignette("prospective")` respectively.
 
+All the documentation is available at
+<https://claudiozandonella.github.io/PRDAbeta/>
+
 ## Installation
 
 <!-- You can install the released version of PRDAbeta from [CRAN](https://CRAN.R-project.org) with: -->
