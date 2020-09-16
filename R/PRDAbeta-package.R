@@ -6,15 +6,15 @@
 
 #' PRDAbeta: Prospective and Retrospective Design Analysis.
 #'
-#' Given a plausible value of effect size, {PRDAbeta} performs a prospective or
-#' retrospective design analysis to evaluate the inferential risks (i.e., power,
-#' Type M error, and Type S error) related to the study design. See
+#' Given a hypothetical value of effect size, {PRDAbeta} performs a prospective
+#' or retrospective design analysis to evaluate the inferential risks (i.e.,
+#' power, Type M error, and Type S error) related to the study design. See
 #' \code{vignette("PRDAbeta_overview")} for a brief introduction to \emph{Design
 #' Analysis}.
 #'
 #' PRDAbeta package can be used for Pearson's correlation between two variables
 #' or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's
-#' t-test) considering a plausible value of \eqn{\rho} or Cohen's \emph{d}
+#' t-test) considering a hypothetical value of \eqn{\rho} or Cohen's \emph{d}
 #' respectively. See \code{vignette("retrospective")} for more details.
 #'
 #' @section Functions:
@@ -43,11 +43,13 @@
 #' }
 #'
 #' @section Hypothetical Effect Size:
-#' The hypothetical population effect size can be defined as a single value or
-#' as a probability distribution. This is a useful feature of {PRDAbeta}, as it
-#' allows users to define hypothetical effect size according to a distribution
-#' that represents their expectations or literature indications. For an example
-#' of application see \code{vignette("retrospective")}.
+#' The hypothetical population effect size can be defined as a single value
+#' according to previous results in the literature or experts indications.
+#' Alternatively, {PRDAbeta} allows users to specify a distribution of plausible
+#' values to account for their uncertainty about the hypothetical population
+#' effect size.  To know how to specify the hypothetical effect size according
+#' to a distribution and an example of application see
+#' \code{vignette("retrospective")}.
 #'
 #' @references Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
 #'  Calcagnì, A., Finos, L., & Pastore, M. (2020). Enhancing Statistical

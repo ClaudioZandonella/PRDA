@@ -30,9 +30,9 @@ library(PRDAbeta)
 <hr>
 <!-- badges: end -->
 
-Given a plausible value of effect size, PRDAbeta performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design. 
+PRDAbeta allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test). 
 
-For a general overview of the package see `vignettes("PRDAbeta_overview")`.
+For an introduction to design analysis and a general overview of the package see `vignettes("PRDAbeta_overview")`.
 Examples for retrospective design analysis and prospective design analysis are provided in `vignettes("retrospective")` and `vignettes("prospective")` respectively.
 
 ## Installation
@@ -55,33 +55,9 @@ devtools::install_github("ClaudioZandonella/PRDAbeta",
 ```
 
 
-
-
-## Some Background Information
-
-The term *Design Analysis* was introduced by @gelmanPowerCalculationsAssessing2014 as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.
-
-Given a *plausible effect size* and study characteristics (i.e., sample size, statistical test directionality, $\alpha$ level), design analysis evaluates:
-
-- **Power**: the probability of the test rejecting the null hypothesis.
-- **Type M error** (Magnitude): the factor by which a statistically significant effect is on average exaggerated, also known as *Exaggeration Ratio*.
-- **Type S error** (Sign): the probability of finding a statistically significant result in the opposite direction to the plausible one.
-
-Although Type M error and Type S error depends directly on power level, they allow enhancing researchers awareness about the inferential risks related to their studies. For example, obtaining a  significant result in a study with 40% of power could sound a promising finding to the researchers. However, knowing that this is associated with a Type M error of almost 1.60 (i.e., on average significant results are an overestimation of 60%) would warn researchers to interpret their results with caution.
-
-Moreover, @gelmanPowerCalculationsAssessing2014 distinguished between two types of design analysis according to the study phase:
-
-- **Prospective Design Analysis**: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.
-- **Retrospective Design Analysis**: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.
-
-It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the plausible effect size according to previous results in the literature or experts indications, whereas the latter defines the plausible effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
-
-To know more about design analysis consider @gelmanPowerCalculationsAssessing2014. While, for an introduction about design analysis considering examples in psychology see @altoeEnhancingStatisticalInference2020 and  @bertoldoDesigningStudiesEvaluating2020.
-
-
 ## The Package
 
-PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test) considering a plausible value of *&rho;* or Cohen's *d* respectively. See `vignette("retrospective")` to know how to set function arguments for the different effect types. 
+PRDAbeta package can be used for Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-samples, and Welch's t-test) considering a hypothetical value of *&rho;* or Cohen's *d* respectively. See `vignette("retrospective")` and `vignette("prospective")` to know how to set function arguments for the different effect types. 
 
 
 ### Functions
@@ -90,9 +66,9 @@ In PRDAbeta there are two main functions `retrospective()` and `prospective()`.
 
 #### &#8226; `retrospective()`
 
-Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis for Cohen's *d* (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant).
+Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant).
 
-Considering a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is *&rho;* = .25. To evaluate the inferential risks related to the study we use the function `retrospective()`.
+Consider a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is *&rho;* = .25. To evaluate the inferential risks related to the study we use the function `retrospective()`.
 
 ```{r retrospective,}
 retrospective(effect_size = .25, sample_n1 = 30,
@@ -102,26 +78,26 @@ retrospective(effect_size = .25, sample_n1 = 30,
 
 In this case, the statistical power is almost 30% and the associated Type M error and Type S error are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction.
 
-To know more about function arguments and examples see the function documentation `?retrospective` and  `vignette("retrospective")`.
+To know more about function arguments and further examples see the function documentation `?retrospective` and  `vignette("retrospective")`.
 
 #### &#8226; `prospective()`
 
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis for Cohen's *d* (t-test comparing group means) or Pearson's correlation test between two variables. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  
 
-Considering a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of *&rho;* = .25, the function `prospective()` can be used to know the required sample size to obtain a power of 80%. 
+Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of *&rho;* = .25, the function `prospective()` can be used to compute the required sample size to obtain a power of 80%. 
 ```{r prospective}
 prospective(effect_size = .25, power = .80, 
             effect_type = "correlation", test_method = "pearson",
             display_message = FALSE, seed = 2020)
 ```
 
-The required sample size is $n=126$, the associated Type M error is  around 1.10 and the Type S error is approximately 0. 
+The required sample size is $n=126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. 
 
-To know more about function arguments and examples see the function documentation `?prospective` and `vignette("prospective")`.
+To know more about function arguments and further examples see the function documentation `?prospective` and `vignette("prospective")`.
 
 ### Hypothetical effect size
 
-The hypothetical population effect size can be defined as a single value or as a distribution of plausible values. This is a useful feature of PRDAbeta, as it allows users to define hypothetical effect size according to a distribution representing their expectations or literature indications. For an example of application see `vignette("retrospective")`.
+The hypothetical population effect size can be defined as a single value according to previous results in the literature or experts indications. Alternatively, PRDAbeta allows users to specify a distribution of plausible values to account for their uncertainty about the hypothetical population effect size.  To know how to specify the hypothetical effect size according to a distribution and an example of application see `vignette("retrospective")`.
 
 ## Bugs and New Features
 
@@ -131,12 +107,12 @@ To propose a new feature or report a bug, please open an issue on [GitHub](https
 
 To cite PRDAbeta in publications use:
 
-Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).  PRDbeta: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. http://doi.org/10.5281/zenodo.3630733
+Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).  PRDAbeta: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. http://doi.org/10.5281/zenodo.3630733
 
 A BibTeX entry for LaTeX users is
 ```{}
 @Misc{,
-    title = {{PRDbeta}: Prospective and Retrospective Design Analysis},
+    title = {{PRDAbeta}: Prospective and Retrospective Design Analysis},
     author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
     year = {2020},
     publisher = {Zenodo},
@@ -145,6 +121,11 @@ A BibTeX entry for LaTeX users is
     url = {https://doi.org/10.5281/zenodo.3630733},
   }
 ```
+
+---
+nocite: | 
+  @altoeEnhancingStatisticalInference2020, @bertoldoDesigningStudiesEvaluating2020, @gelmanPowerCalculationsAssessing2014
+...
 
 ## References
 
