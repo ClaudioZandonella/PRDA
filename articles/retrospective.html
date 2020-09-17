@@ -98,7 +98,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ClaudioZandonella/PRDAbeta">PRDAbeta</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDAbeta">PRDAbeta</a></span>)
 </pre></div>
 <p>Given the hypothetical population effect size and the study sample size, the function <code><a href="../reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis. Retrospective design analysis allows to evaluate the inferential risks associated with a study design when the data have already been collected. Function arguments are:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">retrospective</span>(effect_size, sample_n1, <span class="dt">sample_n2 =</span> <span class="ot">NULL</span>,</span>
@@ -136,7 +136,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span>
 </pre></div>
-<p>In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are <span class="math inline">\(\rho = \pm.36\)</span>. Note that it is not necessary to specify <code>sample_2</code> argument in the case of correlation and tests were conducted considering <code>"two_sided"</code> alternative hypothesis with a significance level of .05 (the default settings).</p>
+<p>In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(\rho = \pm.36\)</span>. Note that it is not necessary to specify <code>sample_2</code> argument in the case of correlation and tests were conducted considering <code>"two_sided"</code> alternative hypothesis with a significance level of .05 (the default settings).</p>
 </div>
 </div>
 <div id="retrospective-design-analysis-for-means-comparison" class="section level2">
@@ -198,7 +198,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Critical value(s): cohen_d  =  ± 0.413</span>
 </pre></div>
-<p>In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are <span class="math inline">\(d = \pm 0.413\)</span>.</p>
+<p>In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(d = \pm 0.413\)</span>.</p>
 </div>
 <div id="example-3-two-sample-t-test" class="section level3">
 <h3 class="hasAnchor">

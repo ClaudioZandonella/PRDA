@@ -146,7 +146,7 @@
 <span class="co"># install.packages( "devtools" )  </span>
 <span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"CaludioZandonella/PRDAbeta"</span>,
                          build_vignettes = <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ClaudioZandonella/PRDAbeta">PRDAbeta</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDAbeta">PRDAbeta</a></span>)
 </pre></div>
 </div>
 <div id="functions" class="section level3">
@@ -155,7 +155,7 @@
 <p>In {PRDAbeta} there are two main functions:</p>
 <ul>
 <li><p><strong><code><a href="../reference/retrospective.html">retrospective()</a></code></strong>. Given the hypothetical population effect size and the study sample size, the function <code><a href="../reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation <code><a href="../reference/retrospective.html">?retrospective</a></code> and <a href="retrospective.html"><code>vignette("retrospective")</code></a>.</p></li>
-<li><p><strong><code><a href="../reference/prospective.html">prospective()</a></code></strong>. Given the hypothetical population effect size and the required power level, the function <code><a href="../reference/prospective.html">prospective()</a></code> performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation <code><a href="../reference/prospective.html">?prospective</a></code> and <a href="prospective.html"><code>vignette("prospective")</code></a>.</p></li>
+<li><p><strong><code><a href="../reference/prospective.html">prospective()</a></code></strong>. Given the hypothetical population effect size and the required power level, the function <code><a href="../reference/prospective.html">prospective()</a></code> performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation <code><a href="../reference/prospective.html">?prospective</a></code> and <a href="prospective.html"><code>vignette("prospective")</code></a>.</p></li>
 </ul>
 </div>
 <div id="hypothetical-effect-size" class="section level3">
@@ -173,7 +173,6 @@
 <a href="#retrospective-design-analysis" class="anchor"></a>Retrospective design analysis</h3>
 <p>The function <code><a href="../reference/retrospective.html">retrospective()</a></code> can be used to evaluate the inferential risks associated with the study.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ClaudioZandonella/PRDAbeta">PRDAbeta</a></span>)
 <span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.25</span>, sample_n1 = <span class="fl">13</span>,
               effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>, seed = <span class="fl">2020</span>)
 <span class="co">#&gt; </span>
@@ -197,7 +196,7 @@
 <div id="prospective-design-analysis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#prospective-design-analysis" class="anchor"></a>Prospective design analysis</h3>
-<p>Considering these results, researchers might consider planning a replicability study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
+<p>Considering the previous results, researchers might consider planning a replicability study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.8</span>,
             effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>, 
