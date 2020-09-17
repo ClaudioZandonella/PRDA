@@ -49,7 +49,7 @@ However, in this scenario statistically significant results are almost certain t
 
 For example, in a study considering a two-sample *t*-test with 30 participants per group, if the hypothetical population effect size is small (e.g., Cohen's *d* of .25) the actual power is only 16%.  The associated Type M error is around 2.60 and  the Type S error is 0.01. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 1% of probability to obtain a statistically significant result in the opposite direction. 
 
-In this scenario, knowing the type M and S errors, researchers would be much more cautious in interpreting the results and might consider carrying out a replicability study to obtain more reliable results.
+In this scenario, knowing the type M and S errors, researchers would be much more cautious in interpreting the results and might consider carrying out a replication study to obtain more reliable results.
 
 ### More on design analysis
 
