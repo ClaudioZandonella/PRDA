@@ -19,6 +19,9 @@
 ^doc$
 ^Meta$
 
+# Paper folder
+^paper$
+
 # Travis files
 ^\.travis\.yml$
 
@@ -32,3 +35,4 @@
 ^codecov\.yml$
 ^appveyor\.yml$
 ^\.covrignore$
+

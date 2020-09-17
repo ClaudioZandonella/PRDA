@@ -14,8 +14,10 @@ PRDA_old/
 PRDAbeta2/
 Old_notes/
 
-# Mac auxiliary files
-.DS_Store
+# Project folders
 inst/doc
 doc
 Meta
+
+# Mac auxiliary files
+.DS_Store
