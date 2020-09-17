@@ -40,7 +40,7 @@
 <li>
   <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
-     
+
   </a>
 </li>
 <li>
@@ -52,7 +52,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -69,7 +69,7 @@
 <li>
   <a href="https://github.com/ClaudioZandonella/PRDAbeta/">
     <span class="fab fa fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -80,21 +80,21 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>PRDAbeta: Prospective and Retrospective Design Analysis</h1>
-            
-      
+
+
       <small class="dont-index">Source: <a href="https://github.com/ClaudioZandonella/PRDAbeta/blob/master/vignettes/PRDAbeta.Rmd"><code>vignettes/PRDAbeta.Rmd</code></a></small>
       <div class="hidden name"><code>PRDAbeta.Rmd</code></div>
 
     </div>
 
-    
-    
+
+
 <p>{PRDAbeta} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch’s <em>t</em>-test).</p>
 <div id="introduction-to-design-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -124,7 +124,7 @@
 <p>Despite the lower chances, a statistically significant result could be obtained even in an underpowered study (e.g., power = 20%). This might seem a promising finding, and researchers might think that getting a statistically significant result in an underpowered study means the results must be reliable. Therefore, they would probably be even more confident in the interpretation of their results.</p>
 <p>However, in this scenario statistically significant results are almost certain to be an overestimation of the population effect. As pointed out by <span class="citation">Gelman, Hill, and Vehtari (2020)</span> “a key risk for a low-power study is not so much that it has a small chance of succeeding, but rather that an apparent success merely masks a larger failure” (p.292). This is also referred as the “Winner’s curse”, indicating that the apparent win in terms of a statistically significant result is an actual loss as the obtained estimate is inflated.</p>
 <p>For example, in a study considering a two-sample <em>t</em>-test with 30 participants per group, if the hypothetical population effect size is small (e.g., Cohen’s <em>d</em> of .25) the actual power is only 16%. The associated Type M error is around 2.60 and the Type S error is 0.01. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 1% of probability to obtain a statistically significant result in the opposite direction.</p>
-<p>In this scenario, knowing the type M and S errors, researchers would be much more cautious in interpreting the results and might consider carrying out a replicability study to obtain more reliable results.</p>
+<p>In this scenario, knowing the type M and S errors, researchers would be much more cautious in interpreting the results and might consider carrying out a replication study to obtain more reliable results.</p>
 </div>
 <div id="more-on-design-analysis" class="section level3">
 <h3 class="hasAnchor">
@@ -199,7 +199,7 @@
 <p>Considering the previous results, researchers might consider planning a replicability study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.8</span>,
-            effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>, 
+            effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>,
             display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
@@ -273,7 +273,7 @@
       </footer>
 </div>
 
-  
+
 
 
   </body>
