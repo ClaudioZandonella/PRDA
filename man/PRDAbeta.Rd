@@ -37,7 +37,7 @@ effect size and the required power level, the function \code{prospective()}
 performs a prospective design analysis. According to the defined alternative
 hypothesis and the significance level, the required sample size is computed
 together with the associated Type M error, Type S error, and the critical
-correlation value (i.e., the minimum absolute effect size value that would
+effect value (i.e., the minimum absolute effect size value that would
 result significant).  To know more about function arguments and examples see
 the function documentation \code{\link[PRDAbeta:prospective]{?prospective}}
 and \code{vignette("prospective")}.

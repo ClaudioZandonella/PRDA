@@ -84,7 +84,7 @@ To know more about function arguments and further examples see the function docu
 
 #### &#8226; `prospective()`
 
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical effect value (i.e., the minimum absolute effect size value that would result significant).  
 
 Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of *&rho;* = .25, the function `prospective()` can be used to compute the required sample size to obtain a power of 80%. 
 ```{r prospective}

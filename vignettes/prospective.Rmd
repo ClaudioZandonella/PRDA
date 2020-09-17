@@ -53,7 +53,7 @@ prospective(effect_size = .25, power = .60,
             display_message = TRUE, seed = 2020)
 ```
 
-Note that default option `display_message = TRUE` prints the different steps to find the required sample size. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 60% the required sample size is $n = 76$, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are $\rho = \pm.226$. Note that correlation tests were conducted considering `"two_sided"` alternative hypothesis and a significance level of .05 (the default settings).
+Note that default option `display_message = TRUE` prints the different steps to find the required sample size. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 60% the required sample size is $n = 76$, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.226$. Note that correlation tests were conducted considering `"two_sided"` alternative hypothesis and a significance level of .05 (the default settings).
 
 
 ## Prospective Design Analysis for Means Comparison
@@ -78,7 +78,7 @@ prospective(effect_size = .35, power = .8,
             ratio_n = 1, display_message = FALSE, seed = 2020)
 ```
 
-To obtain a power of 80%, the required sample size is $n=68$, the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect sizes value that would result significant) are $d  =  \pm 0.242$.
+To obtain a power of 80%, the required sample size is $n=68$, the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $d  =  \pm 0.242$.
 
 ### Example 3: Two-sample *t*-test
 

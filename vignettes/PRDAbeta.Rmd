@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(PRDAbeta)
 ```
 
 
@@ -80,7 +81,7 @@ In {PRDAbeta} there are two main functions:
 Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective` and  [`vignette("retrospective")`](retrospective.html).
 
 - **`prospective()`**.
-Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical correlation value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective` and [`vignette("prospective")`](prospective.html).
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical effect value (i.e., the minimum absolute effect size value that would result significant).  To know more about function arguments and examples see the function documentation `?prospective` and [`vignette("prospective")`](prospective.html).
 
 ### Hypothetical effect size
 
@@ -97,7 +98,6 @@ The hypothetical population effect size can be defined as a single value accordi
 The function `retrospective()` can be used to evaluate the inferential risks associated with the study.
 
 ```{r, retro}
-library(PRDAbeta)
 retrospective(effect_size = .25, sample_n1 = 13,
               effect_type = "correlation", test_method = "pearson", seed = 2020)
 ```
@@ -108,7 +108,7 @@ To know more about function arguments and examples see the function documentatio
 
 ### Prospective design analysis
 
-Considering these results, researchers might consider planning a replicability study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
+Considering the previous results, researchers might consider planning a replicability study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
 
 ```{r, pro}
 prospective(effect_size = .25, power = .8,

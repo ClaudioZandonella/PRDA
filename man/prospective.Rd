@@ -121,7 +121,7 @@ Pearson's correlation test between two variables or \emph{t}-test comparing
 group means (Cohen's \emph{d}). According to the defined alternative
 hypothesis and the significance level, the required sample size is computed
 together with the associated Type M error, Type S error, and the critical
-correlation value (i.e., the minimum absolute effect size value that would
+effect value (i.e., the minimum absolute effect size value that would
 result significant).
 }
 \details{

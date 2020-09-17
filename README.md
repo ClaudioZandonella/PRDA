@@ -32,7 +32,7 @@ analysis and prospective design analysis are provided in
 `vignette("retrospective")` and `vignette("prospective")` respectively.
 
 All the documentation is available at
-<https://claudiozandonella.github.io/PRDAbeta/>
+<https://claudiozandonella.github.io/PRDAbeta/>.
 
 ## Installation
 
@@ -121,8 +121,8 @@ Given the hypothetical population effect size and the required power
 level, the function `prospective()` performs a prospective design
 analysis. According to the defined alternative hypothesis and the
 significance level, the required sample size is computed together with
-the associated Type M error, Type S error, and the critical correlation
-value (i.e., the minimum absolute effect size value that would result
+the associated Type M error, Type S error, and the critical effect value
+(i.e., the minimum absolute effect size value that would result
 significant).
 
 Consider a study that will evaluate the correlation between two
