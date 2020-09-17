@@ -108,7 +108,7 @@ To know more about function arguments and examples see the function documentatio
 
 ### Prospective design analysis
 
-Considering the previous results, researchers might consider planning a replicability study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
+Considering the previous results, researchers might consider planning a replication study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
 
 ```{r, pro}
 prospective(effect_size = .25, power = .8,
