@@ -5,6 +5,9 @@
 
 #----    compute_eigen_matrix    ----
 
+# Compute the Eigen Matrix that is used to simulate observation from a bivariate
+# normal distribution with a given correlation value (i.e., effect_target).
+
 compute_eigen_matrix <- function(effect_target){
 
   Sigma <- matrix(c(1,effect_target,effect_target,1), ncol = 2)
@@ -18,9 +21,13 @@ compute_eigen_matrix <- function(effect_target){
 
 #----    compute_errors    ----
 
-compute_errors <- function(p.values, estimates, true_value, sig_level,B){
+# Given the sampled p-values, estimated effects, true effect value, significance
+# level, and number of iterations, compute the power level, Type M error, and
+# Type S error.
 
-  sig_p.value <- p.values < sig_level
+compute_errors <- function(p_values, estimates, true_value, sig_level,B){
+
+  sig_p.value <- p_values < sig_level
   sum_sig_p <- sum(sig_p.value)
 
   power <- sum_sig_p / B
@@ -40,6 +47,10 @@ compute_errors <- function(p.values, estimates, true_value, sig_level,B){
 
 
 #----    compute_df    ----
+
+# Given the effect type, sample size of the first group and second group (when
+# needed), standard deviation ratio between the two groups, and test method,
+# compute the degrees of freedom of the test.
 
 compute_df <- function(effect_type, sample_n1, sample_n2 = NULL,
                        ratio_sd =1, test_method){
@@ -68,6 +79,9 @@ compute_df <- function(effect_type, sample_n1, sample_n2 = NULL,
 
 #----    compute_critical_t    ----
 
+# Given the degrees of freedom, significance level, and alternative hypothesis,
+# compute the critical value of the t-statistic.
+
 compute_critical_t <- function(df, sig_level, alternative = "two_sided"){
 
   critical_t <- NULL
@@ -85,6 +99,12 @@ compute_critical_t <- function(df, sig_level, alternative = "two_sided"){
 
 
 #----    compute_critical_effect    ----
+
+# Given the effect type, sample size of the first group and second group (when
+# needed), test method, significance level, alternative hypothesis, standard
+# deviation ratio between the two groups, and value of the null hypothesis,
+# compute the degrees of freedom of the test and critical effect value (i.e.,
+# the minimum absolute effect size value that would result significant).
 
 compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL,
                                     test_method, sig_level, alternative,
@@ -125,6 +145,10 @@ compute_critical_effect <- function(effect_type, sample_n1, sample_n2 = NULL,
 
 
 #----    compute_correct_diff    ----
+
+# Given the effect size value (i.e, Cohen's d), test method, and standard
+# deviation ratio between the two groups, compute the correct mean difference
+# between groups.
 
 compute_correct_diff <- function(effect_target, test_method, ratio_sd){
   if(test_method == "paired"){

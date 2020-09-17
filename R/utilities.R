@@ -4,12 +4,16 @@
 
 #----    match_call    ----
 
+# Obtain a list with the call arguments. Argument default allows obtaining the
+# evaluated argument (i.e., obtain complete and correct arguments).
+
 match_call <- function(definition = sys.function(sys.parent()),
                        call = sys.call(sys.parent()),
                        expand.dots = TRUE,
                        default= TRUE,
                        envir = parent.frame(2L),
                        envir_mget = parent.frame(1L)) {
+
   call <- match.call(definition, call, expand.dots, envir)
   formals <- mget(names(formals(definition)), envir_mget)
 
@@ -32,6 +36,8 @@ match_call <- function(definition = sys.function(sys.parent()),
 
 #----    is_single_numeric    ----
 
+# Evaluate if an argument is a single numeric value.
+
 is_single_numeric <- function(x, infinite = FALSE){
 
   if(infinite){
@@ -43,6 +49,8 @@ is_single_numeric <- function(x, infinite = FALSE){
 
 
 #----    list2data    ----
+
+# Transform a list to a dataframe
 
 list2data <- function(list, transpose=TRUE, select=NULL){
   if(transpose) list <- t(list)
@@ -68,6 +76,8 @@ list2data <- function(list, transpose=TRUE, select=NULL){
 
 #----    round_arg    ----
 
+# Round the elements of a list.
+
 round_arg <- function(list_name, n_round){
   arguments <- unlist(lapply(list_name, is.numeric))
   if(sum(arguments)!=0){
@@ -78,6 +88,8 @@ round_arg <- function(list_name, n_round){
 
 
 #----    sign_effect    ----
+
+# Add the ± to the critical effect when the alternative hypothesis is two sided.
 
 sign_effect <- function(critical_effect, alternative){
   if(alternative == "two_sided"){
@@ -91,6 +103,8 @@ sign_effect <- function(critical_effect, alternative){
 
 
 #----    with_seed    ----
+
+# Run a function in a environment with a given seed.
 
 with_seed <- function(seed, code) {
   code <- substitute(code)

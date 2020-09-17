@@ -4,6 +4,10 @@
 
 #----    sample_groups    ----
 
+# Sample observations according to the required the sample size of the first
+# group and second group (when needed), mean difference, and standard deviation
+# ratio between the two groups.
+
 sample_groups <- function(sample_n1, mean_diff, sample_n2=NULL, ratio_sd = 1){
 
   if(is.null(sample_n2)){
@@ -19,6 +23,9 @@ sample_groups <- function(sample_n1, mean_diff, sample_n2=NULL, ratio_sd = 1){
 
 #----    sample_obs_cor    ----
 
+# Sample observations from a bivariate normal distribution according to the
+# required correlation value (i.e., effect_target).
+
 sample_obs_cor <- function(sample_n1, effect_target){
 
   obs <- mvrnorm(n=sample_n1,mu=c(0,0),
@@ -29,6 +36,9 @@ sample_obs_cor <- function(sample_n1, effect_target){
 
 
 #----    sample_effect    ----
+
+# Sample effect size values from a function defined by the user and lower and
+# upper truncation specification.
 
 sample_effect <- function(FUN, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
   if(!is.function(FUN) || length(formals(FUN))!=1L || !eval_rgn_function(FUN))

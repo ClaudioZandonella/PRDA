@@ -4,6 +4,9 @@
 
 #----    simulate_analysis    ----
 
+# Call the appropriate cohen or correlation loop to simulate the analysis
+# according to retrospective() arguments specification.
+
 simulate_analysis <- function(effect_type, effect_samples, test_method,
                               sample_n1, sample_n2, alternative, sig_level,
                               ratio_sd, B, ...){
@@ -38,6 +41,9 @@ simulate_analysis <- function(effect_type, effect_samples, test_method,
 
 #----    retrospective_cohen    ----
 
+# Run a retrospective design analysis for Cohen's d effect type according to
+# retrospective() arguments specification.
+
 retrospective_cohen <- function(sample_n1, sample_n2, effect_target,
                                 test_method, alternative, sig_level, ratio_sd,
                                 B, mu = 0, ...){
@@ -64,6 +70,9 @@ retrospective_cohen <- function(sample_n1, sample_n2, effect_target,
 
 
 #----    retrospective_correlation    ----
+
+# Run a retrospective design analysis for correlation effect type according to
+# retrospective() arguments specification.
 
 retrospective_correlation <- function(sample_n1, effect_target, test_method,
                                       alternative, sig_level, B, ...){

@@ -5,6 +5,9 @@
 
 #----    eval_arguments_retrospective    ----
 
+# Given the arguments of the function retrospective, evaluate that they are
+# correctly specified with no conflicts.
+
 eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
                                          effect_type, test_method, sig_level,
                                          ratio_sd, B, seed, tl, tu, B_effect,
@@ -65,6 +68,9 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
 
 #----    eval_arguments_prospective    ----
+
+# Given the arguments of the function prospective, evaluate that they are
+# correctly specified with no conflicts.
 
 eval_arguments_prospective <- function(effect_size, power, ratio_n,
                                        effect_type, test_method,
@@ -140,6 +146,10 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n,
 
 #----    eval_effect_size    ----
 
+# Given the effect type, effect size values, lower and upper truncation limits,
+# and number of sampled effects, evaluate that arguments are correctly specified
+# with no conflicts and sample effects according to definition.
+
 eval_effect_size <- function(effect_type, effect_size,
                              tl = -Inf, tu = Inf, B_effect = 250){
   correlation <- effect_type == "correlation"
@@ -174,6 +184,9 @@ eval_effect_size <- function(effect_type, effect_size,
 
 #----    eval_samples    ----
 
+# Given the sample size ratio between the first and second group and the current
+# sample size value, compute the sample size of the two groups.
+
 eval_samples <- function(ratio_n, current_n){
 
 
@@ -190,6 +203,12 @@ eval_samples <- function(ratio_n, current_n){
 
 
 #----    eval_test_method    ----
+
+# Given the effect type, effect size value, test method, sample in the first and
+# second group (when needed), alternative hypothesis, significance level,
+# standard deviation ratio between the two groups, evaluate that arguments are
+# correctly specified with no conflicts. One loop in which observation are
+# sampled and appropriate test is run.
 
 eval_test_method <- function(effect_type, effect_target, test_method,
                              sample_n1, sample_n2 = NULL,
@@ -230,6 +249,9 @@ eval_test_method <- function(effect_type, effect_target, test_method,
 
 
 #----    eval_rgn_function    ----
+
+# Given the function to sample effect size values, evaluate the the function
+# returns the required number of numeric values.
 
 eval_rgn_function <- function(FUN, n = 10){
   if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
