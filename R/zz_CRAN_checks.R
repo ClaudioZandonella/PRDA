@@ -41,7 +41,15 @@
 
 # pkgdown::deploy_to_branch()
 
+#----    paper md    ----
+
+# rmarkdown::render(input = "paper/paper.Rmd",output_format = "html_document",
+#                   output_dir = "paper/", clean = FALSE)
+
+
 #----
+
+
 
 
 

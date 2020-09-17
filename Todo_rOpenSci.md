@@ -25,6 +25,7 @@ send
 other:
 
 - [x] problema del welch's t test e correzione d di cohen
+- [ ] change name repo and package
 - [ ] Add more description on hypothetical effect size in vignette overwie and readme
 - [ ] Update Zenodo
 - [ ] Updarte URL in DESCRIPTION
