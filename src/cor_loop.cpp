@@ -62,7 +62,7 @@ List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix) {
 
   }
 
-  return List::create(Named("p.value")=pval,
+  return List::create(Named("p_value")=pval,
                       Named("estimate")=estimate);
 }
 

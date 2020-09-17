@@ -47,52 +47,52 @@ test_cohen_loop <- function(sample_n1 =20, mean_diff = .3, sample_n2 = 20,
 test_that("cohen_loop gives the same p-value as t.test", {
 
   # Two sample t-test
-  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "two_sided")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "two_sided")$p_value,
                t.test(x,y, paired=F, var.equal=T, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "greater")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample", alternative = "greater")$p_value,
                t.test(x,y, paired=F, var.equal=T, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "less")$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "less")$p_value,
                t.test(x,y, paired=F, var.equal=T, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "two_sided", mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "two_sample",alternative = "two_sided", mu = 1.5)$p_value,
                t.test(x,y, paired=F, var.equal=T, mu = 1.5)$p.value)
 
   # Paired t-test
-  expect_equal(test_cohen_loop(test_method = "paired", alternative = "two_sided")$p.value,
+  expect_equal(test_cohen_loop(test_method = "paired", alternative = "two_sided")$p_value,
                t.test(x, y, paired = TRUE, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "paired", alternative = "greater")$p.value,
+  expect_equal(test_cohen_loop(test_method = "paired", alternative = "greater")$p_value,
                t.test(x, y, paired = TRUE, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "paired", alternative = "less")$p.value,
+  expect_equal(test_cohen_loop(test_method = "paired", alternative = "less")$p_value,
                t.test(x, y, paired = TRUE, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "paired", alternative = "two_sided", mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "paired", alternative = "two_sided", mu = 1.5)$p_value,
                t.test(x, y, paired = TRUE, mu = 1.5)$p.value)
 
   # One sample t-test
-  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "two_sided")$p.value,
+  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "two_sided")$p_value,
                t.test(x, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "greater")$p.value,
+  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "greater")$p_value,
                t.test(x, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "less")$p.value,
+  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "less")$p_value,
                t.test(x, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "two_sided", mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "one_sample", alternative = "two_sided", mu = 1.5)$p_value,
                t.test(x, mu = 1.5)$p.value)
 
   # Welch t-test case ratio_sd = 1
-  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided")$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided")$p_value,
                t.test(x,y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater")$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater")$p_value,
                t.test(x,y, paired=F, var.equal=F, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less")$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less")$p_value,
                t.test(x,y, paired=F, var.equal=F, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", mu = 1.5)$p_value,
                t.test(x,y, paired=F, var.equal=F, mu = 1.5)$p.value)
   # case ratio_sd = 2
-  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided", ratio_sd = 2)$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch", alternative = "two_sided", ratio_sd = 2)$p_value,
                t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "two.sided")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater", ratio_sd = 2)$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "greater", ratio_sd = 2)$p_value,
                t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "greater")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less", ratio_sd = 2)$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "less", ratio_sd = 2)$p_value,
                t.test(obs2$x,obs2$y, paired=F, var.equal=F, alternative = "less")$p.value)
-  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", ratio_sd = 2, mu = 1.5)$p.value,
+  expect_equal(test_cohen_loop(test_method = "welch",alternative = "two_sided", ratio_sd = 2, mu = 1.5)$p_value,
                t.test(obs2$x,obs2$y, paired=F, var.equal=F, mu = 1.5)$p.value)
 })
 
@@ -134,7 +134,7 @@ test_that("cohen_loop works for different sample_n2", {
 
   # p.value
   expect_equal(with_seed(2021, cohen_loop(sample_n1 = 20, mean_diff = .3, sample_n2 = 30,
-                        test_method = "two_sample",alternative = "two_sided", mu = 0, B = 1 ))$p.value,
+                        test_method = "two_sample",alternative = "two_sided", mu = 0, B = 1 ))$p_value,
                t.test(x_bis, y_bis, paired=F, var.equal=T, alternative = "two.sided")$p.value)
 
   # effect
@@ -159,11 +159,11 @@ test_cor_loop <- function(n = 20 , alternative, B = 1,
 
 test_that("cor_loop gives the same p-value as cor.test", {
 
-  expect_equal(test_cor_loop(alternative = "two_sided")$p.value,
+  expect_equal(test_cor_loop(alternative = "two_sided")$p_value,
                cor.test(obs_cor[,1], obs_cor[,2], alternative = "two.sided")$p.value)
-  expect_equal(test_cor_loop(alternative = "less")$p.value,
+  expect_equal(test_cor_loop(alternative = "less")$p_value,
                cor.test(obs_cor[,1], obs_cor[,2], alternative = "less")$p.value)
-  expect_equal(test_cor_loop(alternative = "greater")$p.value,
+  expect_equal(test_cor_loop(alternative = "greater")$p_value,
                cor.test(obs_cor[,1], obs_cor[,2], alternative = "greater")$p.value)
 })
 

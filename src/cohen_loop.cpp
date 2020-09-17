@@ -90,6 +90,6 @@ List cohen_loop(double sample_n1, double mean_diff, double sample_n2,
     }
   }
 
-  return List::create(Named("p.value") = pval,
+  return List::create(Named("p_value") = pval,
                       Named("estimate") = estimate);
 }
