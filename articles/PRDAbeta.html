@@ -40,7 +40,7 @@
 <li>
   <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
-
+     
   </a>
 </li>
 <li>
@@ -52,7 +52,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
-
+     
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -69,7 +69,7 @@
 <li>
   <a href="https://github.com/ClaudioZandonella/PRDAbeta/">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul>
@@ -80,27 +80,27 @@
 </div>
 <!--/.navbar -->
 
-
+      
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>PRDAbeta: Prospective and Retrospective Design Analysis</h1>
-
-
+            
+      
       <small class="dont-index">Source: <a href="https://github.com/ClaudioZandonella/PRDAbeta/blob/master/vignettes/PRDAbeta.Rmd"><code>vignettes/PRDAbeta.Rmd</code></a></small>
       <div class="hidden name"><code>PRDAbeta.Rmd</code></div>
 
     </div>
 
-
-
+    
+    
 <p>{PRDAbeta} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch’s <em>t</em>-test).</p>
 <div id="introduction-to-design-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction-to-design-analysis" class="anchor"></a>Introduction to design analysis</h2>
 <p>The term <em>Design Analysis</em> was introduced by <span class="citation">Gelman and Carlin (2014)</span> as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.</p>
-<p>Given a <em>hypothetical effect size</em> and the study characteristics (i.e., sample size, statistical test directionality, <span class="math inline">\(\alpha\)</span> level), design analysis evaluates:</p>
+<p>Given an <em>hypothetical effect size</em> and the study characteristics (i.e., sample size, statistical test directionality, <span class="math inline">\(\alpha\)</span> level), design analysis evaluates:</p>
 <ul>
 <li>
 <strong>Power</strong>: the probability of the test rejecting the null hypothesis.</li>
@@ -112,7 +112,7 @@
 <p>Moreover, <span class="citation">Gelman and Carlin (2014)</span> distinguished between two types of design analysis according to the study phase:</p>
 <ul>
 <li>
-<strong>Prospective Design Analysis</strong>: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.</li>
+<strong>Prospective Design Analysis</strong>: if the analysis is performed in the planning stage of a study to define the sample size needed to obtain a required level of power.</li>
 <li>
 <strong>Retrospective Design Analysis</strong>: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.</li>
 </ul>
@@ -136,7 +136,7 @@
 <h2 class="hasAnchor">
 <a href="#the-package" class="anchor"></a>The package</h2>
 <p>Given a plausible value of effect size, {PRDAbeta} performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.</p>
-<p>{PRDAbeta} package can be used for Pearson’s correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch’s t-test) considering a hypothetical value of <span class="math inline">\(\rho\)</span> or Cohen’s <em>d</em> respectively. See <a href="retrospective.html"><code>vignette("retrospective")</code></a> and <a href="prospective.html"><code>vignette("prospective")</code></a> to know how to set function arguments for the different effect types.</p>
+<p>{PRDAbeta} package can be used for Pearson’s correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch’s t-test) considering an hypothetical value of <span class="math inline">\(\rho\)</span> or Cohen’s <em>d</em> respectively. See <a href="retrospective.html"><code>vignette("retrospective")</code></a> and <a href="prospective.html"><code>vignette("prospective")</code></a> to know how to set function arguments for the different effect types.</p>
 <div id="install" class="section level3">
 <h3 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h3>
@@ -199,7 +199,7 @@
 <p>Considering the previous results, researchers might consider planning a replication study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.8</span>,
-            effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>,
+            effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>, 
             display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
@@ -273,7 +273,7 @@
       </footer>
 </div>
 
-
+  
 
 
   </body>
