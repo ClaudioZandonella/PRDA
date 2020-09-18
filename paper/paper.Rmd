@@ -1,5 +1,5 @@
 ---
-title: 'PRDA: A R pakcage for Prospective and Retrospective Design Analysis'
+title: 'PRDA: An R pakcage for Prospective and Retrospective Design Analysis'
 tags:
   - R
   - design analysis
@@ -61,7 +61,7 @@ To know more about design analysis consider @gelmanPowerCalculationsAssessing201
 
 # Statement of need 
 
-`PRDA` is an R package for performing prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). *Prospective Design Analysis* is performed in the planning stage of a study to define the required sample size to obtain a given level of power. *Retrospective Design Analysis*, instead, is performed when the data have already been collected to evaluate the inferential risks associated with the study.
+`PRDA` is an R package performing prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). *Prospective Design Analysis* is performed in the planning stage of a study to define the required sample size to obtain a given level of power. *Retrospective Design Analysis*, instead, is performed when the data have already been collected to evaluate the inferential risks associated with the study.
 
 Another recent R package, `retrodesign` [@timmRetrodesignToolsType2019], allows conducting retrospective design analysis considering estimate of the unstandardized effect size (i.e., regression coefficient or mean difference) and standard error of the estimate. `PRDA` package, instead, considers standardized effect size (i.e., Pearson correlation coefficient or Cohen's *d*) and study sample size. These are more commonly used in research fields such as Psychology or Social Science, and therefore are implemented in `PRDA` to facilitate researchers' reasoning about design analysis. `PRDA`, additionally, offers the possibility to conduct a prospective design analysis and to account for the uncertainty about the hypothetical value of effect size. In fact, hypothetical effect size can be defined as a single value according to previous results in the literature or experts indications, or by specifying a distribution of plausible values.
 
@@ -69,11 +69,11 @@ The package is available from GitHub (https://github.com/ClaudioZandonella/PRDAb
 
 # Examples
 
-Imagine a study evaluating the relation a given personality trait (e.g., introversion) and math performance. Suppose that 20 participants were included in the study and results indicated a statistically significant correlation (e.g, $r = .55, p = .012 $). The magnitude of the estimated correlation, however, is beyond what could be considered plausible in this field. Suppose previous results in the literature indicate correlations in area are more likely to be around $\rho = .25$.
+Imagine a study evaluating the relation a given personality trait (e.g., introversion) and math performance. Suppose that 20 participants were included in the study and results indicated a statistically significant correlation (e.g, $r = .55, p = .012$). The magnitude of the estimated correlation, however, is beyond what could be considered plausible in this field. 
 
 ## Retrospective design analysis
 
-To evaluate the inferential risks associated with the study design, we can use the function `retrospective()`.
+Suppose previous results in the literature indicate correlations in this area are more likely to be around $\rho = .25$. To evaluate the inferential risks associated with the study design, we can use the function `retrospective()`.
 
 ```{r retro}
 library(PRDA)
@@ -85,7 +85,7 @@ In the output, we have the summary information about the hypothesized population
 
 ### Effect size distribution
 
-Alternatively, if no precise information about hypothetical effect size is available, researchers can specify a distribution of values  to account for their uncertainty. For example, they could define a normal distribution with mean of .25 and standard deviation truncated between .10 and 40.
+Alternatively, if no precise information about hypothetical effect size is available, researchers could specify a distribution of values  to account for their uncertainty. For example, they might define a normal distribution with mean of .25 and standard deviation of .1, truncated between .10 and 40.
 
 ```{r retro_dist}
 retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,

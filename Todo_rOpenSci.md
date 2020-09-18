@@ -13,7 +13,7 @@
 - [x] R packages should have CI for all platforms when they contain Compiled code
 - [x] https://devguide.ropensci.org/ci.html continuos integration
 - [x] We urge package maintainers to make sure they are receiving GitHub notifications, as well as making sure emails from rOpenSci staff and CRAN maintainers are not going to their spam box.
-- [ ] If you would like your package to also be submitted to Journal of Open-Source Software (JOSS), it should include a paper.md file describing the package. More detail on JOSS’s requirements can be found at their website. https://joss.theoj.org/about#author_guidelines
+- [x] If you would like your package to also be submitted to Journal of Open-Source Software (JOSS), it should include a paper.md file describing the package. More detail on JOSS’s requirements can be found at their website. https://joss.theoj.org/about#author_guidelines
 - [x] use repostatus.org badges (which we recommend) https://www.repostatus.org/
 - [ ] name function object_action()
 
@@ -26,7 +26,7 @@ other:
 
 - [x] problema del welch's t test e correzione d di cohen
 - [ ] change name repo and package
-- [ ] Add more description on hypothetical effect size in vignette overwie and readme
+- [x] Add more description on hypothetical effect size in vignette overwie and readme
 - [ ] Update Zenodo
 - [ ] Updarte URL in DESCRIPTION
 - [ ] Coverage for multiple CI (https://devguide.ropensci.org/ci.html#coverage)
