@@ -34,7 +34,7 @@ Given an *hypothetical effect size* and  the study characteristics (i.e., sample
 
 Moreover, @gelmanPowerCalculationsAssessing2014 distinguished between two types of design analysis according to the study phase:
 
-- **Prospective Design Analysis**: if the analysis is performed in the planning stage of the study to define the sample size needed to obtain a required level of power.
+- **Prospective Design Analysis**: if the analysis is performed in the planning stage of a study to define the sample size needed to obtain a required level of power.
 - **Retrospective Design Analysis**: if the analysis is performed in a later stage when the data have already been collected. This is still useful to evaluate the inferential risks associated with the study.
 
 It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the hypothetical effect size according to previous results in the literature or experts indications, whereas the latter defines the hypothetical effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
