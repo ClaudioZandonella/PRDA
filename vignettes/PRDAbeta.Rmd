@@ -26,7 +26,7 @@ library(PRDAbeta)
 
 The term *Design Analysis* was introduced by @gelmanPowerCalculationsAssessing2014 as a broader definition of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.
 
-Given a *hypothetical effect size* and  the study characteristics (i.e., sample size, statistical test directionality, $\alpha$ level), design analysis evaluates:
+Given an *hypothetical effect size* and  the study characteristics (i.e., sample size, statistical test directionality, $\alpha$ level), design analysis evaluates:
 
 - **Power**: the probability of the test rejecting the null hypothesis.
 - **Type M error** (Magnitude): the factor by which a statistically significant effect is on average exaggerated, also known as *Exaggeration Ratio*.
@@ -59,7 +59,7 @@ To know more about design analysis consider @gelmanPowerCalculationsAssessing201
 
 Given a plausible value of effect size, {PRDAbeta} performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
 
-{PRDAbeta} package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's t-test) considering a hypothetical value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) and [`vignette("prospective")`](prospective.html) to know how to set function arguments for the different effect types. 
+{PRDAbeta} package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's t-test) considering an hypothetical value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) and [`vignette("prospective")`](prospective.html) to know how to set function arguments for the different effect types. 
 
 ### Install
 

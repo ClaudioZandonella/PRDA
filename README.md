@@ -61,7 +61,7 @@ devtools::install_github("ClaudioZandonella/PRDAbeta",
 
 {PRDAbeta} package can be used for Pearson’s correlation between two
 variables or mean comparisons (one-sample, paired, two-sample, and
-Welch’s t-test) considering a hypothetical value of *ρ* or Cohen’s *d*
+Welch’s t-test) considering an hypothetical value of *ρ* or Cohen’s *d*
 respectively. See `vignette("retrospective")` and
 `vignette("prospective")` to know how to set function arguments for the
 different effect types.

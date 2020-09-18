@@ -6,7 +6,7 @@
 
 #' PRDAbeta: Prospective and Retrospective Design Analysis.
 #'
-#' Given a hypothetical value of effect size, {PRDAbeta} performs a prospective
+#' Given an hypothetical value of effect size, {PRDAbeta} performs a prospective
 #' or retrospective design analysis to evaluate the inferential risks (i.e.,
 #' power, Type M error, and Type S error) related to the study design. See
 #' \code{vignette("PRDAbeta")} for a brief introduction to \emph{Design
@@ -14,7 +14,7 @@
 #'
 #' PRDAbeta package can be used for Pearson's correlation between two variables
 #' or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's
-#' t-test) considering a hypothetical value of \eqn{\rho} or Cohen's \emph{d}
+#' t-test) considering an hypothetical value of \eqn{\rho} or Cohen's \emph{d}
 #' respectively. See \code{vignette("retrospective")} for more details.
 #'
 #' @section Functions:
