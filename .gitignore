@@ -8,14 +8,17 @@
 
 # htlm output
 Todo.html
+paper/paper.html
 
 # Old folders
 PRDA_old/
 PRDAbeta2/
 Old_notes/
 
-# Mac auxiliary files
-.DS_Store
+# Project folders
 inst/doc
 doc
 Meta
+
+# Mac auxiliary files
+.DS_Store

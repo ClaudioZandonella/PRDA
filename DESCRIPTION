@@ -1,8 +1,11 @@
-Package: PRDAbeta
+Package: PRDA
 Title: Conduct a Prospective or Retrospective Design Analysis
-Version: 0.1.0.9000
+Version: 0.2.0.9000
 Authors@R: c(
-    person("Massimiliano", "Pastore", role = c("aut", "cre"),
+    person("Claudio", "Zandonella Callegher", role = c("aut", "cre"),
+           email = "claudiozandonella@gmail.com",
+           comment = c(ORCID = "0000-0001-7721-6318")),
+    person("Massimiliano", "Pastore", role = c("aut"),
            email = "massimiliano.pastore@unipd.it",
            comment = c(ORCID = "0000-0002-7922-6365")),
     person("Angela", "Andreella", role = c("aut"),
@@ -11,27 +14,39 @@ Authors@R: c(
     person("Anna", "Vesely", role = c("aut"),
            email = "anna.vesely92@gmail.com",
            comment = c(ORCID = "0000-0001-6696-2390")),
-    person("Claudio", "Zandonella Callegher", role = c("aut"),
-           email = "claudiozandonella@gmail.com",
-           comment = c(ORCID = "0000-0001-7721-6318")),
+    person("Enrico", "Toffalini", role = c("aut"),
+           email = "enrico.toffalini@yahoo.it",
+           comment = c(ORCID = "0000-0002-1404-5133")),
+    person("Giulia", "Bertoldo", role = c("aut"),
+           email = "giuliabertoldo94@gmail.com",
+           comment = c(ORCID = "0000-0002-6960-3980")),
     person("Gianmarco", "Altoè", role = c("aut"),
            email = "gianmarco.altoe@unipd.it",
            comment = c(ORCID = "0000-0003-1154-9528")))
 Description: An implementation of the "Design Analysis" proposed by 
     Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
-    error (e.g. Sign).
+    error (e.g. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).
 Depends: 
-    R (>= 3.6.0),
-    MASS
+    R (>= 3.5.0)
 Suggests:
+    covr,
     devtools,
+    ggplot2,
+    knitr,
+    rmarkdown,
     roxygen2,
     testthat,
-    knitr,
-    rmarkdown
+    tidyverse
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp, RcppArmadillo
+Imports:
+    MASS,
+    Rcpp
+URL: https://claudiozandonella.github.io/PRDAbeta/, https://github.com/ClaudioZandonella/PRDAbeta
+BugReports: https://github.com/ClaudioZandonella/PRDAbeta/issues

@@ -19,9 +19,20 @@
 ^doc$
 ^Meta$
 
+# Paper folder
+^paper$
+
 # Travis files
 ^\.travis\.yml$
 
 # Todo list
 ^Todo$
 ^Todo\.html$
+^Todo_rOpenSci\.md$
+^Todo\.md$
+^README\.Rmd$
+^LICENSE$
+^codecov\.yml$
+^appveyor\.yml$
+^\.covrignore$
+

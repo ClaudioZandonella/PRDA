@@ -1,0 +1,133 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+bibliography: vignettes/PRDA.bib
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+library(PRDA)
+```
+
+# PRDA: Prospective and Retrospective Design Analysis
+
+<!-- badges: start -->
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
+[![Travis build status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
+[![Codecov test coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
+<hr>
+<!-- badges: end -->
+
+{PRDA} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). 
+
+For an introduction to design analysis and a general overview of the package see `vignette("PRDA")`.
+Examples for retrospective design analysis and prospective design analysis are provided in `vignette("retrospective")` and `vignette("prospective")` respectively.
+
+All the documentation is available at https://claudiozandonella.github.io/PRDAbeta/.
+
+## Installation
+
+<!-- You can install the released version of PRDA from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+<!-- install.packages("PRDA") -->
+<!-- ``` -->
+
+<!-- And the development version from [GitHub](https://github.com/) with: -->
+
+You can install the development version from [GitHub](https://github.com/ClaudioZandonella/PRDAbeta/tree/develop) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ClaudioZandonella/PRDAbeta",
+                         ref = "develop",
+                         build_vignettes = TRUE)
+```
+
+
+## The Package
+
+{PRDA} package can be used for Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's t-test) considering a hypothetical value of *&rho;* or Cohen's *d* respectively. See `vignette("retrospective")` and `vignette("prospective")` to know how to set function arguments for the different effect types. 
+
+
+### Functions
+
+In {PRDA} there are two main functions `retrospective()` and `prospective()`.
+
+#### &#8226; `retrospective()`
+
+Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant).
+
+Consider a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is *&rho;* = .25. To evaluate the inferential risks related to the study we use the function `retrospective()`.
+
+```{r retrospective,}
+retrospective(effect_size = .25, sample_n1 = 30,
+              effect_type = "correlation", test_method = "pearson",
+              seed = 2020)
+```
+
+In this case, the statistical power is almost 30% and the associated Type M error and Type S error are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction.
+
+To know more about function arguments and further examples see the function documentation `?retrospective` and  `vignette("retrospective")`.
+
+#### &#8226; `prospective()`
+
+Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical effect value (i.e., the minimum absolute effect size value that would result significant).  
+
+Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of *&rho;* = .25, the function `prospective()` can be used to compute the required sample size to obtain a power of 80%. 
+```{r prospective}
+prospective(effect_size = .25, power = .80, 
+            effect_type = "correlation", test_method = "pearson",
+            display_message = FALSE, seed = 2020)
+```
+
+The required sample size is $n=126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. 
+
+To know more about function arguments and further examples see the function documentation `?prospective` and `vignette("prospective")`.
+
+### Hypothetical effect size
+
+The hypothetical population effect size can be defined as a single value according to previous results in the literature or experts indications. Alternatively, {PRDA} allows users to specify a distribution of plausible values to account for their uncertainty about the hypothetical population effect size.  To know how to specify the hypothetical effect size according to a distribution and an example of application see `vignette("retrospective")`.
+
+## Bugs and New Features
+
+To propose a new feature or report a bug, please open an issue on [GitHub](https://github.com/ClaudioZandonella/PRDAbeta/issues).
+
+## Citation
+
+To cite {PRDA} in publications use:
+
+Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).  PRDA: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. http://doi.org/10.5281/zenodo.3630733
+
+A BibTeX entry for LaTeX users is
+```{}
+@Misc{,
+    title = {{PRDA}: Prospective and Retrospective Design Analysis},
+    author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
+    year = {2020},
+    publisher = {Zenodo},
+    version = {v0.1},
+    doi = {10.5281/zenodo.3630733},
+    url = {https://doi.org/10.5281/zenodo.3630733},
+  }
+```
+
+---
+nocite: | 
+  @altoeEnhancingStatisticalInference2020, @bertoldoDesigningStudiesEvaluating2020, @gelmanPowerCalculationsAssessing2014
+...
+
+## References
+

@@ -8,15 +8,16 @@ retrospective(
   effect_size,
   sample_n1,
   sample_n2 = NULL,
-  effect_type = c("cohen_d", "correlation"),
-  alternative = c("two.sided", "less", "greater"),
+  effect_type = c("correlation", "cohen_d"),
+  test_method = c("pearson", "two_sample", "welch", "paired", "one_sample"),
+  alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
+  ratio_sd = 1,
   B = 10000,
-  seed = NULL,
   tl = -Inf,
   tu = Inf,
-  B_effect = 250,
-  ...
+  B_effect = 1000,
+  seed = NULL
 )
 }
 \arguments{
@@ -29,22 +30,31 @@ group.}
 \item{sample_n2}{an optional numeric value indicating the sample size of the
 second group.}
 
-\item{effect_type}{a character string specifying the effect type, must be
-"cohen_d" (default, Cohen's \emph{d} standardised means difference) or
-"pearson" (Pearson's correlation). You can specify just the initial letter.}
+\item{effect_type}{a character string specifying the effect type, must be one
+of \code{"correlation"} (default, Pearson's correlation) or \code{"cohen_d"}
+(Cohen's \emph{d} standardized mean difference) or ". You can specify just
+the initial letters.}
+
+\item{test_method}{a character string specifying the test type, must be one of
+\code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
+(independent two-sample \emph{t}-test), \code{"welch"} (Welch's
+\emph{t}-test), \code{"paired"} (dependent \emph{t}-test for paired
+samples), or \code{"one_sample"} (one-sample \emph{t}-test). You can specify
+just the initial letters.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
-must be one of "two.sided" (default), "greater" or "less". You can specify
-just the initial letter.}
+must be one of \code{"two_sided"} (default), \code{"greater"} or
+\code{"less"}. You can specify just the initial letter.}
 
 \item{sig_level}{a numeric value indicating the significance level on which
 the alternative hypothesis is evaluated.}
 
+\item{ratio_sd}{a numeric value indicating the ratio between the standard
+deviation in the first group and in the second group. This argument is
+needed in the case of Welch's \emph{t}-test.}
+
 \item{B}{a numeric  value indicating the number of iterations. Increase the
 number of iterations to obtain more stable results.}
-
-\item{seed}{a numeric value indicating the seed for random number generation.
-Set the seed to obtain results reproducible.}
 
 \item{tl}{optional value indicating the lower truncation point if
 \code{effect_size} is defined as a function.}
@@ -52,11 +62,12 @@ Set the seed to obtain results reproducible.}
 \item{tu}{optional value indicating the upper truncation point if
 \code{effect_size} is defined as a function.}
 
-\item{B_effect}{a numeric  value indicating the number of sampled effect size
+\item{B_effect}{a numeric  value indicating the number of sampled effects
 if \code{effect_size} is defined as a function. Increase the number to
 obtain more stable results.}
 
-\item{...}{further arguments to be passed to or from methods.}
+\item{seed}{a numeric value indicating the seed for random number generation.
+Set the seed to obtain reproducible results.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -69,83 +80,85 @@ A list with class "design_analysis" containing the following
    considered hypothetical population effect size. The list includes:
    \code{effect_type} indicating the type of effect; \code{effect_function}
    indicating the function from which effect are sampled or the string
-   "single_value" if single value was provided; \code{effect_summary} summary
-   of the sampled effects; \code{effect_samples} vector with the sampled
-   effects (or unique value in the case of single value). if relevant
-   \code{tl} and \code{tu} specifying the lower upper truncation point
-   respectively.}
+   "single_value" if a single value was provided; \code{effect_summary}
+   summary of the sampled effects; \code{effect_samples} vector with the
+   sampled effects (or unique value in the case of a single value). if
+   relevant \code{tl} and \code{tu} specifying the lower upper truncation
+   point respectively.}
    \item{test_info}{a list with all the information regarding the test
    performed. The list includes: \code{test_method} character sting
-   indicating the test method (e.g., "pearson", "one-sample", "paired",
-   "two-samples", or "welch"); sample size (\code{sample_n1} and if relevant
+   indicating the test method (i.e., "pearson", "one_sample", "paired",
+   "two_sample", or "welch"); sample size (\code{sample_n1} and if relevant
    \code{sample_n2}), alternative hypothesis (\code{alternative}),
    significance level (\code{sig_level})  and  degrees of freedom (\code{df})
    of the statistical test; \code{critical_effect} the minimum absolute
    effect value that would result significant. Note that
-   \code{critical_effect} in the case of \code{alternative = "two.sided"} is
+   \code{critical_effect} in the case of \code{alternative = "two_sided"} is
    the absolute value and both positive and negative values should be
    considered.}
-   \item{retrospective_res}{a data frame with the resulting inferential
-   errors. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
+   \item{retrospective_res}{a data frame with the results of the design
+   analysis. Columns names are \code{power}, \code{typeM}, and \code{typeS}.}
 }
 \description{
-Given the hypothetical population effect size and study sample size, the
+Given the hypothetical population effect size and the study sample size, the
 function \code{retrospective()} performs a retrospective design analysis for
-Cohen's \emph{d} (\emph{t}-test comparing group means) or  Pearson's
-correlation test between two variables. According to the defined alternative
-hypothesis and significance level, inferential errors (i.e., Power level,
-Type-M error, and Type-S error) are computed together with the the critical
+Pearson's correlation test between two variables or \emph{t}-test comparing
+group means (Cohen's \emph{d}). According to the defined alternative
+hypothesis and the significance level, inferential risks (i.e., Power level,
+Type M error, and Type S error) are computed together with the critical
 effect value (i.e., the minimum absolute effect size value that would result
 significant).
 }
 \details{
 Conduct a retrospective design analysis to evaluate inferential risks
  according to study design. A general overview is provided in the
- \code{vignette(todo)}.
+ \code{vignette("retrospective")}.
 
  \strong{Population effect size}
 
  The hypothetical population effect size (\code{effect_size}) can be set to a
- single value or a function that allows to sample values from a given
+ single value or a function that allows sampling values from a given
  distribution. The function has to be defined as \code{function(x)
- my_function(x, ...)}, with only one single variable \code{x} that represent
- the number of samples (e.g., \code{function(x) rnorm(x, mean = 0, sd = 1)};
- \code{function(x) sample(c(.1,.3,.5), x, replace = TRUE)}). This allows
- users to define hypothetical effect size distribution according to their
- needs.
+ my_function(x, ...)}, with only one single argument \code{x} representing
+ the number of sampled values (e.g., \code{function(x) rnorm(x, mean = 0, sd
+ = 1)}; \code{function(x) sample(c(.1,.3,.5), x, replace = TRUE)}). This
+ allows users to define hypothetical effect size distribution according to
+ their needs.
 
- Argument \code{B_effect} allows to define the number of sampled effect size.
+ Argument \code{B_effect} allows defining the number of sampled effects.
  Users can access sampled effects in the \code{effect_info} list included in
- the output to evaluate if sample is representative of their specification.
- Increase the number to obtain more accurate results but it will require more
- computational time (default is 250).
+ the output to evaluate if the sample is representative of their
+ specification. Increase the number to obtain more accurate results but it
+ will require more computational time (default is 1000). To avoid long
+ computational times, we suggest adjusting \code{B} when using a function to
+ define the hypothetical population effect size.
 
- Optional arguments \code{tl} and \code{tu} allow to truncate the sampling
+ Optional arguments \code{tl} and \code{tu} allow truncating the sampling
  distribution specifying the lower truncation point and upper  truncation
  point respectively. Note that if \code{effect_type = "correlation"},
  distribution is automatically truncated between -1 and 1.
 
- \strong{Effect type options}
+ \strong{Effect type and test method options}
 
- The \code{effect_type} argument can be set to \code{"cohen_d"} (default) for
- standardized mean difference or \code{"correlation"} if Pearson's
- correlation is evaluated.
-
- In the case of \code{"cohen_d"} one-sample or two-samples \emph{t}-test are
- considered following same options specification of basic function
- \code{t.test()}, note that default options of \code{t.test()} are \code{paired
- = FALSE} and \code{var.equal = FALSE}. For one-sample \emph{t}-test only
- \code{sample_n1} is specified and \code{sample_n2 = NULL} is required. For
- paired \emph{t}-test \code{sample_n1} and \code{sample_n2} needs to be
- identical and option \code{paired = TRUE} is required. For two-samples
- \emph{t}-test \code{sample_n1} and \code{sample_n2} can differ and option
- \code{var.equal = TRUE} is required. For Welch \emph{t}-test, only
- \code{sample_n1} and \code{sample_n2} are required (default option is
- \code{var.equal = FALSE}).
+ The \code{effect_type} argument can be set to \code{"correlation"} (default)
+ if a correlation is evaluated or \code{"cohen_d"} for standardized mean
+ difference.
 
  In the case of \code{"correlation"}, only Pearson's correlation between two
- variables is available and \code{sample_n2} argument is ignored. The
- Kendall's \emph{tau} or Spearman's \emph{rho} are not implemented.
+ variables is available. In this case \code{"pearson"} has to be set as
+ \code{test_method} and \code{sample_n2} argument is ignored. The
+ Kendall's \emph{tau} and Spearman's \emph{rho} are not implemented.
+
+ In the case of \code{"cohen_d"}, the available \emph{t}-tests can be
+ selected specifying the argument \code{test_method}. For independent
+ two-sample \emph{t}-test, use \code{"two_sample"} and indicate the sample
+ size of the second group (\code{sample_n2}). For Welch's \emph{t}-test, use
+ \code{"welch"} and indicate and indicate the sample size of the second group
+ (\code{sample_n2}) and the ratio between the standard deviation in the first
+ group and in the second group (\code{ratio_sd}). For dependent \emph{t}-test
+ for paired samples, use \code{"paired"} (\code{sample_n1} and
+ \code{sample_n2} have to be equal). For one-sample \emph{t}-test, use
+ \code{"one_sample"} (\code{sample_n2} has to be \code{NULL}).
 
  \strong{Study design}
 
@@ -155,29 +168,38 @@ Conduct a retrospective design analysis to evaluate inferential risks
 }
 \examples{
 
-# One-sample t-test
-retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
-              effect_type = "cohen_d", seed = 2020)
-# Paired t-test
-retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
-              effect_type = "cohen_d", paired = TRUE, seed = 2020)
-# Two-samples t-test
-retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type ="cohen_d", var.equal = TRUE, seed = 2020)
-# Welch t-test
-retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type ="cohen_d", seed = 2020)
-
 # Pearson's correlation
 retrospective(effect_size = .3, sample_n1 = 25, effect_type = "correlation",
+              test_method = "pearson", seed = 2020)
+
+# Two-sample t-test
+retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
+              effect_type = "cohen_d", test_method = "two_sample",
+              seed = 2020)
+# Welch t-test
+retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
+              effect_type = "cohen_d", test_method = "welch",
+              ratio_sd = 1.5, seed = 2020)
+# Paired t-test
+retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
+              effect_type = "cohen_d", test_method = "paired", seed = 2020)
+# One-sample t-test
+retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
+              effect_type = "cohen_d", test_method = "one_sample",
               seed = 2020)
 
+
+
+
 \dontrun{
-# Define effect_size using functions (long computational time)
+# Define effect_size using functions (long computational times)
+# Remember to adjust B
 retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-              effect_type = "correlation", seed = 2020)
+              effect_type = "correlation", est_method = "pearson",
+             tl = .15, B = 1e3, seed = 2020)
 retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-              effect_type = "cohen_d", tl = .2, tu = .4, seed = 2020)
+              effect_type = "cohen_d", est_method = "one_sample",
+              tl = .2, tu = .4, B = 1e3, seed = 2020)
 }
 
 }
@@ -186,13 +208,14 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  Calcagnì, A., Finos, L., & Pastore, M. (2020). Enhancing Statistical
  Inference in Psychological Research via Prospective and Retrospective Design
  Analysis. Frontiers in Psychology, 10.
- https://doi.org/10.3389/fpsyg.2019.02893
+ \url{https://doi.org/10.3389/fpsyg.2019.02893}
+
+ Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020).
+ Designing Studies and Evaluating Research Results: Type M and Type S Errors
+ for Pearson Correlation Coefficient. Retrieved from
+ \url{https://psyarxiv.com/q9f86/}
 
  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
- 9(6), 641–651. https://doi.org/10.1177/1745691614551642
-
- Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020, June 15).
- Designing Studies and Evaluating Research Results: Type M and Type S Errors
- for Pearson Correlation Coefficient. Retrieved from https://psyarxiv.com/q9f86/
+ 9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
 }

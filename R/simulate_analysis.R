@@ -4,25 +4,32 @@
 
 #----    simulate_analysis    ----
 
+# Call the appropriate cohen or correlation loop to simulate the analysis
+# according to retrospective() arguments specification.
 
+simulate_analysis <- function(effect_type, effect_samples, test_method,
+                              sample_n1, sample_n2, alternative, sig_level,
+                              ratio_sd, B, ...){
 
-simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n1, sample_n2, alternative, sig_level, B, ...){
-
-  arguments <-  as.list(match.call()[-1])
+  arguments <- as.list(match.call()[-1])
 
   if(effect_type == "cohen_d"){
     # Cohen's d
-    analysis_res <- sapply(effect_samples,
-                           FUN = function(effect_target) do.call(retrospective_cohen,
-                                                                 c(arguments,
-                                                                   effect_target = effect_target)))
+    analysis_res <- vapply(effect_samples,
+                          FUN = function(effect_target)
+                            do.call(retrospective_cohen,
+                                    c(arguments,
+                                      effect_target = effect_target)),
+                          FUN.VALUE = list(power = 0, typeM = 0, typeS = 0))
 
   } else if (effect_type == "correlation"){
     # Correlation
-    analysis_res <- sapply(effect_samples,
-                           FUN = function(effect_target) do.call(retrospective_correlation,
-                                                                 c(arguments,
-                                                                   effect_target = effect_target)))
+    analysis_res <- vapply(effect_samples,
+                          FUN = function(effect_target)
+                            do.call(retrospective_correlation,
+                                    c(arguments,
+                                      effect_target = effect_target)),
+                          FUN.VALUE = list(power = 0, typeM = 0, typeS = 0))
   }
 
   analysis_res <- list2data(analysis_res)
@@ -31,56 +38,60 @@ simulate_analysis <- function(effect_type, effect_samples, test_method, sample_n
 
 }
 
+
 #----    retrospective_cohen    ----
 
-retrospective_cohen <- function(sample_n1, sample_n2, effect_target, test_method,
-                                alternative, sig_level, B, ...){
+# Run a retrospective design analysis for Cohen's d effect type according to
+# retrospective() arguments specification.
 
+retrospective_cohen <- function(sample_n1, sample_n2, effect_target,
+                                test_method, alternative, sig_level, ratio_sd,
+                                B, mu = 0, ...){
 
-  arguments <- as.list(match.call()[-1])
+  # Get the correct mean difference from the effect value
+  correct_diff <- compute_correct_diff(effect_target, test_method, ratio_sd)
 
-  sim_res <- replicate(B,{
-    groups <- sample_groups(sample_n1, effect_target, sample_n2)
+  # C++ do not use NULL so set to 0
+  sample_n2_new <- ifelse(is.null(sample_n2), 0, sample_n2)
 
-    sim <- do.call(my_t_test,c(groups,
-                               arguments))
-  })
-
-
+  sim_res <- cohen_loop(sample_n1 = sample_n1, mean_diff = correct_diff,
+                        sample_n2 = sample_n2_new, test_method = test_method,
+                        alternative = alternative, ratio_sd = ratio_sd,
+                        mu = mu,  B = B)
   sim_res <- list2data(sim_res)
 
-  res_errors <- compute_errors(p.values = sim_res$p.value,
-                        estimates = sim_res$estimate,
-                        true_value = effect_target,
-                        sig_level = sig_level, alternative = alternative, B = B)
+  res_errors <- compute_errors(p_values = sim_res$p_value,
+                               estimates = sim_res$estimate,
+                               true_value = effect_target,
+                               sig_level = sig_level, B = B)
 
   return(res_errors)
-  }
+}
+
+
 #----    retrospective_correlation    ----
+
+# Run a retrospective design analysis for correlation effect type according to
+# retrospective() arguments specification.
 
 retrospective_correlation <- function(sample_n1, effect_target, test_method,
                                       alternative, sig_level, B, ...){
 
-  arguments <- as.list(match.call()[-1])
-
   Eigen_matrix <- compute_eigen_matrix(effect_target = effect_target)
 
-  sim_res <- replicate(B,{
-    groups <- my_mvrnorm(sample_n1, Eigen_matrix =Eigen_matrix)
-
-    sim <- do.call(my_cor_test,c(groups, arguments))
-  })
+  sim_res <- cor_loop(n = sample_n1, alternative = alternative, B = B,
+                      Eigen_matrix = Eigen_matrix)
 
   sim_res <- list2data(sim_res)
 
-  res_errors <- compute_errors(p.values = sim_res$p.value,
+  res_errors <- compute_errors(p_values = sim_res$p_value,
                                estimates = sim_res$estimate,
                                true_value = effect_target,
-                               sig_level = sig_level, alternative = alternative, B = B)
-
+                               sig_level = sig_level, B = B)
 
   return(res_errors)
 }
+
 
 #----
 

@@ -1,0 +1,24 @@
+> retrospective(effect_size = function(x) rnorm(x, 0.3, 0.1), sample_n1 = 20,
++ sample_n2 = 20, effect_type = "cohen_d", test_method = "paired", tl = 0.15, tu = 0.45,
++ B_effect = 10, B = 50, seed = 2020)
+Message: Truncation could require long computational time
+
+
+	Design Analysis
+
+Hypothesized effect:  cohen_d ~ rnorm(x, 0.3, 0.1) [tl =  0.15 ; tu = 0.45 ]
+   n_effect   Min.    1st Qu.   Median   Mean    3rd Qu.   Max. 
+   10         0.187   0.23      0.321    0.301   0.363     0.394
+
+Study characteristics:
+   test_method   sample_n1   sample_n2   alternative   sig_level   df
+   paired        20          20          two_sided     0.05        19
+
+Inferential risks:
+        Min.    1st Qu.   Median   Mean     3rd Qu.   Max. 
+power   0.060   0.18000   0.2800   0.2540   0.330     0.420
+typeM   1.535   1.64775   1.9275   2.0835   2.547     2.888
+typeS   0.000   0.00000   0.0000   0.0000   0.000     0.000
+
+Critical value(s): cohen_d  =  ± 0.468
+
