@@ -6,7 +6,7 @@ tags:
   - power analysis
   - Type M error
   - Type S error
-  - statistical inference
+  - replicabiliyt
 authors:
   - name: Claudio Zandonella Callegher^[Corresponding author add info]
     orcid: 0000-0001-7721-6318
@@ -36,10 +36,10 @@ affiliations:
    index: 2
  - name: Department of General Psychology, University of Padova, Padova, Italy
    index: 3
- - name: Independent Researcher
-   index: 4
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: paper_JOSS.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -51,7 +51,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 *Design Analysis* was introduced by @gelmanPowerCalculationsAssessing2014 as an extension of Power Analysis. Traditional power analysis has a narrow focus on statistical significance. Design analysis, instead, evaluates together with power levels also other inferential risks (i.e., Type M error and Type S error), to assess estimates uncertainty under hypothetical replications of a study.
 
-Given a hypothetical value of effect size and study characteristics (i.e., sample size, statistical test directionality, significance level),
+Given an hypothetical value of effect size and study characteristics (i.e., sample size, statistical test directionality, significance level),
 *Type M error* (Magnitude, also known as Exaggeration Ratio) indicates the factor by which a statistically significant effect is on average exaggerated. *Type S error* (Sign), instead, indicates the probability of finding a statistically significant result in the opposite direction to the hypothetical effect.
 
 Although Type M error and Type S error depend directly on power level, they underline valuable information regarding estimates uncertainty that would otherwise be overlooked. This enhances researchers awareness about the inferential risks related to their studies and helps them in the interpretation of their results. However, design analysis is rarely applied in real research settings also for the lack of dedicated software.
@@ -61,41 +61,52 @@ To know more about design analysis consider @gelmanPowerCalculationsAssessing201
 
 # Statement of need 
 
-`PRDA` is an R package for performing prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test).
+`PRDA` is an R package for performing prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). *Prospective Design Analysis* is performed in the planning stage of a study to define the required sample size to obtain a given level of power. *Retrospective Design Analysis*, instead, is performed when the data have already been collected to evaluate the inferential risks associated with the study.
 
-*Prospective Design Analysis* is performed in the planning stage of the study to define the required sample size to obtain a given level of power. *Retrospective Design Analysis*, instead, is performed when the data have already been collected to evaluate the inferential risks associated with the study.
+Another recent R package, `retrodesign` [@timmRetrodesignToolsType2019], allows conducting retrospective design analysis considering estimate of the unstandardized effect size (i.e., regression coefficient or mean difference) and standard error of the estimate. `PRDA` package, instead, considers standardized effect size (i.e., Pearson correlation coefficient or Cohen's *d*) and study sample size. These are more commonly used in research fields such as Psychology or Social Science, and therefore are implemented in `PRDA` to facilitate researchers' reasoning about design analysis. `PRDA`, additionally, offers the possibility to conduct a prospective design analysis and to account for the uncertainty about the hypothetical value of effect size. In fact, hypothetical effect size can be defined as a single value according to previous results in the literature or experts indications, or by specifying a distribution of plausible values.
 
-Another recent R package, `retrodesign` [@timmRetrodesignToolsType2019], allows conducting retrospective design analysis considering estimate of the true effect size and standard error of the estimate. Compared to this latter, `PRDA` package offers 
-
+The package is available from GitHub (https://github.com/ClaudioZandonella/PRDAbeta) and CRAN (**to add**). Documentation about the package is available at https://claudiozandonella.github.io/PRDAbeta/.
 
 # Examples
 
+Imagine a study evaluating the relation a given personality trait (e.g., introversion) and math performance. Suppose that 20 participants were included in the study and results indicated a statistically significant correlation (e.g, $r = .55, p = .012 $). The magnitude of the estimated correlation, however, is beyond what could be considered plausible in this field. Suppose previous results in the literature indicate correlations in area are more likely to be around $\rho = .25$.
 
-# Citations
+## Retrospective design analysis
 
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+To evaluate the inferential risks associated with the study design, we can use the function `retrospective()`.
 
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+```{r retro}
+library(PRDAbeta)
+retrospective(effect_size = .25, sample_n1 = 20,
+              effect_type = "correlation", test_method = "pearson", seed = 2020)
+```
 
-<!-- For a quick reference, the following citation commands can be used: -->
-<!-- - `@author:2001`  ->  "Author et al. (2001)" -->
-<!-- - `[@author:2001]` -> "(Author et al., 2001)" -->
-<!-- - `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)" -->
+In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 20% that is associated with a Type M error of around 2.2 and a Type S error of 0.01. That means, statistical significant results are on average an overestimation of 120% of the hypothesized population effect and there is a 1% of probability to obtain a statistically significant result in the opposite direction. To know more about function arguments and examples see the function documentation and vignette.
 
-<!-- # Figures -->
+### Effect size distribution
 
-<!-- Figures can be included like this: -->
-<!-- ![Caption for example figure.\label{fig:example}](figure.png) -->
-<!-- and referenced from text using \autoref{fig:example}. -->
+Alternatively, if no precise information about hypothetical effect size is available, researchers can specify a distribution of values  to account for their uncertainty. For example, they could define a normal distribution with mean of .25 and standard deviation truncated between .10 and 40.
 
-<!-- Fenced code blocks are rendered with syntax highlighting: -->
-<!-- ```python -->
-<!-- for n in range(10): -->
-<!--     yield f(n) -->
-<!-- ```	 -->
+```{r retro_dist}
+retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
+              effect_type = "correlation", test_method = "pearson",
+              tl = .1, tu = .4, B = 1e3, seed = 2020)
+```
+
+Consequently this time we obtained a distribution of values for power, Type M error, and Type S error. Summary information are provided in the output.
+
+## Prospective design analysis
+
+Given the previous results, researchers might consider planning a replication study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a given level of power (e.g., power = 80%).
+
+```{r pro}
+prospective(effect_size = .25, power = .8,
+            effect_type = "correlation", test_method = "pearson",
+            display_message = FALSE, seed = 2020)
+```
+
+In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. To know more about function arguments and examples see the function documentation and vignette.
+
 
 # References
 
