@@ -2,8 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  PRDAbeta: PRDAbeta.html
+  PRDA: PRDA.html
   prospective: prospective.html
   retrospective: retrospective.html
-last_built: 2020-09-18T10:44Z
+last_built: 2020-09-18T13:46Z
 

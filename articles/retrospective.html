@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retrospective Design Analysis • PRDAbeta</title>
+<title>Retrospective Design Analysis • PRDA</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -30,8 +30,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">PRDAbeta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <a class="navbar-link" href="../index.html">PRDA</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/PRDAbeta.html">Get started</a>
+  <a href="../articles/PRDA.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -98,7 +98,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDAbeta">PRDAbeta</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDAbeta">PRDA</a></span>)
 </pre></div>
 <p>Given the hypothetical population effect size and the study sample size, the function <code><a href="../reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis. Retrospective design analysis allows to evaluate the inferential risks associated with a study design when the data have already been collected. Function arguments are:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">retrospective</span>(effect_size, sample_n1, <span class="dt">sample_n2 =</span> <span class="ot">NULL</span>,</span>
@@ -292,7 +292,7 @@
 <div id="graphical-representation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphical-representation" class="anchor"></a>Graphical representation</h2>
-<p>Currently there are no personalized plot functions in {PRDAbeta}. However, it is easy to access all the results and use them to create the plots according to your needs. Here we present an example using {tidyverse} and {ggplot2}.</p>
+<p>Currently there are no personalized plot functions in {PRDA}. However, it is easy to access all the results and use them to create the plots according to your needs. Here we present an example using {tidyverse} and {ggplot2}.</p>
 <p>The function <code><a href="../reference/retrospective.html">retrospective()</a></code> returns a list with class <code>"design_analysis"</code> that contains:</p>
 <ul>
 <li>
@@ -382,7 +382,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Giulia Bertoldo, Enrico Toffalini, Gianmarco Altoè.</p>
+  <p>Developed by Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, Gianmarco Altoè.</p>
 </div>
 
 <div class="pkgdown">
