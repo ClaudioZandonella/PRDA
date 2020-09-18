@@ -2,7 +2,7 @@
 ####    Test Rcpp loops   ####
 ##############################
 
-library(PRDAbeta)
+library(PRDA)
 
 #----    input checks    ----
 

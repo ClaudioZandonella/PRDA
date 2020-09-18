@@ -2,7 +2,7 @@
 ####    Test sample effect   ####
 #################################
 
-library(PRDAbeta)
+library(PRDA)
 
 #----    input checks    ----
 

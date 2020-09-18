@@ -10,8 +10,8 @@
 
 # devtools::build_vignettes()
 # devtools::build()  # Build package source
-# install.packages("../PRDAbeta_0.1.0.9000.tar.gz", repos = NULL, type = "source") # Install source
-# browseVignettes("PRDAbeta")  # See vignette
+# install.packages("../PRDA_0.2.0.9000.tar.gz", repos = NULL, type = "source") # Install source
+# browseVignettes("PRDA")  # See vignette
 
 #----    Add to .Rbuildignore    ----
 

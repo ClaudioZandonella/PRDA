@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 ```{r, message=FALSE}
 library(tidyverse)
 library(ggplot2)
-library(PRDAbeta)
+library(PRDA)
 ```
 
 Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis. Retrospective design analysis allows to evaluate the inferential risks associated with a study design when the data have already been collected.  Function arguments are:
@@ -128,7 +128,7 @@ Note that we adjusted `B_effect` and `B` to find a good trade-off between comput
 
 ## Graphical representation
 
-Currently there are no personalized plot functions in {PRDAbeta}. However, it is easy to access all the results and use them to create the plots according to your needs. Here we present an example using {tidyverse} and {ggplot2}. 
+Currently there are no personalized plot functions in {PRDA}. However, it is easy to access all the results and use them to create the plots according to your needs. Here we present an example using {tidyverse} and {ggplot2}. 
 
 The function `retrospective()` returns a list with class `"design_analysis"` that contains:
 

@@ -11,21 +11,21 @@ authors:
   - name: Claudio Zandonella Callegher^[Corresponding author add info]
     orcid: 0000-0001-7721-6318
     affiliation: 1
-  - name: Massimiliano Pastore
-    orcid: 0000-0002-7922-6365
-    affiliation: 1
-  - name: Angela Andreella
-    orcid: 0000-0002-1141-3041
-    affiliation: 2
-  - name: Anna Vesely
-    orcid: 0000-0001-6696-2390
-    affiliation: 2
   - name: Giulia Bertoldo
     orcid: 0000-0002-6960-3980
     affiliation: 1
   - name: Enrico Toffalini
     orcid: 0000-0002-1404-5133
     affiliation: 3
+  - name: Anna Vesely
+    orcid: 0000-0001-6696-2390
+    affiliation: 2
+  - name: Angela Andreella
+    orcid: 0000-0002-1141-3041
+    affiliation: 2
+  - name: Massimiliano Pastore
+    orcid: 0000-0002-7922-6365
+    affiliation: 1
   - name: Gianmarco Altoè
     orcid: 0000-0003-1154-9528
     affiliation: 1
@@ -76,7 +76,7 @@ Imagine a study evaluating the relation a given personality trait (e.g., introve
 To evaluate the inferential risks associated with the study design, we can use the function `retrospective()`.
 
 ```{r retro}
-library(PRDAbeta)
+library(PRDA)
 retrospective(effect_size = .25, sample_n1 = 20,
               effect_type = "correlation", test_method = "pearson", seed = 2020)
 ```

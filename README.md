@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# PRDAbeta: Prospective and Retrospective Design Analysis
+# PRDA: Prospective and Retrospective Design Analysis
 
 <!-- badges: start -->
 
@@ -20,14 +20,14 @@ coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/
 
 <!-- badges: end -->
 
-{PRDAbeta} allows performing a prospective or retrospective design
-analysis to evaluate inferential risks (i.e., power, Type M error, and
-Type S error) in a study considering Pearson’s correlation between two
+{PRDA} allows performing a prospective or retrospective design analysis
+to evaluate inferential risks (i.e., power, Type M error, and Type S
+error) in a study considering Pearson’s correlation between two
 variables or mean comparisons (one-sample, paired, two-sample, and
 Welch’s *t*-test).
 
 For an introduction to design analysis and a general overview of the
-package see `vignette("PRDAbeta")`. Examples for retrospective design
+package see `vignette("PRDA")`. Examples for retrospective design
 analysis and prospective design analysis are provided in
 `vignette("retrospective")` and `vignette("prospective")` respectively.
 
@@ -36,11 +36,11 @@ All the documentation is available at
 
 ## Installation
 
-<!-- You can install the released version of PRDAbeta from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- You can install the released version of PRDA from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
 
-<!-- install.packages("PRDAbeta") -->
+<!-- install.packages("PRDA") -->
 
 <!-- ``` -->
 
@@ -59,16 +59,16 @@ devtools::install_github("ClaudioZandonella/PRDAbeta",
 
 ## The Package
 
-{PRDAbeta} package can be used for Pearson’s correlation between two
+{PRDA} package can be used for Pearson’s correlation between two
 variables or mean comparisons (one-sample, paired, two-sample, and
-Welch’s t-test) considering an hypothetical value of *ρ* or Cohen’s *d*
+Welch’s t-test) considering a hypothetical value of *ρ* or Cohen’s *d*
 respectively. See `vignette("retrospective")` and
 `vignette("prospective")` to know how to set function arguments for the
 different effect types.
 
 ### Functions
 
-In {PRDAbeta} there are two main functions `retrospective()` and
+In {PRDA} there are two main functions `retrospective()` and
 `prospective()`.
 
 #### • `retrospective()`
@@ -160,7 +160,7 @@ function documentation `?prospective` and `vignette("prospective")`.
 
 The hypothetical population effect size can be defined as a single value
 according to previous results in the literature or experts indications.
-Alternatively, {PRDAbeta} allows users to specify a distribution of
+Alternatively, {PRDA} allows users to specify a distribution of
 plausible values to account for their uncertainty about the hypothetical
 population effect size. To know how to specify the hypothetical effect
 size according to a distribution and an example of application see
@@ -173,17 +173,17 @@ To propose a new feature or report a bug, please open an issue on
 
 ## Citation
 
-To cite {PRDAbeta} in publications use:
+To cite {PRDA} in publications use:
 
 Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella,
 Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè.
-(2020). PRDAbeta: Prospective and Retrospective Design Analysis (Version
+(2020). PRDA: Prospective and Retrospective Design Analysis (Version
 v0.1). Zenodo. <http://doi.org/10.5281/zenodo.3630733>
 
 A BibTeX entry for LaTeX users is
 
     @Misc{,
-        title = {{PRDAbeta}: Prospective and Retrospective Design Analysis},
+        title = {{PRDA}: Prospective and Retrospective Design Analysis},
         author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
         year = {2020},
         publisher = {Zenodo},

@@ -1,9 +1,9 @@
 ---
-title: "PRDAbeta: Prospective and Retrospective Design Analysis"
-description: "This vignette offers a general overview of the PRDAbeta package, introducing the concept of design analysis and providing information about the main functions in the package."
+title: "PRDA: Prospective and Retrospective Design Analysis"
+description: "This vignette offers a general overview of the PRDA package, introducing the concept of design analysis and providing information about the main functions in the package."
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{PRDAbeta}
+  %\VignetteIndexEntry{PRDA}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 bibliography: PRDA.bib
@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(PRDAbeta)
+library(PRDA)
 ```
 
 
-{PRDAbeta} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). 
+{PRDA} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson's correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch's *t*-test). 
 
 ## Introduction to design analysis
 
@@ -57,9 +57,9 @@ To know more about design analysis consider @gelmanPowerCalculationsAssessing201
 
 ## The package
 
-Given a plausible value of effect size, {PRDAbeta} performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
+Given a plausible value of effect size, {PRDA} performs a prospective or retrospective design analysis to evaluate the inferential risks (i.e., power, Type M error, and Type S error) related to the study design.
 
-{PRDAbeta} package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's t-test) considering an hypothetical value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) and [`vignette("prospective")`](prospective.html) to know how to set function arguments for the different effect types. 
+{PRDA} package can be used for Pearson's correlation between two variables or mean comparisons (i.e., one-sample, paired, two-sample, and Welch's t-test) considering an hypothetical value of $\rho$ or Cohen's *d* respectively. See [`vignette("retrospective")`](retrospective.html) and [`vignette("prospective")`](prospective.html) to know how to set function arguments for the different effect types. 
 
 ### Install
 
@@ -70,12 +70,12 @@ To install the github version type in R:
 # install.packages( "devtools" )  
 devtools::install_github("CaludioZandonella/PRDAbeta",
                          build_vignettes = TRUE)
-library(PRDAbeta)
+library(PRDA)
 ```
 
 ### Functions
 
-In {PRDAbeta} there are two main functions:
+In {PRDA} there are two main functions:
 
 - **`retrospective()`**.
 Given the hypothetical population effect size and the study sample size, the function `retrospective()` performs a retrospective design analysis. According to the defined alternative hypothesis and the significance level, the inferential risks (i.e., Power level, Type M error, and Type S error) are computed together with the critical effect value (i.e., the minimum absolute effect size value that would result significant). To know more about function arguments and examples see the function documentation `?retrospective` and  [`vignette("retrospective")`](retrospective.html).
@@ -85,7 +85,7 @@ Given the hypothetical population effect size and the required power level, the 
 
 ### Hypothetical effect size
 
-The hypothetical population effect size can be defined as a single value according to previous results in the literature or experts indications. Alternatively, {PRDAbeta} allows users to specify a distribution of plausible values to account for their uncertainty about the hypothetical population effect size.  To know how to specify the hypothetical effect size according to a distribution and an example of application see [`vignette("retrospective")`](retrospective.html).
+The hypothetical population effect size can be defined as a single value according to previous results in the literature or experts indications. Alternatively, {PRDA} allows users to specify a distribution of plausible values to account for their uncertainty about the hypothetical population effect size.  To know how to specify the hypothetical effect size according to a distribution and an example of application see [`vignette("retrospective")`](retrospective.html).
 
 
 

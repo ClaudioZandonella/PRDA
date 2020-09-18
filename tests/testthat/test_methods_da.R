@@ -2,7 +2,7 @@
 ####    Test methods design analysis   ####
 ###########################################
 
-library(PRDAbeta)
+library(PRDA)
 
 
 #----    print    ----

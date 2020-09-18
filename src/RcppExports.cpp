@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // cohen_loop
 List cohen_loop(double sample_n1, double mean_diff, double sample_n2, String test_method, String alternative, double ratio_sd, double mu, int B);
-RcppExport SEXP _PRDAbeta_cohen_loop(SEXP sample_n1SEXP, SEXP mean_diffSEXP, SEXP sample_n2SEXP, SEXP test_methodSEXP, SEXP alternativeSEXP, SEXP ratio_sdSEXP, SEXP muSEXP, SEXP BSEXP) {
+RcppExport SEXP _PRDA_cohen_loop(SEXP sample_n1SEXP, SEXP mean_diffSEXP, SEXP sample_n2SEXP, SEXP test_methodSEXP, SEXP alternativeSEXP, SEXP ratio_sdSEXP, SEXP muSEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26,7 +26,7 @@ END_RCPP
 }
 // cor_loop
 List cor_loop(int n, String alternative, int B, arma::mat Eigen_matrix);
-RcppExport SEXP _PRDAbeta_cor_loop(SEXP nSEXP, SEXP alternativeSEXP, SEXP BSEXP, SEXP Eigen_matrixSEXP) {
+RcppExport SEXP _PRDA_cor_loop(SEXP nSEXP, SEXP alternativeSEXP, SEXP BSEXP, SEXP Eigen_matrixSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -40,12 +40,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_PRDAbeta_cohen_loop", (DL_FUNC) &_PRDAbeta_cohen_loop, 8},
-    {"_PRDAbeta_cor_loop", (DL_FUNC) &_PRDAbeta_cor_loop, 4},
+    {"_PRDA_cohen_loop", (DL_FUNC) &_PRDA_cohen_loop, 8},
+    {"_PRDA_cor_loop", (DL_FUNC) &_PRDA_cor_loop, 4},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_PRDAbeta(DllInfo *dll) {
+RcppExport void R_init_PRDA(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

@@ -1,8 +1,8 @@
-citHeader("To cite PRDAbeta in publications use:")
+citHeader("To cite PRDA in publications use:")
 
 bibentry(
   bibtype = "Misc",
-  title        = "{PRDbeta}: Prospective and Retrospective Design Analysis",
+  title        = "{PRDA}: Prospective and Retrospective Design Analysis",
   author       = personList(
                    as.person("Claudio {Zandonella Callegher}"),
                    as.person("Massimiliano Pastore"),
@@ -17,5 +17,5 @@ bibentry(
   doi          = "10.5281/zenodo.3630733",
   url          = "https://doi.org/10.5281/zenodo.3630733",
 
-  textVersion  = paste( "Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).", " PRDbeta: Prospective and Retrospective Design Analysis (Version v0.1).", "Zenodo.", "http://doi.org/10.5281/zenodo.3630733")
+  textVersion  = paste( "Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè. (2020).", " PRDA: Prospective and Retrospective Design Analysis (Version v0.1).", "Zenodo.", "http://doi.org/10.5281/zenodo.3630733")
 )

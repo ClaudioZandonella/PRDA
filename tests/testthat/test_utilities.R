@@ -2,7 +2,7 @@
 ####    Test utilities   ####
 #############################
 
-library(PRDAbeta)
+library(PRDA)
 
 
 context("Evaluate utility functions")

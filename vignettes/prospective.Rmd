@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, message=FALSE}
-library(PRDAbeta)
+library(PRDA)
 ```
 
 Given the hypothetical population effect size and the required power level, the function `prospective()` performs a prospective design analysis. Prospective design analysis allows to define the sample size needed to obtain a required level of power computing also the associated inferential risks. Function arguments are:
@@ -130,7 +130,7 @@ Note that we adjusted `B_effect` and `B` to find a good trade-off between comput
 
 ## Graphical representation
 
-Currently there are no personalized plot functions in {PRDAbeta}. However, it is easy to access all the results and use them to create the plots according to your needs. 
+Currently there are no personalized plot functions in {PRDA}. However, it is easy to access all the results and use them to create the plots according to your needs. 
 
 The function `prospective()` returns a list with class `"design_analysis"` that contains:
 

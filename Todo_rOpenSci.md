@@ -33,6 +33,14 @@ other:
 - [ ] Problem with .covrignore function RcppArmadillo
 - [x] Fail CI on windows
 
+# Changed name
+
+- [ ] url in DESCRIPTION
+- [ ] url in readme
+- [ ] zenodo
+- [ ] url in paper
+- [ ] url in vignette PRDA
+
 Joss:
 
 - [ ] https://joss.readthedocs.io/en/latest/submitting.html
