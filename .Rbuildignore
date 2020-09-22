@@ -30,6 +30,7 @@
 ^Todo\.html$
 ^Todo_rOpenSci\.md$
 ^Todo\.md$
+^Todo_branch\.md$
 ^README\.Rmd$
 ^LICENSE$
 ^codecov\.yml$
