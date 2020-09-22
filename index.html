@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Conduct a Prospective or Retrospective Design Analysis">
-<meta property="og:description" content='An implementation of the "Design Analysis" proposed by
-    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis
+<meta property="og:description" content='An implementation of the "Design Analysis" proposed by 
+    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
     with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
     error (e.g. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).'>
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
 <li>
   <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
-
+     
   </a>
 </li>
 <li>
@@ -55,7 +55,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
-
+     
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -70,9 +70,9 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ClaudioZandonella/PRDAbeta/">
+  <a href="https://github.com/ClaudioZandonella/PRDA/">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul>
@@ -83,7 +83,7 @@
 </div>
 <!--/.navbar -->
 
-
+      
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -94,6 +94,7 @@
 
 <!-- badges: end --><p>{PRDA} allows performing a prospective or retrospective design analysis to evaluate inferential risks (i.e., power, Type M error, and Type S error) in a study considering Pearson’s correlation between two variables or mean comparisons (one-sample, paired, two-sample, and Welch’s <em>t</em>-test).</p>
 <p>For an introduction to design analysis and a general overview of the package see <code><a href="articles/PRDA.html">vignette("PRDA")</a></code>. Examples for retrospective design analysis and prospective design analysis are provided in <code><a href="articles/retrospective.html">vignette("retrospective")</a></code> and <code><a href="articles/prospective.html">vignette("prospective")</a></code> respectively.</p>
+<p>All the documentation is available at <a href="https://claudiozandonella.github.io/PRDA/" class="uri">https://claudiozandonella.github.io/PRDA/</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -102,10 +103,10 @@
 <!-- install.packages("PRDA") -->
 <!-- ``` -->
 <!-- And the development version from [GitHub](https://github.com/) with: -->
-<p>You can install the development version from <a href="https://github.com/ClaudioZandonella/PRDAbeta/tree/develop">GitHub</a> with:</p>
+<p>You can install the development version from <a href="https://github.com/ClaudioZandonella/PRDA/tree/develop">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># install.packages("devtools")</span>
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ClaudioZandonella/PRDAbeta"</span>,
+<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ClaudioZandonella/PRDA"</span>,
                          ref = <span class="st">"develop"</span>,
                          build_vignettes = <span class="fl">TRUE</span>)
 </pre></div>
@@ -153,7 +154,7 @@
 <p>Given the hypothetical population effect size and the required power level, the function <code><a href="reference/prospective.html">prospective()</a></code> performs a prospective design analysis. According to the defined alternative hypothesis and the significance level, the required sample size is computed together with the associated Type M error, Type S error, and the critical effect value (i.e., the minimum absolute effect size value that would result significant).</p>
 <p>Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of <em>ρ</em> = .25, the function <code><a href="reference/prospective.html">prospective()</a></code> can be used to compute the required sample size to obtain a power of 80%.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.80</span>,
+<span class="fu"><a href="reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.80</span>, 
             effect_type = <span class="st">"correlation"</span>, test_method = <span class="st">"pearson"</span>,
             display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
 <span class="co">#&gt; </span>
@@ -184,33 +185,41 @@
 <div id="bugs-and-new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bugs-and-new-features" class="anchor"></a>Bugs and New Features</h2>
-<p>To propose a new feature or report a bug, please open an issue on <a href="https://github.com/ClaudioZandonella/PRDAbeta/issues">GitHub</a>.</p>
+<p>To propose a new feature or tos report a bug, please open an issue on <a href="https://github.com/ClaudioZandonella/PRDA/issues">GitHub</a>.</p>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>To cite {PRDA} in publications use:</p>
-<p>Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella, Anna Vesely, Enrico Toffalini, Giulia Bertoldo, &amp; Gianmarco Altoè. (2020). PRDA: Prospective and Retrospective Design Analysis (Version v0.1). Zenodo. <a href="http://doi.org/10.5281/zenodo.3630733" class="uri">http://doi.org/10.5281/zenodo.3630733</a></p>
+<p>Zandonella Callegher, C., Pastore, M., Andreella, A., Vesely, A., Toffalini, E., Bertoldo, G., &amp; Altoè G. (2020). PRDA: Prospective and Retrospective Design Analysis (Version v1.0.0.900). Zenodo. <a href="https://doi.org/10.5281/zenodo.4044214" class="uri">https://doi.org/10.5281/zenodo.4044214</a></p>
 <p>A BibTeX entry for LaTeX users is</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">@</span>Misc{,</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    title =<span class="st"> </span>{{PRDA}<span class="op">:</span><span class="st"> </span>Prospective and Retrospective Design Analysis},</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    author =<span class="st"> </span>{Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    year =<span class="st"> </span>{<span class="dv">2020</span>},</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    publisher =<span class="st"> </span>{Zenodo},</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    version =<span class="st"> </span>{v0<span class="fl">.1</span>},</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    doi =<span class="st"> </span>{<span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.3630733</span>},</span>
-<span id="cb4-8"><a href="#cb4-8"></a>    url =<span class="st"> </span>{https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.3630733</span>},</span>
-<span id="cb4-9"><a href="#cb4-9"></a>  }</span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a>    author       =<span class="st"> </span>{Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                    Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    title        =<span class="st"> </span>{{PRDA<span class="op">:</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>Prospective and Retrospective Design </span>
+<span id="cb4-5"><a href="#cb4-5"></a>                   Analysis}},</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    year         =<span class="st"> </span><span class="dv">2020</span>,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    publisher    =<span class="st"> </span>{Zenodo},</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    version      =<span class="st"> </span>{v1.<span class="dv">0</span>.<span class="fl">0.900</span>},</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    doi          =<span class="st"> </span>{<span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.4044214</span>},</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    url          =<span class="st"> </span>{https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.5281</span><span class="op">/</span>zenodo<span class="fl">.4044214</span>}</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  }</span></code></pre></div>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references">
 <div id="ref-altoeEnhancingStatisticalInference2020">
-<p>Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore. 2020. “Enhancing Statistical Inference in Psychological Research via Prospective and Retrospective Design Analysis.” <em>Frontiers in Psychology</em> 10. <a href="https://doi.org/10.3389/fpsyg.2019.02893" class="uri">https://doi.org/10.3389/fpsyg.2019.02893</a>.</p>
+<p>Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore.</p>
+<ol>
+<li>“Enhancing Statistical Inference in Psychological Research via Prospective and Retrospective Design Analysis.” <em>Frontiers in Psychology</em> 10. <a href="https://doi.org/10.3389/fpsyg.2019.02893" class="uri">https://doi.org/10.3389/fpsyg.2019.02893</a>.</li>
+</ol>
 </div>
 <div id="ref-bertoldoDesigningStudiesEvaluating2020">
-<p>Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè. 2020. “Designing Studies and Evaluating Research Results: Type M and Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/q9f86" class="uri">https://doi.org/10.31234/osf.io/q9f86</a>.</p>
+<p>Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè.</p>
+<ol>
+<li>“Designing Studies and Evaluating Research Results: Type M and Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/q9f86" class="uri">https://doi.org/10.31234/osf.io/q9f86</a>.</li>
+</ol>
 </div>
 <div id="ref-gelmanPowerCalculationsAssessing2014">
 <p>Gelman, Andrew, and John Carlin. 2014. “Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives on Psychological Science</em> 9 (6): 641–51. <a href="https://doi.org/10.1177/1745691614551642" class="uri">https://doi.org/10.1177/1745691614551642</a>.</p>
@@ -224,9 +233,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/ClaudioZandonella/PRDAbeta/">https://​github.com/​ClaudioZandonella/​PRDAbeta/​</a>
+<li>Browse source code at <br><a href="https://github.com/ClaudioZandonella/PRDA/">https://​github.com/​ClaudioZandonella/​PRDA/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/ClaudioZandonella/PRDAbeta/issues">https://​github.com/​ClaudioZandonella/​PRDAbeta/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/ClaudioZandonella/PRDA/issues">https://​github.com/​ClaudioZandonella/​PRDA/​issues</a>
 </li>
 </ul>
 </div>
@@ -259,10 +268,10 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
-<li><a href="https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta"><img src="https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&amp;svg=true" alt="AppVeyor build status"></a></li>
-<li><a href="https://travis-ci.org/ClaudioZandonella/PRDA_beta"><img src="https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop"><img src="https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.3630733"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg" alt="DOI"></a></li>
+<li><a href="https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
+<li><a href="https://travis-ci.org/ClaudioZandonella/PRDA"><img src="https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master"><img src="https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://zenodo.org/badge/latestdoi/212573857"><img src="https://zenodo.org/badge/212573857.svg" alt="DOI"></a></li>
 </ul>
 </div>
 </div>
@@ -280,7 +289,7 @@
       </footer>
 </div>
 
-
+  
 
 
   </body>
