@@ -9,7 +9,7 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA)
 [![Travis build
 status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
 [![Codecov test
@@ -32,7 +32,7 @@ analysis and prospective design analysis are provided in
 `vignette("retrospective")` and `vignette("prospective")` respectively.
 
 All the documentation is available at
-<https://claudiozandonella.github.io/PRDAbeta/>.
+<https://claudiozandonella.github.io/PRDA/>.
 
 ## Installation
 
