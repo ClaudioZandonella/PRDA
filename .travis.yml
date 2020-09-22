@@ -16,6 +16,8 @@ jobs:
     - name: "macOS"
       os: osx
       language: R
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes'
       env:
         - RENV_PATHS_ROOT="$HOME/renv/cache"
       before_install:
