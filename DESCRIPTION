@@ -48,5 +48,5 @@ LinkingTo:
 Imports:
     MASS,
     Rcpp
-URL: https://claudiozandonella.github.io/PRDAbeta/, https://github.com/ClaudioZandonella/PRDAbeta
-BugReports: https://github.com/ClaudioZandonella/PRDAbeta/issues
+URL: https://claudiozandonella.github.io/PRDA/, https://github.com/ClaudioZandonella/PRDA
+BugReports: https://github.com/ClaudioZandonella/PRDA/issues

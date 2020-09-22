@@ -65,7 +65,7 @@ To know more about design analysis consider @gelmanPowerCalculationsAssessing201
 
 Another recent R package, `retrodesign` [@timmRetrodesignToolsType2019], allows conducting retrospective design analysis considering estimate of the unstandardized effect size (i.e., regression coefficient or mean difference) and standard error of the estimate. `PRDA` package, instead, considers standardized effect size (i.e., Pearson correlation coefficient or Cohen's *d*) and study sample size. These are more commonly used in research fields such as Psychology or Social Science, and therefore are implemented in `PRDA` to facilitate researchers' reasoning about design analysis. `PRDA`, additionally, offers the possibility to conduct a prospective design analysis and to account for the uncertainty about the hypothetical value of effect size. In fact, hypothetical effect size can be defined as a single value according to previous results in the literature or experts indications, or by specifying a distribution of plausible values.
 
-The package is available from GitHub (https://github.com/ClaudioZandonella/PRDAbeta) and CRAN (**to add**). Documentation about the package is available at https://claudiozandonella.github.io/PRDAbeta/.
+The package is available from GitHub (https://github.com/ClaudioZandonella/PRDA) and CRAN (**to add**). Documentation about the package is available at https://claudiozandonella.github.io/PRDA/.
 
 # Examples
 
