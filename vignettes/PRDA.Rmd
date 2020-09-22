@@ -68,7 +68,7 @@ To install the github version type in R:
 ```{r setup, eval = F}
 # If devtools is not installed yet: 
 # install.packages( "devtools" )  
-devtools::install_github("CaludioZandonella/PRDAbeta",
+devtools::install_github("CaludioZandonella/PRDA",
                          build_vignettes = TRUE)
 library(PRDA)
 ```

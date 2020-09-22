@@ -9,11 +9,11 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDAbeta?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDAbeta)
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/develop)
 [![Travis build
-status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
+status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
 
 <hr>
@@ -32,7 +32,7 @@ analysis and prospective design analysis are provided in
 `vignette("retrospective")` and `vignette("prospective")` respectively.
 
 All the documentation is available at
-<https://claudiozandonella.github.io/PRDAbeta/>.
+<https://claudiozandonella.github.io/PRDA/>.
 
 ## Installation
 
@@ -47,12 +47,11 @@ All the documentation is available at
 <!-- And the development version from [GitHub](https://github.com/) with: -->
 
 You can install the development version from
-[GitHub](https://github.com/ClaudioZandonella/PRDAbeta/tree/develop)
-with:
+[GitHub](https://github.com/ClaudioZandonella/PRDA/tree/develop) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ClaudioZandonella/PRDAbeta",
+devtools::install_github("ClaudioZandonella/PRDA",
                          ref = "develop",
                          build_vignettes = TRUE)
 ```
@@ -168,8 +167,8 @@ size according to a distribution and an example of application see
 
 ## Bugs and New Features
 
-To propose a new feature or report a bug, please open an issue on
-[GitHub](https://github.com/ClaudioZandonella/PRDAbeta/issues).
+To propose a new feature or tos report a bug, please open an issue on
+[GitHub](https://github.com/ClaudioZandonella/PRDA/issues).
 
 ## Citation
 

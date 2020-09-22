@@ -25,21 +25,21 @@ send
 other:
 
 - [x] problema del welch's t test e correzione d di cohen
-- [ ] change name repo and package
+- [x] change name repo and package
 - [x] Add more description on hypothetical effect size in vignette overwie and readme
 - [ ] Update Zenodo
-- [ ] Updarte URL in DESCRIPTION
+- [x] Updarte URL in DESCRIPTION
 - [ ] Coverage for multiple CI (https://devguide.ropensci.org/ci.html#coverage)
 - [ ] Problem with .covrignore function RcppArmadillo
 - [x] Fail CI on windows
 
 # Changed name
 
-- [ ] url in DESCRIPTION
-- [ ] url in readme
+- [x] url in DESCRIPTION
+- [x] url in readme
 - [ ] zenodo
-- [ ] url in paper
-- [ ] url in vignette PRDA
+- [x] url in paper
+- [x] url in vignette PRDA
 
 Joss:
 

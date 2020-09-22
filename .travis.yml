@@ -16,6 +16,8 @@ jobs:
     - name: "macOS"
       os: osx
       language: R
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes'
       env:
         - RENV_PATHS_ROOT="$HOME/renv/cache"
       before_install:
@@ -36,3 +38,7 @@ jobs:
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
   - Rscript -e "renv::restore()"
+
+after_success:
+  - Rscript -e 'covr::codecov(token = "549179f1-fef6-4a05-be11-e2b5029df6a0", branch = "develop")'
+
