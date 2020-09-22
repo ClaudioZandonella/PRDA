@@ -14,7 +14,7 @@ status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRD
 status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
 coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
+[![DOI](https://zenodo.org/badge/212573857.svg)](https://zenodo.org/badge/latestdoi/212573857)
 
 <hr>
 
@@ -174,22 +174,24 @@ To propose a new feature or tos report a bug, please open an issue on
 
 To cite {PRDA} in publications use:
 
-Claudio Zandonella Callegher, Massimiliano Pastore, Angela Andreella,
-Anna Vesely, Enrico Toffalini, Giulia Bertoldo, & Gianmarco Altoè.
-(2020). PRDA: Prospective and Retrospective Design Analysis (Version
-v0.1). Zenodo. <http://doi.org/10.5281/zenodo.3630733>
+Zandonella Callegher, C., Pastore, M., Andreella, A., Vesely, A.,
+Toffalini, E., Bertoldo, G., & Altoè G. (2020). PRDA: Prospective and
+Retrospective Design Analysis (Version v1.0.0.900). Zenodo.
+<https://doi.org/10.5281/zenodo.4044214>
 
 A BibTeX entry for LaTeX users is
 
     @Misc{,
-        title = {{PRDA}: Prospective and Retrospective Design Analysis},
-        author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
-        year = {2020},
-        publisher = {Zenodo},
-        version = {v0.1},
-        doi = {10.5281/zenodo.3630733},
-        url = {https://doi.org/10.5281/zenodo.3630733},
-      }
+      author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
+        Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
+      title        = {{PRDA: : Prospective and Retrospective Design 
+        Analysis}},
+      year         = 2020,
+      publisher    = {Zenodo},
+      version      = {v1.0.0.900},
+      doi          = {10.5281/zenodo.4044214},
+      url          = {https://doi.org/10.5281/zenodo.4044214}
+    }
 
 ## References
 
