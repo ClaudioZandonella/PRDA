@@ -9,11 +9,11 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA)
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/develop)
 [![Travis build
-status](https://travis-ci.org/ClaudioZandonella/PRDA_beta.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA_beta)
+status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDAbeta/branch/develop)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3630733.svg)](https://doi.org/10.5281/zenodo.3630733)
 
 <hr>
