@@ -107,6 +107,10 @@ prospective(effect_size = .25, power = .8,
 
 In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. To know more about function arguments and examples see the function documentation and vignette.
 
+In `PRDA` there are no implemented functions to obtain graphical representations of the results. However, it is easy to access all the results and use them to create the plots according to your own needs and preferences. See vignettes for an example.
+
+
+
 
 # References
 
