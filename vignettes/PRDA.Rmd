@@ -39,7 +39,7 @@ Moreover, @gelmanPowerCalculationsAssessing2014 distinguished between two types 
 
 It is important to do not mistake a retrospective design analysis for post-hoc power analysis. The former defines the hypothetical effect size according to previous results in the literature or experts indications, whereas the latter defines the hypothetical effect size based on the same study results and it is a widely-deprecated practice [@goodmanUsePredictedConfidence1994; @lenthStatisticalPowerCalculations12007; @Senn1304].
 
-### Enhanching researchers awareness
+### Enhancing researchers awareness
 
 Although Type M error and Type S error depend directly on power level, they underline valuable information regarding estimates uncertainty that would otherwise be overlooked. This enhances researchers awareness about the inferential risks related to their studies and helps them in the interpretation of the results.
 
@@ -47,7 +47,7 @@ Despite the lower chances, a statistically significant result could be obtained 
 
 However, in this scenario statistically significant results are almost certain to be an overestimation of the population effect. As pointed out by @gelman_hill_vehtari_2020 "a key risk for a low-power study is not so much that it has a small chance of succeeding, but rather that an apparent success merely masks a larger failure" (p.292). This is also referred as the "Winner's curse", indicating that the apparent win in terms of a statistically significant result is an actual loss as the obtained estimate is inflated.
 
-For example, in a study considering a two-sample *t*-test with 30 participants per group, if the hypothetical population effect size is small (e.g., Cohen's *d* of .25) the actual power is only 16%.  The associated Type M error is around 2.60 and  the Type S error is 0.01. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 1% of probability to obtain a statistically significant result in the opposite direction. 
+For example, in a study considering a two-sample *t*-test with 30 participants per group, if the hypothetical population effect size is small (e.g., Cohen's *d* of .25) the actual power is only 16%.  The associated Type M error is around 2.60 and  the Type S error is 0.01. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 1% probability of obtaining a statistically significant result in the opposite direction. 
 
 In this scenario, knowing the type M and S errors, researchers would be much more cautious in interpreting the results and might consider carrying out a replication study to obtain more reliable results.
 
@@ -102,7 +102,7 @@ retrospective(effect_size = .25, sample_n1 = 13,
               effect_type = "correlation", test_method = "pearson", seed = 2020)
 ```
 
-In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% of probability to obtain a statistically significant result in the opposite direction.
+In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% probability of obtaining a statistically significant result in the opposite direction.
 
 To know more about function arguments and examples see the function documentation `?retrospective` and  [`vignette("retrospective")`](retrospective.html).
 

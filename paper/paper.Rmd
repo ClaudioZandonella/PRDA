@@ -81,7 +81,7 @@ retrospective(effect_size = .25, sample_n1 = 20,
               effect_type = "correlation", test_method = "pearson", seed = 2020)
 ```
 
-In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 20% that is associated with a Type M error of around 2.2 and a Type S error of 0.01. That means, statistical significant results are on average an overestimation of 120% of the hypothesized population effect and there is a 1% of probability to obtain a statistically significant result in the opposite direction. To know more about function arguments and examples see the function documentation and vignette.
+In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 20% that is associated with a Type M error of around 2.2 and a Type S error of 0.01. That means, statistical significant results are on average an overestimation of 120% of the hypothesized population effect and there is a 1% probability of obtaining a statistically significant result in the opposite direction. To know more about function arguments and examples see the function documentation and vignette.
 
 ### Effect size distribution
 

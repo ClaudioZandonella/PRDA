@@ -108,7 +108,7 @@ In this case, the statistical power is almost 30% and the associated
 Type M error and Type S error are respectively around 1.80 and 0.003.
 That means, statistical significant results are on average an
 overestimation of 80% of the hypothesized population effect and there is
-a .3% of probability to obtain a statistically significant result in the
+a .3% probability of obtaining a statistically significant result in the
 opposite direction.
 
 To know more about function arguments and further examples see the
