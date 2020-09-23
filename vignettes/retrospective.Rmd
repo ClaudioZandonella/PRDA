@@ -52,7 +52,7 @@ retrospective(effect_size = .25, sample_n1 = 30,
               seed = 2020)
 ```
 
-In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.36$. Note that it is not necessary to specify `sample_2` argument in the case of correlation and tests were conducted considering `"two_sided"` alternative hypothesis with a significance level of .05 (the default settings).
+In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.36$. Note that it is not necessary to specify `sample_2` argument in the case of correlation and tests were conducted considering `"two_sided"` alternative hypothesis with a significance level of .05 (the default settings).
 
 
 ## Retrospective Design Analysis for Means Comparison
@@ -76,7 +76,7 @@ retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 25,
               effect_type ="cohen_d", test_method = "paired", seed = 2020)
 ```
 
-In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% of probability to obtain a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $d  =  \pm 0.413$.
+In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $d  =  \pm 0.413$.
 
 ### Example 3: Two-sample *t*-test
 

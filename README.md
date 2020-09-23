@@ -107,7 +107,7 @@ In this case, the statistical power is almost 30% and the associated
 Type M error and Type S error are respectively around 1.80 and 0.003.
 That means, statistical significant results are on average an
 overestimation of 80% of the hypothesized population effect and there is
-a .3% of probability to obtain a statistically significant result in the
+a .3% probability of obtaining a statistically significant result in the
 opposite direction.
 
 To know more about function arguments and further examples see the
@@ -181,6 +181,7 @@ Retrospective Design Analysis (Version v1.0.0.900). Zenodo.
 A BibTeX entry for LaTeX users is
 
     @Misc{,
+    <<<<<<< HEAD
         author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
                         Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
         title        = {{PRDA: : Prospective and Retrospective Design 
@@ -191,6 +192,27 @@ A BibTeX entry for LaTeX users is
         doi          = {10.5281/zenodo.4044214},
         url          = {https://doi.org/10.5281/zenodo.4044214}
       }
+    ||||||| b5f20b7
+        title = {{PRDA}: Prospective and Retrospective Design Analysis},
+        author = {Claudio {Zandonella Callegher} and Massimiliano Pastore and Angela Andreella and Anna Vesely and Enrico Toffalini and Giulia Bertoldo and Gianmarco Altoè},
+        year = {2020},
+        publisher = {Zenodo},
+        version = {v0.1},
+        doi = {10.5281/zenodo.3630733},
+        url = {https://doi.org/10.5281/zenodo.3630733},
+      }
+    =======
+      author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
+        Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
+      title        = {{PRDA: : Prospective and Retrospective Design 
+        Analysis}},
+      year         = 2020,
+      publisher    = {Zenodo},
+      version      = {v1.0.0.900},
+      doi          = {10.5281/zenodo.4044214},
+      url          = {https://doi.org/10.5281/zenodo.4044214}
+    }
+    >>>>>>> develop
 
 ## References
 
