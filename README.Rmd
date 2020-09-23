@@ -52,7 +52,6 @@ You can install the development version from [GitHub](https://github.com/Claudio
 ``` r
 # install.packages("devtools")
 devtools::install_github("ClaudioZandonella/PRDA",
-                         ref = "develop",
                          build_vignettes = TRUE)
 ```
 
