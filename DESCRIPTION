@@ -25,8 +25,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-1154-9528")))
 Description: An implementation of the "Design Analysis" proposed by 
     Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
-    with other inferential-risks as Type-M error (e.g. Magnitude) and Type-S
-    error (e.g. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).
+    with other inferential-risks as Type-M error (i.e. Magnitude) and Type-S
+    error (i.e. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).
 Depends: 
     R (>= 3.5.0)
 Suggests:
