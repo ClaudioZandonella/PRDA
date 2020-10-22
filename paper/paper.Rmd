@@ -1,5 +1,5 @@
 ---
-title: 'PRDA: An R pakcage for Prospective and Retrospective Design Analysis'
+title: 'PRDA: An R package for Prospective and Retrospective Design Analysis'
 tags:
   - R
   - design analysis
