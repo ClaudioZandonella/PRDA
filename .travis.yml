@@ -22,7 +22,7 @@ jobs:
         - RENV_PATHS_ROOT="$HOME/renv/cache"
       before_install:
         - brew update
-        - brew install ccache
+        # - brew install ccache
       cache:
         ccache: true
         directories:
