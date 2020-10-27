@@ -166,8 +166,12 @@ size according to a distribution and an example of application see
 
 ## Bugs and New Features
 
-To propose a new feature or tos report a bug, please open an issue on
+To propose a new feature or to report a bug, please open an issue on
 [GitHub](https://github.com/ClaudioZandonella/PRDA/issues).
+
+Please note that this project is released under a [Contributor Code of
+Conduct](https://www.contributor-covenant.org/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Citation
 
