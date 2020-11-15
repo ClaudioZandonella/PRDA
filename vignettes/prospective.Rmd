@@ -68,7 +68,7 @@ To conduct a retrospective design analysis considering means comparisons, we nee
 
 ### Example 2: Paired *t*-test
 
-Imagine that we are planning a study where the same group is measured twice (e.g., pre- and post-test). Knowing from the literature that we expect an effect size of $d = .35$, which is the required sample size to obtain a power of 80%? We can use the function `prospective()` specifying the corresponding arguments. We use the option `test_method = one_sample` for paired *t*-test  and set `sample_n1 =1`.
+Imagine that we are planning a study where the same group is measured twice (e.g., pre- and post-test). Knowing from the literature that we expect an effect size of $d = .35$, which is the required sample size to obtain a power of 80%? We can use the function `prospective()` specifying the corresponding arguments. We use the option `test_method = one_sample` for paired *t*-test  and set `ratio_n = 1`.
 
 ```{r, example2}
 prospective(effect_size = .35, power = .8, test_method = "paired",

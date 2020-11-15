@@ -30,7 +30,8 @@ hypothetical population effect size.}
 \item{power}{a numeric value indicating the required power level.}
 
 \item{ratio_n}{a numeric value indicating the ratio between \code{sample_n1}
-and \code{sample_n2}.}
+and \code{sample_n2}. This argument is required in the case of two-sample
+\emph{t}-test or Welch's \emph{t}-test.}
 
 \item{test_method}{a character string specifying the test type, must be one of
 \code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
@@ -167,21 +168,22 @@ Conduct a prospective design analysis to define the required sample
   \emph{rho} are not implemented. The \code{test_method} argument has to be
   set to \code{"pearson"} (default) and the \code{effect_size} argument is
   used to define the hypothetical population effect size in terms of
-  Pearson's correlation coefficient (\eqn{\rho}). The \code{sample_n2}
+  Pearson's correlation coefficient (\eqn{\rho}). The \code{ratio_n}
   argument is ignored.
 
   In the case of a comparison between group means, the \code{effect_size}
   argument is used to define the hypothetical population effect size in terms
   of Cohen's \emph{d} and the available \emph{t}-tests are selected
   specifying the argument \code{test_method}. For independent two-sample
-  \emph{t}-test, use \code{"two_sample"} and indicate the sample size of the
-  second group (\code{sample_n2}). For Welch's \emph{t}-test, use
-  \code{"welch"} and indicate and indicate the sample size of the second
-  group (\code{sample_n2}) and the ratio between the standard deviation in
-  the first group and in the second group (\code{ratio_sd}). For dependent
-  \emph{t}-test for paired samples, use \code{"paired"} (\code{sample_n1} and
-  \code{sample_n2} have to be equal). For one-sample \emph{t}-test, use
-  \code{"one_sample"} (\code{sample_n2} has to be \code{NULL}).
+  \emph{t}-test, use \code{"two_sample"} and indicate the ratio between the
+  sample size of the first group and the second group (\code{ratio_n}). For
+  Welch's \emph{t}-test, use \code{"welch"} and indicate the ratio between
+  the sample size of the first group and the second group (\code{ratio_n})
+  and the ratio between the standard deviation in the first group and in the
+  second group (\code{ratio_sd}). For dependent \emph{t}-test for paired
+  samples, use \code{"paired"} (\code{ratio_n} has to be 1). For one-sample
+  \emph{t}-test, use \code{"one_sample"} (\code{ratio_n} has to be
+  \code{NULL}).
 
   \strong{Study design}
 
