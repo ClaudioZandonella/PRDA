@@ -52,14 +52,14 @@ You can install the development version from
 ``` r
 # install.packages("devtools")
 devtools::install_github("ClaudioZandonella/PRDA",
-                         build_vignettes = TRUE)
+                         ref = "develop", build_vignettes = TRUE)
 ```
 
 ## The Package
 
 {PRDA} package can be used for Pearson’s correlation between two
-variables or mean comparisons (one-sample, paired, two-sample, and
-Welch’s t-test) considering a hypothetical value of *ρ* or Cohen’s *d*
+variables or mean comparisons (i.e., one-sample, paired, two-sample, and
+Welch’s t-test) considering an hypothetical value of *ρ* or Cohen’s *d*
 respectively. See `vignette("retrospective")` and
 `vignette("prospective")` to know how to set function arguments for the
 different effect types.
