@@ -36,7 +36,7 @@ affiliations:
    index: 2
  - name: Department of General Psychology, University of Padova, Padova, Italy
    index: 3
-date: "24 September, 2020"
+date: "15 November, 2020"
 bibliography: paper_JOSS.bib
 editor_options: 
   chunk_output_type: console
@@ -77,7 +77,7 @@ Suppose previous results in the literature indicate correlations in this area ar
 ```r
 library(PRDA)
 retrospective(effect_size = .25, sample_n1 = 20,
-              effect_type = "correlation", test_method = "pearson", seed = 2020)
+              test_method = "pearson", seed = 2020)
 ```
 
 ```
@@ -106,8 +106,7 @@ Alternatively, if no precise information about hypothetical effect size is avail
 
 ```r
 retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
-              effect_type = "correlation", test_method = "pearson",
-              tl = .1, tu = .4, B = 1e3, seed = 2020)
+              test_method = "pearson", tl = .1, tu = .4, B = 1e3, seed = 2020)
 ```
 
 ```
@@ -143,8 +142,7 @@ Given the previous results, researchers might consider planning a replication st
 
 
 ```r
-prospective(effect_size = .25, power = .8,
-            effect_type = "correlation", test_method = "pearson",
+prospective(effect_size = .25, power = .8, test_method = "pearson",
             display_message = FALSE, seed = 2020)
 ```
 

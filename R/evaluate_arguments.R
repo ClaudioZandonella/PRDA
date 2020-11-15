@@ -271,5 +271,26 @@ eval_rgn_function <- function(FUN, n = 10){
   return(res)
 }
 
+#----    eval_effect_type    ----
+
+# Given the test_method return the corresponding effect_type. In the case of
+# "two_sample", "welch", "paired", or "one_sample" test return "choen_d. In the
+# case of "pearson" test, return "correlation".
+
+eval_effect_type <- function(test_method = c("pearson", "two_sample", "welch",
+                                             "paired", "one_sample")){
+  mean_diff <- c("two_sample", "welch", "paired", "one_sample")
+  correlation <- c("pearson")
+
+  if(test_method %in% mean_diff){
+    effect_type <- "cohen_d"
+  } else if (test_method %in% correlation){
+    effect_type <- "correlation"
+  }
+
+  return(effect_type)
+}
+
+
 #----
 

@@ -8,7 +8,6 @@ retrospective(
   effect_size,
   sample_n1,
   sample_n2 = NULL,
-  effect_type = c("correlation", "cohen_d"),
   test_method = c("pearson", "two_sample", "welch", "paired", "one_sample"),
   alternative = c("two_sided", "less", "greater"),
   sig_level = 0.05,
@@ -29,11 +28,6 @@ group.}
 
 \item{sample_n2}{an optional numeric value indicating the sample size of the
 second group.}
-
-\item{effect_type}{a character string specifying the effect type, must be one
-of \code{"correlation"} (default, Pearson's correlation) or \code{"cohen_d"}
-(Cohen's \emph{d} standardized mean difference) or ". You can specify just
-the initial letters.}
 
 \item{test_method}{a character string specifying the test type, must be one of
 \code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
@@ -138,27 +132,32 @@ Conduct a retrospective design analysis to evaluate inferential risks
  point respectively. Note that if \code{effect_type = "correlation"},
  distribution is automatically truncated between -1 and 1.
 
- \strong{Effect type and test method options}
+ \strong{Test methods}
 
- The \code{effect_type} argument can be set to \code{"correlation"} (default)
- if a correlation is evaluated or \code{"cohen_d"} for standardized mean
- difference.
+ The function \code{retrospective()} performs a retrospective design analysis
+ considering correlations between two variables or comparisons between group
+ means.
 
- In the case of \code{"correlation"}, only Pearson's correlation between two
- variables is available. In this case \code{"pearson"} has to be set as
- \code{test_method} and \code{sample_n2} argument is ignored. The
- Kendall's \emph{tau} and Spearman's \emph{rho} are not implemented.
+ In the case of a correlation, only Pearson's correlation between two
+ variables is available, whereas Kendall's \emph{tau} and Spearman's
+ \emph{rho} are not implemented. The \code{test_method} argument has to be
+ set to \code{"pearson"} (default) and the \code{effect_size} argument is
+ used to define the hypothetical population effect size in terms of Pearson's
+ correlation coefficient (\eqn{\rho}). The \code{sample_n2} argument is
+ ignored.
 
- In the case of \code{"cohen_d"}, the available \emph{t}-tests can be
- selected specifying the argument \code{test_method}. For independent
- two-sample \emph{t}-test, use \code{"two_sample"} and indicate the sample
- size of the second group (\code{sample_n2}). For Welch's \emph{t}-test, use
- \code{"welch"} and indicate and indicate the sample size of the second group
- (\code{sample_n2}) and the ratio between the standard deviation in the first
- group and in the second group (\code{ratio_sd}). For dependent \emph{t}-test
- for paired samples, use \code{"paired"} (\code{sample_n1} and
- \code{sample_n2} have to be equal). For one-sample \emph{t}-test, use
- \code{"one_sample"} (\code{sample_n2} has to be \code{NULL}).
+ In the case of a comparison between group means, the \code{effect_size}
+ argument is used to define the hypothetical population effect size in terms
+ of Cohen's \emph{d} and the available \emph{t}-tests are selected specifying
+ the argument \code{test_method}. For independent two-sample \emph{t}-test,
+ use \code{"two_sample"} and indicate the sample size of the second group
+ (\code{sample_n2}). For Welch's \emph{t}-test, use \code{"welch"} and
+ indicate and indicate the sample size of the second group (\code{sample_n2})
+ and the ratio between the standard deviation in the first group and in the
+ second group (\code{ratio_sd}). For dependent \emph{t}-test for paired
+ samples, use \code{"paired"} (\code{sample_n1} and \code{sample_n2} have to
+ be equal). For one-sample \emph{t}-test, use \code{"one_sample"}
+ (\code{sample_n2} has to be \code{NULL}).
 
  \strong{Study design}
 
@@ -169,24 +168,21 @@ Conduct a retrospective design analysis to evaluate inferential risks
 \examples{
 
 # Pearson's correlation
-retrospective(effect_size = .3, sample_n1 = 25, effect_type = "correlation",
+retrospective(effect_size = .3, sample_n1 = 25,
               test_method = "pearson", seed = 2020)
 
 # Two-sample t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type = "cohen_d", test_method = "two_sample",
-              seed = 2020)
+              test_method = "two_sample", seed = 2020)
 # Welch t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              effect_type = "cohen_d", test_method = "welch",
-              ratio_sd = 1.5, seed = 2020)
+              test_method = "welch", ratio_sd = 1.5, seed = 2020)
 # Paired t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
-              effect_type = "cohen_d", test_method = "paired", seed = 2020)
+              test_method = "paired", seed = 2020)
 # One-sample t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
-              effect_type = "cohen_d", test_method = "one_sample",
-              seed = 2020)
+              test_method = "one_sample", seed = 2020)
 
 
 
@@ -195,11 +191,10 @@ retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
 # Define effect_size using functions (long computational times)
 # Remember to adjust B
 retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-              effect_type = "correlation", est_method = "pearson",
-             tl = .15, B = 1e3, seed = 2020)
+              test_method = "pearson", tl = .15, B = 1e3, seed = 2020)
 retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 25,
-              effect_type = "cohen_d", est_method = "one_sample",
-              tl = .2, tu = .4, B = 1e3, seed = 2020)
+              test_method = "one_sample", tl = .2, tu = .4, B = 1e3,
+              seed = 2020)
 }
 
 }

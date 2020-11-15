@@ -21,10 +21,6 @@
 #'@param power a numeric value indicating the required power level.
 #'@param ratio_n a numeric value indicating the ratio between \code{sample_n1}
 #'   and \code{sample_n2}.
-#'@param effect_type a character string specifying the effect type, must be one
-#'  of \code{"correlation"} (default, Pearson's correlation) or \code{"cohen_d"}
-#'  (Cohen's \emph{d} standardized mean difference) or ". You can specify just
-#'  the initial letters.
 #'@param test_method a character string specifying the test type, must be one of
 #'  \code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
 #'  (independent two-sample \emph{t}-test), \code{"welch"} (Welch's
@@ -125,28 +121,32 @@
 #'   than the required level (median)?; Which is the required sample size to
 #'   obtain on average a power equal or greater than the required level (mean)?
 #'
-#'   \strong{Effect type and test method options}
+#'   \strong{Test methods}
 #'
-#'   The \code{effect_type} argument can be set to \code{"correlation"}
-#'   (default) if a correlation is evaluated or \code{"cohen_d"} for
-#'   standardized mean difference.
+#'   The function \code{retrospective()} performs a retrospective design
+#'   analysis considering correlations between two variables or comparisons
+#'   between group means.
 #'
-#'   In the case of \code{"correlation"}, only Pearson's correlation between two
-#'   variables is available. In this case \code{"pearson"} has to be set as
-#'   \code{test_method} and \code{ratio_n} argument is ignored. The Kendall's
-#'   \emph{tau} and Spearman's \emph{rho} are not implemented.
+#'   In the case of a correlation, only Pearson's correlation between two
+#'   variables is available, whereas Kendall's \emph{tau} and Spearman's
+#'   \emph{rho} are not implemented. The \code{test_method} argument has to be
+#'   set to \code{"pearson"} (default) and the \code{effect_size} argument is
+#'   used to define the hypothetical population effect size in terms of
+#'   Pearson's correlation coefficient (\eqn{\rho}). The \code{sample_n2}
+#'   argument is ignored.
 #'
-#'   In the case of \code{"cohen_d"}, the available \emph{t}-tests can be
-#'   selected specifying the argument \code{test_method}. For independent
-#'   two-sample \emph{t}-test, use \code{"two_sample"} and indicate the ratio
-#'   between the sample size of the first group and the second group
-#'   (\code{ratio_n}). For Welch's \emph{t}-test, use \code{"welch"} and
-#'   indicate the ratio between the sample size of the first group and the
-#'   second group (\code{ratio_n}) and the ratio between the standard deviation
-#'   in the first group and in the second group (\code{ratio_sd}). For dependent
-#'   \emph{t}-test for paired samples, use \code{"paired"} (\code{ratio_n} has
-#'   to be 1). For one-sample \emph{t}-test, use \code{"one_sample"}
-#'   (\code{ratio_n} has to be \code{NULL}).
+#'   In the case of a comparison between group means, the \code{effect_size}
+#'   argument is used to define the hypothetical population effect size in terms
+#'   of Cohen's \emph{d} and the available \emph{t}-tests are selected
+#'   specifying the argument \code{test_method}. For independent two-sample
+#'   \emph{t}-test, use \code{"two_sample"} and indicate the sample size of the
+#'   second group (\code{sample_n2}). For Welch's \emph{t}-test, use
+#'   \code{"welch"} and indicate and indicate the sample size of the second
+#'   group (\code{sample_n2}) and the ratio between the standard deviation in
+#'   the first group and in the second group (\code{ratio_sd}). For dependent
+#'   \emph{t}-test for paired samples, use \code{"paired"} (\code{sample_n1} and
+#'   \code{sample_n2} have to be equal). For one-sample \emph{t}-test, use
+#'   \code{"one_sample"} (\code{sample_n2} has to be \code{NULL}).
 #'
 #'   \strong{Study design}
 #'
@@ -157,36 +157,32 @@
 #' @examples
 #'
 #' # Pearson's correlation
-#' prospective(effect_size = .3, power = .8, effect_type = "correlation",
-#'             test_method = "pearson", B = 1e3, seed = 2020)
+#' prospective(effect_size = .3, power = .8, test_method = "pearson", B = 1e3,
+#'             seed = 2020)
 #'
 #' # Two-sample t-test
 #' prospective(effect_size = .3, power = .8, ratio_n = 1.5,
-#'             effect_type = "cohen_d", test_method = "two_sample",
-#'             B = 1e3, seed = 2020)
+#'             test_method = "two_sample", B = 1e3, seed = 2020)
 #' # Welch t-test
 #' prospective(effect_size = .3, power = .8, ratio_n = 2,
-#'             effect_type ="cohen_d", test_method = "welch",
-#'             ratio_sd = 1.5, B = 1e3, seed = 2020)
+#'             test_method = "welch", ratio_sd = 1.5, B = 1e3, seed = 2020)
 #' # Paired t-test
 #' prospective(effect_size = .3, power = .8, ratio_n = 1,
-#'             effect_type = "cohen_d", test_method = "paired",
-#'             B = 1e3, seed = 2020)
+#'             test_method = "paired", B = 1e3, seed = 2020)
 #' # One-sample t-test
 #' prospective(effect_size = .3, power = .8, ratio_n = NULL,
-#'             effect_type = "cohen_d", test_method = "one_sample",
-#'             B = 1e3, seed = 2020)
+#'             test_method = "one_sample", B = 1e3, seed = 2020)
 #'
 #'
 #'
 #' \dontrun{
 #' # Define effect_size using functions (long computational time)
 #' prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-#'             effect_type = "correlation", test_method = "pearson",
-#'             B_effect = 500, B = 500, tl = .15, seed = 2020)
+#'             test_method = "pearson", B_effect = 500, B = 500, tl = .15,
+#'             seed = 2020)
 #' prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
-#'             effect_type = "cohen_d", test_method = "two_sample", ratio_n = 1,
-#'             B_effect = 500, B = 500, tl = .2, tu = .4, seed = 2020)
+#'             test_method = "two_sample", ratio_n = 1, B_effect = 500, B = 500,
+#'             tl = .2, tu = .4, seed = 2020)
 #' }
 #'
 #'@references Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
@@ -210,7 +206,6 @@
 prospective <- function(effect_size,
                         power,
                         ratio_n = 1,
-                        effect_type = c("correlation", "cohen_d"),
                         test_method = c("pearson", "two_sample", "welch",
                                         "paired", "one_sample"),
                         alternative = c("two_sided","less","greater"),
@@ -231,10 +226,12 @@ prospective <- function(effect_size,
   #----    Save call    ----
 
   # Match arguments
-  effect_type <- match.arg(effect_type)
   alternative <- match.arg(alternative)
   test_method <- match.arg(test_method)
   eval_power <- match.arg(eval_power)
+
+  # eval effect_type
+  effect_type <- eval_effect_type(test_method)
 
   # Save call
   design_analysis <- "prospective"
@@ -242,7 +239,8 @@ prospective <- function(effect_size,
 
   # eval possible errors
   do.call(eval_arguments_prospective,
-          call_arguments)
+          c(call_arguments,
+            effect_type = effect_type))
 
 
   #----    Set seed    ----
@@ -268,7 +266,7 @@ prospective <- function(effect_size,
 
   if(effect_type == "correlation" && !is.null(ratio_n)){
     if(ratio_n != 1)
-      warning("If 'effect_type = correlation', argument 'ratio_n' is set to NULL")
+      warning("If 'test_method = pearson', argument 'ratio_n' is set to NULL")
 
     call_arguments["ratio_n"] <- list(NULL)
     ratio_n <- NULL
@@ -281,6 +279,7 @@ prospective <- function(effect_size,
   # Evaluate test test_method
   # (use t.test or cor.tes() to evaluate possible errors)
   do.call(eval_test_method, c(call_arguments,
+                              effect_type = effect_type,
                               sample_n1 = sample_info$sample_n1,
                               sample_n2 = sample_info$sample_n2,
                               effect_target = effect_target))
@@ -297,6 +296,7 @@ prospective <- function(effect_size,
 
     prospective_res <- do.call(simulate_analysis,
                                c(call_arguments,
+                                 effect_type = effect_type,
                                  effect_info["effect_samples"],
                                  sample_info))
 
@@ -336,6 +336,7 @@ prospective <- function(effect_size,
   #Compute df and critical value
   crit_values <- do.call(compute_critical_effect,
                          c(call_arguments,
+                           effect_type = effect_type,
                            sample_n1 = sample_info$sample_n1,
                            sample_n2 = sample_info$sample_n2))
 

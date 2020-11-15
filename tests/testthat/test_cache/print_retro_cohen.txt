@@ -1,6 +1,6 @@
 > retrospective(effect_size = function(x) rnorm(x, 0.3, 0.1), sample_n1 = 20,
-+ sample_n2 = 20, effect_type = "cohen_d", test_method = "paired", tl = 0.15, tu = 0.45,
-+ B_effect = 10, B = 50, seed = 2020)
++ sample_n2 = 20, test_method = "paired", tl = 0.15, tu = 0.45, B_effect = 10, B = 50,
++ seed = 2020)
 Message: Truncation could require long computational time
 
 

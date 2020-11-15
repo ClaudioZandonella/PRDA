@@ -99,7 +99,7 @@ The function `retrospective()` can be used to evaluate the inferential risks ass
 
 ```{r, retro}
 retrospective(effect_size = .25, sample_n1 = 13,
-              effect_type = "correlation", test_method = "pearson", seed = 2020)
+              test_method = "pearson", seed = 2020)
 ```
 
 In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% probability of obtaining a statistically significant result in the opposite direction.
@@ -111,8 +111,7 @@ To know more about function arguments and examples see the function documentatio
 Considering the previous results, researchers might consider planning a replication study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).
 
 ```{r, pro}
-prospective(effect_size = .25, power = .8,
-            effect_type = "correlation", test_method = "pearson", 
+prospective(effect_size = .25, power = .8, test_method = "pearson", 
             display_message = FALSE, seed = 2020)
 ```
 

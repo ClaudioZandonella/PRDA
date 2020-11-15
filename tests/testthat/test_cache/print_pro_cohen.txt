@@ -1,5 +1,5 @@
-> prospective(effect_size = 0.3, power = 0.8, ratio_n = 2, effect_type = "cohen_d",
-+   test_method = "two_sample", seed = 2020, B = 50)
+> prospective(effect_size = 0.3, power = 0.8, ratio_n = 2, test_method = "two_sample",
++   seed = 2020, B = 50)
 Evaluate n = 501
 Estimated power is 1
 

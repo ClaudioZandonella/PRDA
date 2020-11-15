@@ -96,4 +96,15 @@ test_that("evaluate the correct number of sampled values", {
 
 })
 
+
+#----    eval_effect_type    ----
+
+test_that("evaluate the correct effect type", {
+  expect_match(eval_effect_type(test_method = "pearson"), "correlation")
+  expect_match(eval_effect_type(test_method = "two_sample"), "cohen_d")
+  expect_match(eval_effect_type(test_method = "welch"), "cohen_d")
+  expect_match(eval_effect_type(test_method = "paired"), "cohen_d")
+  expect_match(eval_effect_type(test_method = "one_sample"), "cohen_d")
+})
+
 #----
