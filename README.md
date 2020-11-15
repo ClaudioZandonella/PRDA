@@ -9,11 +9,11 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/develop)
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=master&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/master)
 [![Travis build
-status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA)
+status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master)
 [![DOI](https://zenodo.org/badge/212573857.svg)](https://zenodo.org/badge/latestdoi/212573857)
 
 <hr>
@@ -52,7 +52,6 @@ You can install the development version from
 ``` r
 # install.packages("devtools")
 devtools::install_github("ClaudioZandonella/PRDA",
-                         ref = "develop",
                          build_vignettes = TRUE)
 ```
 
@@ -167,8 +166,12 @@ size according to a distribution and an example of application see
 
 ## Bugs and New Features
 
-To propose a new feature or tos report a bug, please open an issue on
+To propose a new feature or to report a bug, please open an issue on
 [GitHub](https://github.com/ClaudioZandonella/PRDA/issues).
+
+Please note that this project is released under a [Contributor Code of
+Conduct](https://www.contributor-covenant.org/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Citation
 
@@ -182,16 +185,16 @@ Retrospective Design Analysis (Version v1.0.0.900). Zenodo.
 A BibTeX entry for LaTeX users is
 
     @Misc{,
-      author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
-        Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
-      title        = {{PRDA: : Prospective and Retrospective Design 
-        Analysis}},
-      year         = 2020,
-      publisher    = {Zenodo},
-      version      = {v1.0.0.900},
-      doi          = {10.5281/zenodo.4044214},
-      url          = {https://doi.org/10.5281/zenodo.4044214}
-    }
+        author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
+                        Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
+        title        = {{PRDA: : Prospective and Retrospective Design 
+                       Analysis}},
+        year         = 2020,
+        publisher    = {Zenodo},
+        version      = {v1.0.0.900},
+        doi          = {10.5281/zenodo.4044214},
+        url          = {https://doi.org/10.5281/zenodo.4044214}
+      }
 
 ## References
 

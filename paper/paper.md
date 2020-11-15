@@ -36,15 +36,13 @@ affiliations:
    index: 2
  - name: Department of General Psychology, University of Padova, Padova, Italy
    index: 3
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "24 September, 2020"
 bibliography: paper_JOSS.bib
 editor_options: 
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 
 # Summary
@@ -75,10 +73,28 @@ Imagine a study evaluating the relation a given personality trait (e.g., introve
 
 Suppose previous results in the literature indicate correlations in this area are more likely to be around $\rho = .25$. To evaluate the inferential risks associated with the study design, we can use the function `retrospective()`.
 
-```{r retro}
+
+```r
 library(PRDA)
 retrospective(effect_size = .25, sample_n1 = 20,
               effect_type = "correlation", test_method = "pearson", seed = 2020)
+```
+
+```
+## 
+## 	Design Analysis
+## 
+## Hypothesized effect:  rho = 0.25 
+## 
+## Study characteristics:
+##    test_method   sample_n1   sample_n2   alternative   sig_level   df
+##    pearson       20          NULL        two_sided     0.05        18
+## 
+## Inferential risks:
+##    power   typeM   typeS
+##    0.185   2.161   0.008
+## 
+## Critical value(s): rho  =  ± 0.444
 ```
 
 In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 20% that is associated with a Type M error of around 2.2 and a Type S error of 0.01. That means, statistical significant results are on average an overestimation of 120% of the hypothesized population effect and there is a 1% probability of obtaining a statistically significant result in the opposite direction. To know more about function arguments and examples see the function documentation and vignette.
@@ -87,10 +103,36 @@ In the output, we have the summary information about the hypothesized population
 
 Alternatively, if no precise information about hypothetical effect size is available, researchers could specify a distribution of values  to account for their uncertainty. For example, they might define a normal distribution with mean of .25 and standard deviation of .1, truncated between .10 and 40.
 
-```{r retro_dist}
+
+```r
 retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
               effect_type = "correlation", test_method = "pearson",
               tl = .1, tu = .4, B = 1e3, seed = 2020)
+```
+
+```
+## Truncation could require long computational time
+```
+
+```
+## 
+## 	Design Analysis
+## 
+## Hypothesized effect:  rho ~ rnorm(x, 0.25, 0.1) [tl =  0.1 ; tu = 0.4 ]
+##    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. 
+##    1000       0.1    0.19      0.244    0.247   0.302     0.398
+## 
+## Study characteristics:
+##    test_method   sample_n1   sample_n2   alternative   sig_level   df
+##    pearson       20          NULL        two_sided     0.05        18
+## 
+## Inferential risks:
+##         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
+## power   0.058   0.12600   0.181    0.198498   0.25800   0.441
+## typeM   1.414   1.81875   2.216    2.405984   2.79950   5.345
+## typeS   0.000   0.00000   0.007    0.019144   0.02425   0.175
+## 
+## Critical value(s): rho  =  ± 0.444
 ```
 
 Consequently this time we obtained a distribution of values for power, Type M error, and Type S error. Summary information are provided in the output.
@@ -99,10 +141,28 @@ Consequently this time we obtained a distribution of values for power, Type M er
 
 Given the previous results, researchers might consider planning a replication study to obtain more reliable results. The function `prospective()` can be used to compute the sample size needed to obtain a given level of power (e.g., power = 80%).
 
-```{r pro}
+
+```r
 prospective(effect_size = .25, power = .8,
             effect_type = "correlation", test_method = "pearson",
             display_message = FALSE, seed = 2020)
+```
+
+```
+## 
+## 	Design Analysis
+## 
+## Hypothesized effect:  rho = 0.25 
+## 
+## Study characteristics:
+##    test_method   sample_n1   sample_n2   alternative   sig_level   df 
+##    pearson       126         NULL        two_sided     0.05        124
+## 
+## Inferential risks:
+##    power   typeM   typeS
+##    0.807   1.107   0    
+## 
+## Critical value(s): rho  =  ± 0.175
 ```
 
 In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. To know more about function arguments and examples see the function documentation and vignette.

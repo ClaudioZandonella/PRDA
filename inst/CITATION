@@ -19,3 +19,4 @@ bibentry(
 
   textVersion  = paste( "Zandonella Callegher, C., Pastore, M., Andreella, A., Vesely, A., Toffalini, E., Bertoldo, G., & Altoè G. (2020).", " PRDA: Prospective and Retrospective Design Analysis (Version v1.0.0.900).", "Zenodo.", "https://doi.org/10.5281/zenodo.4044214")
 )
+
