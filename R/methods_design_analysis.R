@@ -7,7 +7,7 @@
 #' Print Method for design_analysis class
 #'
 #' @param x an object with class "design_analysis"
-#' @param ... urther arguments passed to or from other methods.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @return a summary output
 #' @export
@@ -100,7 +100,7 @@ print.design_analysis <- function(x, ...){
 #' Print Method for design_analysis class
 #'
 #' @param object an object with class "design_analysis"
-#' @param ... urther arguments passed to or from other methods.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @return a summary output
 #'

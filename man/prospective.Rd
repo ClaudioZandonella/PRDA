@@ -89,7 +89,7 @@ A list with class "design_analysis" containing the following
    \item{design_analysis}{a character string indicating the type of design
    analysis: "prospective".}
    \item{call_arguments}{a list with all the arguments passed to the
-   function.}
+   function and the raw function call.}
    \item{effect_info}{a list with all the information regarding the
    considered hypothetical population effect size. The list includes:
    \code{effect_type} indicating the type of effect; \code{effect_function}

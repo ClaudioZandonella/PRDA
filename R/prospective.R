@@ -65,7 +65,7 @@
 #'    \item{design_analysis}{a character string indicating the type of design
 #'    analysis: "prospective".}
 #'    \item{call_arguments}{a list with all the arguments passed to the
-#'    function.}
+#'    function and the raw function call.}
 #'    \item{effect_info}{a list with all the information regarding the
 #'    considered hypothetical population effect size. The list includes:
 #'    \code{effect_type} indicating the type of effect; \code{effect_function}
@@ -241,6 +241,7 @@ prospective <- function(effect_size,
 
   # Save call
   design_analysis <- "prospective"
+  arguments_raw <- sys.call()
   call_arguments <- as.list(match_call(default = TRUE))[-1]
 
   # eval possible errors
@@ -355,7 +356,8 @@ prospective <- function(effect_size,
 
   #----    save results    ----
   design_fit <- structure(list(design_analysis = design_analysis,
-                               call_arguments = call_arguments,
+                               call_arguments = c(call_arguments,
+                                                  arguments_raw = arguments_raw),
                                effect_info = c(effect_type = effect_type,
                                                effect_info),
                                test_info = test_info,
