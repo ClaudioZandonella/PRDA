@@ -15,12 +15,17 @@
 #' effect value (i.e., the minimum absolute effect size value that would result
 #' significant).
 #'
-#'@param effect_size a numeric value or function (see details) indicating the
+#'@param effect_size a numeric value or function (see Details) indicating the
 #'  hypothetical population effect size.
 #'@param sample_n1 a numeric value indicating the sample size of the first
 #'  group.
-#'@param sample_n2 an optional numeric value indicating the sample size of the
-#'  second group.
+#'@param sample_n2 a numeric value indicating the sample size of the second
+#'  group. This argument is required when \code{test_method} is set to
+#'  \code{"two_sample"} or \code{"welch"}. In the case of \code{test_method =
+#'  "paired"}, set \code{sample_n2} equal to \code{sample_n1}. Whereas in the
+#'  case of \code{test_method = "one_sample"}, set \code{sample_n2} to
+#'  \code{NULL}. This argument is ignored for \code{test_method = "pearson"}.
+#'  See Test methods section in Details.
 #'@param test_method a character string specifying the test type, must be one of
 #'  \code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
 #'  (independent two-sample \emph{t}-test), \code{"welch"} (Welch's

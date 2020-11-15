@@ -16,12 +16,16 @@
 #' effect value (i.e., the minimum absolute effect size value that would
 #' result significant).
 #'
-#'@param effect_size a numeric value or function (see details) indicating the
+#'@param effect_size a numeric value or function (see Details) indicating the
 #'  hypothetical population effect size.
 #'@param power a numeric value indicating the required power level.
-#'@param ratio_n a numeric value indicating the ratio between \code{sample_n1}
-#'  and \code{sample_n2}. This argument is required in the case of two-sample
-#'  \emph{t}-test or Welch's \emph{t}-test.
+#'@param ratio_n a numeric value indicating the ratio between the sample size in
+#'  the first group and in the second group. This argument is required when
+#'  \code{test_method} is set to \code{"two_sample"} or \code{"welch"}. In the
+#'  case of \code{test_method = "paired"}, set \code{ratio_n} to 1. Whereas in
+#'  the case of \code{test_method = "one_sample"}, set \code{ratio_n} to
+#'  \code{NULL}. This argument is ignored for \code{test_method = "pearson"}.
+#'  See Test methods section in Details.
 #'@param test_method a character string specifying the test type, must be one of
 #'  \code{"pearson"} (default, Pearson's correlation), \code{"two_sample"}
 #'  (independent two-sample \emph{t}-test), \code{"welch"} (Welch's
@@ -49,7 +53,7 @@
 #'   maximum sample size of the first group (\code{sample_n1}).
 #'@param eval_power a character string specifying the function used to summarize
 #'  the resulting distribution of power values. Must be one of "median"
-#'  (default) or "mean". You can specify just the initial letters. See details.
+#'  (default) or "mean". You can specify just the initial letters. See Details.
 #'@param tol a numeric value indicating the tolerance of required power level.
 #'@param display_message a logical variable indicating whether to display or
 #'   not the information about computational steps.
