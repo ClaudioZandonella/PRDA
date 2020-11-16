@@ -108,14 +108,14 @@ Now, to obtain a power of 80%, we would need at least 63 participants in the fir
 
 Defining the hypothetical population effect size as a single value could be limiting.  Instead, researchers may prefer to use a probability distribution representing their uncertainty regarding the hypothetical population effect. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
 
-To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single argument `x` representing the number of samples (e.g., `function(x) rnorm(x, mean = 0, sd = 1)`). See [`vignette("retrospective")`](retrospective.html) for further details.
+To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(n) my_function(n, ...)`, with only one single argument `n` representing the number of samples (e.g., `function(n) rnorm(n, mean = 0, sd = 1)`). See [`vignette("retrospective")`](retrospective.html) for further details.
 
 ### Example 5: Effect size distribution
 
 Consider the same scenario as in the correlation example (Example 1). This time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between .15 and .45.
 
 ```{r, example5}
-prospective(effect_size = function(x) rnorm(x, .3, .1), power = .60, 
+prospective(effect_size = function(n) rnorm(n, .3, .1), power = .60, 
             test_method = "pearson", tl = .15, tu = .45, B_effect = 500, 
             B = 500, display_message = FALSE, seed = 2020)
 ```
@@ -137,7 +137,7 @@ The function `prospective()` returns a list with class `"design_analysis"` that 
 Output complete description is provided in the function help page `?prospective`.
 
 ```{r, data_plot}
-da_fit <- prospective(effect_size = function(x) rnorm(x, .3, .1), power = .60,
+da_fit <- prospective(effect_size = function(n) rnorm(n, .3, .1), power = .60,
                       test_method = "pearson", tl = .15, tu = .45, 
                       B_effect = 500, B = 500, display_message = FALSE, 
                       seed = 2020)

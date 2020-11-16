@@ -88,7 +88,7 @@ In the output, we have the summary information about the hypothesized population
 Alternatively, if no precise information about hypothetical effect size is available, researchers could specify a distribution of values  to account for their uncertainty. For example, they might define a normal distribution with mean of .25 and standard deviation of .1, truncated between .10 and 40.
 
 ```{r retro_dist}
-retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
+retrospective(effect_size = function(n) rnorm(n, .25, .1), sample_n1 = 20,
               test_method = "pearson", tl = .1, tu = .4, B = 1e3, seed = 2020)
 ```
 

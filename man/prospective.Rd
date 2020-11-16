@@ -132,10 +132,10 @@ Conduct a prospective design analysis to define the required sample
 
   The hypothetical population effect size (\code{effect_size}) can be set to
   a single value or a function that allows sampling values from a given
-  distribution. The function has to be defined as \code{function(x)
-  my_function(x, ...)}, with only one single argument \code{x} representing
-  the number of sampled values (e.g., \code{function(x) rnorm(x, mean = 0, sd
-  = 1)}; \code{function(x) sample(c(.1,.3,.5), x, replace = TRUE)}). This
+  distribution. The function has to be defined as \code{function(n)
+  my_function(n, ...)}, with only one single argument \code{n} representing
+  the number of sampled values (e.g., \code{function(n) rnorm(n, mean = 0, sd
+  = 1)}; \code{function(n) sample(c(.1,.3,.5), n, replace = TRUE)}). This
   allows users to define hypothetical effect size distribution according to
   their needs.
 
@@ -218,10 +218,10 @@ prospective(effect_size = .3, power = .8, ratio_n = NULL,
 
 \dontrun{
 # Define effect_size using functions (long computational time)
-prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
+prospective(effect_size = function(n) rnorm(n, .3, .1), power = .8,
             test_method = "pearson", B_effect = 500, B = 500, tl = .15,
             seed = 2020)
-prospective(effect_size = function(x) rnorm(x, .3, .1), power = .8,
+prospective(effect_size = function(n) rnorm(n, .3, .1), power = .8,
             test_method = "two_sample", ratio_n = 1, B_effect = 500, B = 500,
             tl = .2, tu = .4, seed = 2020)
 }

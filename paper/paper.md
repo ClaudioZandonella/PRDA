@@ -105,7 +105,7 @@ Alternatively, if no precise information about hypothetical effect size is avail
 
 
 ```r
-retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
+retrospective(effect_size = function(n) rnorm(n, .25, .1), sample_n1 = 20,
               test_method = "pearson", tl = .1, tu = .4, B = 1e3, seed = 2020)
 ```
 
@@ -117,7 +117,7 @@ retrospective(effect_size = function(x) rnorm(x, .25, .1), sample_n1 = 20,
 ## 
 ## 	Design Analysis
 ## 
-## Hypothesized effect:  rho ~ rnorm(x, 0.25, 0.1) [tl =  0.1 ; tu = 0.4 ]
+## Hypothesized effect:  rho ~ rnorm(n, 0.25, 0.1) [tl =  0.1 ; tu = 0.4 ]
 ##    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. 
 ##    1000       0.1    0.19      0.244    0.247   0.302     0.398
 ## 

@@ -105,7 +105,7 @@ We obtained a statistical power of 50%, which is associated with a Type M error 
 
 Defining the hypothetical population effect size as a single value could be limiting. Instead, researchers may prefer to use a probability distribution representing their uncertainty regarding the hypothetical population effect. Note that this could be interpreted as a prior distribution of the population effect in a Bayesian framework. 
 
-To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(x) my_function(x, ...)`, with only one single argument `x` representing the number of samples. For example, `function(x) rnorm(x, mean = 0, sd = 1)` would allow to sample from a normal distribution with mean 0 and standard deviation 1; or `function(x) sample(c(.1,.3,.5), x, replace = TRUE)` would allow to sample form a set of three equally plausible values. This allows users to define hypothetical effect size distribution according to their needs.
+To define the hypothetical population effect size (`effect_size`) according to a probability distribution, it is necessary to specify a function that allows sampling values from a given distribution. The function has to be defined as `function(n) my_function(n, ...)`, with only one single argument `n` representing the number of samples. For example, `function(n) rnorm(n, mean = 0, sd = 1)` would allow to sample from a normal distribution with mean 0 and standard deviation 1; or `function(n) sample(c(.1,.3,.5), n, replace = TRUE)` would allow to sample form a set of three equally plausible values. This allows users to define hypothetical effect size distribution according to their needs.
 
 Argument `B_effect` defines the number of sampled effects. Increase the number to obtain more accurate results, although this will require more computational time (default is `B_effect = 1000`). To avoid long computational times when using a function to define the hypothetical population effect size, we suggest adjusting `B` (i.e., the number of simulation per each effect).
 
@@ -117,7 +117,7 @@ Optional arguments `tl` and `tu` allow truncating the sampling distribution defi
 Consider the same scenario as in the correlation example (Example 1). This time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between .15 and .45.
 
 ```{r, example5}
-retrospective(effect_size = function(x) rnorm(x, .3, .1), sample_n1 = 30,
+retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 30,
               test_method = "pearson", tl = .15, tu = .45, 
               B_effect = 1e3, B = 1e3, seed = 2020)
 ```
@@ -139,7 +139,7 @@ The function `retrospective()` returns a list with class `"design_analysis"` tha
 Output complete description is provided in the function help page `?retrospective`.
 
 ```{r, data_plot}
-da_fit <- retrospective(effect_size = function(x) rnorm(x, .3, .1), 
+da_fit <- retrospective(effect_size = function(n) rnorm(n, .3, .1), 
                         sample_n1 = 30, test_method = "pearson",
                         tl = .15, tu = .45, B_effect = 1e3, B = 1e3, seed = 2020)
 

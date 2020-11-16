@@ -43,9 +43,9 @@ sample_obs_cor <- function(sample_n1, effect_target){
 sample_effect <- function(FUN, B_effect, tl = -Inf, tu = Inf, tol = 1e4){
   if(!is.function(FUN) || length(formals(FUN))!=1L || !eval_rgn_function(FUN))
     stop(c("FUN has to be a function that allows to sample numeric values\n",
-           "  The function has to be of the type 'function(x) my_function(x, ...)'\n",
-           "  It requires only one single argument 'x' representing the number of sampled values\n",
-           "  E.s. 'function(x) rnorm(x, mean = 0, sd = 1)'"))
+           "  The function has to be of the type 'function(n) my_function(n, ...)'\n",
+           "  It requires only one single argument 'n' representing the number of sampled values\n",
+           "  E.s. 'function(n) rnorm(n, mean = 0, sd = 1)'"))
 
   args <- list(x = B_effect)
 
