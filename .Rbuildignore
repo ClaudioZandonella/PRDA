@@ -33,6 +33,8 @@
 ^Todo_branch\.md$
 ^README\.Rmd$
 ^LICENSE$
+^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$
 ^codecov\.yml$
 ^appveyor\.yml$
 ^\.covrignore$

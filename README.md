@@ -162,14 +162,27 @@ population effect size. To know how to specify the hypothetical effect
 size according to a distribution and an example of application see
 `vignette("retrospective")`.
 
-## Bugs and New Features
+## Contributing to PRDA
 
-To propose a new feature or to report a bug, please open an issue on
-[GitHub](https://github.com/ClaudioZandonella/PRDA/issues).
+The PRDA package is still in the early stages of its life. Thus, surely
+there are many bugs to fix and features to propose. Anyone is welcome to
+contribute to the PRDA package.
 
 Please note that this project is released under a [Contributor Code of
 Conduct](https://www.contributor-covenant.org/). By contributing to this
 project, you agree to abide by its terms.
+
+#### Bugs and New Features
+
+To propose a new feature or to report a bug, please open an issue on
+[GitHub](https://github.com/ClaudioZandonella/PRDA/issues). See
+[Community
+guidelines](https://github.com/ClaudioZandonella/PRDA/CONTRIBUTING.md).
+
+#### Future Plans
+
+  - Improve compute time by parallelizing the code
+  - Implement design analysis in the case of linear regression models
 
 ## Citation
 
