@@ -55,8 +55,10 @@
 #'  the resulting distribution of power values. Must be one of "median"
 #'  (default) or "mean". You can specify just the initial letters. See Details.
 #'@param tol a numeric value indicating the tolerance of required power level.
-#'@param display_message a logical variable indicating whether to display or
-#'   not the information about computational steps.
+#'@param display_message a logical variable indicating whether to display or not
+#'  the information about computational steps and the progress bar. Not that the
+#'  progress bar is available only when \code{effect_size} is defined as a
+#'  function.
 #'@param seed a numeric value indicating the seed for random number generation.
 #'  Set the seed to obtain reproducible results.
 #'

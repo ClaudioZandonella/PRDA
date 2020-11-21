@@ -15,9 +15,10 @@ test_that("inputs are correctly specified", {
                           sample_n2 = NULL, test_method = "pearson",
                           alternative = "two_sided", sig_level = .05,
                           ratio_sd = 1, B = 10, tl = -Inf, tu = Inf,
-                          B_effect = 10, seed = 2020){
+                          B_effect = 10, display_message = TRUE, seed = 2020){
     retrospective(effect_size, sample_n1, sample_n2, test_method,
-                  alternative, sig_level, ratio_sd, B, tl, tu, B_effect, seed)
+                  alternative, sig_level, ratio_sd, B, tl, tu, B_effect,
+                  display_message, seed)
   }
 
   #----    Arguments    ----
@@ -90,6 +91,13 @@ test_that("inputs are correctly specified", {
   expect_error(test_retrospective(B_effect = "ciao"), B_effect_text)
   expect_error(test_retrospective(B_effect = c(10,20)), B_effect_text)
 
+  # display_message
+  display_text <- "Argument 'display_message' has to be logical"
+  expect_error(test_retrospective(display_message = 1), display_text)
+  expect_error(test_retrospective(display_message = Inf), display_text)
+  expect_error(test_retrospective(display_message = NULL), display_text)
+  expect_error(test_retrospective(display_message = "ciao"), display_text)
+  expect_error(test_retrospective(display_message = c(.1,.2)), display_text)
 
   #----    Other cases    ----
 

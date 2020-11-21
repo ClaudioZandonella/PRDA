@@ -11,7 +11,7 @@
 eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
                                          effect_type, test_method, sig_level,
                                          ratio_sd, B, seed, tl, tu, B_effect,
-                                         ...){
+                                         display_message, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
     stop("Argument 'effect_size' has to be a single numeric value or a function")
@@ -42,6 +42,9 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
   if(!is_single_numeric(B_effect) || B_effect <= 1)
     stop("Argument 'B_effect' has to be a single integer value grater than 1")
+
+  if(!is.logical(display_message))
+    stop("Argument 'display_message' has to be logical")
 
   # Check coherence effect_type, test_method and others
   if(effect_type == "correlation" && test_method != "pearson")

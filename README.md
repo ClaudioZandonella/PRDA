@@ -84,7 +84,7 @@ the hypothesized effect is *ρ* = .25. To evaluate the inferential risks
 related to the study we use the function `retrospective()`.
 
 ``` r
-retrospective(effect_size = .25, sample_n1 = 30,
+retrospective(effect_size = .25, sample_n1 = 30, 
               test_method = "pearson", seed = 2020)
 #> 
 #>  Design Analysis

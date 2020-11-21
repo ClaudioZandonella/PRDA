@@ -51,7 +51,7 @@ prospective(effect_size = .25, power = .60, test_method = "pearson",
             display_message = TRUE, seed = 2020)
 ```
 
-Note that default option `display_message = TRUE` prints the different steps to find the required sample size. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 60% the required sample size is $n = 76$, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.226$. Note that correlation tests were conducted considering `"two_sided"` alternative hypothesis and a significance level of .05 (the default settings).
+The default option `display_message = TRUE` prints the different steps to find the required sample size and the progress bar. Note that, however, the progress bar is available only when `effect_size` is defined as a function. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 60% the required sample size is $n = 76$, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.226$. Note that correlation tests were conducted considering `"two_sided"` alternative hypothesis and a significance level of .05 (the default settings).
 
 
 ## Prospective Design Analysis for Means Comparison

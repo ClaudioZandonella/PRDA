@@ -40,7 +40,9 @@ compute_errors <- function(p_values, estimates, true_value, sig_level,B){
 
   typeM <- mean(abs(estimates[sig_p.value])) / abs(true_value)
 
-  res <- list(power = power, typeM = typeM, typeS = typeS)
+  res <- data.frame(power = power,
+                    typeM = typeM,
+                    typeS = typeS)
 
   return(res)
 }

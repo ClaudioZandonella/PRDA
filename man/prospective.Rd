@@ -77,8 +77,10 @@ the resulting distribution of power values. Must be one of "median"
 
 \item{tol}{a numeric value indicating the tolerance of required power level.}
 
-\item{display_message}{a logical variable indicating whether to display or
-not the information about computational steps.}
+\item{display_message}{a logical variable indicating whether to display or not
+the information about computational steps and the progress bar. Not that the
+progress bar is available only when \code{effect_size} is defined as a
+function.}
 
 \item{seed}{a numeric value indicating the seed for random number generation.
 Set the seed to obtain reproducible results.}

@@ -49,6 +49,9 @@
 #'@param B_effect a numeric  value indicating the number of sampled effects
 #'  if \code{effect_size} is defined as a function. Increase the number to
 #'  obtain more stable results.
+#'@param display_message a logical variable indicating whether to display or not
+#'  the progress bar. Not that this applies only when \code{effect_size} is
+#'  defined as a function.
 #'@param seed a numeric value indicating the seed for random number generation.
 #'  Set the seed to obtain reproducible results.
 
@@ -207,6 +210,7 @@ retrospective <- function(effect_size,
                           tl = -Inf,
                           tu = Inf,
                           B_effect = 1e3,
+                          display_message = TRUE,
                           seed = NULL){
 
 

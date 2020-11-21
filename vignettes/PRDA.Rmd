@@ -98,7 +98,7 @@ The hypothetical population effect size can be defined as a single value accordi
 The function `retrospective()` can be used to evaluate the inferential risks associated with the study.
 
 ```{r, retro}
-retrospective(effect_size = .25, sample_n1 = 13,
+retrospective(effect_size = .25, sample_n1 = 13, 
               test_method = "pearson", seed = 2020)
 ```
 

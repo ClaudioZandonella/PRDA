@@ -9,30 +9,33 @@
 
 simulate_analysis <- function(effect_type, effect_samples, test_method,
                               sample_n1, sample_n2, alternative, sig_level,
-                              ratio_sd, B, ...){
+                              ratio_sd, B, display_message = TRUE, ...){
 
   arguments <- as.list(match.call()[-1])
 
+  # decide which lapply to call
+
+  my_lapply <- ifelse((display_message & length(effect_samples) > 1L),
+                      yes = "pblapply", no = "lapply")
+
+
   if(effect_type == "cohen_d"){
     # Cohen's d
-    analysis_res <- vapply(effect_samples,
-                          FUN = function(effect_target)
-                            do.call(retrospective_cohen,
-                                    c(arguments,
-                                      effect_target = effect_target)),
-                          FUN.VALUE = list(power = 0, typeM = 0, typeS = 0))
+    analysis_res <- do.call(my_lapply, args = list(
+      X = effect_samples, FUN = function(effect_target)
+        do.call(retrospective_cohen,
+                c(arguments, effect_target = effect_target))))
+
 
   } else if (effect_type == "correlation"){
     # Correlation
-    analysis_res <- vapply(effect_samples,
-                          FUN = function(effect_target)
-                            do.call(retrospective_correlation,
-                                    c(arguments,
-                                      effect_target = effect_target)),
-                          FUN.VALUE = list(power = 0, typeM = 0, typeS = 0))
+    analysis_res <- do.call(my_lapply, args = list(
+      X = effect_samples, FUN = function(effect_target)
+        do.call(retrospective_correlation,
+                c(arguments, effect_target = effect_target))))
   }
 
-  analysis_res <- list2data(analysis_res)
+  analysis_res <- do.call(rbind, analysis_res)
 
   return(analysis_res)
 

@@ -72,7 +72,7 @@ Given the hypothetical population effect size and the study sample size, the fun
 Consider a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is *&rho;* = .25. To evaluate the inferential risks related to the study we use the function `retrospective()`.
 
 ```{r retrospective,}
-retrospective(effect_size = .25, sample_n1 = 30,
+retrospective(effect_size = .25, sample_n1 = 30, 
               test_method = "pearson", seed = 2020)
 ```
 

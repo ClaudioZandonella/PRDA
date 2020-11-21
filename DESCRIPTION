@@ -47,6 +47,7 @@ LinkingTo:
     Rcpp, RcppArmadillo
 Imports:
     MASS,
+    pbapply,
     Rcpp
 URL: https://claudiozandonella.github.io/PRDA/, https://github.com/ClaudioZandonella/PRDA
 BugReports: https://github.com/ClaudioZandonella/PRDA/issues
