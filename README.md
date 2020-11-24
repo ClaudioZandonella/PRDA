@@ -177,7 +177,7 @@ project, you agree to abide by its terms.
 To propose a new feature or to report a bug, please open an issue on
 [GitHub](https://github.com/ClaudioZandonella/PRDA/issues). See
 [Community
-guidelines](https://github.com/ClaudioZandonella/PRDA/CONTRIBUTING.md).
+guidelines](https://github.com/ClaudioZandonella/PRDA/blob/master/CONTRIBUTING.md).
 
 #### Future Plans
 
