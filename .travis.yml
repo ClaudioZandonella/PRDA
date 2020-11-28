@@ -4,7 +4,6 @@ language: R
 
 jobs:
   include:
-
     - name: "Linux R release" # Linux R release
       os: linux
       language: R
@@ -49,7 +48,6 @@ jobs:
         - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
 
    - name: "macOS R develop"      # MacOS R develop
-
       os: osx
       language: R
       r: devel
