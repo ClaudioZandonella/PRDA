@@ -7,6 +7,10 @@ jobs:
     - name: "Linux"
       os: linux
       language: R
+      #R-versions release and devel
+      r:
+        - release
+        - devel
       cache:
         directories:
           - /home/travis/.linuxbrew
@@ -16,6 +20,10 @@ jobs:
     - name: "macOS"
       os: osx
       language: R
+      #R-versions release and devel
+      r:
+        - release
+        - devel
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes'
       env:

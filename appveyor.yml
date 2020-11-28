@@ -18,6 +18,9 @@ environment:
     WARNINGS_ARE_ERRORS: 0
     USE_RTOOLS: true
     NOT_CRAN: true
+    R_VERSION:
+      - release
+      - devel
   # env vars that may need to be set, at least temporarily, from time to time
   # see https://github.com/krlmlr/r-appveyor#readme for details
   # USE_RTOOLS: true
