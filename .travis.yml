@@ -14,6 +14,16 @@ jobs:
           - $HOME/.local/share/renv # global renv cache in linux (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
 
+    - name: "Linux R devel" # Linux R release
+      os: linux
+      language: R
+      r: devel
+      cache:
+        directories:
+          - /home/travis/.linuxbrew
+          - $HOME/.local/share/renv # global renv cache in linux (not used)
+          - $TRAVIS_BUILD_DIR/renv/library # local renv cache
+
     - name: "macOS R release"       # MacOS R release
       os: osx
       language: R
