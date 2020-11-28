@@ -124,8 +124,8 @@ A BibTeX entry for LaTeX users is
 @Misc{,
     author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
                     Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
-    title        = {{PRDA: : Prospective and Retrospective Design 
-                   Analysis}},
+    title        = {PRDA: Prospective and Retrospective Design 
+                   Analysis},
     year         = 2020,
     publisher    = {Zenodo},
     version      = {v1.0.0.900},
