@@ -9,11 +9,11 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/develop)
+status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=master&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/master)
 [![Travis build
-status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=develop)](https://travis-ci.org/ClaudioZandonella/PRDA)
+status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/develop)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master)
 [![DOI](https://zenodo.org/badge/212573857.svg)](https://zenodo.org/badge/latestdoi/212573857)
 
 <hr>
@@ -47,12 +47,12 @@ All the documentation is available at
 <!-- And the development version from [GitHub](https://github.com/) with: -->
 
 You can install the development version from
-[GitHub](https://github.com/ClaudioZandonella/PRDA/tree/develop) with:
+[GitHub](https://github.com/ClaudioZandonella/PRDA/tree/master) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ClaudioZandonella/PRDA",
-                         ref = "develop", build_vignettes = TRUE)
+                         build_vignettes = TRUE)
 ```
 
 ## The Package
@@ -177,7 +177,7 @@ project, you agree to abide by its terms.
 To propose a new feature or to report a bug, please open an issue on
 [GitHub](https://github.com/ClaudioZandonella/PRDA/issues). See
 [Community
-guidelines](https://github.com/ClaudioZandonella/PRDA/blob/develop/CONTRIBUTING.md).
+guidelines](https://github.com/ClaudioZandonella/PRDA/blob/master/CONTRIBUTING.md).
 
 #### Future Plans
 
