@@ -190,7 +190,7 @@ To cite {PRDA} in publications use:
 
 Zandonella Callegher, C., Pastore, M., Andreella, A., Vesely, A.,
 Toffalini, E., Bertoldo, G., & Altoè G. (2020). PRDA: Prospective and
-Retrospective Design Analysis (Version 1.0.0.900). Zenodo.
+Retrospective Design Analysis (Version 1.0.0). Zenodo.
 <https://doi.org/10.5281/zenodo.4044214>
 
 A BibTeX entry for LaTeX users is
@@ -202,7 +202,7 @@ A BibTeX entry for LaTeX users is
                        Analysis},
         year         = 2020,
         publisher    = {Zenodo},
-        version      = {1.0.0.900},
+        version      = {1.0.0},
         doi          = {10.5281/zenodo.4044214},
         url          = {https://doi.org/10.5281/zenodo.4044214}
       }
