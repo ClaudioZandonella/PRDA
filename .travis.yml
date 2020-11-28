@@ -4,26 +4,34 @@ language: R
 
 jobs:
   include:
-    - name: "Linux"
+      # Linux R release
+    - name: "Linux R release"
       os: linux
       language: R
-      #R-versions release and devel
-      r:
-        - release
-        - devel
+      r: release
       cache:
         directories:
           - /home/travis/.linuxbrew
           - $HOME/.local/share/renv # global renv cache in linux (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
 
-    - name: "macOS"
+      # Linux R develop
+    - name: "Linux R develop"
+      os: linux
+      language: R
+      r: devel
+      cache:
+        directories:
+          - /home/travis/.linuxbrew
+          - $HOME/.local/share/renv # global renv cache in linux (not used)
+          - $TRAVIS_BUILD_DIR/renv/library # local renv cache
+
+
+      # MacOS R release
+    - name: "macOS R release"
       os: osx
       language: R
-      #R-versions release and devel
-      r:
-        - release
-        - devel
+      r: release
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes'
       env:
@@ -42,6 +50,32 @@ jobs:
       before_cache:
         - brew cleanup
         - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
+
+     # MacOS R develop
+   - name: "macOS R develop"
+      os: osx
+      language: R
+      r: devel
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes'
+      env:
+        - RENV_PATHS_ROOT="$HOME/renv/cache"
+      before_install:
+        - brew update
+        # - brew install ccache
+      cache:
+        ccache: true
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - /usr/local/Homebrew
+          - /usr/local/lib/R
+          - $RENV_PATHS_ROOT # global renv cache in MacOS (not used)
+          - $TRAVIS_BUILD_DIR/renv/library # local renv cache
+      before_cache:
+        - brew cleanup
+        - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
+
+
 
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
