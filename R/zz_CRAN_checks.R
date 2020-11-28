@@ -22,7 +22,8 @@
 # devtools::check()
 # devtools::check(vignettes = FALSE)
 # devtools::check_win_devel(email= "claudiozandonella@gmail.com")
-
+# devtools::check_win_release(email= "claudiozandonella@gmail.com")
+# devtools::release()
 
 #----    Goodpractice    ----
 
