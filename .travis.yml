@@ -4,8 +4,8 @@ language: R
 
 jobs:
   include:
-      # Linux R release
-    - name: "Linux R release"
+
+    - name: "Linux R release" # Linux R release
       os: linux
       language: R
       r: release
@@ -15,8 +15,7 @@ jobs:
           - $HOME/.local/share/renv # global renv cache in linux (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
 
-      # Linux R develop
-    - name: "Linux R develop"
+    - name: "Linux R develop" # Linux R develop
       os: linux
       language: R
       r: devel
@@ -26,9 +25,7 @@ jobs:
           - $HOME/.local/share/renv # global renv cache in linux (not used)
           - $TRAVIS_BUILD_DIR/renv/library # local renv cache
 
-
-      # MacOS R release
-    - name: "macOS R release"
+    - name: "macOS R release"       # MacOS R release
       os: osx
       language: R
       r: release
@@ -51,8 +48,8 @@ jobs:
         - brew cleanup
         - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
 
-     # MacOS R develop
-   - name: "macOS R develop"
+   - name: "macOS R develop"      # MacOS R develop
+
       os: osx
       language: R
       r: devel
