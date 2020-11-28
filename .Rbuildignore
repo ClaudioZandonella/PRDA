@@ -39,3 +39,4 @@
 ^appveyor\.yml$
 ^\.covrignore$
 
+^cran-comments\.md$

@@ -47,12 +47,12 @@ All the documentation is available at
 <!-- And the development version from [GitHub](https://github.com/) with: -->
 
 You can install the development version from
-[GitHub](https://github.com/ClaudioZandonella/PRDA/tree/develop) with:
+[GitHub](https://github.com/ClaudioZandonella/PRDA/tree/master) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ClaudioZandonella/PRDA",
-                         ref = "develop", build_vignettes = TRUE)
+                         build_vignettes = TRUE)
 ```
 
 ## The Package
@@ -198,8 +198,8 @@ A BibTeX entry for LaTeX users is
     @Misc{,
         author       = {Zandonella Callegher, Claudio and Pastore, Massimiliano and Andreella, Angela and 
                         Vesely, Anna and Toffalini, Enrico and Bertoldo, Giulia and Altoè, Gianmarco},
-        title        = {{PRDA: : Prospective and Retrospective Design 
-                       Analysis}},
+        title        = {PRDA: Prospective and Retrospective Design 
+                       Analysis},
         year         = 2020,
         publisher    = {Zenodo},
         version      = {v1.0.0.900},
