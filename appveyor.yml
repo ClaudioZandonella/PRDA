@@ -19,10 +19,10 @@ environment:
     USE_RTOOLS: true
     NOT_CRAN: true
 
-    matrix:
-    - R_VERSION: release
+  matrix:
+  - R_VERSION: release
 
-    - R_VERSION: devel
+  - R_VERSION: devel
 
   # env vars that may need to be set, at least temporarily, from time to time
   # see https://github.com/krlmlr/r-appveyor#readme for details
