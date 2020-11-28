@@ -1,6 +1,6 @@
 Package: PRDA
 Title: Conduct a Prospective or Retrospective Design Analysis
-Version: 1.0.0.9100
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Claudio",
              family = "Zandonella Callegher",
