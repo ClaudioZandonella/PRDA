@@ -39,9 +39,4 @@ This is my first submission.
 
 The encoding is UTF-8. In the first case the surname is Altoè and is correctly displayed in all vignettes and documentation. In the other cases names and words are correctly spelled.
 
-> Problems when formatting CITATION entries:
->  x:1: unexpected '}'
-
-In the citation file my surname is enclosed in brackets "{Zandonella Callegher}" to ensure the correct use in bib files.
-
 
