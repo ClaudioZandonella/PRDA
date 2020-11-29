@@ -38,9 +38,11 @@ Authors@R:
              email = "gianmarco.altoe@unipd.it",
              comment = c(ORCID = "0000-0003-1154-9528")))
 Description: An implementation of the "Design Analysis" proposed by 
-    Gelman and Carlin (2014). It combines the evaluation of Power-Analysis 
-    with other inferential-risks as Type-M error (i.e. Magnitude) and Type-S
-    error (i.e. Sign). See also Altoè et al. (2020) and Bertoldo et al. (2020).
+    Gelman and Carlin (2014) <doi:10.1177/1745691614551642>. It combines 
+    the evaluation of Power-Analysis with other inferential-risks as 
+    Type-M error (i.e. Magnitude) and Type-S error (i.e. Sign). See also
+    Altoè et al. (2020) <doi:10.3389/fpsyg.2019.02893> and 
+    Bertoldo et al. (2020) <doi:10.31234/osf.io/q9f86>.
 Depends: 
     R (>= 3.5.0)
 Suggests:
