@@ -1,3 +1,12 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Added doi reference to citations in the DESCRIPTION file.
+
+* Solved the problem of CITATION entries.
+
+
 ## Test environments
 * Mac OS X 10.13 (on travis-ci):
   - release R 4.0.3
