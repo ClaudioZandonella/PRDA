@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9100</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -141,13 +141,12 @@
 <h3 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h3>
 <p>To install the github version type in R:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># If devtools is not installed yet: </span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># If devtools is not installed yet: </span>
 <span class="co"># install.packages( "devtools" )  </span>
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"CaludioZandonella/PRDA"</span>,
-                         build_vignettes = <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDA">PRDA</a></span>)
-</pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"CaludioZandonella/PRDA"</span>,
+                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://claudiozandonella.github.io/PRDA/">PRDA</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="functions" class="section level3">
 <h3 class="hasAnchor">
@@ -172,9 +171,10 @@
 <h3 class="hasAnchor">
 <a href="#retrospective-design-analysis" class="anchor"></a>Retrospective design analysis</h3>
 <p>The function <code><a href="../reference/retrospective.html">retrospective()</a></code> can be used to evaluate the inferential risks associated with the study.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.25</span>, sample_n1 = <span class="fl">13</span>, 
-              test_method = <span class="st">"pearson"</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span> <span class="co"># set seed to make results reproducible</span>
+
+<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, sample_n1 <span class="op">=</span> <span class="fl">13</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -188,8 +188,7 @@
 <span class="co">#&gt;    power   typeM   typeS</span>
 <span class="co">#&gt;    0.127   2.583   0.028</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.553</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.553</span></code></pre></div>
 <p>In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% probability of obtaining a statistically significant result in the opposite direction.</p>
 <p>To know more about function arguments and examples see the function documentation <code><a href="../reference/retrospective.html">?retrospective</a></code> and <a href="retrospective.html"><code>vignette("retrospective")</code></a>.</p>
 </div>
@@ -197,9 +196,9 @@
 <h3 class="hasAnchor">
 <a href="#prospective-design-analysis" class="anchor"></a>Prospective design analysis</h3>
 <p>Considering the previous results, researchers might consider planning a replication study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.8</span>, test_method = <span class="st">"pearson"</span>, 
-            display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, power <span class="op">=</span> <span class="fl">.8</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span>, 
+            display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -211,10 +210,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.807   1.107   0    </span>
+<span class="co">#&gt;    0.807   1.111   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.175</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.175</span></code></pre></div>
 <p>In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is <span class="math inline">\(n = 126\)</span>, the associated Type M error is around 1.10 and the Type S error is approximately 0.</p>
 <p>To know more about function arguments and examples see the function documentation <code><a href="../reference/prospective.html">?prospective</a></code> and <a href="prospective.html"><code>vignette("prospective")</code></a>.</p>
 </div>
@@ -236,7 +234,7 @@
 <p>Gelman, Andrew, and John Carlin. 2014. “Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors.” <em>Perspectives on Psychological Science</em> 9 (6): 641–51. <a href="https://doi.org/10.1177/1745691614551642">https://doi.org/10.1177/1745691614551642</a>.</p>
 </div>
 <div id="ref-gelman_hill_vehtari_2020">
-<p>Gelman, Andrew, Jennifer Hill, and Aki Vehtari. 2020. <em>Regression and Other Stories</em>. Analytical Methods for Social Research. Cambridge: Cambridge University Press. <a href="https://doi.org/10.1017/9781139161879">https://doi.org/10.1017/9781139161879</a>.</p>
+<p>Gelman, Andrew, Jennifer Hill, and Aki Vehtari. 2020. <em>Regression and Other Stories</em>. Analytical Methods for Social Research. Cambridge: Cambridge University Press.</p>
 </div>
 <div id="ref-goodmanUsePredictedConfidence1994">
 <p>Goodman, Steven N. 1994. “The Use of Predicted Confidence Intervals When Planning Experiments and the Misuse of Power When Interpreting Results.” <em>Annals of Internal Medicine</em> 121 (3): 200. <a href="https://doi.org/10.7326/0003-4819-121-3-199408010-00008">https://doi.org/10.7326/0003-4819-121-3-199408010-00008</a>.</p>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9100</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -95,11 +95,10 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDA">PRDA</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://claudiozandonella.github.io/PRDA/">PRDA</a></span><span class="op">)</span></code></pre></div>
 <p>Given the hypothetical population effect size and the study sample size, the function <code><a href="../reference/retrospective.html">retrospective()</a></code> performs a retrospective design analysis. Retrospective design analysis allows to evaluate the inferential risks associated with a study design when the data have already been collected. Function arguments are:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">retrospective</span>(effect_size, sample_n1, <span class="dt">sample_n2 =</span> <span class="ot">NULL</span>,</span>
 <span id="cb2-2"><a href="#cb2-2"></a>              <span class="dt">test_method =</span> <span class="kw">c</span>(<span class="st">"pearson"</span>, <span class="st">"two_sample"</span>, <span class="st">"welch"</span>,</span>
@@ -107,7 +106,7 @@
 <span id="cb2-4"><a href="#cb2-4"></a>              <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">"two_sided"</span>,<span class="st">"less"</span>,<span class="st">"greater"</span>),</span>
 <span id="cb2-5"><a href="#cb2-5"></a>              <span class="dt">sig_level =</span> <span class="fl">.05</span>, <span class="dt">ratio_sd =</span> <span class="dv">1</span>, <span class="dt">B =</span> <span class="fl">1e4</span>, </span>
 <span id="cb2-6"><a href="#cb2-6"></a>              <span class="dt">tl =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">tu =</span> <span class="ot">Inf</span>, <span class="dt">B_effect =</span> <span class="fl">1e3</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>              <span class="dt">display_message =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7"></a>              <span class="dt">display_message =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>Complete arguments description is provided in the function documentation <code><a href="../reference/retrospective.html">?retrospective</a></code>. In the following sections, instead, different examples are presented. For further details about design analysis see <span class="citation">Altoè et al. (2020)</span> and <span class="citation">Bertoldo, Zandonella Callegher, and Altoè (2020)</span>.</p>
 <div id="retrospective-design-analysis-for-correlation" class="section level2">
 <h2 class="hasAnchor">
@@ -116,10 +115,11 @@
 <div id="example-1-pearsons-correlation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-1-pearsons-correlation" class="anchor"></a>Example 1: Pearson’s correlation</h3>
-<p>Consider a study that evaluates the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is <span class="math inline">\(\rho = .25\)</span>. We can evaluate the inferential risks related to the present study design setting the argument <code>test_method = "pearson"</code>. The <code>seed</code> argument is used to obtain reproducible results.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.25</span>, sample_n1 = <span class="fl">30</span>, 
-              test_method = <span class="st">"pearson"</span>, seed = <span class="fl">2020</span>)
+<p>Consider a study that evaluates the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is <span class="math inline">\(\rho = .25\)</span>. We can evaluate the inferential risks related to the present study design setting the argument <code>test_method = "pearson"</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span> <span class="co"># set seed to make results reproducible</span>
+
+<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, sample_n1 <span class="op">=</span> <span class="fl">30</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -133,8 +133,7 @@
 <span class="co">#&gt;    power   typeM   typeS</span>
 <span class="co">#&gt;    0.27    1.826   0.003</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span></code></pre></div>
 <p>In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(\rho = \pm.36\)</span>. Note that it is not necessary to specify <code>sample_2</code> argument in the case of correlation and tests were conducted considering <code>"two_sided"</code> alternative hypothesis with a significance level of .05 (the default settings).</p>
 </div>
 </div>
@@ -179,9 +178,9 @@
 <h3 class="hasAnchor">
 <a href="#example-2-paired-t-test" class="anchor"></a>Example 2: Paired <em>t</em>-test</h3>
 <p>Consider a study where the same group (<span class="math inline">\(n = 25\)</span>) was measured twice (e.g., pre- and post-test). Knowing from the literature that we would expect an effect size of <span class="math inline">\(d = .35\)</span>, which are the inferential risks related to the present study design? We can use the function <code><a href="../reference/retrospective.html">retrospective()</a></code> specifying the corresponding arguments. We use the option <code>test_method = one_sample</code> for paired <em>t</em>-test and set the same value for <code>sample_n1</code> and <code>sample_n2</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.35</span>, sample_n1 = <span class="fl">25</span>, sample_n2 = <span class="fl">25</span>,
-              test_method = <span class="st">"paired"</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, sample_n1 <span class="op">=</span> <span class="fl">25</span>, sample_n2 <span class="op">=</span> <span class="fl">25</span>,
+              test_method <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -193,20 +192,19 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.391   1.589   0.001</span>
+<span class="co">#&gt;    0.392   1.594   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  ± 0.413</span>
-</pre></div>
-<p>In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(d = \pm 0.413\)</span>.</p>
+<span class="co">#&gt; Critical value(s): cohen_d  =  ± 0.413</span></code></pre></div>
+<p>In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and the Type S error is approximately 0. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(d = \pm 0.413\)</span>.</p>
 </div>
 <div id="example-3-two-sample-t-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-3-two-sample-t-test" class="anchor"></a>Example 3: Two-sample <em>t</em>-test</h3>
 <p>Consider a case where two groups (e.g., treatment and control group) with respectively 25 and 35 subjects were compared. Again, we hypothesize an effect size of <span class="math inline">\(d = .35\)</span>, but this time we specify a one-sided alternative hypothesis and a significance level of .10. We can do that using respectively the arguments <code>alternative</code> and <code>sig_level</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.35</span>, sample_n1 = <span class="fl">25</span>, sample_n2 = <span class="fl">35</span>,
-              test_method = <span class="st">"two_sample"</span>, alternative = <span class="st">"great"</span>, 
-              sig_level = <span class="fl">.10</span>, B = <span class="fl">1e5</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, sample_n1 <span class="op">=</span> <span class="fl">25</span>, sample_n2 <span class="op">=</span> <span class="fl">35</span>,
+              test_method <span class="op">=</span> <span class="st">"two_sample"</span>, alternative <span class="op">=</span> <span class="st">"great"</span>, 
+              sig_level <span class="op">=</span> <span class="fl">.10</span>, B <span class="op">=</span> <span class="fl">1e5</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -218,20 +216,19 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.518   1.579   0    </span>
+<span class="co">#&gt;    0.52    1.579   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  0.339</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): cohen_d  =  0.339</span></code></pre></div>
 <p>The option <code>test_method = "two_sample"</code> is used to consider a two-sample <em>t</em>-test and <code>B = 1e5</code> increases the number of replication for more accurate results. We obtained a statistical power of around 50% that is associated with a Type M error of almost 1.60. Note that in the case of one-sided tests, the type S error will be always 0 or 1 depending on whether the hypothesized effect is coherent with the alternative hypothesis. Finally, the critical value is <span class="math inline">\(d = .34\)</span>.</p>
 </div>
 <div id="example-4-welchs-t-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-4-welchs-t-test" class="anchor"></a>Example 4: Welch’s <em>t</em>-test</h3>
 <p>Consider again the previous example, but this time we do not assume homogeneity of variance between the two groups. We suppose, instead, that the ratio between the standard deviation of the first group and of the second group is 1.5. In this case the appropriate test is the Welch’s <em>t</em>-test. We set the option <code>test_method = "welch"</code> and specify the argument <code>ratio_sd</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fl">.35</span>, sample_n1 = <span class="fl">25</span>, sample_n2 = <span class="fl">35</span>,
-              test_method = <span class="st">"welch"</span>, ratio_sd = <span class="fl">1.5</span>, alternative = <span class="st">"great"</span>, 
-              sig_level = <span class="fl">.10</span>, B = <span class="fl">1e5</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, sample_n1 <span class="op">=</span> <span class="fl">25</span>, sample_n2 <span class="op">=</span> <span class="fl">35</span>,
+              test_method <span class="op">=</span> <span class="st">"welch"</span>, ratio_sd <span class="op">=</span> <span class="fl">1.5</span>, alternative <span class="op">=</span> <span class="st">"great"</span>, 
+              sig_level <span class="op">=</span> <span class="fl">.10</span>, B <span class="op">=</span> <span class="fl">1e5</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -243,10 +240,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.5     1.648   0    </span>
+<span class="co">#&gt;    0.502   1.647   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  0.352</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): cohen_d  =  0.352</span></code></pre></div>
 <p>We obtained a statistical power of 50%, which is associated with a Type M error of almost 1.65, and the critical value is <span class="math inline">\(d = .35\)</span>. Results are really close to the previous ones with a slightly higher Type M error.</p>
 </div>
 </div>
@@ -261,17 +257,17 @@
 <h3 class="hasAnchor">
 <a href="#example-5-effect-size-distribution" class="anchor"></a>Example 5: Effect size distribution</h3>
 <p>Consider the same scenario as in the correlation example (Example 1). This time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between .15 and .45. The argument <code>display_message = TRUE</code> (default) allows to print the progress bar. Note that the progress bar is available only when <code>effect_size</code> is defined as a function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fu">function</span>(<span class="kw">n</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span>), sample_n1 = <span class="fl">30</span>,
-              test_method = <span class="st">"pearson"</span>, tl = <span class="fl">.15</span>, tu = <span class="fl">.45</span>, B_effect = <span class="fl">1e3</span>, 
-              B = <span class="fl">1e3</span>, display_message = <span class="fl">TRUE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span><span class="op">)</span>, sample_n1 <span class="op">=</span> <span class="fl">30</span>,
+              test_method <span class="op">=</span> <span class="st">"pearson"</span>, tl <span class="op">=</span> <span class="fl">.15</span>, tu <span class="op">=</span> <span class="fl">.45</span>, B_effect <span class="op">=</span> <span class="fl">1e3</span>, 
+              B <span class="op">=</span> <span class="fl">1e3</span>, display_message <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Truncation could require long computational time</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Hypothesized effect:  rho ~ rnorm(n, 0.3, 0.1) [tl =  0.15 ; tu = 0.45 ]</span>
 <span class="co">#&gt;    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. </span>
-<span class="co">#&gt;    1000       0.15   0.24      0.294    0.297   0.352     0.448</span>
+<span class="co">#&gt;    1000       0.15   0.245     0.304    0.303   0.362     0.449</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Study characteristics:</span>
 <span class="co">#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df</span>
@@ -279,12 +275,11 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. </span>
-<span class="co">#&gt; power   0.106   0.250     0.3585   0.378520   0.496     0.741</span>
-<span class="co">#&gt; typeM   1.140   1.363     1.5825   1.668918   1.892     2.935</span>
-<span class="co">#&gt; typeS   0.000   0.000     0.0000   0.002595   0.003     0.077</span>
+<span class="co">#&gt; power   0.117   0.26100   0.377    0.393333   0.5180    0.740</span>
+<span class="co">#&gt; typeM   1.155   1.33475   1.534    1.647008   1.8605    2.945</span>
+<span class="co">#&gt; typeS   0.000   0.00000   0.000    0.002787   0.0030    0.059</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.361</span></code></pre></div>
 <p>We adjusted <code>B_effect</code> and <code>B</code> to find a good trade-off between computational times and results accuracy. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.</p>
 </div>
 </div>
@@ -306,52 +301,48 @@
 <code>retrospective_res</code> - a data frame with the results of the design analysis (i.e., <code>power</code>, <code>typeM</code>, and <code>typeS</code>).</li>
 </ul>
 <p>Output complete description is provided in the function help page <code><a href="../reference/retrospective.html">?retrospective</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">da_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(effect_size = <span class="fu">function</span>(<span class="kw">n</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span>), 
-                        sample_n1 = <span class="fl">30</span>, test_method = <span class="st">"pearson"</span>,
-                        tl = <span class="fl">.15</span>, tu = <span class="fl">.45</span>, B_effect = <span class="fl">1e3</span>, B = <span class="fl">1e3</span>, 
-                        display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">da_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span><span class="op">)</span>, 
+                        sample_n1 <span class="op">=</span> <span class="fl">30</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span>,
+                        tl <span class="op">=</span> <span class="fl">.15</span>, tu <span class="op">=</span> <span class="fl">.45</span>, B_effect <span class="op">=</span> <span class="fl">1e3</span>, B <span class="op">=</span> <span class="fl">1e3</span>, 
+                        display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Truncation could require long computational time</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">da_fit</span>, max.level = <span class="fl">1</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">da_fit</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 5</span>
 <span class="co">#&gt;  $ design_analysis  : chr "retrospective"</span>
 <span class="co">#&gt;  $ call_arguments   :List of 14</span>
 <span class="co">#&gt;  $ effect_info      :List of 6</span>
 <span class="co">#&gt;  $ test_info        :List of 7</span>
 <span class="co">#&gt;  $ retrospective_res:'data.frame':   1000 obs. of  3 variables:</span>
-<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "design_analysis" "list"</span>
-</pre></div>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "design_analysis" "list"</span></code></pre></div>
 <p>Note that the inferential risks associated to the <em>i</em> value of the vector <code>effect_samples</code> are reported in the <em>i</em> row of <code>retrospective_res</code> dataframe. Thus, we can simply add <code>effect_samples</code> as a new column of the dataframe.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">data_plot</span> <span class="op">&lt;-</span> <span class="kw">da_fit</span><span class="op">$</span><span class="kw">retrospective_res</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span>(effect = <span class="kw">da_fit</span><span class="op">$</span><span class="kw">effect_info</span><span class="op">$</span><span class="kw">effect_samples</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_plot</span> <span class="op">&lt;-</span> <span class="va">da_fit</span><span class="op">$</span><span class="va">retrospective_res</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>effect <span class="op">=</span> <span class="va">da_fit</span><span class="op">$</span><span class="va">effect_info</span><span class="op">$</span><span class="va">effect_samples</span><span class="op">)</span></code></pre></div>
 <p>Plotting the distribution of sampled effects, we can evaluate whether they accurately represent the intended distribution. If not, we could increase the number of sampled effects (<code>B_effect</code>).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data_plot</span>)<span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">effect</span>, y = <span class="kw">..density..</span>),
-                 col = <span class="st">"black"</span>, fill = <span class="st">"#00BFC4"</span>, alpha = <span class="fl">.8</span>,
-                 breaks=<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">.15</span>,<span class="fl">.45</span>,<span class="fl">.02</span>))<span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(breaks = <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">.1</span>,<span class="fl">.5</span>,<span class="fl">.05</span>), limits = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">.1</span>,<span class="fl">.5</span>))<span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(x = <span class="st">"Sampled Effects"</span>,
-       y = <span class="st">"Density"</span>)<span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data_plot</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">effect</span>, y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span>,
+                 col <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"#00BFC4"</span>, alpha <span class="op">=</span> <span class="fl">.8</span>,
+                 breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.15</span>,<span class="fl">.45</span>,<span class="fl">.02</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.5</span>,<span class="fl">.05</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sampled Effects"</span>,
+       y <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="retrospective_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
 <p>We can also plot the distributions of Power, Type M error, and Type S error.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">data_plot</span> <span class="op">%&gt;%</span>
-  <span class="fu">pivot_longer</span>(cols = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"power"</span>, <span class="st">"typeM"</span>, <span class="st">"typeS"</span>), 
-               names_to = <span class="st">"Criteria"</span>, values_to = <span class="st">"Value"</span>) <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span>(Criteria = <span class="fu">recode</span>(<span class="kw">Criteria</span>, power = <span class="st">"Power"</span>, typeM = <span class="st">"Type M"</span>,  typeS = <span class="st">"Type S"</span>)) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Value</span>, y = <span class="kw">..density..</span>, fill = <span class="kw">Criteria</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span>(col = <span class="st">"black"</span>, alpha = <span class="fl">.7</span>, bins = <span class="fl">15</span>) <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="kw">.</span><span class="op">~</span> <span class="kw">Criteria</span>, scales = <span class="st">"free"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(y = <span class="st">"Density"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"none"</span>) 
-</pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_plot</span> <span class="op">%&gt;%</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"power"</span>, <span class="st">"typeM"</span>, <span class="st">"typeS"</span><span class="op">)</span>, 
+               names_to <span class="op">=</span> <span class="st">"Criteria"</span>, values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>Criteria <span class="op">=</span> <span class="fu">recode</span><span class="op">(</span><span class="va">Criteria</span>, power <span class="op">=</span> <span class="st">"Power"</span>, typeM <span class="op">=</span> <span class="st">"Type M"</span>,  typeS <span class="op">=</span> <span class="st">"Type S"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Value</span>, y <span class="op">=</span> <span class="va">..density..</span>, fill <span class="op">=</span> <span class="va">Criteria</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">.7</span>, bins <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span> <span class="va">Criteria</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> </code></pre></div>
 <p><img src="retrospective_files/figure-html/unnamed-chunk-6-1.png" width="694.08"></p>
 <div id="references" class="section level3 unnumbered">
 <h3 class="hasAnchor">

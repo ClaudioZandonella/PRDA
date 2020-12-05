@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9100</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -95,20 +95,18 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://claudiozandonella.github.io/PRDA">PRDA</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://claudiozandonella.github.io/PRDA/">PRDA</a></span><span class="op">)</span></code></pre></div>
 <p>Given the hypothetical population effect size and the required power level, the function <code><a href="../reference/prospective.html">prospective()</a></code> performs a prospective design analysis. Prospective design analysis allows to define the sample size needed to obtain a required level of power computing also the associated inferential risks. Function arguments are:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/retrospective.html">retrospective</a></span>(<span class="kw">effect_size</span>, <span class="kw">power</span>, ratio_n = <span class="fl">1</span>,
-              test_method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"pearson"</span>, <span class="st">"two_sample"</span>, <span class="st">"welch"</span>,
-                                        <span class="st">"paired"</span>, <span class="st">"one_sample"</span>),
-              alternative = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"two_sided"</span>,<span class="st">"less"</span>,<span class="st">"greater"</span>),
-              sig_level = <span class="fl">.05</span>, ratio_sd = <span class="fl">1</span>, B = <span class="fl">1e4</span>,
-              tl = <span class="op">-</span><span class="fl">Inf</span>, tu = <span class="fl">Inf</span>, B_effect = <span class="fl">1e3</span>,
-              sample_range = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1000</span>), tol = <span class="fl">.01</span>,
-              display_message = <span class="fl">TRUE</span>, seed = <span class="kw">NULL</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span><span class="va">effect_size</span>, <span class="va">power</span>, ratio_n <span class="op">=</span> <span class="fl">1</span>,
+              test_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pearson"</span>, <span class="st">"two_sample"</span>, <span class="st">"welch"</span>,
+                                        <span class="st">"paired"</span>, <span class="st">"one_sample"</span><span class="op">)</span>,
+              alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>,<span class="st">"less"</span>,<span class="st">"greater"</span><span class="op">)</span>,
+              sig_level <span class="op">=</span> <span class="fl">.05</span>, ratio_sd <span class="op">=</span> <span class="fl">1</span>, B <span class="op">=</span> <span class="fl">1e4</span>,
+              tl <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>, tu <span class="op">=</span> <span class="cn">Inf</span>, B_effect <span class="op">=</span> <span class="fl">1e3</span>,
+              sample_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1000</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">.01</span>,
+              display_message <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Complete arguments description is provided in the function documentation <code><a href="../reference/prospective.html">?prospective</a></code>. In the following sections, instead, different examples are presented. For further details about design analysis see <span class="citation">Altoè et al. (2020)</span> and <span class="citation">Bertoldo, Zandonella Callegher, and Altoè (2020)</span>.</p>
 <div id="prospective-design-analysis-for-correlation" class="section level2">
 <h2 class="hasAnchor">
@@ -117,10 +115,12 @@
 <div id="example-1-pearsons-correlation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-1-pearsons-correlation" class="anchor"></a>Example 1: Pearson’s correlation</h3>
-<p>Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of <span class="math inline">\(\rho = .25\)</span>, which is the required sample size to obtain a power of 60%? We can use the function <code><a href="../reference/prospective.html">prospective()</a></code> setting the argument <code>test_method = "pearson"</code>. The <code>seed</code> argument is used to obtain reproducible results.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.25</span>, power = <span class="fl">.60</span>, test_method = <span class="st">"pearson"</span>,
-            display_message = <span class="fl">TRUE</span>, seed = <span class="fl">2020</span>)
+<p>Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of <span class="math inline">\(\rho = .25\)</span>, which is the required sample size to obtain a power of 60%? We can use the function <code><a href="../reference/prospective.html">prospective()</a></code> setting the argument <code>test_method = "pearson"</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span> <span class="co"># set seed to make results reproducible</span>
+
+<span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, power <span class="op">=</span> <span class="fl">.60</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span>,
+            display_message <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Evaluate n = 501</span>
 <span class="co">#&gt; Estimated power is 1</span>
 <span class="co">#&gt; </span>
@@ -157,8 +157,7 @@
 <span class="co">#&gt;    power   typeM   typeS</span>
 <span class="co">#&gt;    0.593   1.277   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.226</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.226</span></code></pre></div>
 <p>The default option <code>display_message = TRUE</code> prints the different steps to find the required sample size and the progress bar. Note that, however, the progress bar is available only when <code>effect_size</code> is defined as a function. In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 60% the required sample size is <span class="math inline">\(n = 76\)</span>, the associated Type M error is almost 1.30 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(\rho = \pm.226\)</span>. Note that correlation tests were conducted considering <code>"two_sided"</code> alternative hypothesis and a significance level of .05 (the default settings).</p>
 </div>
 </div>
@@ -201,9 +200,9 @@
 <h3 class="hasAnchor">
 <a href="#example-2-paired-t-test" class="anchor"></a>Example 2: Paired <em>t</em>-test</h3>
 <p>Imagine that we are planning a study where the same group is measured twice (e.g., pre- and post-test). Knowing from the literature that we expect an effect size of <span class="math inline">\(d = .35\)</span>, which is the required sample size to obtain a power of 80%? We can use the function <code><a href="../reference/prospective.html">prospective()</a></code> specifying the corresponding arguments. We use the option <code>test_method = one_sample</code> for paired <em>t</em>-test and set <code>ratio_n = 1</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.35</span>, power = <span class="fl">.8</span>, test_method = <span class="st">"paired"</span>,
-            ratio_n = <span class="fl">1</span>, display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, power <span class="op">=</span> <span class="fl">.8</span>, test_method <span class="op">=</span> <span class="st">"paired"</span>,
+            ratio_n <span class="op">=</span> <span class="fl">1</span>, display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -211,24 +210,23 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Study characteristics:</span>
 <span class="co">#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df</span>
-<span class="co">#&gt;    paired        68          68          two_sided     0.05        67</span>
+<span class="co">#&gt;    paired        66          66          two_sided     0.05        65</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.806   1.116   0    </span>
+<span class="co">#&gt;    0.798   1.124   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  ± 0.242</span>
-</pre></div>
-<p>To obtain a power of 80%, the required sample size is <span class="math inline">\(n=68\)</span>, the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(d = \pm 0.242\)</span>.</p>
+<span class="co">#&gt; Critical value(s): cohen_d  =  ± 0.246</span></code></pre></div>
+<p>To obtain a power of 80%, the required sample size is <span class="math inline">\(n=66\)</span>, the associated Type M error is around 1.10 and the Type S error is approximately 0. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are <span class="math inline">\(d = \pm 0.246\)</span>.</p>
 </div>
 <div id="example-3-two-sample-t-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-3-two-sample-t-test" class="anchor"></a>Example 3: Two-sample <em>t</em>-test</h3>
 <p>Imagine now the case where two groups (e.g., treatment and control group) will be compared. However, we know in advance that the sample size in the two groups will be different (e.g., the number of participants in the treatment group could be limited due to strict selecting criteria). We can define the ratio between the sample size in the first group and in the second group using the <code>ratio_n</code> argument. Again, we hypothesize an effect size of <span class="math inline">\(d = .35\)</span>, but this time we specify a one-sided alternative hypothesis and a significance level of .10. We can do that using respectively the arguments <code>alternative</code> and <code>sig_level</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.35</span>, power = <span class="fl">.80</span>, ratio_n = <span class="fl">.5</span>, 
-            test_method = <span class="st">"two_sample"</span>, alternative = <span class="st">"great"</span>, sig_level = <span class="fl">.10</span>, 
-            display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, power <span class="op">=</span> <span class="fl">.80</span>, ratio_n <span class="op">=</span> <span class="fl">.5</span>, 
+            test_method <span class="op">=</span> <span class="st">"two_sample"</span>, alternative <span class="op">=</span> <span class="st">"great"</span>, sig_level <span class="op">=</span> <span class="fl">.10</span>, 
+            display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -240,20 +238,19 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.792   1.165   0    </span>
+<span class="co">#&gt;    0.802   1.167   0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  0.213</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): cohen_d  =  0.213</span></code></pre></div>
 <p>The option <code>test_method = "two_sample"</code> is used to consider a two-sample <em>t</em>-test. To obtain a power of 80%, we would need at least 55 participants in the first group and 110 participants in the second group. The associated Type M error is almost 1.20 and the Type S error is approximately 0. Finally, the critical value is <span class="math inline">\(d = .213\)</span>.</p>
 </div>
 <div id="example-4-welchs-t-test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-4-welchs-t-test" class="anchor"></a>Example 4: Welch’s <em>t</em>-test</h3>
 <p>Consider again the previous example, but this time we do not assume homogeneity of variance between the two groups. We suppose, instead, that the ratio between the standard deviation of the first group and of the second group is 1.5. In this case the appropriate test is the Welch’s <em>t</em>-test. We set the option <code>test_method = "welch"</code> and specify the argument <code>ratio_sd</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fl">.35</span>, power = <span class="fl">.80</span>, ratio_n = <span class="fl">.5</span>, test_method = <span class="st">"welch"</span>,
-            ratio_sd = <span class="fl">1.5</span>, alternative = <span class="st">"great"</span>, sig_level = <span class="fl">.10</span>, 
-            display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.35</span>, power <span class="op">=</span> <span class="fl">.80</span>, ratio_n <span class="op">=</span> <span class="fl">.5</span>, test_method <span class="op">=</span> <span class="st">"welch"</span>,
+            ratio_sd <span class="op">=</span> <span class="fl">1.5</span>, alternative <span class="op">=</span> <span class="st">"great"</span>, sig_level <span class="op">=</span> <span class="fl">.10</span>, 
+            display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
@@ -265,10 +262,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;    power   typeM   typeS</span>
-<span class="co">#&gt;    0.795   1.177   0    </span>
+<span class="co">#&gt;    0.799   1.17    0    </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): cohen_d  =  0.212</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): cohen_d  =  0.212</span></code></pre></div>
 <p>Now, to obtain a power of 80%, we would need at least 63 participants in the first group and 126 participants in the second group. The associated Type M error is almost 1.20 and the Type S error is approximately 0. Finally, the critical value is <span class="math inline">\(d = .212\)</span>. Results are really close to the previous ones.</p>
 </div>
 </div>
@@ -281,30 +277,29 @@
 <h3 class="hasAnchor">
 <a href="#example-5-effect-size-distribution" class="anchor"></a>Example 5: Effect size distribution</h3>
 <p>Consider the same scenario as in the correlation example (Example 1). This time we define the hypothesized effect size according to a normal distribution with mean .30 and standard deviation .10. Moreover, to avoid unreasonable values we truncate the distribution between .15 and .45.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fu">function</span>(<span class="kw">n</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span>), power = <span class="fl">.60</span>, 
-            test_method = <span class="st">"pearson"</span>, tl = <span class="fl">.15</span>, tu = <span class="fl">.45</span>, B_effect = <span class="fl">500</span>, 
-            B = <span class="fl">500</span>, display_message = <span class="fl">FALSE</span>, seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">.60</span>, 
+            test_method <span class="op">=</span> <span class="st">"pearson"</span>, tl <span class="op">=</span> <span class="fl">.15</span>, tu <span class="op">=</span> <span class="fl">.45</span>, B_effect <span class="op">=</span> <span class="fl">500</span>, 
+            B <span class="op">=</span> <span class="fl">500</span>, display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Truncation could require long computational time</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Design Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Hypothesized effect:  rho ~ rnorm(n, 0.3, 0.1) [tl =  0.15 ; tu = 0.45 ]</span>
-<span class="co">#&gt;    n_effect   Min.    1st Qu.   Median   Mean    3rd Qu.   Max. </span>
-<span class="co">#&gt;    500        0.153   0.244     0.294    0.296   0.349     0.447</span>
+<span class="co">#&gt;    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. </span>
+<span class="co">#&gt;    500        0.15   0.244     0.303    0.301   0.356     0.448</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Study characteristics:</span>
 <span class="co">#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df</span>
-<span class="co">#&gt;    pearson       55          NULL        two_sided     0.05        53</span>
+<span class="co">#&gt;    pearson       52          NULL        two_sided     0.05        50</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Inferential risks:</span>
 <span class="co">#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. </span>
-<span class="co">#&gt; power   0.176   0.44200   0.5990   0.593028   0.75800   0.948</span>
-<span class="co">#&gt; typeM   1.018   1.14075   1.2615   1.337060   1.46125   2.195</span>
-<span class="co">#&gt; typeS   0.000   0.00000   0.0000   0.000352   0.00000   0.017</span>
+<span class="co">#&gt; power   0.160   0.42350   0.601    0.583848   0.7565    0.944</span>
+<span class="co">#&gt; typeM   1.016   1.14475   1.268    1.357738   1.4860    2.325</span>
+<span class="co">#&gt; typeS   0.000   0.00000   0.000    0.000322   0.0000    0.010</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Critical value(s): rho  =  ± 0.266</span>
-</pre></div>
+<span class="co">#&gt; Critical value(s): rho  =  ± 0.273</span></code></pre></div>
 <p>Note that we adjusted <code>B_effect</code> and <code>B</code> to find a good trade-off between computational times and results accuracy. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.</p>
 </div>
 </div>
@@ -326,22 +321,20 @@
 <code>prospective_res</code> - a data frame with the results of the design analysis (i.e., <code>power</code>, <code>typeM</code>, and <code>typeS</code>).</li>
 </ul>
 <p>Output complete description is provided in the function help page <code><a href="../reference/prospective.html">?prospective</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">da_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prospective.html">prospective</a></span>(effect_size = <span class="fu">function</span>(<span class="kw">n</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span>), power = <span class="fl">.60</span>,
-                      test_method = <span class="st">"pearson"</span>, tl = <span class="fl">.15</span>, tu = <span class="fl">.45</span>, 
-                      B_effect = <span class="fl">500</span>, B = <span class="fl">500</span>, display_message = <span class="fl">FALSE</span>, 
-                      seed = <span class="fl">2020</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">da_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">.3</span>, <span class="fl">.1</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">.60</span>,
+                      test_method <span class="op">=</span> <span class="st">"pearson"</span>, tl <span class="op">=</span> <span class="fl">.15</span>, tu <span class="op">=</span> <span class="fl">.45</span>, 
+                      B_effect <span class="op">=</span> <span class="fl">500</span>, B <span class="op">=</span> <span class="fl">500</span>, display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Truncation could require long computational time</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">da_fit</span>, max.level = <span class="fl">1</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">da_fit</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 5</span>
 <span class="co">#&gt;  $ design_analysis: chr "prospective"</span>
 <span class="co">#&gt;  $ call_arguments :List of 17</span>
 <span class="co">#&gt;  $ effect_info    :List of 6</span>
 <span class="co">#&gt;  $ test_info      :List of 7</span>
 <span class="co">#&gt;  $ prospective_res:'data.frame': 500 obs. of  3 variables:</span>
-<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "design_analysis" "list"</span>
-</pre></div>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "design_analysis" "list"</span></code></pre></div>
 <p>Similarly to the examples provided in <a href="retrospective.html"><code>vignette("retrospective")</code></a>, results can be used to create the plots according to your needs. See <a href="retrospective.html"><code>vignette("retrospective")</code></a> for further details.</p>
 <div id="references" class="section level3 unnumbered">
 <h3 class="hasAnchor">

@@ -79,7 +79,7 @@ significant)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9100</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -149,21 +149,20 @@ effect value (i.e., the minimum absolute effect size value that would result
 significant).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>retrospective</span>(
-  <span class='kw'>effect_size</span>,
-  <span class='kw'>sample_n1</span>,
-  sample_n2 = <span class='kw'>NULL</span>,
-  test_method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pearson"</span>, <span class='st'>"two_sample"</span>, <span class='st'>"welch"</span>, <span class='st'>"paired"</span>, <span class='st'>"one_sample"</span>),
-  alternative = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"two_sided"</span>, <span class='st'>"less"</span>, <span class='st'>"greater"</span>),
-  sig_level = <span class='fl'>0.05</span>,
-  ratio_sd = <span class='fl'>1</span>,
-  B = <span class='fl'>10000</span>,
-  tl = <span class='op'>-</span><span class='fl'>Inf</span>,
-  tu = <span class='fl'>Inf</span>,
-  B_effect = <span class='fl'>1000</span>,
-  display_message = <span class='fl'>TRUE</span>,
-  seed = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>retrospective</span><span class='op'>(</span>
+  <span class='va'>effect_size</span>,
+  <span class='va'>sample_n1</span>,
+  sample_n2 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  test_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pearson"</span>, <span class='st'>"two_sample"</span>, <span class='st'>"welch"</span>, <span class='st'>"paired"</span>, <span class='st'>"one_sample"</span><span class='op'>)</span>,
+  alternative <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"two_sided"</span>, <span class='st'>"less"</span>, <span class='st'>"greater"</span><span class='op'>)</span>,
+  sig_level <span class='op'>=</span> <span class='fl'>0.05</span>,
+  ratio_sd <span class='op'>=</span> <span class='fl'>1</span>,
+  B <span class='op'>=</span> <span class='fl'>10000</span>,
+  tl <span class='op'>=</span> <span class='op'>-</span><span class='cn'>Inf</span>,
+  tu <span class='op'>=</span> <span class='cn'>Inf</span>,
+  B_effect <span class='op'>=</span> <span class='fl'>1000</span>,
+  display_message <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,11 +239,6 @@ obtain more stable results.</p></td>
       <td><p>a logical variable indicating whether to display or not
 the progress bar. Not that this applies only when <code>effect_size</code> is
 defined as a function.</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.</p></td>
     </tr>
     </table>
 
@@ -349,8 +343,7 @@ Set the seed to obtain reproducible results.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Pearson's correlation</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fl'>.3</span>, sample_n1 = <span class='fl'>25</span>,
-              test_method = <span class='st'>"pearson"</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, test_method <span class='op'>=</span> <span class='st'>"pearson"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -362,12 +355,12 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.312   1.675   0.001
+#&gt;    0.313   1.674   0.001
 #&gt; 
 #&gt; Critical value(s): rho  =  ± 0.396</div><div class='input'>
 <span class='co'># Two-sample t-test</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fl'>.3</span>, sample_n1 = <span class='fl'>25</span>, sample_n2 = <span class='fl'>35</span>,
-              test_method = <span class='st'>"two_sample"</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='fl'>35</span>,
+              test_method <span class='op'>=</span> <span class='st'>"two_sample"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -379,11 +372,11 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.198   2.226   0.003
+#&gt;    0.212   2.236   0.004
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.524</div><div class='input'><span class='co'># Welch t-test</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fl'>.3</span>, sample_n1 = <span class='fl'>25</span>, sample_n2 = <span class='fl'>35</span>,
-              test_method = <span class='st'>"welch"</span>, ratio_sd = <span class='fl'>1.5</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='fl'>35</span>,
+              test_method <span class='op'>=</span> <span class='st'>"welch"</span>, ratio_sd <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -395,11 +388,11 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.186   2.342   0.005
+#&gt;    0.198   2.358   0.006
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.546</div><div class='input'><span class='co'># Paired t-test</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fl'>.3</span>, sample_n1 = <span class='fl'>25</span>, sample_n2 = <span class='fl'>25</span>,
-              test_method = <span class='st'>"paired"</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='fl'>25</span>,
+              test_method <span class='op'>=</span> <span class='st'>"paired"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -411,11 +404,11 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.304   1.805   0.001
+#&gt;    0.3     1.802   0.001
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'><span class='co'># One-sample t-test</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fl'>.3</span>, sample_n1 = <span class='fl'>25</span>, sample_n2 = <span class='kw'>NULL</span>,
-              test_method = <span class='st'>"one_sample"</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='cn'>NULL</span>,
+              test_method <span class='op'>=</span> <span class='st'>"one_sample"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -427,21 +420,54 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.304   1.853   0.002
+#&gt;    0.303   1.872   0.001
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'>
 
 
 
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># \donttest{</span>
 <span class='co'># Define effect_size using functions (long computational times)</span>
 <span class='co'># Remember to adjust B</span>
-<span class='fu'>retrospective</span>(effect_size = <span class='fu'>function</span>(<span class='kw'>n</span>) <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span>), sample_n1 = <span class='fl'>25</span>,
-              test_method = <span class='st'>"pearson"</span>, tl = <span class='fl'>.15</span>, B = <span class='fl'>1e3</span>, seed = <span class='fl'>2020</span>)
-<span class='fu'>retrospective</span>(effect_size = <span class='fu'>function</span>(<span class='kw'>n</span>) <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span>), sample_n1 = <span class='fl'>25</span>,
-              test_method = <span class='st'>"one_sample"</span>, tl = <span class='fl'>.2</span>, tu = <span class='fl'>.4</span>, B = <span class='fl'>1e3</span>,
-              seed = <span class='fl'>2020</span>)
-}
+<span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span><span class='op'>)</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>,
+              test_method <span class='op'>=</span> <span class='st'>"pearson"</span>, tl <span class='op'>=</span> <span class='fl'>.15</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>If 'effect_type = correlation', effect_size distribution is truncated between 0.15 and 1</span></div><div class='output co'>#&gt; <span class='message'>Truncation could require long computational time</span></div><div class='output co'>#&gt; 
+#&gt; 	Design Analysis
+#&gt; 
+#&gt; Hypothesized effect:  rho ~ rnorm(n, 0.3, 0.1) [tl =  0.15 ; tu = 1 ]
+#&gt;    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. 
+#&gt;    1000       0.15   0.25      0.308    0.314   0.372     0.624
+#&gt; 
+#&gt; Study characteristics:
+#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
+#&gt;    pearson       25          NULL        two_sided     0.05        23
+#&gt; 
+#&gt; Inferential risks:
+#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
+#&gt; power   0.094   0.228     0.3300   0.357788   0.46600   0.946
+#&gt; typeM   1.019   1.393     1.6345   1.738267   1.96525   3.172
+#&gt; typeS   0.000   0.000     0.0000   0.004277   0.00400   0.071
+#&gt; 
+#&gt; Critical value(s): rho  =  ± 0.396</div><div class='input'><span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span><span class='op'>)</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>,
+              test_method <span class='op'>=</span> <span class='st'>"one_sample"</span>, tl <span class='op'>=</span> <span class='fl'>.2</span>, tu <span class='op'>=</span> <span class='fl'>.4</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Truncation could require long computational time</span></div><div class='output co'>#&gt; 
+#&gt; 	Design Analysis
+#&gt; 
+#&gt; Hypothesized effect:  cohen_d ~ rnorm(n, 0.3, 0.1) [tl =  0.2 ; tu = 0.4 ]
+#&gt;    n_effect   Min.   1st Qu.   Median   Mean   3rd Qu.   Max.
+#&gt;    1000       0.2    0.258     0.299    0.3    0.342     0.4 
+#&gt; 
+#&gt; Study characteristics:
+#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
+#&gt;    one_sample    25          NULL        two_sided     0.05        24
+#&gt; 
+#&gt; Inferential risks:
+#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
+#&gt; power   0.144   0.233     0.301    0.307773   0.37700   0.511
+#&gt; typeM   1.456   1.670     1.865    1.917841   2.12525   2.743
+#&gt; typeS   0.000   0.000     0.000    0.002034   0.00300   0.031
+#&gt; 
+#&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>

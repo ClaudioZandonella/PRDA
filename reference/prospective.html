@@ -79,7 +79,7 @@ result significant)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9100</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -149,24 +149,23 @@ effect value (i.e., the minimum absolute effect size value that would
 result significant).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prospective</span>(
-  <span class='kw'>effect_size</span>,
-  <span class='kw'>power</span>,
-  ratio_n = <span class='fl'>1</span>,
-  test_method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pearson"</span>, <span class='st'>"two_sample"</span>, <span class='st'>"welch"</span>, <span class='st'>"paired"</span>, <span class='st'>"one_sample"</span>),
-  alternative = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"two_sided"</span>, <span class='st'>"less"</span>, <span class='st'>"greater"</span>),
-  sig_level = <span class='fl'>0.05</span>,
-  ratio_sd = <span class='fl'>1</span>,
-  B = <span class='fl'>10000</span>,
-  tl = <span class='op'>-</span><span class='fl'>Inf</span>,
-  tu = <span class='fl'>Inf</span>,
-  B_effect = <span class='fl'>1000</span>,
-  sample_range = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1000</span>),
-  eval_power = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"median"</span>, <span class='st'>"mean"</span>),
-  tol = <span class='fl'>0.01</span>,
-  display_message = <span class='fl'>TRUE</span>,
-  seed = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>prospective</span><span class='op'>(</span>
+  <span class='va'>effect_size</span>,
+  <span class='va'>power</span>,
+  ratio_n <span class='op'>=</span> <span class='fl'>1</span>,
+  test_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pearson"</span>, <span class='st'>"two_sample"</span>, <span class='st'>"welch"</span>, <span class='st'>"paired"</span>, <span class='st'>"one_sample"</span><span class='op'>)</span>,
+  alternative <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"two_sided"</span>, <span class='st'>"less"</span>, <span class='st'>"greater"</span><span class='op'>)</span>,
+  sig_level <span class='op'>=</span> <span class='fl'>0.05</span>,
+  ratio_sd <span class='op'>=</span> <span class='fl'>1</span>,
+  B <span class='op'>=</span> <span class='fl'>10000</span>,
+  tl <span class='op'>=</span> <span class='op'>-</span><span class='cn'>Inf</span>,
+  tu <span class='op'>=</span> <span class='cn'>Inf</span>,
+  B_effect <span class='op'>=</span> <span class='fl'>1000</span>,
+  sample_range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1000</span><span class='op'>)</span>,
+  eval_power <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"median"</span>, <span class='st'>"mean"</span><span class='op'>)</span>,
+  tol <span class='op'>=</span> <span class='fl'>0.01</span>,
+  display_message <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -258,11 +257,6 @@ the resulting distribution of power values. Must be one of "median"
 the information about computational steps and the progress bar. Not that the
 progress bar is available only when <code>effect_size</code> is defined as a
 function.</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.</p></td>
     </tr>
     </table>
 
@@ -376,8 +370,7 @@ Set the seed to obtain reproducible results.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Pearson's correlation</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fl'>.3</span>, power = <span class='fl'>.8</span>, test_method = <span class='st'>"pearson"</span>, B = <span class='fl'>1e3</span>,
-            seed = <span class='fl'>2020</span>)
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, power <span class='op'>=</span> <span class='fl'>.8</span>, test_method <span class='op'>=</span> <span class='st'>"pearson"</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Evaluate n = 501
 #&gt; Estimated power is 1
 #&gt; 
@@ -385,16 +378,22 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; Estimated power is 1
 #&gt; 
 #&gt; Evaluate n = 126
-#&gt; Estimated power is 0.94
+#&gt; Estimated power is 0.93
 #&gt; 
 #&gt; Evaluate n = 64
-#&gt; Estimated power is 0.7
+#&gt; Estimated power is 0.68
 #&gt; 
 #&gt; Evaluate n = 95
-#&gt; Estimated power is 0.84
+#&gt; Estimated power is 0.85
 #&gt; 
 #&gt; Evaluate n = 80
 #&gt; Estimated power is 0.79
+#&gt; 
+#&gt; Evaluate n = 88
+#&gt; Estimated power is 0.83
+#&gt; 
+#&gt; Evaluate n = 84
+#&gt; Estimated power is 0.8
 #&gt; </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -402,16 +401,16 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
-#&gt;    pearson       80          NULL        two_sided     0.05        78
+#&gt;    pearson       84          NULL        two_sided     0.05        82
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.791   1.134   0    
+#&gt;    0.803   1.125   0    
 #&gt; 
-#&gt; Critical value(s): rho  =  ± 0.22</div><div class='input'>
+#&gt; Critical value(s): rho  =  ± 0.215</div><div class='input'>
 <span class='co'># Two-sample t-test</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fl'>.3</span>, power = <span class='fl'>.8</span>, ratio_n = <span class='fl'>1.5</span>,
-            test_method = <span class='st'>"two_sample"</span>, B = <span class='fl'>1e3</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, power <span class='op'>=</span> <span class='fl'>.8</span>, ratio_n <span class='op'>=</span> <span class='fl'>1.5</span>,
+            test_method <span class='op'>=</span> <span class='st'>"two_sample"</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Evaluate n = 501
 #&gt; Estimated power is 1
 #&gt; 
@@ -419,18 +418,27 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; Estimated power is 0.95
 #&gt; 
 #&gt; Evaluate n = 126
-#&gt; Estimated power is 0.73
+#&gt; Estimated power is 0.74
 #&gt; 
 #&gt; Evaluate n = 188
 #&gt; Estimated power is 0.89
 #&gt; 
 #&gt; Evaluate n = 157
-#&gt; Estimated power is 0.83
+#&gt; Estimated power is 0.82
 #&gt; 
 #&gt; Evaluate n = 142
-#&gt; Estimated power is 0.79
+#&gt; Estimated power is 0.78
 #&gt; 
 #&gt; Evaluate n = 150
+#&gt; Estimated power is 0.78
+#&gt; 
+#&gt; Evaluate n = 154
+#&gt; Estimated power is 0.81
+#&gt; 
+#&gt; Evaluate n = 152
+#&gt; Estimated power is 0.82
+#&gt; 
+#&gt; Evaluate n = 151
 #&gt; Estimated power is 0.8
 #&gt; </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
@@ -439,15 +447,15 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df 
-#&gt;    two_sample    225         150         two_sided     0.05        373
+#&gt;    two_sample    226         151         two_sided     0.05        375
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.798   1.117   0    
+#&gt;    0.802   1.114   0    
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.207</div><div class='input'><span class='co'># Welch t-test</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fl'>.3</span>, power = <span class='fl'>.8</span>, ratio_n = <span class='fl'>2</span>,
-            test_method = <span class='st'>"welch"</span>, ratio_sd = <span class='fl'>1.5</span>, B = <span class='fl'>1e3</span>, seed = <span class='fl'>2020</span>)
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, power <span class='op'>=</span> <span class='fl'>.8</span>, ratio_n <span class='op'>=</span> <span class='fl'>2</span>,
+            test_method <span class='op'>=</span> <span class='st'>"welch"</span>, ratio_sd <span class='op'>=</span> <span class='fl'>1.5</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Evaluate n = 501
 #&gt; Estimated power is 1
 #&gt; 
@@ -458,19 +466,13 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; Estimated power is 0.83
 #&gt; 
 #&gt; Evaluate n = 64
-#&gt; Estimated power is 0.56
+#&gt; Estimated power is 0.55
 #&gt; 
 #&gt; Evaluate n = 95
 #&gt; Estimated power is 0.73
 #&gt; 
 #&gt; Evaluate n = 110
-#&gt; Estimated power is 0.78
-#&gt; 
-#&gt; Evaluate n = 118
-#&gt; Estimated power is 0.82
-#&gt; 
-#&gt; Evaluate n = 114
-#&gt; Estimated power is 0.8
+#&gt; Estimated power is 0.79
 #&gt; </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
@@ -478,15 +480,57 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df     
-#&gt;    welch         228         114         two_sided     0.05        313.042
+#&gt;    welch         220         110         two_sided     0.05        301.979
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.8     1.117   0    
+#&gt;    0.791   1.139   0    
 #&gt; 
-#&gt; Critical value(s): cohen_d  =  ± 0.211</div><div class='input'><span class='co'># Paired t-test</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fl'>.3</span>, power = <span class='fl'>.8</span>, ratio_n = <span class='fl'>1</span>,
-            test_method = <span class='st'>"paired"</span>, B = <span class='fl'>1e3</span>, seed = <span class='fl'>2020</span>)
+#&gt; Critical value(s): cohen_d  =  ± 0.215</div><div class='input'><span class='co'># Paired t-test</span>
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, power <span class='op'>=</span> <span class='fl'>.8</span>, ratio_n <span class='op'>=</span> <span class='fl'>1</span>,
+            test_method <span class='op'>=</span> <span class='st'>"paired"</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Evaluate n = 501
+#&gt; Estimated power is 1
+#&gt; 
+#&gt; Evaluate n = 251
+#&gt; Estimated power is 1
+#&gt; 
+#&gt; Evaluate n = 126
+#&gt; Estimated power is 0.93
+#&gt; 
+#&gt; Evaluate n = 64
+#&gt; Estimated power is 0.66
+#&gt; 
+#&gt; Evaluate n = 95
+#&gt; Estimated power is 0.82
+#&gt; 
+#&gt; Evaluate n = 80
+#&gt; Estimated power is 0.77
+#&gt; 
+#&gt; Evaluate n = 88
+#&gt; Estimated power is 0.79
+#&gt; 
+#&gt; Evaluate n = 92
+#&gt; Estimated power is 0.83
+#&gt; 
+#&gt; Evaluate n = 90
+#&gt; Estimated power is 0.81
+#&gt; </div><div class='output co'>#&gt; 
+#&gt; 	Design Analysis
+#&gt; 
+#&gt; Hypothesized effect:  cohen_d = 0.3 
+#&gt; 
+#&gt; Study characteristics:
+#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
+#&gt;    paired        90          90          two_sided     0.05        89
+#&gt; 
+#&gt; Inferential risks:
+#&gt;    power   typeM   typeS
+#&gt;    0.806   1.125   0    
+#&gt; 
+#&gt; Critical value(s): cohen_d  =  ± 0.209</div><div class='input'><span class='co'># One-sample t-test</span>
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, power <span class='op'>=</span> <span class='fl'>.8</span>, ratio_n <span class='op'>=</span> <span class='cn'>NULL</span>,
+            test_method <span class='op'>=</span> <span class='st'>"one_sample"</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Evaluate n = 501
 #&gt; Estimated power is 1
 #&gt; 
@@ -497,13 +541,13 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; Estimated power is 0.92
 #&gt; 
 #&gt; Evaluate n = 64
-#&gt; Estimated power is 0.65
+#&gt; Estimated power is 0.69
 #&gt; 
 #&gt; Evaluate n = 95
-#&gt; Estimated power is 0.82
+#&gt; Estimated power is 0.84
 #&gt; 
 #&gt; Evaluate n = 80
-#&gt; Estimated power is 0.78
+#&gt; Estimated power is 0.76
 #&gt; 
 #&gt; Evaluate n = 88
 #&gt; Estimated power is 0.8
@@ -514,54 +558,97 @@ Set the seed to obtain reproducible results.</p></td>
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
-#&gt;    paired        88          88          two_sided     0.05        87
+#&gt;    one_sample    88          NULL        two_sided     0.05        87
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.795   1.131   0    
+#&gt;    0.804   1.145   0    
 #&gt; 
-#&gt; Critical value(s): cohen_d  =  ± 0.212</div><div class='input'><span class='co'># One-sample t-test</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fl'>.3</span>, power = <span class='fl'>.8</span>, ratio_n = <span class='kw'>NULL</span>,
-            test_method = <span class='st'>"one_sample"</span>, B = <span class='fl'>1e3</span>, seed = <span class='fl'>2020</span>)
-</div><div class='output co'>#&gt; Evaluate n = 501
+#&gt; Critical value(s): cohen_d  =  ± 0.212</div><div class='input'>
+
+
+<span class='co'># \donttest{</span>
+<span class='co'># Define effect_size using functions (long computational time)</span>
+<span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span><span class='op'>)</span>, power <span class='op'>=</span> <span class='fl'>.8</span>,
+            test_method <span class='op'>=</span> <span class='st'>"pearson"</span>, B_effect <span class='op'>=</span> <span class='fl'>500</span>, B <span class='op'>=</span> <span class='fl'>500</span>, tl <span class='op'>=</span> <span class='fl'>.15</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>If 'effect_type = correlation', effect_size distribution is truncated between 0.15 and 1</span></div><div class='output co'>#&gt; <span class='message'>Truncation could require long computational time</span></div><div class='output co'>#&gt; Evaluate n = 501
 #&gt; Estimated power is 1
 #&gt; 
 #&gt; Evaluate n = 251
 #&gt; Estimated power is 1
 #&gt; 
 #&gt; Evaluate n = 126
-#&gt; Estimated power is 0.92
+#&gt; Estimated power is 0.95
 #&gt; 
 #&gt; Evaluate n = 64
-#&gt; Estimated power is 0.64
+#&gt; Estimated power is 0.72
 #&gt; 
 #&gt; Evaluate n = 95
+#&gt; Estimated power is 0.88
+#&gt; 
+#&gt; Evaluate n = 80
+#&gt; Estimated power is 0.82
+#&gt; 
+#&gt; Evaluate n = 72
+#&gt; Estimated power is 0.78
+#&gt; 
+#&gt; Evaluate n = 76
 #&gt; Estimated power is 0.8
 #&gt; </div><div class='output co'>#&gt; 
 #&gt; 	Design Analysis
 #&gt; 
-#&gt; Hypothesized effect:  cohen_d = 0.3 
+#&gt; Hypothesized effect:  rho ~ rnorm(n, 0.3, 0.1) [tl =  0.15 ; tu = 1 ]
+#&gt;    n_effect   Min.    1st Qu.   Median   Mean    3rd Qu.   Max. 
+#&gt;    500        0.151   0.25      0.315    0.316   0.372     0.629
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
-#&gt;    one_sample    95          NULL        two_sided     0.05        94
+#&gt;    pearson       76          NULL        two_sided     0.05        74
 #&gt; 
 #&gt; Inferential risks:
-#&gt;    power   typeM   typeS
-#&gt;    0.8     1.106   0    
+#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
+#&gt; power   0.242   0.5915    0.7990   0.745664   0.92250   1.000
+#&gt; typeM   0.973   1.0380    1.1115   1.190556   1.28325   1.929
+#&gt; typeS   0.000   0.0000    0.0000   0.000158   0.00000   0.008
 #&gt; 
-#&gt; Critical value(s): cohen_d  =  ± 0.204</div><div class='input'>
-
-
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Define effect_size using functions (long computational time)</span>
-<span class='fu'>prospective</span>(effect_size = <span class='fu'>function</span>(<span class='kw'>n</span>) <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span>), power = <span class='fl'>.8</span>,
-            test_method = <span class='st'>"pearson"</span>, B_effect = <span class='fl'>500</span>, B = <span class='fl'>500</span>, tl = <span class='fl'>.15</span>,
-            seed = <span class='fl'>2020</span>)
-<span class='fu'>prospective</span>(effect_size = <span class='fu'>function</span>(<span class='kw'>n</span>) <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span>), power = <span class='fl'>.8</span>,
-            test_method = <span class='st'>"two_sample"</span>, ratio_n = <span class='fl'>1</span>, B_effect = <span class='fl'>500</span>, B = <span class='fl'>500</span>,
-            tl = <span class='fl'>.2</span>, tu = <span class='fl'>.4</span>, seed = <span class='fl'>2020</span>)
-}
+#&gt; Critical value(s): rho  =  ± 0.226</div><div class='input'><span class='fu'>prospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span><span class='op'>)</span>, power <span class='op'>=</span> <span class='fl'>.8</span>,
+            test_method <span class='op'>=</span> <span class='st'>"two_sample"</span>, ratio_n <span class='op'>=</span> <span class='fl'>1</span>, B_effect <span class='op'>=</span> <span class='fl'>500</span>, B <span class='op'>=</span> <span class='fl'>500</span>,
+            tl <span class='op'>=</span> <span class='fl'>.2</span>, tu <span class='op'>=</span> <span class='fl'>.4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Truncation could require long computational time</span></div><div class='output co'>#&gt; Evaluate n = 501
+#&gt; Estimated power is 1
+#&gt; 
+#&gt; Evaluate n = 251
+#&gt; Estimated power is 0.92
+#&gt; 
+#&gt; Evaluate n = 126
+#&gt; Estimated power is 0.67
+#&gt; 
+#&gt; Evaluate n = 188
+#&gt; Estimated power is 0.83
+#&gt; 
+#&gt; Evaluate n = 157
+#&gt; Estimated power is 0.76
+#&gt; 
+#&gt; Evaluate n = 172
+#&gt; Estimated power is 0.8
+#&gt; </div><div class='output co'>#&gt; 
+#&gt; 	Design Analysis
+#&gt; 
+#&gt; Hypothesized effect:  cohen_d ~ rnorm(n, 0.3, 0.1) [tl =  0.2 ; tu = 0.4 ]
+#&gt;    n_effect   Min.    1st Qu.   Median   Mean    3rd Qu.   Max. 
+#&gt;    500        0.201   0.262     0.304    0.303   0.343     0.399
+#&gt; 
+#&gt; Study characteristics:
+#&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df 
+#&gt;    two_sample    172         172         two_sided     0.05        342
+#&gt; 
+#&gt; Inferential risks:
+#&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
+#&gt; power   0.426   0.6795    0.800    0.773788   0.88650   0.968
+#&gt; typeM   1.003   1.0680    1.123    1.155574   1.22125   1.500
+#&gt; typeS   0.000   0.0000    0.000    0.000000   0.00000   0.000
+#&gt; 
+#&gt; Critical value(s): cohen_d  =  ± 0.212</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
