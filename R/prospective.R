@@ -183,7 +183,7 @@
 #'
 #'
 #'
-#' \dontrun{
+#' \donttest{
 #' # Define effect_size using functions (long computational time)
 #' prospective(effect_size = function(n) rnorm(n, .3, .1), power = .8,
 #'             test_method = "pearson", B_effect = 500, B = 500, tl = .15,

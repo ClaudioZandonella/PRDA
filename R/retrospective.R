@@ -170,7 +170,7 @@
 #'
 #'
 #'
-#' \dontrun{
+#' \donttest{
 #' # Define effect_size using functions (long computational times)
 #' # Remember to adjust B
 #' retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 25,
