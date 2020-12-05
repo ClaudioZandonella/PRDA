@@ -20,9 +20,10 @@ test_that("inputs are correctly specified", {
                          tu = Inf, B_effect = 10, sample_range = c(2, 1000),
                          eval_power = "mean", tol = .01,
                          display_message = FALSE, seed = 2020){
-    prospective(effect_size, power, ratio_n, test_method,
-                alternative, sig_level, ratio_sd, B, tl, tu, B_effect,
-                sample_range, eval_power, tol, display_message, seed)
+    with_seed(seed = seed,
+              code = prospective(effect_size, power, ratio_n, test_method,
+                                 alternative, sig_level, ratio_sd, B, tl, tu, B_effect,
+                                 sample_range, eval_power, tol, display_message))
   }
 
   #----    Arguments    ----
@@ -70,12 +71,6 @@ test_that("inputs are correctly specified", {
   expect_error(test_prospective(B = Inf), B_text)
   expect_error(test_prospective(B = "ciao"), B_text)
   expect_error(test_prospective(B = c(10,20)), B_text)
-
-  # seed
-  seed_text <- "If specified, argument 'seed' has to be a single finite number"
-  expect_error(test_prospective(seed = Inf), seed_text)
-  expect_error(test_prospective(seed = "ciao"), seed_text)
-  expect_error(test_prospective(seed = c(10,20)), seed_text)
 
   # tl
   tl_text <- "Argument 'tl' has to be a single numeric value"
@@ -156,7 +151,7 @@ test_that("inputs are correctly specified", {
                t_test_text)
 
   # sample_range
-  sample_range <- "Actual power = 0.1 with n = 100\n  try to increase maximum of sample_range > 100."
+  sample_range <- "Actual power = 0.16 with n = 100\n  try to increase maximum of sample_range > 100."
   expect_error(test_prospective(effect_size = .1, test_method = "two_sample",
                                 sample_range =  c(5,100), B=100), sample_range)
 
@@ -178,34 +173,45 @@ test_that("inputs are correctly specified", {
 #----    obtain same results    ----
 
 test_that("same results as previous run", {
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, seed = 2020, display_message = FALSE)$effect_info,
-                     file = "test_cache/effect_info_single_pro_cor", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, seed = 2020, display_message = FALSE,
-                                 test_method = "two_sample")$effect_info,
-                     file = "test_cache/effect_info_single_pro_cohen", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, seed = 2020, display_message = FALSE)$prospective_res,
-                     file="test_cache/res_corr_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = NULL, test_method = "one_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
-                     file="test_cache/res_one_sample_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, test_method = "paired", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
-                     file="test_cache/res_cohen_paired_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 1,  test_method = "welch", ratio_sd = 1.5, B = 100, seed = 2020, display_message = FALSE)$prospective_res,
-                     file="test_cache/res_cohen_single_pro", update= FALSE)
-  expect_known_value(prospective(effect_size = .3, power = .8, ratio_n = 2,  test_method = "two_sample", B = 100, seed = 2020, display_message = FALSE)$prospective_res,
-                     file="test_cache/res_cohen_ratio_n_pro", update= FALSE)
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, display_message = FALSE)$effect_info),
+                     file = "test_cache/effect_info_single_pro_cor")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, display_message = FALSE,
+                                 test_method = "two_sample")$effect_info),
+                     file = "test_cache/effect_info_single_pro_cohen")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = 1, B = 100, display_message = FALSE)$prospective_res),
+                     file="test_cache/res_corr_single_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = NULL, test_method = "one_sample", B = 100, display_message = FALSE)$prospective_res),
+                     file="test_cache/res_one_sample_single_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, test_method = "paired", B = 100, display_message = FALSE)$prospective_res),
+                     file="test_cache/res_cohen_paired_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = 1,  test_method = "welch", ratio_sd = 1.5, B = 100, display_message = FALSE)$prospective_res),
+                     file="test_cache/res_cohen_single_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = .3, power = .8, ratio_n = 2,  test_method = "two_sample", B = 100, display_message = FALSE)$prospective_res),
+                     file="test_cache/res_cohen_ratio_n_pro")
 
 
-  expect_known_value(prospective(effect_size = function(x) rnorm(x),  test_method = "welch", ratio_sd = 1.5, power = .8, ratio_n = 1, B = 100, B_effect = 10, seed = 2020, display_message = FALSE)$effect_info,
-                     file = "test_cache/effect_info_dist_pro",update= FALSE)
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = 1,
-                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
-                     file = "test_cache/res_corr_dist_pro",update= FALSE)
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = NULL,  test_method = "one_sample",
-                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
-                     file = "test_cache/res_one_sample_dist_pro",update= FALSE)
-  expect_known_value(prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = 1,  test_method = "welch", ratio_sd = 1.5,
-                                 B = 100, B_effect = 10, seed = 2020, eval_power = "mean", display_message = FALSE)$prospective_res,
-                     file = "test_cache/res_cohen_dist_pro",update= FALSE)
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = function(x) rnorm(x),  test_method = "welch", ratio_sd = 1.5, power = .8, ratio_n = 1, B = 100, B_effect = 10, display_message = FALSE)$effect_info),
+                     file = "test_cache/effect_info_dist_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = 1,
+                                 B = 100, B_effect = 10, eval_power = "mean", display_message = FALSE)$prospective_res),
+                     file = "test_cache/res_corr_dist_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = NULL,  test_method = "one_sample",
+                                 B = 100, B_effect = 10, eval_power = "mean", display_message = FALSE)$prospective_res),
+                     file = "test_cache/res_one_sample_dist_pro")
+  expect_known_value(with_seed(seed = 2020,
+                               prospective(effect_size = function(x) rnorm(x), power = .8, ratio_n = 1,  test_method = "welch", ratio_sd = 1.5,
+                                 B = 100, B_effect = 10, eval_power = "mean", display_message = FALSE)$prospective_res),
+                     file = "test_cache/res_cohen_dist_pro")
 
 })
 

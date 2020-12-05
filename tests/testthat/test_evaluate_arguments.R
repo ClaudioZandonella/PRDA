@@ -73,7 +73,7 @@ test_that("evaluate the correct effect size", {
   expect_equal(eval_effect_size(effect_type = "correlation", effect_size = .3)$effect_samples, .3)
   expect_equal(eval_effect_size(effect_type = "correlation", effect_size = .3)$effect_summary[["Mean"]], .3)
   expect_equal(with_seed(2020,eval_effect_size(effect_type = "cohen_d", effect_size = function(x) rnorm(x),B_effect = 100)$effect_samples),
-               with_seed(2020, rnorm(100)))
+               with_seed(2020, rnorm(110)[11:110]))
 
   error_effect_corr <- "If 'effect_type = correlation', argument 'effect_size' must be between -1 and 1"
   expect_error(eval_effect_size(effect_type = "correlation", effect_size = 2),

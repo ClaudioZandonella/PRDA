@@ -16,9 +16,10 @@ test_that("inputs are correctly specified", {
                           alternative = "two_sided", sig_level = .05,
                           ratio_sd = 1, B = 10, tl = -Inf, tu = Inf,
                           B_effect = 10, display_message = TRUE, seed = 2020){
-    retrospective(effect_size, sample_n1, sample_n2, test_method,
+    with_seed(seed = seed,
+              retrospective(effect_size, sample_n1, sample_n2, test_method,
                   alternative, sig_level, ratio_sd, B, tl, tu, B_effect,
-                  display_message, seed)
+                  display_message))
   }
 
   #----    Arguments    ----
@@ -67,12 +68,6 @@ test_that("inputs are correctly specified", {
   expect_error(test_retrospective(B = Inf), B_text)
   expect_error(test_retrospective(B = "ciao"), B_text)
   expect_error(test_retrospective(B = c(10,20)), B_text)
-
-  # seed
-  seed_text <- "If specified, argument 'seed' has to be a single finite number"
-  expect_error(test_retrospective(seed = Inf), seed_text)
-  expect_error(test_retrospective(seed = "ciao"), seed_text)
-  expect_error(test_retrospective(seed = c(10,20)), seed_text)
 
   # tl
   tl_text <- "Argument 'tl' has to be a single numeric value"
@@ -146,30 +141,41 @@ test_that("inputs are correctly specified", {
 #----    obtain same results    ----
 
 test_that("same results as previous run", {
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, seed = 2020)$effect_info,
-                            file = "test_cache/effect_info_single_cor", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = .3,  test_method = "one_sample",
-                                   seed = 2020)$effect_info, file = "test_cache/effect_info_single_cohen", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = .3, seed = 2020)$retrospective_res,
-                            file = "test_cache/res_corr_single", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = .3,  test_method = "one_sample",
-                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_single", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3,  test_method = "paired",
-                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_paired", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 20, effect_size = .3,  test_method = "two_sample",
-                                   seed = 2020)$retrospective_res, file="test_cache/res_cohen_two_sample", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3,  test_method = "welch",
-                                   ratio_sd = 1.5, seed = 2020)$retrospective_res, file="test_cache/res_cohen_welch", update= FALSE)
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = .3)$effect_info),
+                            file = "test_cache/effect_info_single_cor")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = .3,  test_method = "one_sample")$effect_info),
+                     file = "test_cache/effect_info_single_cohen")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = .3)$retrospective_res),
+                            file = "test_cache/res_corr_single")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = .3,  test_method = "one_sample")$retrospective_res),
+                     file="test_cache/res_cohen_single")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3,  test_method = "paired")$retrospective_res),
+                     file="test_cache/res_cohen_paired")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, sample_n2 = 20, effect_size = .3,  test_method = "two_sample")$retrospective_res),
+                     file="test_cache/res_cohen_two_sample")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = .3,  test_method = "welch",
+                                   ratio_sd = 1.5)$retrospective_res), file="test_cache/res_cohen_welch")
 
 
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x),
-                                   seed = 2020,B = 10, B_effect = 10)$effect_info, file = "test_cache/effect_info_dist", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x),
-                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_corr_dist", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x),  test_method = "one_sample",
-                                   seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_cohen_dist", update= FALSE)
-  expect_known_value(retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = function(x) rnorm(x),  test_method = "welch",
-                                   ratio_sd = 1.5, seed = 2020, B=100, B_effect = 10)$retrospective_res, file = "test_cache/res_welch_dist", update= FALSE)
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), B = 10, B_effect = 10)$effect_info),
+                     file = "test_cache/effect_info_dist")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x), B=100, B_effect = 10)$retrospective_res),
+                     file = "test_cache/res_corr_dist")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, effect_size = function(x) rnorm(x),  test_method = "one_sample", B=100, B_effect = 10)$retrospective_res),
+                     file = "test_cache/res_cohen_dist")
+  expect_known_value(with_seed(seed = 2020,
+                               retrospective(sample_n1 = 10, sample_n2 = 10, effect_size = function(x) rnorm(x),  test_method = "welch",
+                                   ratio_sd = 1.5, B=100, B_effect = 10)$retrospective_res), file = "test_cache/res_welch_dist")
 
   })
 

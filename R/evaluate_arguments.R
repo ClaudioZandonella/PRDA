@@ -10,7 +10,7 @@
 
 eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
                                          effect_type, test_method, sig_level,
-                                         ratio_sd, B, seed, tl, tu, B_effect,
+                                         ratio_sd, B, tl, tu, B_effect,
                                          display_message, ...){
   # Check inputs arguments
   if(!is.function(effect_size) && !is_single_numeric(effect_size))
@@ -30,9 +30,6 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
   if(!is_single_numeric(B) || B <= 1)
     stop("Argument 'B' has to be a single integer value grater than 1")
-
-  if(!is.null(seed) && (!is_single_numeric(seed)))
-    stop("If specified, argument 'seed' has to be a single finite number")
 
   if(!is_single_numeric(tl, infinite = TRUE ))
     stop("Argument 'tl' has to be a single numeric value")
@@ -77,7 +74,7 @@ eval_arguments_retrospective <- function(effect_size, sample_n1, sample_n2,
 
 eval_arguments_prospective <- function(effect_size, power, ratio_n,
                                        effect_type, test_method,
-                                       sig_level, ratio_sd, B, seed, tl, tu,
+                                       sig_level, ratio_sd, B, tl, tu,
                                        B_effect, sample_range, tol,
                                        display_message, ...){
   # Check inputs arguments
@@ -98,9 +95,6 @@ eval_arguments_prospective <- function(effect_size, power, ratio_n,
 
   if(!is_single_numeric(B) || B <= 1)
     stop("Argument 'B' has to be a single integer value grater than 1")
-
-  if(!is.null(seed) && (!is_single_numeric(seed)))
-    stop("If specified, argument 'seed' has to be a single finite number")
 
   if(!is_single_numeric(tl, infinite = TRUE ))
     stop("Argument 'tl' has to be a single numeric value")
@@ -257,8 +251,6 @@ eval_test_method <- function(effect_type, effect_target, test_method,
 # returns the required number of numeric values.
 
 eval_rgn_function <- function(FUN, n = 10){
-  if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
-  orig.seed <- .Random.seed
 
   args <- list(x = n)
 
@@ -270,7 +262,6 @@ eval_rgn_function <- function(FUN, n = 10){
   n_out <- length(out) == as.integer(n)
   res <- is.numeric(out) && n_out
 
-  on.exit(.Random.seed <<- orig.seed)
   return(res)
 }
 

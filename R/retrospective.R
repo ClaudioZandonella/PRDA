@@ -52,8 +52,6 @@
 #'@param display_message a logical variable indicating whether to display or not
 #'  the progress bar. Not that this applies only when \code{effect_size} is
 #'  defined as a function.
-#'@param seed a numeric value indicating the seed for random number generation.
-#'  Set the seed to obtain reproducible results.
 
 #'
 #'@return A list with class "design_analysis" containing the following
@@ -150,21 +148,20 @@
 #' @examples
 #'
 #' # Pearson's correlation
-#' retrospective(effect_size = .3, sample_n1 = 25,
-#'               test_method = "pearson", seed = 2020)
+#' retrospective(effect_size = .3, sample_n1 = 25, test_method = "pearson")
 #'
 #' # Two-sample t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-#'               test_method = "two_sample", seed = 2020)
+#'               test_method = "two_sample")
 #' # Welch t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-#'               test_method = "welch", ratio_sd = 1.5, seed = 2020)
+#'               test_method = "welch", ratio_sd = 1.5)
 #' # Paired t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
-#'               test_method = "paired", seed = 2020)
+#'               test_method = "paired")
 #' # One-sample t-test
 #' retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
-#'               test_method = "one_sample", seed = 2020)
+#'               test_method = "one_sample")
 #'
 
 #'
@@ -174,10 +171,9 @@
 #' # Define effect_size using functions (long computational times)
 #' # Remember to adjust B
 #' retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 25,
-#'               test_method = "pearson", tl = .15, B = 1e3, seed = 2020)
+#'               test_method = "pearson", tl = .15, B = 1e3)
 #' retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 25,
-#'               test_method = "one_sample", tl = .2, tu = .4, B = 1e3,
-#'               seed = 2020)
+#'               test_method = "one_sample", tl = .2, tu = .4, B = 1e3)
 #' }
 #'
 #'@references Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
@@ -210,8 +206,7 @@ retrospective <- function(effect_size,
                           tl = -Inf,
                           tu = Inf,
                           B_effect = 1e3,
-                          display_message = TRUE,
-                          seed = NULL){
+                          display_message = TRUE){
 
 
 
@@ -241,16 +236,6 @@ retrospective <- function(effect_size,
       warning("If 'test_method = pearson', argument 'ratio_n' is set to NULL")
     }
     sample_n2 <- NULL
-  }
-
-  #----    Set seed    ----
-
-  # Set seed
-  if(!is.null(seed)){
-    if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
-    old_seed <- .Random.seed
-    on.exit( { .Random.seed <<- old_seed })
-    set.seed(seed = seed)
   }
 
   #----    Evaluate effect size    ----

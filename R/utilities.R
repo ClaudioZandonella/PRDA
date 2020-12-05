@@ -104,14 +104,12 @@ sign_effect <- function(critical_effect, alternative){
 
 #----    with_seed    ----
 
-# Run a function in a environment with a given seed.
+# Run a function in a environment with a given seed used in the test.
 
 with_seed <- function(seed, code) {
   code <- substitute(code)
-  if(!exists(".Random.seed")) rnorm(1) # Ensure .Random.seed exist
-  orig.seed <- .Random.seed
-  on.exit(.Random.seed <<- orig.seed)
   set.seed(seed)
+  rnorm(10)
   return(eval.parent(code))
 }
 
