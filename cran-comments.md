@@ -2,9 +2,9 @@
 
 This is a resubmission. In this version I have:
 
-* Added doi reference to citations in the DESCRIPTION file.
+* Replaced \dontrun{} with \donttest{} in the functions examples that are executable in more than 5 sec.
 
-* Solved the problem of CITATION entries.
+* Removed the seed argument in the functions to avoid modifying the .GlobalEnv, in line with CRAN policies.
 
 
 ## Test environments
