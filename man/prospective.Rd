@@ -19,8 +19,7 @@ prospective(
   sample_range = c(2, 1000),
   eval_power = c("median", "mean"),
   tol = 0.01,
-  display_message = TRUE,
-  seed = NULL
+  display_message = TRUE
 )
 }
 \arguments{
@@ -81,9 +80,6 @@ the resulting distribution of power values. Must be one of "median"
 the information about computational steps and the progress bar. Not that the
 progress bar is available only when \code{effect_size} is defined as a
 function.}
-
-\item{seed}{a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -200,32 +196,30 @@ Conduct a prospective design analysis to define the required sample
 \examples{
 
 # Pearson's correlation
-prospective(effect_size = .3, power = .8, test_method = "pearson", B = 1e3,
-            seed = 2020)
+prospective(effect_size = .3, power = .8, test_method = "pearson", B = 1e3)
 
 # Two-sample t-test
 prospective(effect_size = .3, power = .8, ratio_n = 1.5,
-            test_method = "two_sample", B = 1e3, seed = 2020)
+            test_method = "two_sample", B = 1e3)
 # Welch t-test
 prospective(effect_size = .3, power = .8, ratio_n = 2,
-            test_method = "welch", ratio_sd = 1.5, B = 1e3, seed = 2020)
+            test_method = "welch", ratio_sd = 1.5, B = 1e3)
 # Paired t-test
 prospective(effect_size = .3, power = .8, ratio_n = 1,
-            test_method = "paired", B = 1e3, seed = 2020)
+            test_method = "paired", B = 1e3)
 # One-sample t-test
 prospective(effect_size = .3, power = .8, ratio_n = NULL,
-            test_method = "one_sample", B = 1e3, seed = 2020)
+            test_method = "one_sample", B = 1e3)
 
 
 
-\dontrun{
+\donttest{
 # Define effect_size using functions (long computational time)
 prospective(effect_size = function(n) rnorm(n, .3, .1), power = .8,
-            test_method = "pearson", B_effect = 500, B = 500, tl = .15,
-            seed = 2020)
+            test_method = "pearson", B_effect = 500, B = 500, tl = .15)
 prospective(effect_size = function(n) rnorm(n, .3, .1), power = .8,
             test_method = "two_sample", ratio_n = 1, B_effect = 500, B = 500,
-            tl = .2, tu = .4, seed = 2020)
+            tl = .2, tu = .4)
 }
 
 }

@@ -8,7 +8,7 @@ tags:
   - Type S error
   - replicabiliyt
 authors:
-  - name: Claudio Zandonella Callegher^[Corresponding author add info]
+  - name: Claudio Zandonella Callegher^[claudiozandonella@gmail.com]
     orcid: 0000-0001-7721-6318
     affiliation: 1
   - name: Giulia Bertoldo
@@ -36,7 +36,7 @@ affiliations:
    index: 2
  - name: Department of General Psychology, University of Padova, Padova, Italy
    index: 3
-date: "21 November, 2020"
+date: "05 December, 2020"
 bibliography: paper_JOSS.bib
 editor_options: 
   chunk_output_type: console
@@ -76,8 +76,10 @@ Suppose previous results in the literature indicate correlations in this area ar
 
 ```r
 library(PRDA)
-retrospective(effect_size = .25, sample_n1 = 20, 
-              test_method = "pearson", seed = 2020)
+
+set.seed(2020) # set seed to make results reproducible
+
+retrospective(effect_size = .25, sample_n1 = 20, test_method = "pearson")
 ```
 
 ```
@@ -107,7 +109,7 @@ Alternatively, if no precise information about hypothetical effect size is avail
 ```r
 retrospective(effect_size = function(n) rnorm(n, .25, .1), sample_n1 = 20,
               test_method = "pearson", tl = .1, tu = .4, B = 1e3, 
-              seed = 2020, display_message = FALSE)
+              display_message = FALSE)
 ```
 
 ```
@@ -119,8 +121,8 @@ retrospective(effect_size = function(n) rnorm(n, .25, .1), sample_n1 = 20,
 ## 	Design Analysis
 ## 
 ## Hypothesized effect:  rho ~ rnorm(n, 0.25, 0.1) [tl =  0.1 ; tu = 0.4 ]
-##    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. 
-##    1000       0.1    0.19      0.244    0.247   0.302     0.398
+##    n_effect   Min.    1st Qu.   Median   Mean    3rd Qu.   Max.
+##    1000       0.101   0.197     0.25     0.252   0.308     0.4 
 ## 
 ## Study characteristics:
 ##    test_method   sample_n1   sample_n2   alternative   sig_level   df
@@ -128,9 +130,9 @@ retrospective(effect_size = function(n) rnorm(n, .25, .1), sample_n1 = 20,
 ## 
 ## Inferential risks:
 ##         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
-## power   0.058   0.12600   0.181    0.198498   0.25800   0.441
-## typeM   1.414   1.81875   2.216    2.405984   2.79950   5.345
-## typeS   0.000   0.00000   0.007    0.019144   0.02425   0.175
+## power   0.055   0.133     0.1880   0.203727   0.26600   0.449
+## typeM   1.407   1.785     2.1645   2.347745   2.70075   5.263
+## typeS   0.000   0.000     0.0060   0.017573   0.02300   0.246
 ## 
 ## Critical value(s): rho  =  ± 0.444
 ```
@@ -144,7 +146,7 @@ Given the previous results, researchers might consider planning a replication st
 
 ```r
 prospective(effect_size = .25, power = .8, test_method = "pearson",
-            display_message = FALSE, seed = 2020)
+            display_message = FALSE)
 ```
 
 ```
@@ -155,16 +157,16 @@ prospective(effect_size = .25, power = .8, test_method = "pearson",
 ## 
 ## Study characteristics:
 ##    test_method   sample_n1   sample_n2   alternative   sig_level   df 
-##    pearson       126         NULL        two_sided     0.05        124
+##    pearson       122         NULL        two_sided     0.05        120
 ## 
 ## Inferential risks:
 ##    power   typeM   typeS
-##    0.807   1.107   0    
+##    0.796   1.12    0    
 ## 
-## Critical value(s): rho  =  ± 0.175
+## Critical value(s): rho  =  ± 0.178
 ```
 
-In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. To know more about function arguments and examples see the function documentation and vignette.
+In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 122$, the associated Type M error is around 1.10 and the Type S error is approximately 0. To know more about function arguments and examples see the function documentation and vignette.
 
 In `PRDA` there are no implemented functions to obtain graphical representations of the results. However, it is easy to access all the results and use them to create the plots according to your own needs and preferences. See vignettes for an example.
 

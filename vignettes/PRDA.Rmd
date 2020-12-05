@@ -98,8 +98,9 @@ The hypothetical population effect size can be defined as a single value accordi
 The function `retrospective()` can be used to evaluate the inferential risks associated with the study.
 
 ```{r, retro}
-retrospective(effect_size = .25, sample_n1 = 13, 
-              test_method = "pearson", seed = 2020)
+set.seed(2020) # set seed to make results reproducible
+
+retrospective(effect_size = .25, sample_n1 = 13, test_method = "pearson")
 ```
 
 In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 13% that is associated with a Type M error of around 2.6 and a Type S error of 0.03. That means, statistical significant results are on average an overestimation of 160% of the hypothesized population effect and there is a 3% probability of obtaining a statistically significant result in the opposite direction.
@@ -112,7 +113,7 @@ Considering the previous results, researchers might consider planning a replicat
 
 ```{r, pro}
 prospective(effect_size = .25, power = .8, test_method = "pearson", 
-            display_message = FALSE, seed = 2020)
+            display_message = FALSE)
 ```
 
 In the output, we have again the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. To obtain a power of around 80% the required sample size is $n = 126$, the associated Type M error is around 1.10 and the Type S error is approximately 0.

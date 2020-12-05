@@ -72,8 +72,10 @@ Given the hypothetical population effect size and the study sample size, the fun
 Consider a study that evaluated the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is *&rho;* = .25. To evaluate the inferential risks related to the study we use the function `retrospective()`.
 
 ```{r retrospective,}
+set.seed(2020) # set seed to make results reproducible
+
 retrospective(effect_size = .25, sample_n1 = 30, 
-              test_method = "pearson", seed = 2020)
+              test_method = "pearson")
 ```
 
 In this case, the statistical power is almost 30% and the associated Type M error and Type S error are respectively around 1.80 and 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% probability of obtaining a statistically significant result in the opposite direction.
@@ -87,10 +89,10 @@ Given the hypothetical population effect size and the required power level, the 
 Consider a study that will evaluate the correlation between two variables. Knowing from the literature that we expect an effect size of *&rho;* = .25, the function `prospective()` can be used to compute the required sample size to obtain a power of 80%. 
 ```{r prospective}
 prospective(effect_size = .25, power = .80, test_method = "pearson",
-            display_message = FALSE, seed = 2020)
+            display_message = FALSE)
 ```
 
-The required sample size is $n=126$, the associated Type M error is around 1.10 and the Type S error is approximately 0. 
+The required sample size is $n=122$, the associated Type M error is around 1.10 and the Type S error is approximately 0. 
 
 To know more about function arguments and further examples see the function documentation `?prospective` and `vignette("prospective")`.
 

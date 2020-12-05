@@ -32,7 +32,7 @@ retrospective(effect_size, sample_n1, sample_n2 = NULL,
               alternative = c("two_sided","less","greater"),
               sig_level = .05, ratio_sd = 1, B = 1e4, 
               tl = -Inf, tu = Inf, B_effect = 1e3,
-              display_message = TRUE, seed = NULL)
+              display_message = TRUE)
 ```
 
 Complete arguments description is provided in the function documentation `?retrospective`. In the following sections, instead, different examples are presented. For further details about design analysis see @altoeEnhancingStatisticalInference2020 and @bertoldoDesigningStudiesEvaluating2020.
@@ -44,11 +44,12 @@ To conduct a retrospective design analysis considering a correlation between two
 
 ### Example 1: Pearson's correlation
 
-Consider a study that evaluates the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is $\rho = .25$. We can evaluate the inferential risks related to the present study design setting the argument `test_method = "pearson"`. The `seed` argument is used to obtain reproducible results.
+Consider a study that evaluates the correlation between two variables with a sample of 30 subjects. Suppose that according to the literature the hypothesized effect is $\rho = .25$. We can evaluate the inferential risks related to the present study design setting the argument `test_method = "pearson"`.
 
 ```{r, example1}
-retrospective(effect_size = .25, sample_n1 = 30, 
-              test_method = "pearson", seed = 2020)
+set.seed(2020) # set seed to make results reproducible
+
+retrospective(effect_size = .25, sample_n1 = 30, test_method = "pearson")
 ```
 
 In the output, we have the summary information about the hypothesized population effect, the study characteristics, and the inferential risks. We obtained a statistical power of almost 30% that is associated with a Type M error of around 1.80 and a Type S error of 0.003. That means, statistical significant results are on average an overestimation of 80% of the hypothesized population effect and there is a .3% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $\rho = \pm.36$. Note that it is not necessary to specify `sample_2` argument in the case of correlation and tests were conducted considering `"two_sided"` alternative hypothesis with a significance level of .05 (the default settings).
@@ -72,10 +73,10 @@ Consider a study where the same group ($n = 25$) was measured twice (e.g., pre- 
 
 ```{r, example2}
 retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 25,
-              test_method = "paired", seed = 2020)
+              test_method = "paired")
 ```
 
-In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and a Type S error of 0.001. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect and there is a .1% probability of obtaining a statistically significant result in the opposite direction. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $d  =  \pm 0.413$.
+In this case, we obtained a statistical power of almost 40% that is associated with a Type M error of around 1.60 and the Type S error is approximately 0. That means, statistical significant results are on average an overestimation of 60% of the hypothesized population effect. Finally, the critical values (i.e., the minimum absolute effect size value that would result significant) are $d  =  \pm 0.413$.
 
 ### Example 3: Two-sample *t*-test
 
@@ -84,7 +85,7 @@ Consider a case where two groups (e.g., treatment and control group) with respec
 ```{r, example3}
 retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 35,
               test_method = "two_sample", alternative = "great", 
-              sig_level = .10, B = 1e5, seed = 2020)
+              sig_level = .10, B = 1e5)
 ```
 
 The option `test_method = "two_sample"` is used to consider a two-sample *t*-test and `B = 1e5` increases the number of replication for more accurate results. We obtained a statistical power of around 50% that is associated with a Type M error of almost 1.60. Note that in the case of one-sided tests, the type S error will be always 0 or 1 depending on whether the hypothesized effect is coherent with the alternative hypothesis. Finally, the critical value is $d = .34$.
@@ -96,7 +97,7 @@ Consider again the previous example, but this time we do not assume homogeneity 
 ```{r, example4}
 retrospective(effect_size = .35, sample_n1 = 25, sample_n2 = 35,
               test_method = "welch", ratio_sd = 1.5, alternative = "great", 
-              sig_level = .10, B = 1e5, seed = 2020)
+              sig_level = .10, B = 1e5)
 ```
 
 We obtained a statistical power of 50%, which is associated with a Type M error of almost 1.65, and the critical value is $d = .35$. Results are really close to the previous ones with a slightly higher Type M error.
@@ -120,7 +121,7 @@ Consider the same scenario as in the correlation example (Example 1). This time 
 ```{r, example5}
 retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 30,
               test_method = "pearson", tl = .15, tu = .45, B_effect = 1e3, 
-              B = 1e3, display_message = TRUE, seed = 2020)
+              B = 1e3, display_message = TRUE)
 ```
 
 We adjusted `B_effect` and `B` to find a good trade-off between computational times and results accuracy. Differently from previous outputs, we have now a summary for the sampled effects distribution and for the inferential risks.
@@ -143,7 +144,7 @@ Output complete description is provided in the function help page `?retrospectiv
 da_fit <- retrospective(effect_size = function(n) rnorm(n, .3, .1), 
                         sample_n1 = 30, test_method = "pearson",
                         tl = .15, tu = .45, B_effect = 1e3, B = 1e3, 
-                        display_message = FALSE, seed = 2020)
+                        display_message = FALSE)
 
 str(da_fit, max.level = 1)
 ```

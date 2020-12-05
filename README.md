@@ -84,8 +84,10 @@ the hypothesized effect is *ρ* = .25. To evaluate the inferential risks
 related to the study we use the function `retrospective()`.
 
 ``` r
+set.seed(2020) # set seed to make results reproducible
+
 retrospective(effect_size = .25, sample_n1 = 30, 
-              test_method = "pearson", seed = 2020)
+              test_method = "pearson")
 #> 
 #>  Design Analysis
 #> 
@@ -129,7 +131,7 @@ required sample size to obtain a power of 80%.
 
 ``` r
 prospective(effect_size = .25, power = .80, test_method = "pearson",
-            display_message = FALSE, seed = 2020)
+            display_message = FALSE)
 #> 
 #>  Design Analysis
 #> 
@@ -137,16 +139,16 @@ prospective(effect_size = .25, power = .80, test_method = "pearson",
 #> 
 #> Study characteristics:
 #>    test_method   sample_n1   sample_n2   alternative   sig_level   df 
-#>    pearson       126         NULL        two_sided     0.05        124
+#>    pearson       122         NULL        two_sided     0.05        120
 #> 
 #> Inferential risks:
 #>    power   typeM   typeS
-#>    0.807   1.107   0    
+#>    0.797   1.119   0    
 #> 
-#> Critical value(s): rho  =  ± 0.175
+#> Critical value(s): rho  =  ± 0.178
 ```
 
-The required sample size is \(n=126\), the associated Type M error is
+The required sample size is \(n=122\), the associated Type M error is
 around 1.10 and the Type S error is approximately 0.
 
 To know more about function arguments and further examples see the

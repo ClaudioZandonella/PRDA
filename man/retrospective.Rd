@@ -16,8 +16,7 @@ retrospective(
   tl = -Inf,
   tu = Inf,
   B_effect = 1000,
-  display_message = TRUE,
-  seed = NULL
+  display_message = TRUE
 )
 }
 \arguments{
@@ -69,9 +68,6 @@ obtain more stable results.}
 \item{display_message}{a logical variable indicating whether to display or not
 the progress bar. Not that this applies only when \code{effect_size} is
 defined as a function.}
-
-\item{seed}{a numeric value indicating the seed for random number generation.
-Set the seed to obtain reproducible results.}
 }
 \value{
 A list with class "design_analysis" containing the following
@@ -178,33 +174,31 @@ Conduct a retrospective design analysis to evaluate inferential risks
 \examples{
 
 # Pearson's correlation
-retrospective(effect_size = .3, sample_n1 = 25,
-              test_method = "pearson", seed = 2020)
+retrospective(effect_size = .3, sample_n1 = 25, test_method = "pearson")
 
 # Two-sample t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              test_method = "two_sample", seed = 2020)
+              test_method = "two_sample")
 # Welch t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 35,
-              test_method = "welch", ratio_sd = 1.5, seed = 2020)
+              test_method = "welch", ratio_sd = 1.5)
 # Paired t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = 25,
-              test_method = "paired", seed = 2020)
+              test_method = "paired")
 # One-sample t-test
 retrospective(effect_size = .3, sample_n1 = 25, sample_n2 = NULL,
-              test_method = "one_sample", seed = 2020)
+              test_method = "one_sample")
 
 
 
 
-\dontrun{
+\donttest{
 # Define effect_size using functions (long computational times)
 # Remember to adjust B
 retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 25,
-              test_method = "pearson", tl = .15, B = 1e3, seed = 2020)
+              test_method = "pearson", tl = .15, B = 1e3)
 retrospective(effect_size = function(n) rnorm(n, .3, .1), sample_n1 = 25,
-              test_method = "one_sample", tl = .2, tu = .4, B = 1e3,
-              seed = 2020)
+              test_method = "one_sample", tl = .2, tu = .4, B = 1e3)
 }
 
 }
