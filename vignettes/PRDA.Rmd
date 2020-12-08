@@ -63,7 +63,13 @@ Given a plausible value of effect size, {PRDA} performs a prospective or retrosp
 
 ### Install
 
-To install the github version type in R:
+You can install the released version of PRDA from [CRAN](https://CRAN.R-project.org/package=PRDA) with:
+
+``` r
+install.packages("PRDA")
+```
+
+And the development version from [GitHub](https://github.com/ClaudioZandonella/PRDA/tree/master) with:
 
 ```{r setup, eval = F}
 # If devtools is not installed yet: 

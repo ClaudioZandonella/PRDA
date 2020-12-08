@@ -8,6 +8,8 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/PRDA)](https://CRAN.R-project.org/package=PRDA)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=develop&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/develop)
 [![Travis build
@@ -36,17 +38,14 @@ All the documentation is available at
 
 ## Installation
 
-<!-- You can install the released version of PRDA from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of PRDA from
+[CRAN](https://CRAN.R-project.org/package=PRDA) with:
 
-<!-- ``` r -->
+``` r
+install.packages("PRDA")
+```
 
-<!-- install.packages("PRDA") -->
-
-<!-- ``` -->
-
-<!-- And the development version from [GitHub](https://github.com/) with: -->
-
-You can install the development version from
+And the development version from
 [GitHub](https://github.com/ClaudioZandonella/PRDA/tree/master) with:
 
 ``` r
