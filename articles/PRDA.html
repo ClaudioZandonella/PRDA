@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.900</span>
       </span>
     </div>
 
@@ -140,8 +140,11 @@
 <div id="install" class="section level3">
 <h3 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h3>
-<p>To install the github version type in R:</p>
+<p>You can install the released version of PRDA from <a href="https://CRAN.R-project.org/package=PRDA">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"PRDA"</span><span class="op">)</span></code></pre></div>
+<p>And the development version from <a href="https://github.com/ClaudioZandonella/PRDA/tree/master">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If devtools is not installed yet: </span>
 <span class="co"># install.packages( "devtools" )  </span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"CaludioZandonella/PRDA"</span>,
@@ -171,7 +174,7 @@
 <h3 class="hasAnchor">
 <a href="#retrospective-design-analysis" class="anchor"></a>Retrospective design analysis</h3>
 <p>The function <code><a href="../reference/retrospective.html">retrospective()</a></code> can be used to evaluate the inferential risks associated with the study.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span> <span class="co"># set seed to make results reproducible</span>
 
 <span class="fu"><a href="../reference/retrospective.html">retrospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, sample_n1 <span class="op">=</span> <span class="fl">13</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
@@ -196,7 +199,7 @@
 <h3 class="hasAnchor">
 <a href="#prospective-design-analysis" class="anchor"></a>Prospective design analysis</h3>
 <p>Considering the previous results, researchers might consider planning a replication study to obtain more reliable results. The function <code><a href="../reference/prospective.html">prospective()</a></code> can be used to compute the sample size needed to obtain a required level of power (e.g., power = 80%).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/prospective.html">prospective</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fl">.25</span>, power <span class="op">=</span> <span class="fl">.8</span>, test_method <span class="op">=</span> <span class="st">"pearson"</span>, 
             display_message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; </span>

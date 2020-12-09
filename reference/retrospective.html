@@ -79,7 +79,7 @@ significant)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PRDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.900</span>
       </span>
     </div>
 
@@ -355,7 +355,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.313   1.674   0.001
+#&gt;    0.313   1.678   0.001
 #&gt; 
 #&gt; Critical value(s): rho  =  ± 0.396</div><div class='input'>
 <span class='co'># Two-sample t-test</span>
@@ -372,7 +372,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.212   2.236   0.004
+#&gt;    0.205   2.243   0.003
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.524</div><div class='input'><span class='co'># Welch t-test</span>
 <span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='fl'>35</span>,
@@ -388,7 +388,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.198   2.358   0.006
+#&gt;    0.183   2.345   0.007
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.546</div><div class='input'><span class='co'># Paired t-test</span>
 <span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='fl'>25</span>,
@@ -404,7 +404,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.3     1.802   0.001
+#&gt;    0.298   1.8     0    
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'><span class='co'># One-sample t-test</span>
 <span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='fl'>.3</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>, sample_n2 <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -420,7 +420,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;    power   typeM   typeS
-#&gt;    0.303   1.872   0.001
+#&gt;    0.303   1.873   0.001
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'>
 
@@ -436,7 +436,7 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Hypothesized effect:  rho ~ rnorm(n, 0.3, 0.1) [tl =  0.15 ; tu = 1 ]
 #&gt;    n_effect   Min.   1st Qu.   Median   Mean    3rd Qu.   Max. 
-#&gt;    1000       0.15   0.25      0.308    0.314   0.372     0.624
+#&gt;    1000       0.15   0.249     0.308    0.312   0.371     0.624
 #&gt; 
 #&gt; Study characteristics:
 #&gt;    test_method   sample_n1   sample_n2   alternative   sig_level   df
@@ -444,9 +444,9 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
-#&gt; power   0.094   0.228     0.3300   0.357788   0.46600   0.946
-#&gt; typeM   1.019   1.393     1.6345   1.738267   1.96525   3.172
-#&gt; typeS   0.000   0.000     0.0000   0.004277   0.00400   0.071
+#&gt; power   0.102   0.22575   0.329    0.355294   0.46375   0.936
+#&gt; typeM   1.025   1.39900   1.627    1.743234   1.97925   3.225
+#&gt; typeS   0.000   0.00000   0.000    0.004147   0.00400   0.071
 #&gt; 
 #&gt; Critical value(s): rho  =  ± 0.396</div><div class='input'><span class='fu'>retrospective</span><span class='op'>(</span>effect_size <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span>, <span class='fl'>.3</span>, <span class='fl'>.1</span><span class='op'>)</span>, sample_n1 <span class='op'>=</span> <span class='fl'>25</span>,
               test_method <span class='op'>=</span> <span class='st'>"one_sample"</span>, tl <span class='op'>=</span> <span class='fl'>.2</span>, tu <span class='op'>=</span> <span class='fl'>.4</span>, B <span class='op'>=</span> <span class='fl'>1e3</span><span class='op'>)</span>
@@ -463,9 +463,9 @@ defined as a function.</p></td>
 #&gt; 
 #&gt; Inferential risks:
 #&gt;         Min.    1st Qu.   Median   Mean       3rd Qu.   Max. 
-#&gt; power   0.144   0.233     0.301    0.307773   0.37700   0.511
-#&gt; typeM   1.456   1.670     1.865    1.917841   2.12525   2.743
-#&gt; typeS   0.000   0.000     0.000    0.002034   0.00300   0.031
+#&gt; power   0.146   0.236     0.300    0.308001   0.37600   0.516
+#&gt; typeM   1.454   1.673     1.866    1.917553   2.11825   2.690
+#&gt; typeS   0.000   0.000     0.000    0.002266   0.00400   0.026
 #&gt; 
 #&gt; Critical value(s): cohen_d  =  ± 0.413</div><div class='input'><span class='co'># }</span>
 
