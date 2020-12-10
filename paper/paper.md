@@ -8,7 +8,7 @@ tags:
   - Type S error
   - replicabiliyt
 authors:
-  - name: Claudio Zandonella Callegher^[claudiozandonella@gmail.com]
+  - name: Claudio Zandonella Callegher
     orcid: 0000-0001-7721-6318
     affiliation: 1
   - name: Giulia Bertoldo
@@ -36,7 +36,7 @@ affiliations:
    index: 2
  - name: Department of General Psychology, University of Padova, Padova, Italy
    index: 3
-date: "08 December, 2020"
+date: "10 December, 2020"
 bibliography: paper_JOSS.bib
 editor_options: 
   chunk_output_type: console

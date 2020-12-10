@@ -8,7 +8,7 @@ tags:
   - Type S error
   - replicabiliyt
 authors:
-  - name: Claudio Zandonella Callegher^[claudiozandonella@gmail.com]
+  - name: Claudio Zandonella Callegher
     orcid: 0000-0001-7721-6318
     affiliation: 1
   - name: Giulia Bertoldo
