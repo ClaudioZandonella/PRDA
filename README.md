@@ -16,6 +16,7 @@ status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRD
 status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master)](https://travis-ci.org/ClaudioZandonella/PRDA)
 [![Codecov test
 coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02810/status.svg)](https://doi.org/10.21105/joss.02810)
 [![DOI](https://zenodo.org/badge/212573857.svg)](https://zenodo.org/badge/latestdoi/212573857)
 
 <hr>
