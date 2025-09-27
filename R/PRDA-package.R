@@ -6,7 +6,7 @@
 
 #' PRDA: Prospective and Retrospective Design Analysis.
 #'
-#' Given an hypothetical value of effect size, {PRDA} performs a prospective
+#' Given an hypothetical value of effect size, \pkg{PRDA} performs a prospective
 #' or retrospective design analysis to evaluate the inferential risks (i.e.,
 #' power, Type M error, and Type S error) related to the study design. See
 #' \code{vignette("PRDA")} for a brief introduction to \emph{Design
@@ -18,7 +18,7 @@
 #' respectively. See \code{vignette("retrospective")} for more details.
 #'
 #' @section Functions:
-#' In {PRDA} there are two main functions:
+#' In \pkg{PRDA} there are two main functions:
 #' \itemize{
 #' \item{\strong{\code{retrospective()}}}. Given the hypothetical population
 #' effect size and the study sample size, the function \code{retrospective()}
@@ -45,7 +45,7 @@
 #' @section Hypothetical Effect Size:
 #' The hypothetical population effect size can be defined as a single value
 #' according to previous results in the literature or experts indications.
-#' Alternatively, {PRDA} allows users to specify a distribution of plausible
+#' Alternatively, \pkg{PRDA} allows users to specify a distribution of plausible
 #' values to account for their uncertainty about the hypothetical population
 #' effect size.  To know how to specify the hypothetical effect size according
 #' to a distribution and an example of application see
@@ -72,9 +72,8 @@
 #' @importFrom utils capture.output
 #' @importFrom pbapply pblapply
 #'
-#' @docType package
-#' @name PRDA
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 
 #----    use_rcpp and rcppArmadillo    ----

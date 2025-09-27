@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // cohen_loop
 List cohen_loop(double sample_n1, double mean_diff, double sample_n2, String test_method, String alternative, double ratio_sd, double mu, int B);
 RcppExport SEXP _PRDA_cohen_loop(SEXP sample_n1SEXP, SEXP mean_diffSEXP, SEXP sample_n2SEXP, SEXP test_methodSEXP, SEXP alternativeSEXP, SEXP ratio_sdSEXP, SEXP muSEXP, SEXP BSEXP) {
