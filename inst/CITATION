@@ -3,7 +3,7 @@ citHeader("To cite PRDA in publications use:")
 bibentry(
   bibtype = "Misc",
   title        = "PRDA: Prospective and Retrospective Design Analysis",
-  author       = personList(
+  author       = c(
     as.person("Claudio Zandonella Callegher"),
     as.person("Massimiliano Pastore"),
     as.person("Angela Andreella"),

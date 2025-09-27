@@ -207,7 +207,7 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
  Calcagnì, A., Finos, L., & Pastore, M. (2020). Enhancing Statistical
  Inference in Psychological Research via Prospective and Retrospective Design
  Analysis. Frontiers in Psychology, 10.
- \url{https://doi.org/10.3389/fpsyg.2019.02893}
+ \doi{10.3389/fpsyg.2019.02893}
 
  Bertoldo, G., Altoè, G., & Zandonella Callegher, C. (2020).
  Designing Studies and Evaluating Research Results: Type M and Type S Errors
@@ -216,5 +216,5 @@ Altoè, G., Bertoldo, G., Zandonella Callegher, C., Toffalini, E.,
 
  Gelman, A., & Carlin, J. (2014). Beyond Power Calculations: Assessing Type S
  (Sign) and Type M (Magnitude) Errors. Perspectives on Psychological Science,
- 9(6), 641–651. \url{https://doi.org/10.1177/1745691614551642}
+ 9(6), 641–651. \doi{10.1177/1745691614551642}
 }
