@@ -9,9 +9,13 @@ This is a resubmission. In this version I have:
 
 * Mac OS X 15.6 (local machine):
   - release R 4.5.1
-* win-builder:
-  - release R 4.5.
-  - devel R 4.1.0 (2020-11-24 r79490)
+
+* Rhub
+  - linux R-* (any version) ubuntu-latest on GitHub
+  - m1-san R-* (any version) macos-15 on GitHub, ASAN + UBSAN on macOS
+  - macos R-* (any version) macos-13 on GitHub
+  - macos-arm64 R-* (any version) macos-latest on GitHub
+  - windows R-* (any version) windows-latest on GitHub
 
 ## R CMD check results
 

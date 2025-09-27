@@ -1,3 +1,6 @@
+# Github
+.github
+
 # Rproject files
 ^.*\.Rproj$
 ^\.Rproj\.user$
