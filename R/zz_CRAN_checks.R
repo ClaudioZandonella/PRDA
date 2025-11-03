@@ -23,6 +23,7 @@
 # devtools::check(vignettes = FALSE)
 # devtools::check_win_devel(email= "claudiozandonella@gmail.com")
 # devtools::check_win_release(email= "claudiozandonella@gmail.com")
+# rhub::rhub_check()
 # devtools::release()
 
 #----    Goodpractice    ----

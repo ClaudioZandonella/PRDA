@@ -1,6 +1,6 @@
 Package: PRDA
 Title: Conduct a Prospective or Retrospective Design Analysis
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Claudio", "Zandonella Callegher", , "claudiozandonella@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7721-6318")),

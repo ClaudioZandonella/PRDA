@@ -12,13 +12,10 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 status](https://www.r-pkg.org/badges/version/PRDA)](https://CRAN.R-project.org/package=PRDA)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ClaudioZandonella/PRDA?branch=master&svg=true)](https://ci.appveyor.com/project/ClaudioZandonella/PRDA/branch/master)
-[![Travis build
-status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master)](https://travis-ci.org/ClaudioZandonella/PRDA)
+<!-- [![Travis build status](https://travis-ci.org/ClaudioZandonella/PRDA.svg?branch=master)](https://app.travis-ci.com/ClaudioZandonella/PRDA) -->
 [![Codecov test
-coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg)](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master)
-[![DOI](https://joss.theoj.org/papers/10.21105/joss.02810/status.svg)](https://doi.org/10.21105/joss.02810)
+coverage](https://codecov.io/gh/ClaudioZandonella/PRDA/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ClaudioZandonella/PRDA/branch/master)
 [![DOI](https://zenodo.org/badge/212573857.svg)](https://zenodo.org/badge/latestdoi/212573857)
-
 <hr>
 
 <!-- badges: end -->
@@ -148,7 +145,7 @@ prospective(effect_size = .25, power = .80, test_method = "pearson",
 #> Critical value(s): rho  =  ± 0.178
 ```
 
-The required sample size is \(n=122\), the associated Type M error is
+The required sample size is $n=122$, the associated Type M error is
 around 1.10 and the Type S error is approximately 0.
 
 To know more about function arguments and further examples see the
@@ -183,8 +180,8 @@ guidelines](https://github.com/ClaudioZandonella/PRDA/blob/master/CONTRIBUTING.m
 
 #### Future Plans
 
-  - Improve compute time by parallelizing the code
-  - Implement design analysis in the case of linear regression models
+- Improve compute time by parallelizing the code
+- Implement design analysis in the case of linear regression models
 
 ## Citation
 
@@ -211,9 +208,10 @@ A BibTeX entry for LaTeX users is
 
 ## References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
-<div id="ref-altoeEnhancingStatisticalInference2020">
+<div id="ref-altoeEnhancingStatisticalInference2020" class="csl-entry">
 
 Altoè, Gianmarco, Giulia Bertoldo, Claudio Zandonella Callegher, Enrico
 Toffalini, Antonio Calcagnì, Livio Finos, and Massimiliano Pastore.
@@ -223,7 +221,7 @@ Psychology* 10. <https://doi.org/10.3389/fpsyg.2019.02893>.
 
 </div>
 
-<div id="ref-bertoldoDesigningStudiesEvaluating2020">
+<div id="ref-bertoldoDesigningStudiesEvaluating2020" class="csl-entry">
 
 Bertoldo, Giulia, Claudio Zandonella Callegher, and Gianmarco Altoè.
 2020. “Designing Studies and Evaluating Research Results: Type M and
@@ -232,7 +230,7 @@ Type S Errors for Pearson Correlation Coefficient.” Preprint. PsyArXiv.
 
 </div>
 
-<div id="ref-gelmanPowerCalculationsAssessing2014">
+<div id="ref-gelmanPowerCalculationsAssessing2014" class="csl-entry">
 
 Gelman, Andrew, and John Carlin. 2014. “Beyond Power Calculations:
 Assessing Type S (Sign) and Type M (Magnitude) Errors.” *Perspectives on

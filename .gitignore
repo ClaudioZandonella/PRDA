@@ -22,3 +22,5 @@ Meta
 
 # Mac auxiliary files
 .DS_Store
+/doc/
+/Meta/
